@@ -1,0 +1,3 @@
+USE ChinchDB;
+DELETE FROM Dishes;
+DBCC CHECKIDENT ('Dishes', RESEED, 0);

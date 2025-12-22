@@ -1,0 +1,119 @@
+/* Old Money стиль для ресторана CHINCH */
+:root {
+  /* Теплые бежево-коричневые тона */
+  --primary-beige: #f5f1e8;
+  --dark-beige: #e8dfca;
+  --walnut: #7c6a5c;
+  --dark-brown: #3d3026;
+  --accent-gold: #c4a96a;
+  
+  /* Дополнительные цвета */
+  --ivory: #fffff0;
+  --parchment: #f1e8d7;
+  --mahogany: #4a2c2a;
+  
+  /* Шрифты */
+  --font-serif: 'Times New Roman', Times, serif;
+  --font-sans: 'Helvetica Neue', Arial, sans-serif;
+}
+
+/* Общие стили */
+body {
+  background-color: var(--primary-beige);
+  color: var(--dark-brown);
+  font-family: var(--font-sans);
+  margin: 0;
+  padding: 0;
+}
+
+.old-money-container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 20px;
+}
+
+/* Типография */
+h1, h2, h3, h4, h5, h6 {
+  font-family: var(--font-serif);
+  font-weight: normal;
+  color: var(--mahogany);
+}
+
+h1 {
+  font-size: 3rem;
+  letter-spacing: 2px;
+  border-bottom: 2px solid var(--accent-gold);
+  padding-bottom: 10px;
+}
+
+h2 {
+  font-size: 2rem;
+  border-bottom: 1px solid var(--walnut);
+  padding-bottom: 8px;
+}
+
+/* Кнопки */
+.btn-old-money {
+  background-color: var(--dark-brown);
+  color: var(--primary-beige);
+  border: 1px solid var(--accent-gold);
+  padding: 12px 30px;
+  font-family: var(--font-serif);
+  font-size: 1rem;
+  letter-spacing: 1px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.btn-old-money:hover {
+  background-color: var(--accent-gold);
+  color: var(--dark-brown);
+}
+
+/* Карточки */
+.old-money-card {
+  background-color: var(--ivory);
+  border: 1px solid var(--dark-beige);
+  padding: 25px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+}
+
+/* Навигация */
+.nav-old-money {
+  background-color: var(--dark-brown);
+  padding: 20px 0;
+}
+
+.nav-old-money a {
+  color: var(--primary-beige);
+  text-decoration: none;
+  margin: 0 15px;
+  font-family: var(--font-serif);
+  letter-spacing: 1px;
+}
+
+.nav-old-money a:hover {
+  color: var(--accent-gold);
+}
+
+/* Футер */
+.footer-old-money {
+  background-color: var(--dark-brown);
+  color: var(--primary-beige);
+  padding: 40px 0;
+  margin-top: 60px;
+}
+
+/* Эффекты */
+.gold-border {
+  border: 2px solid var(--accent-gold);
+}
+
+.walnut-bg {
+  background-color: var(--walnut);
+  color: var(--primary-beige);
+}
+
+.text-gold {
+  color: var(--accent-gold);
+}
