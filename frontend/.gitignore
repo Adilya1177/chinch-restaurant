@@ -35,3 +35,8 @@ Thumbs.db
 # Build
 backend/publish/
 frontend/dist/" > .gitignore
+
+# Environment variables
+.env
+.env.*
+!.env.example
