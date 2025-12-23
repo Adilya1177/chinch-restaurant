@@ -1,70 +1,100 @@
-// frontend/src/services/api.js - ФИНАЛЬНАЯ ВЕРСИЯ ДЛЯ GITHUB PAGES
-
-// Мок-данные для меню
+// frontend/src/services/api.js - ОБНОВЛЕННЫЕ МОК-ДАННЫЕ
 const mockMenuData = [
   {
     id: 1,
     name: "БАМБЛ-КАРАМЕЛЬ",
     description: "Эспрессо, карамель, молоко",
-    price: "420 / 450 / 850",
+    priceInfo: "420 / 450 / 850",
     category: "КОФЕ",
-    mainCategory: "Напитки"
+    mainCategory: "Напитки",
+    subCategory: "КОФЕ", // ДОБАВИЛИ
+    volumeInfo: "Маленький | Средний | Большой", // ДОБАВИЛИ
+    basePrice: null, // ДОБАВИЛИ
+    options: null // ДОБАВИЛИ
   },
   {
     id: 2,
     name: "ПАНЧО КАРБОНАРА",
     description: "Паста карбонара",
-    price: "1200",
+    priceInfo: "1200",
     category: "НА ГОРЯЧЕЕ",
-    mainCategory: "Основные блюда"
+    mainCategory: "Еда", // ИЗМЕНИЛИ на "Еда"
+    subCategory: "НА ГОРЯЧЕЕ", // ДОБАВИЛИ
+    volumeInfo: null,
+    basePrice: "1200", // ДОБАВИЛИ
+    options: null
   },
   {
     id: 3,
     name: "ОЛИВЬЕ КРАБ | БРИСКЕТ",
     description: "Салат Оливье",
-    price: "890",
+    priceInfo: "890",
     category: "NEW YEAR SPECIAL",
-    mainCategory: "Специальные предложения"
+    mainCategory: "Еда",
+    subCategory: "NEW YEAR SPECIAL",
+    volumeInfo: null,
+    basePrice: "890",
+    options: null
   },
   {
     id: 4,
     name: "КРУАССАН | БЛИНЫ",
     description: "Завтрак",
-    price: "450",
+    priceInfo: "450",
     category: "NEW YEAR SPECIAL",
-    mainCategory: "Специальные предложения"
+    mainCategory: "Еда",
+    subCategory: "NEW YEAR SPECIAL",
+    volumeInfo: null,
+    basePrice: "450",
+    options: null
   },
   {
     id: 5,
     name: "СУП ТОМ ЯМ",
     description: "Острый тайский суп",
-    price: "790",
+    priceInfo: "790",
     category: "СУПЫ",
-    mainCategory: "Закуски и супы"
+    mainCategory: "Еда",
+    subCategory: "СУПЫ",
+    volumeInfo: null,
+    basePrice: "790",
+    options: null
   },
   {
     id: 6,
     name: "ПИЦЦА МАРГАРИТА",
     description: "Классическая итальянская пицца",
-    price: "950",
+    priceInfo: "950",
     category: "РИМСКАЯ ПИЦЦА",
-    mainCategory: "Основные блюда"
+    mainCategory: "Еда",
+    subCategory: "РИМСКАЯ ПИЦЦА",
+    volumeInfo: null,
+    basePrice: "950",
+    options: null
   },
   {
     id: 7,
     name: "САЛАТ ЦЕЗАРЬ",
     description: "С курицей и пармезаном",
-    price: "850",
+    priceInfo: "850",
     category: "САЛАТЫ",
-    mainCategory: "Закуски и супы"
+    mainCategory: "Еда",
+    subCategory: "САЛАТЫ",
+    volumeInfo: null,
+    basePrice: "850",
+    options: null
   },
   {
     id: 8,
     name: "ЯИЧНИЦА С БЕКОНОМ",
     description: "С беконом и зеленью",
-    price: "550",
+    priceInfo: "550",
     category: "БЛЮДА ИЗ ЯИЦ",
-    mainCategory: "Завтраки"
+    mainCategory: "Еда",
+    subCategory: "БЛЮДА ИЗ ЯИЦ",
+    volumeInfo: null,
+    basePrice: "550",
+    options: null
   }
 ]
 
@@ -88,7 +118,7 @@ export const menuService = {
   async getByCategory(category) {
     console.log(`✅ API: Фильтр по категории "${category}"`);
     const filtered = mockMenuData.filter(dish => 
-      dish.category === category || dish.mainCategory === category
+      dish.subCategory === category || dish.mainCategory === category
     );
     console.log(`✅ Найдено блюд: ${filtered.length}`);
     return filtered;
@@ -110,7 +140,6 @@ export const reservationService = {
   }
 }
 
-// Простой экспорт для совместимости
 const api = {
   menuService,
   reservationService
