@@ -361,10 +361,22 @@ const mockMenuData = [
 
   // БЛЮДА ИЗ ЯИЦ (1 основное + 13 дополнений = 14 блюд)
   {
-    id: 56, name: "ГЛАЗУНЬЯ | СКРЭМБЛ | ОМЛЕТ",
-    description: "Основное блюдо из яиц", priceInfo: "", category: "БЛЮДА ИЗ ЯИЦ",
+    id: 56, name: "ГЛАЗУНЬЯ",
+    description: "Яичница глазунья", priceInfo: "", category: "БЛЮДА ИЗ ЯИЦ",
     mainCategory: "Еда", subCategory: "БЛЮДА ИЗ ЯИЦ",
-    volumeInfo: null, basePrice: "250 р", options: null, isAddon: false
+    volumeInfo: null, basePrice: "250 р", options: null, isAddon: false, eggType: "main"
+  },
+  {
+    id: 56.1, name: "СКРЭМБЛ",
+    description: "Взбитые яйца", priceInfo: "", category: "БЛЮДА ИЗ ЯИЦ",
+    mainCategory: "Еда", subCategory: "БЛЮДА ИЗ ЯИЦ",
+    volumeInfo: null, basePrice: "250 р", options: null, isAddon: false, eggType: "main"
+  },
+  {
+    id: 56.2, name: "ОМЛЕТ",
+    description: "Французский омлет", priceInfo: "", category: "БЛЮДА ИЗ ЯИЦ",
+    mainCategory: "Еда", subCategory: "БЛЮДА ИЗ ЯИЦ",
+    volumeInfo: null, basePrice: "250 р", options: null, isAddon: false, eggType: "main"
   },
   {
     id: 57, name: "+ ЛОСОСЬ",

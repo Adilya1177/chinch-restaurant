@@ -56,7 +56,7 @@
             v-for="subCategory in groupedMenu" 
             :key="subCategory.name" 
             :id="'category-' + subCategory.name"
-            class="menu-category"
+            :class="['menu-category', { 'egg-category': subCategory.name === 'БЛЮДА ИЗ ЯИЦ' }]"
           >
             <!-- Заголовок категории -->
             <div class="category-title-section">
@@ -68,7 +68,7 @@
               <div 
                 v-for="item in subCategory.items" 
                 :key="item.id" 
-                :class="['dish-card', { 'is-addon': item.isAddon }]"
+                :class="['dish-card', { 'is-addon': item.isAddon, 'is-egg-main': item.eggType === 'main' }]"
               >
                 <div class="dish-card-inner">
                   <h3 class="dish-title">{{ item.name }}</h3>
@@ -245,14 +245,20 @@ export default {
       }, 50);
     },
     
-    // Форматирование объема
+    // Форматирование объема с добавлением пробела перед "мл"
     formatVolume(volumeInfo) {
       if (!volumeInfo) return '';
+      
+      // Добавляем пробел перед "мл", если его нет
+      let formatted = volumeInfo;
+      formatted = formatted.replace(/(\d+)(мл)/g, '$1 $2');
+      formatted = formatted.replace(/(\d+)(мл)/g, '$1 $2');
+      
       // Если есть символ "|", разбиваем на строки
-      if (volumeInfo.includes('|')) {
-        return volumeInfo.split('|').map(v => v.trim()).join(' / ');
+      if (formatted.includes('|')) {
+        return formatted.split('|').map(v => v.trim()).join(' / ');
       }
-      return volumeInfo;
+      return formatted;
     },
     
     // Форматирование цены
@@ -297,7 +303,6 @@ export default {
 </script>
 
 <style scoped>
-/* Стили остаются те же, добавим только новые */
 .menu-view {
   min-height: 100vh;
   background: linear-gradient(135deg, #f8f4ea 0%, #e8dcc9 100%);
@@ -517,6 +522,10 @@ export default {
   padding: 1.5rem;
   backdrop-filter: blur(8px);
   transition: all 0.3s ease;
+  display: flex;
+  flex-direction: column;
+  align-items: center; /* Выравнивание по центру */
+  text-align: center; /* Текст по центру */
 }
 
 .dish-card-inner:hover {
@@ -531,6 +540,8 @@ export default {
   color: #2a1e14;
   font-weight: 600;
   margin: 0 0 0.5rem 0;
+  text-align: center; /* Названия по центру */
+  width: 100%;
 }
 
 /* Блок с ценами и объемами */
@@ -539,6 +550,7 @@ export default {
   padding: 0.8rem 0;
   border-top: 1px solid rgba(232, 220, 201, 0.5);
   border-bottom: 1px solid rgba(232, 220, 201, 0.5);
+  width: 100%;
 }
 
 .volume-info {
@@ -555,20 +567,21 @@ export default {
 .prices-container {
   display: flex;
   align-items: center;
+  justify-content: center; /* Цены по центру */
 }
 
 .price-single {
-  font-family: 'Cormorant Garamond', serif;
-  font-size: 1.1rem;
-  color: #2a1e14;
-  font-weight: 600;
+  font-family: 'EB Garamond', serif; /* Шрифт как у объема */
+  font-size: 0.95rem;
+  color: #8b6b4d;
+  font-weight: 500;
 }
 
 .price-multiple {
-  font-family: 'Cormorant Garamond', serif;
-  font-size: 1rem;
-  color: #2a1e14;
-  font-weight: 600;
+  font-family: 'EB Garamond', serif; /* Шрифт как у объема */
+  font-size: 0.95rem;
+  color: #8b6b4d;
+  font-weight: 500;
 }
 
 .price-values {
@@ -578,6 +591,8 @@ export default {
 /* Опции */
 .dish-details {
   margin-top: 0.8rem;
+  text-align: center;
+  width: 100%;
 }
 
 .options-info .options-text {
@@ -588,41 +603,101 @@ export default {
   font-style: italic;
 }
 
-/* Стиль для дополнений к яйцам */
+/* ============ ОСОБЫЕ СТИЛИ ДЛЯ ЯИЧНЫХ БЛЮД ============ */
+
+/* Категория яичных блюд */
+.menu-category.egg-category .items-container {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: 1.5rem;
+}
+
+/* Основные яичные блюда (ГЛАЗУНЬЯ, СКРЭМБЛ, ОМЛЕТ) */
+.dish-card.is-egg-main .dish-card-inner {
+  background: rgba(139, 107, 77, 0.08);
+  border: 2px solid #8b6b4d;
+  padding: 1.8rem 1.5rem;
+  box-shadow: 0 4px 12px rgba(139, 107, 77, 0.1);
+}
+
+.dish-card.is-egg-main .dish-title {
+  color: #2a1e14;
+  font-size: 1.4rem;
+  font-weight: 700;
+  margin-bottom: 0.8rem;
+}
+
+.dish-card.is-egg-main .price-single {
+  color: #2a1e14;
+  font-size: 1.1rem;
+  font-weight: 600;
+}
+
+/* Добавки к яйцам - красивый грид */
 .dish-card.is-addon .dish-card-inner {
-  background: rgba(248, 244, 234, 0.4);
-  border-color: rgba(139, 107, 77, 0.3);
-  margin-left: 1.5rem;
-  transform: scale(0.95);
+  background: rgba(248, 244, 234, 0.5);
+  border: 1px solid rgba(139, 107, 77, 0.3);
+  padding: 1.2rem;
+  border-radius: 10px;
+  min-height: 100px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
 }
 
 .dish-card.is-addon .dish-title {
-  font-size: 1.1rem;
+  font-size: 1.05rem;
+  color: #8b6b4d;
+  font-weight: 500;
+  margin-bottom: 0.5rem;
+}
+
+.dish-card.is-addon .price-single {
+  font-size: 0.95rem;
   color: #8b6b4d;
   opacity: 0.9;
 }
 
 .dish-card.is-addon .dish-card-inner:hover {
-  transform: translateY(-2px) scale(0.97);
-  box-shadow: 0 4px 12px rgba(139, 107, 77, 0.1);
+  transform: translateY(-3px);
+  box-shadow: 0 6px 16px rgba(139, 107, 77, 0.15);
+  border-color: #8b6b4d;
 }
 
-.dish-card.is-addon .price-single,
-.dish-card.is-addon .price-multiple {
-  font-size: 1rem;
-  color: #8b6b4d;
-  opacity: 0.8;
+/* Для лучшего отображения добавок - компактная сетка */
+@media (min-width: 768px) {
+  .menu-category.egg-category .items-container {
+    grid-template-columns: repeat(3, 1fr); /* Три колонки для основных */
+  }
+  
+  /* Добавки занимают 4 колонки */
+  .menu-category.egg-category .dish-card.is-addon:nth-child(n+4) {
+    grid-column: span 1;
+  }
 }
 
-/* Для мобильных устройств */
-@media (max-width: 768px) {
+/* Для мобильных устройств - вертикальное расположение */
+@media (max-width: 767px) {
+  .menu-category.egg-category .items-container {
+    grid-template-columns: 1fr;
+  }
+  
   .dish-card.is-addon .dish-card-inner {
-    margin-left: 1rem;
-    transform: scale(0.92);
+    padding: 1rem;
+    min-height: 80px;
   }
   
   .dish-card.is-addon .dish-title {
     font-size: 1rem;
+  }
+  
+  .dish-card.is-egg-main .dish-card-inner {
+    padding: 1.5rem 1rem;
+  }
+  
+  .dish-card.is-egg-main .dish-title {
+    font-size: 1.2rem;
   }
 }
 
