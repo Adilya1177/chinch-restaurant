@@ -1,109 +1,34 @@
-// frontend/src/services/api.js - ОБНОВЛЕННЫЕ МОК-ДАННЫЕ
-const mockMenuData = [
-  {
-    id: 1,
-    name: "БАМБЛ-КАРАМЕЛЬ",
-    description: "Эспрессо, карамель, молоко",
-    priceInfo: "420 / 450 / 850",
-    category: "КОФЕ",
-    mainCategory: "Напитки",
-    subCategory: "КОФЕ", // ДОБАВИЛИ
-    volumeInfo: "Маленький | Средний | Большой", // ДОБАВИЛИ
-    basePrice: null, // ДОБАВИЛИ
-    options: null // ДОБАВИЛИ
-  },
-  {
-    id: 2,
-    name: "ПАНЧО КАРБОНАРА",
-    description: "Паста карбонара",
-    priceInfo: "1200",
-    category: "НА ГОРЯЧЕЕ",
-    mainCategory: "Еда", // ИЗМЕНИЛИ на "Еда"
-    subCategory: "НА ГОРЯЧЕЕ", // ДОБАВИЛИ
-    volumeInfo: null,
-    basePrice: "1200", // ДОБАВИЛИ
-    options: null
-  },
-  {
-    id: 3,
-    name: "ОЛИВЬЕ КРАБ | БРИСКЕТ",
-    description: "Салат Оливье",
-    priceInfo: "890",
-    category: "NEW YEAR SPECIAL",
-    mainCategory: "Еда",
-    subCategory: "NEW YEAR SPECIAL",
-    volumeInfo: null,
-    basePrice: "890",
-    options: null
-  },
-  {
-    id: 4,
-    name: "КРУАССАН | БЛИНЫ",
-    description: "Завтрак",
-    priceInfo: "450",
-    category: "NEW YEAR SPECIAL",
-    mainCategory: "Еда",
-    subCategory: "NEW YEAR SPECIAL",
-    volumeInfo: null,
-    basePrice: "450",
-    options: null
-  },
-  {
-    id: 5,
-    name: "СУП ТОМ ЯМ",
-    description: "Острый тайский суп",
-    priceInfo: "790",
-    category: "СУПЫ",
-    mainCategory: "Еда",
-    subCategory: "СУПЫ",
-    volumeInfo: null,
-    basePrice: "790",
-    options: null
-  },
-  {
-    id: 6,
-    name: "ПИЦЦА МАРГАРИТА",
-    description: "Классическая итальянская пицца",
-    priceInfo: "950",
-    category: "РИМСКАЯ ПИЦЦА",
-    mainCategory: "Еда",
-    subCategory: "РИМСКАЯ ПИЦЦА",
-    volumeInfo: null,
-    basePrice: "950",
-    options: null
-  },
-  {
-    id: 7,
-    name: "САЛАТ ЦЕЗАРЬ",
-    description: "С курицей и пармезаном",
-    priceInfo: "850",
-    category: "САЛАТЫ",
-    mainCategory: "Еда",
-    subCategory: "САЛАТЫ",
-    volumeInfo: null,
-    basePrice: "850",
-    options: null
-  },
-  {
-    id: 8,
-    name: "ЯИЧНИЦА С БЕКОНОМ",
-    description: "С беконом и зеленью",
-    priceInfo: "550",
-    category: "БЛЮДА ИЗ ЯИЦ",
-    mainCategory: "Еда",
-    subCategory: "БЛЮДА ИЗ ЯИЦ",
-    volumeInfo: null,
-    basePrice: "550",
-    options: null
+// frontend/src/services/api.js
+import axios from 'axios';
+
+// Создаем базовый экземпляр axios
+// В зависимости от среды будет использоваться разный URL
+const api = axios.create({
+  // Важно: оставляем путь пустым, будем добавлять префиксы в методах
+  baseURL: '',
+  headers: {
+    'Content-Type': 'application/json'
   }
-]
+});
 
-console.log('✅ API: Загружены мок-данные для меню');
+const API_BASE_URL = import.meta.env.VITE_API_BASE_URL || 'http://localhost:5277';
 
+console.log(`✅ API: Используется базовый URL: ${API_BASE_URL}`);
+
+// СЕРВИС ДЛЯ РАБОТЫ С МЕНЮ
 export const menuService = {
+  // Получить все блюда из реального API
   async getDishes() {
-    console.log('✅ API: Возвращаем мок-данные меню');
-    return mockMenuData;
+    try {
+      console.log('✅ API: Запрос всех блюд с реального сервера');
+      const response = await axios.get(`${API_BASE_URL}/api/menu`);
+      console.log(`✅ API: Получено ${response.data.length} блюд с сервера`);
+      return response.data;
+    } catch (error) {
+      console.error('❌ API: Ошибка при получении меню:', error);
+      // В случае ошибки возвращаем пустой массив
+      return [];
+    }
   },
   
   async getAll() {
@@ -112,37 +37,83 @@ export const menuService = {
   
   async getRecommended() {
     console.log('✅ API: Рекомендованные блюда');
-    return mockMenuData.slice(0, 3);
+    try {
+      const allDishes = await this.getDishes();
+      return allDishes.slice(0, 3);
+    } catch (error) {
+      console.error('❌ API: Ошибка при получении рекомендованных:', error);
+      return [];
+    }
   },
   
   async getByCategory(category) {
     console.log(`✅ API: Фильтр по категории "${category}"`);
-    const filtered = mockMenuData.filter(dish => 
-      dish.subCategory === category || dish.mainCategory === category
-    );
-    console.log(`✅ Найдено блюд: ${filtered.length}`);
-    return filtered;
+    try {
+      // Сначала пытаемся получить по основной категории
+      const response = await axios.get(`${API_BASE_URL}/api/menu/maincategory/${encodeURIComponent(category)}`);
+      if (response.data && response.data.length > 0) {
+        console.log(`✅ API: Найдено ${response.data.length} блюд в категории "${category}"`);
+        return response.data;
+      }
+      
+      // Если не нашли, пытаемся по подкатегории
+      const response2 = await axios.get(`${API_BASE_URL}/api/menu/category/${encodeURIComponent(category)}`);
+      if (response2.data && response2.data.length > 0) {
+        console.log(`✅ API: Найдено ${response2.data.length} блюд в подкатегории "${category}"`);
+        return response2.data;
+      }
+      
+      // Если ничего не нашли, пробуем фильтровать локально
+      const allDishes = await this.getDishes();
+      const filtered = allDishes.filter(dish => 
+        dish.subCategory === category || 
+        dish.mainCategory === category ||
+        (dish.category && dish.category === category)
+      );
+      console.log(`✅ API: Найдено ${filtered.length} блюд фильтрацией`);
+      return filtered;
+    } catch (error) {
+      console.error(`❌ API: Ошибка при фильтрации по категории "${category}":`, error);
+      return [];
+    }
   }
 }
 
+// СЕРВИС ДЛЯ БРОНИРОВАНИЙ
 export const reservationService = {
   async getAll() {
     console.log('✅ API: Запрос всех бронирований');
-    return [];
+    try {
+      const response = await axios.get(`${API_BASE_URL}/api/reservation`);
+      return response.data;
+    } catch (error) {
+      console.error('❌ API: Ошибка при получении бронирований:', error);
+      return [];
+    }
   },
   
   async create(reservation) {
-    console.log('✅ API: Создано бронирование', reservation);
-    return { 
-      success: true, 
-      message: 'Бронирование успешно отправлено! Мы свяжемся с вами для подтверждения. (Демо-режим)' 
-    };
+    console.log('✅ API: Отправка бронирования на сервер', reservation);
+    try {
+      const response = await axios.post(`${API_BASE_URL}/api/reservation`, reservation);
+      console.log('✅ API: Бронирование успешно создано');
+      return { 
+        success: true, 
+        message: 'Бронирование успешно отправлено! Мы свяжемся с вами для подтверждения.',
+        data: response.data
+      };
+    } catch (error) {
+      console.error('❌ API: Ошибка при создании бронирования:', error);
+      return { 
+        success: false, 
+        message: 'Ошибка при отправке бронирования. Пожалуйста, попробуйте позже или позвоните по телефону.'
+      };
+    }
   }
 }
 
-const api = {
+// Экспортируем объект API для совместимости
+export default {
   menuService,
   reservationService
 };
-
-export default api;
