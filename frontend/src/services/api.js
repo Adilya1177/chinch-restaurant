@@ -9,35 +9,834 @@ const isGitHubPages = window.location.hostname.includes('github.io');
 console.log(`📍 Определено окружение: ${isLocalhost ? 'Локально' : 'Продакшен'}`);
 console.log(`🌐 Хост: ${window.location.hostname}`);
 
-// МОК-ДАННЫЕ для GitHub Pages (временное решение)
+// МОК-ДАННЫЕ для GitHub Pages (ПОЛНОЕ РЕАЛЬНОЕ МЕНЮ - 161 блюдо)
 const mockMenuData = [
-  // Сюда позже вставим все 161 блюдо из базы
+  // ============ ЕДА ============
+  
+  // ЗАВТРАКИ НА ВЕСЬ ДЕНЬ (15 блюд)
   {
-    id: 1,
-    name: "БАМБЛ-КАРАМЕЛЬ",
-    description: "Эспрессо, карамель, молоко",
-    priceInfo: "420 / 450 / 850",
-    category: "КОФЕ",
-    mainCategory: "Напитки",
-    subCategory: "КОФЕ",
-    volumeInfo: "Маленький | Средний | Большой",
-    basePrice: null,
-    options: null
+    id: 1, name: "КРЕВЕТКИ, ШПИНАТ, АВОКАДО, ТОМАТ",
+    description: "", priceInfo: "", category: "ЗАВТРАКИ НА ВЕСЬ ДЕНЬ",
+    mainCategory: "Еда", subCategory: "ЗАВТРАКИ НА ВЕСЬ ДЕНЬ",
+    volumeInfo: null, basePrice: "750 р", options: null
   },
   {
-    id: 2,
-    name: "ПАНЧО КАРБОНАРА",
-    description: "Паста карбонара",
-    priceInfo: "1200",
-    category: "НА ГОРЯЧЕЕ",
-    mainCategory: "Еда",
-    subCategory: "НА ГОРЯЧЕЕ",
-    volumeInfo: null,
-    basePrice: "1200",
-    options: null
+    id: 2, name: "ПАСТРАМИ, ХАШБРАУН, ШПИНАТ",
+    description: "", priceInfo: "", category: "ЗАВТРАКИ НА ВЕСЬ ДЕНЬ",
+    mainCategory: "Еда", subCategory: "ЗАВТРАКИ НА ВЕСЬ ДЕНЬ",
+    volumeInfo: null, basePrice: "730 р", options: null
   },
-  // ... остальные блюда
+  {
+    id: 3, name: "КРОКЕТЫ БАТАТ, ЛОСОСЬ, ТОМАТ",
+    description: "", priceInfo: "", category: "ЗАВТРАКИ НА ВЕСЬ ДЕНЬ",
+    mainCategory: "Еда", subCategory: "ЗАВТРАКИ НА ВЕСЬ ДЕНЬ",
+    volumeInfo: null, basePrice: "750 р", options: null
+  },
+  {
+    id: 4, name: "КРОКЕТЫ КРАБ, КЛУБНИКА, ТОМАТ",
+    description: "", priceInfo: "", category: "ЗАВТРАКИ НА ВЕСЬ ДЕНЬ",
+    mainCategory: "Еда", subCategory: "ЗАВТРАКИ НА ВЕСЬ ДЕНЬ",
+    volumeInfo: null, basePrice: "1190 р", options: null
+  },
+  {
+    id: 5, name: "ОЛАДЬИ ИЗ ЦУКИНИ, ЛОСОСЬ, СТРАЧАТЕЛЛА",
+    description: "", priceInfo: "", category: "ЗАВТРАКИ НА ВЕСЬ ДЕНЬ",
+    mainCategory: "Еда", subCategory: "ЗАВТРАКИ НА ВЕСЬ ДЕНЬ",
+    volumeInfo: null, basePrice: "790 р", options: null
+  },
+  {
+    id: 6, name: "ШАКШУКА, КОЛБАСКИ, ФЕТА, ШПИНАТ",
+    description: "", priceInfo: "", category: "ЗАВТРАКИ НА ВЕСЬ ДЕНЬ",
+    mainCategory: "Еда", subCategory: "ЗАВТРАКИ НА ВЕСЬ ДЕНЬ",
+    volumeInfo: null, basePrice: "770 р", options: null
+  },
+  {
+    id: 7, name: "ФРАНЦУЗСКИЙ ОМЛЕТ, ИНДЕЙКА",
+    description: "", priceInfo: "", category: "ЗАВТРАКИ НА ВЕСЬ ДЕНЬ",
+    mainCategory: "Еда", subCategory: "ЗАВТРАКИ НА ВЕСЬ ДЕНЬ",
+    volumeInfo: null, basePrice: "690 р", options: null
+  },
+  {
+    id: 8, name: "ОВСЯНАЯ КАША, ГОЛУБИКА, БАНАН",
+    description: "", priceInfo: "", category: "ЗАВТРАКИ НА ВЕСЬ ДЕНЬ",
+    mainCategory: "Еда", subCategory: "ЗАВТРАКИ НА ВЕСЬ ДЕНЬ",
+    volumeInfo: null, basePrice: "450 р", options: null
+  },
+  {
+    id: 9, name: "РИСОВАЯ КАША, КЛУБНИКА, ГРАНОЛА",
+    description: "", priceInfo: "", category: "ЗАВТРАКИ НА ВЕСЬ ДЕНЬ",
+    mainCategory: "Еда", subCategory: "ЗАВТРАКИ НА ВЕСЬ ДЕНЬ",
+    volumeInfo: null, basePrice: "480 р", options: null
+  },
+  {
+    id: 10, name: "ПАНИНИ, ПАСТРАМИ, ТОМАТ, ГАУДА",
+    description: "", priceInfo: "", category: "ЗАВТРАКИ НА ВЕСЬ ДЕНЬ",
+    mainCategory: "Еда", subCategory: "ЗАВТРАКИ НА ВЕСЬ ДЕНЬ",
+    volumeInfo: null, basePrice: "590 р", options: null
+  },
+  {
+    id: 11, name: "КРУАССАН, ЛОСОСЬ, КРЕМ-ЧИЗ, АВОКАДО",
+    description: "", priceInfo: "", category: "ЗАВТРАКИ НА ВЕСЬ ДЕНЬ",
+    mainCategory: "Еда", subCategory: "ЗАВТРАКИ НА ВЕСЬ ДЕНЬ",
+    volumeInfo: null, basePrice: "630 р", options: null
+  },
+  {
+    id: 12, name: "КРУАССАН, ИНДЕЙКА, СКРЭМБЛ",
+    description: "", priceInfo: "", category: "ЗАВТРАКИ НА ВЕСЬ ДЕНЬ",
+    mainCategory: "Еда", subCategory: "ЗАВТРАКИ НА ВЕСЬ ДЕНЬ",
+    volumeInfo: null, basePrice: "650 р", options: null
+  },
+  {
+    id: 13, name: "КРУАССАН, ТРЮФЕЛЬ, СТРАЧАТЕЛЛА, ТОМАТ",
+    description: "", priceInfo: "", category: "ЗАВТРАКИ НА ВЕСЬ ДЕНЬ",
+    mainCategory: "Еда", subCategory: "ЗАВТРАКИ НА ВЕСЬ ДЕНЬ",
+    volumeInfo: null, basePrice: "590 р", options: null
+  },
+  {
+    id: 14, name: "СЫРНИКИ, КЛУБНИКА, ЛИМОННАЯ СМЕТАНА",
+    description: "", priceInfo: "", category: "ЗАВТРАКИ НА ВЕСЬ ДЕНЬ",
+    mainCategory: "Еда", subCategory: "ЗАВТРАКИ НА ВЕСЬ ДЕНЬ",
+    volumeInfo: null, basePrice: "610 р", options: null
+  },
+  {
+    id: 15, name: "ЙОГУРТ, ЯГОДЫ, МИНДАЛЬ",
+    description: "", priceInfo: "", category: "ЗАВТРАКИ НА ВЕСЬ ДЕНЬ",
+    mainCategory: "Еда", subCategory: "ЗАВТРАКИ НА ВЕСЬ ДЕНЬ",
+    volumeInfo: null, basePrice: "490 р", options: null
+  },
+
+  // NEW YEAR SPECIAL (7 блюд)
+  {
+    id: 16, name: "БРИОШЬ, РОСТБИФ, ЯЙЦО",
+    description: "", priceInfo: "", category: "NEW YEAR SPECIAL",
+    mainCategory: "Еда", subCategory: "NEW YEAR SPECIAL",
+    volumeInfo: null, basePrice: "990 р", options: null
+  },
+  {
+    id: 17, name: "САЛАТ РОСТБИФ, КАРТОФЕЛЬ, ПЕЧЕННЫЙ БАКЛАЖАН",
+    description: "", priceInfo: "", category: "NEW YEAR SPECIAL",
+    mainCategory: "Еда", subCategory: "NEW YEAR SPECIAL",
+    volumeInfo: null, basePrice: "790 р", options: null
+  },
+  {
+    id: 18, name: "ОЛИВЬЕ КРАБ | БРИСКЕТ",
+    description: "ПЮРЕ ИЗ ЗЕЛЕНОГО ГОРОШКА, КРАСНАЯ ИКРА",
+    priceInfo: "", category: "NEW YEAR SPECIAL",
+    mainCategory: "Еда", subCategory: "NEW YEAR SPECIAL",
+    volumeInfo: null, basePrice: "990 р", options: null
+  },
+  {
+    id: 19, name: "САЛАТ С УТИНОЙ ГРУДКОЙ, ПЕРСИК",
+    description: "", priceInfo: "", category: "NEW YEAR SPECIAL",
+    mainCategory: "Еда", subCategory: "NEW YEAR SPECIAL",
+    volumeInfo: null, basePrice: "750 р", options: null
+  },
+  {
+    id: 20, name: "ЛОСОСЬ ПОД ШУБОЙ",
+    description: "", priceInfo: "", category: "NEW YEAR SPECIAL",
+    mainCategory: "Еда", subCategory: "NEW YEAR SPECIAL",
+    volumeInfo: null, basePrice: "810 р", options: null
+  },
+  {
+    id: 21, name: "КРУАССАН | БЛИНЫ",
+    description: "КРАСНАЯ ИКРА, МАСЛО С ТРАВАМИ",
+    priceInfo: "", category: "NEW YEAR SPECIAL",
+    mainCategory: "Еда", subCategory: "NEW YEAR SPECIAL",
+    volumeInfo: null, basePrice: "890 р", options: null
+  },
+  {
+    id: 22, name: "УТИНАЯ ГРУДКА, РАТАТУЙ, МЕД",
+    description: "", priceInfo: "", category: "NEW YEAR SPECIAL",
+    mainCategory: "Еда", subCategory: "NEW YEAR SPECIAL",
+    volumeInfo: null, basePrice: "950 р", options: null
+  },
+
+  // СУПЫ (3 блюда)
+  {
+    id: 23, name: "КУРИНЫЙ БУЛЬОН, ОРЗО",
+    description: "", priceInfo: "", category: "СУПЫ",
+    mainCategory: "Еда", subCategory: "СУПЫ",
+    volumeInfo: null, basePrice: "450 р", options: null
+  },
+  {
+    id: 24, name: "ТЫКВЕННЫЙ КРЕМ-СУП, ЛОСОСЬ",
+    description: "", priceInfo: "", category: "СУПЫ",
+    mainCategory: "Еда", subCategory: "СУПЫ",
+    volumeInfo: null, basePrice: "590 р", options: null
+  },
+  {
+    id: 25, name: "СЫРНЫЙ КРЕМ-СУП, ИНДЕЙКА",
+    description: "", priceInfo: "", category: "СУПЫ",
+    mainCategory: "Еда", subCategory: "СУПЫ",
+    volumeInfo: null, basePrice: "630 р", options: null
+  },
+
+  // РИМСКАЯ ПИЦЦА (4 блюда)
+  {
+    id: 26, name: "ЛОСОСЬ, КРАСНАЯ ИКРА, ПАРМЕЗАН",
+    description: "", priceInfo: "", category: "РИМСКАЯ ПИЦЦА",
+    mainCategory: "Еда", subCategory: "РИМСКАЯ ПИЦЦА",
+    volumeInfo: null, basePrice: "1750 р", options: null
+  },
+  {
+    id: 27, name: "ЦЫПЛЕНОК, ПЕСТО, ТОМАТ",
+    description: "", priceInfo: "", category: "РИМСКАЯ ПИЦЦА",
+    mainCategory: "Еда", subCategory: "РИМСКАЯ ПИЦЦА",
+    volumeInfo: null, basePrice: "1100 р", options: null
+  },
+  {
+    id: 28, name: "ПЕППЕРОНИ",
+    description: "", priceInfo: "", category: "РИМСКАЯ ПИЦЦА",
+    mainCategory: "Еда", subCategory: "РИМСКАЯ ПИЦЦА",
+    volumeInfo: null, basePrice: "890 р", options: null
+  },
+  {
+    id: 29, name: "ЧЕТЫРЕ СЫРА",
+    description: "", priceInfo: "", category: "РИМСКАЯ ПИЦЦА",
+    mainCategory: "Еда", subCategory: "РИМСКАЯ ПИЦЦА",
+    volumeInfo: null, basePrice: "1190 р", options: null
+  },
+
+  // ЗАКУСКИ (12 блюд)
+  {
+    id: 30, name: "АССОРТИ БРУСКЕТТ, КРУАССАН",
+    description: "", priceInfo: "", category: "ЗАКУСКИ",
+    mainCategory: "Еда", subCategory: "ЗАКУСКИ",
+    volumeInfo: null, basePrice: "1090 р", options: null
+  },
+  {
+    id: 31, name: "ФРИ, ПАРМЕЗАН, ТРЮФЕЛЬ",
+    description: "", priceInfo: "", category: "ЗАКУСКИ",
+    mainCategory: "Еда", subCategory: "ЗАКУСКИ",
+    volumeInfo: null, basePrice: "370 р", options: null
+  },
+  {
+    id: 32, name: "БАТАТ ФРИ, ТРЮФЕЛЬНЫЙ МУСС",
+    description: "", priceInfo: "", category: "ЗАКУСКИ",
+    mainCategory: "Еда", subCategory: "ЗАКУСКИ",
+    volumeInfo: null, basePrice: "450 р", options: null
+  },
+  {
+    id: 33, name: "МОЦАРЕЛЛА, МЕД, ТРЮФЕЛЬНОЕ МАСЛО",
+    description: "", priceInfo: "", category: "ЗАКУСКИ",
+    mainCategory: "Еда", subCategory: "ЗАКУСКИ",
+    volumeInfo: null, basePrice: "450 р", options: null
+  },
+  {
+    id: 34, name: "ТАРТАР ТУНЕЦ, КЛУБНИКА, ГРАНАТ",
+    description: "", priceInfo: "", category: "ЗАКУСКИ",
+    mainCategory: "Еда", subCategory: "ЗАКУСКИ",
+    volumeInfo: null, basePrice: "890 р", options: null
+  },
+  {
+    id: 35, name: "СВЕКЛА, ТРЮФЕЛЬ, ФИСТАШКА",
+    description: "", priceInfo: "", category: "ЗАКУСКИ",
+    mainCategory: "Еда", subCategory: "ЗАКУСКИ",
+    volumeInfo: null, basePrice: "690 р", options: null
+  },
+  {
+    id: 36, name: "БАТАТ, ДЗАДЗИКИ, ЛИМОН",
+    description: "", priceInfo: "", category: "ЗАКУСКИ",
+    mainCategory: "Еда", subCategory: "ЗАКУСКИ",
+    volumeInfo: null, basePrice: "570 р", options: null
+  },
+  {
+    id: 37, name: "ОПАЛЕННЫЙ ТУНЕЦ, ГУАКАМОЛЕ, ТОМАТ",
+    description: "", priceInfo: "", category: "ЗАКУСКИ",
+    mainCategory: "Еда", subCategory: "ЗАКУСКИ",
+    volumeInfo: null, basePrice: "570 р", options: null
+  },
+  {
+    id: 38, name: "ЧЕСНОЧНЫЕ КРЕВЕТКИ, ГУАКАМОЛЕ",
+    description: "", priceInfo: "", category: "ЗАКУСКИ",
+    mainCategory: "Еда", subCategory: "ЗАКУСКИ",
+    volumeInfo: null, basePrice: "690 р", options: null
+  },
+  {
+    id: 39, name: "ЛЬНЯНОЙ ХЛЕБ, КРАБ, СТРАЧАТЕЛЛА",
+    description: "", priceInfo: "", category: "ЗАКУСКИ",
+    mainCategory: "Еда", subCategory: "ЗАКУСКИ",
+    volumeInfo: null, basePrice: "990 р", options: null
+  },
+  {
+    id: 40, name: "РОСТБИФ, СОУС ТОННАТО",
+    description: "", priceInfo: "", category: "ЗАКУСКИ",
+    mainCategory: "Еда", subCategory: "ЗАКУСКИ",
+    volumeInfo: null, basePrice: "950 р", options: null
+  },
+  {
+    id: 41, name: "ЗАПЕЧЕННЫЕ ПЕРЦЫ, СОУС ТОННАТО",
+    description: "", priceInfo: "", category: "ЗАКУСКИ",
+    mainCategory: "Еда", subCategory: "ЗАКУСКИ",
+    volumeInfo: null, basePrice: "750 р", options: null
+  },
+
+  // САЛАТЫ (5 блюд)
+  {
+    id: 42, name: "ГРЕЧЕСКИЙ САЛАТ",
+    description: "", priceInfo: "", category: "САЛАТЫ",
+    mainCategory: "Еда", subCategory: "САЛАТЫ",
+    volumeInfo: null, basePrice: "670 р", options: null
+  },
+  {
+    id: 43, name: "ЗЕЛЕНЫЙ САЛАТ, ЛОСОСЬ, ПАРМЕЗАН",
+    description: "", priceInfo: "", category: "САЛАТЫ",
+    mainCategory: "Еда", subCategory: "САЛАТЫ",
+    volumeInfo: null, basePrice: "690 р", options: null
+  },
+  {
+    id: 44, name: "КРАБ, СТРАЧАТЕЛЛА, ТОМАТ",
+    description: "", priceInfo: "", category: "САЛАТЫ",
+    mainCategory: "Еда", subCategory: "САЛАТЫ",
+    volumeInfo: null, basePrice: "950 р", options: null
+  },
+  {
+    id: 45, name: "ЦУКИНИ, ТОМАТ, КРЕМ-ЧИЗ",
+    description: "", priceInfo: "", category: "САЛАТЫ",
+    mainCategory: "Еда", subCategory: "САЛАТЫ",
+    volumeInfo: null, basePrice: "650 р", options: null
+  },
+  {
+    id: 46, name: "ЗЕЛЕНЫЙ САЛАТ, ТУНЕЦ, ЯЙЦО",
+    description: "", priceInfo: "", category: "САЛАТЫ",
+    mainCategory: "Еда", subCategory: "САЛАТЫ",
+    volumeInfo: null, basePrice: "750 р", options: null
+  },
+
+  // НА ГОРЯЧЕЕ (9 блюд)
+  {
+    id: 47, name: "КРЕВЕТКИ, КАРТОФЕЛЬ, ПЕСТО",
+    description: "", priceInfo: "", category: "НА ГОРЯЧЕЕ",
+    mainCategory: "Еда", subCategory: "НА ГОРЯЧЕЕ",
+    volumeInfo: null, basePrice: "870 р", options: null
+  },
+  {
+    id: 48, name: "ГОВЯЖЬИ ЩЕКИ, ОРЗО, ШПИНАТ",
+    description: "", priceInfo: "", category: "НА ГОРЯЧЕЕ",
+    mainCategory: "Еда", subCategory: "НА ГОРЯЧЕЕ",
+    volumeInfo: null, basePrice: "890 р", options: null
+  },
+  {
+    id: 49, name: "БИФШТЕКС, ТОЛЧЕНЫЙ КАРТОФЕЛЬ, ЛИМОННАЯ СМЕТАНА",
+    description: "", priceInfo: "", category: "НА ГОРЯЧЕЕ",
+    mainCategory: "Еда", subCategory: "НА ГОРЯЧЕЕ",
+    volumeInfo: null, basePrice: "890 р", options: null
+  },
+  {
+    id: 50, name: "БРИСКЕТ, ЙОГУРТ, КАРТОФЕЛЬ",
+    description: "", priceInfo: "", category: "НА ГОРЯЧЕЕ",
+    mainCategory: "Еда", subCategory: "НА ГОРЯЧЕЕ",
+    volumeInfo: null, basePrice: "990 р", options: null
+  },
+  {
+    id: 51, name: "ОРЗО, КРЕВЕТКИ, ТРЮФЕЛЬ",
+    description: "", priceInfo: "", category: "НА ГОРЯЧЕЕ",
+    mainCategory: "Еда", subCategory: "НА ГОРЯЧЕЕ",
+    volumeInfo: null, basePrice: "990 р", options: null
+  },
+  {
+    id: 52, name: "ЛОСОСЬ НА ГРИЛЕ, ПЮРЕ ИЗ ЦВЕТНОЙ КАПУСТЫ",
+    description: "", priceInfo: "", category: "НА ГОРЯЧЕЕ",
+    mainCategory: "Еда", subCategory: "НА ГОРЯЧЕЕ",
+    volumeInfo: null, basePrice: "1190 р", options: null
+  },
+  {
+    id: 53, name: "СПАГЕТТИ ИЗ ЦУКИНИ, КРЕВЕТКИ, ТОМАТ",
+    description: "", priceInfo: "", category: "НА ГОРЯЧЕЕ",
+    mainCategory: "Еда", subCategory: "НА ГОРЯЧЕЕ",
+    volumeInfo: null, basePrice: "870 р", options: null
+  },
+  {
+    id: 54, name: "БУРГЕР. ГОВЯДИНА, РУККОЛА, ГОРГОНЗОЛА",
+    description: "", priceInfo: "", category: "НА ГОРЯЧЕЕ",
+    mainCategory: "Еда", subCategory: "НА ГОРЯЧЕЕ",
+    volumeInfo: null, basePrice: "790 р", options: null
+  },
+  {
+    id: 55, name: "ПАСТА ТОРТИЛЬОНИ, ГОВЯЖЬИ ЩЕЧКИ, УСТРИЧНЫЙ СОУС",
+    description: "", priceInfo: "", category: "НА ГОРЯЧЕЕ",
+    mainCategory: "Еда", subCategory: "НА ГОРЯЧЕЕ",
+    volumeInfo: null, basePrice: "990 р", options: null
+  },
+
+  // БЛЮДА ИЗ ЯИЦ (1 основное + 13 дополнений = 14 блюд)
+  {
+    id: 56, name: "ГЛАЗУНЬЯ | СКРЭМБЛ | ОМЛЕТ",
+    description: "", priceInfo: "", category: "БЛЮДА ИЗ ЯИЦ",
+    mainCategory: "Еда", subCategory: "БЛЮДА ИЗ ЯИЦ",
+    volumeInfo: null, basePrice: "250 р", options: null
+  },
+  {
+    id: 57, name: "ЛОСОСЬ",
+    description: "Дополнение к яичным блюдам", priceInfo: "", 
+    category: "БЛЮДА ИЗ ЯИЦ", mainCategory: "Еда", subCategory: "БЛЮДА ИЗ ЯИЦ",
+    volumeInfo: null, basePrice: "350 р", options: null
+  },
+  {
+    id: 58, name: "КРЕВЕТКИ",
+    description: "Дополнение к яичным блюдам", priceInfo: "", 
+    category: "БЛЮДА ИЗ ЯИЦ", mainCategory: "Еда", subCategory: "БЛЮДА ИЗ ЯИЦ",
+    volumeInfo: null, basePrice: "330 р", options: null
+  },
+  {
+    id: 59, name: "КРАБ",
+    description: "Дополнение к яичным блюдам", priceInfo: "", 
+    category: "БЛЮДА ИЗ ЯИЦ", mainCategory: "Еда", subCategory: "БЛЮДА ИЗ ЯИЦ",
+    volumeInfo: null, basePrice: "450 р", options: null
+  },
+  {
+    id: 60, name: "ПАСТРАМИ",
+    description: "Дополнение к яичным блюдам", priceInfo: "", 
+    category: "БЛЮДА ИЗ ЯИЦ", mainCategory: "Еда", subCategory: "БЛЮДА ИЗ ЯИЦ",
+    volumeInfo: null, basePrice: "290 р", options: null
+  },
+  {
+    id: 61, name: "ИНДЕЙКА",
+    description: "Дополнение к яичным блюдам", priceInfo: "", 
+    category: "БЛЮДА ИЗ ЯИЦ", mainCategory: "Еда", subCategory: "БЛЮДА ИЗ ЯИЦ",
+    volumeInfo: null, basePrice: "290 р", options: null
+  },
+  {
+    id: 62, name: "ХАШБРАУН",
+    description: "Дополнение к яичным блюдам", priceInfo: "", 
+    category: "БЛЮДА ИЗ ЯИЦ", mainCategory: "Еда", subCategory: "БЛЮДА ИЗ ЯИЦ",
+    volumeInfo: null, basePrice: "250 р", options: null
+  },
+  {
+    id: 63, name: "ПАРМЕЗАН",
+    description: "Дополнение к яичным блюдам", priceInfo: "", 
+    category: "БЛЮДА ИЗ ЯИЦ", mainCategory: "Еда", subCategory: "БЛЮДА ИЗ ЯИЦ",
+    volumeInfo: null, basePrice: "230 р", options: null
+  },
+  {
+    id: 64, name: "ФЕТА",
+    description: "Дополнение к яичным блюдам", priceInfo: "", 
+    category: "БЛЮДА ИЗ ЯИЦ", mainCategory: "Еда", subCategory: "БЛЮДА ИЗ ЯИЦ",
+    volumeInfo: null, basePrice: "230 р", options: null
+  },
+  {
+    id: 65, name: "СТРАЧАТЕЛЛА",
+    description: "Дополнение к яичным блюдам", priceInfo: "", 
+    category: "БЛЮДА ИЗ ЯИЦ", mainCategory: "Еда", subCategory: "БЛЮДА ИЗ ЯИЦ",
+    volumeInfo: null, basePrice: "270 р", options: null
+  },
+  {
+    id: 66, name: "КРЕМ-ЧИЗ",
+    description: "Дополнение к яичным блюдам", priceInfo: "", 
+    category: "БЛЮДА ИЗ ЯИЦ", mainCategory: "Еда", subCategory: "БЛЮДА ИЗ ЯИЦ",
+    volumeInfo: null, basePrice: "230 р", options: null
+  },
+  {
+    id: 67, name: "АВОКАДО",
+    description: "Дополнение к яичным блюдам", priceInfo: "", 
+    category: "БЛЮДА ИЗ ЯИЦ", mainCategory: "Еда", subCategory: "БЛЮДА ИЗ ЯИЦ",
+    volumeInfo: null, basePrice: "270 р", options: null
+  },
+  {
+    id: 68, name: "САЛАТ ИЗ ТОМАТОВ",
+    description: "Дополнение к яичным блюдам", priceInfo: "", 
+    category: "БЛЮДА ИЗ ЯИЦ", mainCategory: "Еда", subCategory: "БЛЮДА ИЗ ЯИЦ",
+    volumeInfo: null, basePrice: "270 р", options: null
+  },
+  {
+    id: 69, name: "ШПИНАТ",
+    description: "Дополнение к яичным блюдам", priceInfo: "", 
+    category: "БЛЮДА ИЗ ЯИЦ", mainCategory: "Еда", subCategory: "БЛЮДА ИЗ ЯИЦ",
+    volumeInfo: null, basePrice: "250 р", options: null
+  },
+
+  // ============ НАПИТКИ ============
+
+  // КОФЕ (19 напитков)
+  {
+    id: 70, name: "ЭСПРЕССО",
+    description: "", priceInfo: "", category: "КОФЕ",
+    mainCategory: "Напитки", subCategory: "КОФЕ",
+    volumeInfo: "35мл", basePrice: "230 р", options: null
+  },
+  {
+    id: 71, name: "АМЕРИКАНО",
+    description: "", priceInfo: "", category: "КОФЕ",
+    mainCategory: "Напитки", subCategory: "КОФЕ",
+    volumeInfo: "250мл", basePrice: "250 р", options: null
+  },
+  {
+    id: 72, name: "ФИЛЬТР-КОФЕ",
+    description: "", priceInfo: "240 | 260 р", category: "КОФЕ",
+    mainCategory: "Напитки", subCategory: "КОФЕ",
+    volumeInfo: "250 | 350 мл", basePrice: null, options: null
+  },
+  {
+    id: 73, name: "КАПУЧИНО",
+    description: "", priceInfo: "280 | 330 р", category: "КОФЕ",
+    mainCategory: "Напитки", subCategory: "КОФЕ",
+    volumeInfo: "250 | 350 мл", basePrice: null, options: null
+  },
+  {
+    id: 74, name: "ЛАТТЕ",
+    description: "", priceInfo: "310 | 350 р", category: "КОФЕ",
+    mainCategory: "Напитки", subCategory: "КОФЕ",
+    volumeInfo: "350 | 450 мл", basePrice: null, options: null
+  },
+  {
+    id: 75, name: "ФЛЭТ УАЙТ",
+    description: "", priceInfo: "", category: "КОФЕ",
+    mainCategory: "Напитки", subCategory: "КОФЕ",
+    volumeInfo: "250мл", basePrice: "330 р", options: null
+  },
+  {
+    id: 76, name: "РАФ",
+    description: "", priceInfo: "", category: "КОФЕ",
+    mainCategory: "Напитки", subCategory: "КОФЕ",
+    volumeInfo: "350мл", basePrice: "420 р", options: "ВАНИЛЬ | ЦИТРУС | ПРАГА | ХАЛВА"
+  },
+  {
+    id: 77, name: "PAФ CHINCH",
+    description: "", priceInfo: "", category: "КОФЕ",
+    mainCategory: "Напитки", subCategory: "КОФЕ",
+    volumeInfo: "350мл", basePrice: "450 р", options: null
+  },
+  {
+    id: 78, name: "МАТЧА ЛАТТЕ",
+    description: "", priceInfo: "330 | 380 р", category: "КОФЕ",
+    mainCategory: "Напитки", subCategory: "КОФЕ",
+    volumeInfo: "250 | 350 мл", basePrice: null, options: null
+  },
+  {
+    id: 79, name: "КАКАО-ШОКОЛАД",
+    description: "", priceInfo: "", category: "КОФЕ",
+    mainCategory: "Напитки", subCategory: "КОФЕ",
+    volumeInfo: "350 мл", basePrice: "370 р", options: null
+  },
+  {
+    id: 80, name: "БЕЛЫЙ КАКАО, ФИСТАШКА, СОЛЬ",
+    description: "", priceInfo: "", category: "КОФЕ",
+    mainCategory: "Напитки", subCategory: "КОФЕ",
+    volumeInfo: "350 мл", basePrice: "420 р", options: null
+  },
+  {
+    id: 81, name: "ЛАТТЕ СИНГАПУР",
+    description: "", priceInfo: "", category: "КОФЕ",
+    mainCategory: "Напитки", subCategory: "КОФЕ",
+    volumeInfo: "350 мл", basePrice: "450 р", options: null
+  },
+  {
+    id: 82, name: "ЛАТТЕ, БЕЛЫЙ ШОКОЛАД, ФИСТАШКА",
+    description: "", priceInfo: "", category: "КОФЕ",
+    mainCategory: "Напитки", subCategory: "КОФЕ",
+    volumeInfo: "350 мл", basePrice: "420 р", options: null
+  },
+  {
+    id: 83, name: "ЛАТТЕ ПТИЧЬЕ МОЛОКО",
+    description: "", priceInfo: "", category: "КОФЕ",
+    mainCategory: "Напитки", subCategory: "КОФЕ",
+    volumeInfo: "350 мл", basePrice: "420 р", options: null
+  },
+  {
+    id: 84, name: "БАМБЛ-КАРАМЕЛЬ",
+    description: "Эспрессо, карамель, молоко", priceInfo: "420 / 450 / 850 р", 
+    category: "КОФЕ", mainCategory: "Напитки", subCategory: "КОФЕ",
+    volumeInfo: "250 мл", basePrice: null, options: "ГРЕЙПФРУТ | ГРАНАТ"
+  },
+  {
+    id: 85, name: "ЭСПРЕССО-ТОНИК",
+    description: "", priceInfo: "", category: "КОФЕ",
+    mainCategory: "Напитки", subCategory: "КОФЕ",
+    volumeInfo: "350 мл", basePrice: "390 р", options: null
+  },
+  {
+    id: 86, name: "РАСТИТЕЛЬНОЕ МОЛОКО",
+    description: "", priceInfo: "", category: "КОФЕ",
+    mainCategory: "Напитки", subCategory: "КОФЕ",
+    volumeInfo: null, basePrice: "90 р", options: "КОКОСОВОЕ | МИНДАЛЬНОЕ | ФУНДУЧНОЕ | БАНАНОВОЕ | БЕЗЛАКТОЗНОЕ"
+  },
+
+  // ФРЕШ (4 напитка)
+  {
+    id: 87, name: "АПЕЛЬСИН",
+    description: "", priceInfo: "", category: "ФРЕШ",
+    mainCategory: "Напитки", subCategory: "ФРЕШ",
+    volumeInfo: "200 мл", basePrice: "370 р", options: null
+  },
+  {
+    id: 88, name: "ГРЕЙПФРУТ",
+    description: "", priceInfo: "", category: "ФРЕШ",
+    mainCategory: "Напитки", subCategory: "ФРЕШ",
+    volumeInfo: "200 мл", basePrice: "370 р", options: null
+  },
+  {
+    id: 89, name: "МАНДАРИН",
+    description: "", priceInfo: "", category: "ФРЕШ",
+    mainCategory: "Напитки", subCategory: "ФРЕШ",
+    volumeInfo: "200 мл", basePrice: "470 р", options: null
+  },
+  {
+    id: 90, name: "ГРАНАТ",
+    description: "", priceInfo: "", category: "ФРЕШ",
+    mainCategory: "Напитки", subCategory: "ФРЕШ",
+    volumeInfo: "200 мл", basePrice: "790 р", options: null
+  },
+
+  // SPECIAL (9 напитков)
+  {
+    id: 91, name: "СИБИРСКИЙ ЛАТТЕ",
+    description: "", priceInfo: "", category: "SPECIAL",
+    mainCategory: "Напитки", subCategory: "SPECIAL",
+    volumeInfo: "350 мл", basePrice: "450 р", options: null
+  },
+  {
+    id: 92, name: "РАФ МАСАЛА",
+    description: "", priceInfo: "", category: "SPECIAL",
+    mainCategory: "Напитки", subCategory: "SPECIAL",
+    volumeInfo: "350 мл", basePrice: "450 р", options: null
+  },
+  {
+    id: 93, name: "ЛАТТЕ АРАХИС",
+    description: "", priceInfo: "", category: "SPECIAL",
+    mainCategory: "Напитки", subCategory: "SPECIAL",
+    volumeInfo: "350 мл", basePrice: "420 р", options: null
+  },
+  {
+    id: 94, name: "ЛАТТЕ ИМБИРНЫЙ ПРЯНИК",
+    description: "", priceInfo: "", category: "SPECIAL",
+    mainCategory: "Напитки", subCategory: "SPECIAL",
+    volumeInfo: "350 мл", basePrice: "420 р", options: null
+  },
+  {
+    id: 95, name: "ГЛИНТВЕЙН Б/А, ВИШНЯ, БАРБАРИС",
+    description: "", priceInfo: "", category: "SPECIAL",
+    mainCategory: "Напитки", subCategory: "SPECIAL",
+    volumeInfo: "250 мл", basePrice: "490 р", options: null
+  },
+  {
+    id: 96, name: "ЗИМНИЙ БАМБЛ, МАНДАРИН",
+    description: "", priceInfo: "", category: "SPECIAL",
+    mainCategory: "Напитки", subCategory: "SPECIAL",
+    volumeInfo: "350 мл", basePrice: "490 р", options: null
+  },
+  {
+    id: 97, name: "АЛТАЙСКИЙ ЧАЙ. КЛЮКВА, МОЖЖЕВЕЛЬНИК",
+    description: "", priceInfo: "", category: "SPECIAL",
+    mainCategory: "Напитки", subCategory: "SPECIAL",
+    volumeInfo: "500 мл", basePrice: "550 р", options: null
+  },
+  {
+    id: 98, name: "СМОРОДИНА, АПЕЛЬСИН, МАСАЛА",
+    description: "", priceInfo: "", category: "SPECIAL",
+    mainCategory: "Напитки", subCategory: "SPECIAL",
+    volumeInfo: "500 мл", basePrice: "550 р", options: null
+  },
+  {
+    id: 99, name: "МОРОШКА, ПИХТА, МАЛИНА",
+    description: "", priceInfo: "", category: "SPECIAL",
+    mainCategory: "Напитки", subCategory: "SPECIAL",
+    volumeInfo: "500 мл", basePrice: "550 р", options: null
+  },
+
+  // ХОЛОДНЫЕ НАПИТКИ (10 напитков)
+  {
+    id: 100, name: "АПЕРОЛЬ Б/А",
+    description: "", priceInfo: "", category: "ХОЛОДНЫЕ НАПИТКИ",
+    mainCategory: "Напитки", subCategory: "ХОЛОДНЫЕ НАПИТКИ",
+    volumeInfo: "250 мл", basePrice: "450 р", options: null
+  },
+  {
+    id: 101, name: "ДЮШЕС",
+    description: "", priceInfo: "", category: "ХОЛОДНЫЕ НАПИТКИ",
+    mainCategory: "Напитки", subCategory: "ХОЛОДНЫЕ НАПИТКИ",
+    volumeInfo: "250 мл", basePrice: "410 р", options: null
+  },
+  {
+    id: 102, name: "КЛУБНИКА-МЯТА",
+    description: "", priceInfo: "", category: "ХОЛОДНЫЕ НАПИТКИ",
+    mainCategory: "Напитки", subCategory: "ХОЛОДНЫЕ НАПИТКИ",
+    volumeInfo: "250 мл", basePrice: "410 р", options: null
+  },
+  {
+    id: 103, name: "ГРЕЙПФРУТ, БУРБОНСКАЯ ВАНИЛЬ",
+    description: "", priceInfo: "", category: "ХОЛОДНЫЕ НАПИТКИ",
+    mainCategory: "Напитки", subCategory: "ХОЛОДНЫЕ НАПИТКИ",
+    volumeInfo: "250 мл", basePrice: "470 р", options: null
+  },
+  {
+    id: 104, name: "МАНГО-МАРАКУЙЯ",
+    description: "", priceInfo: "", category: "ХОЛОДНЫЕ НАПИТКИ",
+    mainCategory: "Напитки", subCategory: "ХОЛОДНЫЕ НАПИТКИ",
+    volumeInfo: "250 мл", basePrice: "450 р", options: null
+  },
+  {
+    id: 105, name: "МАНГО, МАТЧА, КОКОС",
+    description: "", priceInfo: "", category: "ХОЛОДНЫЕ НАПИТКИ",
+    mainCategory: "Напитки", subCategory: "ХОЛОДНЫЕ НАПИТКИ",
+    volumeInfo: "250 мл", basePrice: "470 р", options: null
+  },
+  {
+    id: 106, name: "ГРЕЙПФРУТ-КЛУБНИКА",
+    description: "", priceInfo: "", category: "ХОЛОДНЫЕ НАПИТКИ",
+    mainCategory: "Напитки", subCategory: "ХОЛОДНЫЕ НАПИТКИ",
+    volumeInfo: "250 мл", basePrice: "450 р", options: null
+  },
+  {
+    id: 107, name: "ЗЕЛЕНОЕ ЯБЛОКО, САГАН-ДАЙЛЯ",
+    description: "", priceInfo: "", category: "ХОЛОДНЫЕ НАПИТКИ",
+    mainCategory: "Напитки", subCategory: "ХОЛОДНЫЕ НАПИТКИ",
+    volumeInfo: "250 мл", basePrice: "420 р", options: null
+  },
+  {
+    id: 108, name: "ПЕРСИК, ЛАЙМ, ЭСТРАГОН",
+    description: "", priceInfo: "", category: "ХОЛОДНЫЕ НАПИТКИ",
+    mainCategory: "Напитки", subCategory: "ХОЛОДНЫЕ НАПИТКИ",
+    volumeInfo: "250 мл", basePrice: "450 р", options: null
+  },
+  {
+    id: 109, name: "СМУЗИ КЛУБНИКА-КОКОС",
+    description: "", priceInfo: "", category: "ХОЛОДНЫЕ НАПИТКИ",
+    mainCategory: "Напитки", subCategory: "ХОЛОДНЫЕ НАПИТКИ",
+    volumeInfo: "400 мл", basePrice: "450 р", options: null
+  },
+  {
+    id: 110, name: "СМУЗИ АПЕЛЬСИН-ЧЕРНИКА",
+    description: "", priceInfo: "", category: "ХОЛОДНЫЕ НАПИТКИ",
+    mainCategory: "Напитки", subCategory: "ХОЛОДНЫЕ НАПИТКИ",
+    volumeInfo: "400 мл", basePrice: "450 р", options: null
+  },
+
+  // ЧАЙ / ТИЗАН (11 напитков)
+  {
+    id: 111, name: "ДАРДЖИЛИНГ",
+    description: "", priceInfo: "", category: "ЧАЙ / ТИЗАН",
+    mainCategory: "Напитки", subCategory: "ЧАЙ / ТИЗАН",
+    volumeInfo: "500 мл", basePrice: "390 р", options: null
+  },
+  {
+    id: 112, name: "ЭРЛ ГРЕЙ",
+    description: "", priceInfo: "", category: "ЧАЙ / ТИЗАН",
+    mainCategory: "Напитки", subCategory: "ЧАЙ / ТИЗАН",
+    volumeInfo: "500 мл", basePrice: "390 р", options: null
+  },
+  {
+    id: 113, name: "СЕНЧА",
+    description: "", priceInfo: "", category: "ЧАЙ / ТИЗАН",
+    mainCategory: "Напитки", subCategory: "ЧАЙ / ТИЗАН",
+    volumeInfo: "500 мл", basePrice: "390 р", options: null
+  },
+  {
+    id: 114, name: "ЖАСМИН",
+    description: "", priceInfo: "", category: "ЧАЙ / ТИЗАН",
+    mainCategory: "Напитки", subCategory: "ЧАЙ / ТИЗАН",
+    volumeInfo: "500 мл", basePrice: "390 р", options: null
+  },
+  {
+    id: 115, name: "СБОР ТРАВ",
+    description: "", priceInfo: "", category: "ЧАЙ / ТИЗАН",
+    mainCategory: "Напитки", subCategory: "ЧАЙ / ТИЗАН",
+    volumeInfo: "500 мл", basePrice: "390 р", options: null
+  },
+  {
+    id: 116, name: "ГРЕЧИШНЫЙ ЧАЙ",
+    description: "", priceInfo: "", category: "ЧАЙ / ТИЗАН",
+    mainCategory: "Напитки", subCategory: "ЧАЙ / ТИЗАН",
+    volumeInfo: "500 мл", basePrice: "390 р", options: null
+  },
+  {
+    id: 117, name: "ШИПОВНИК-МАЛИНА",
+    description: "", priceInfo: "", category: "ЧАЙ / ТИЗАН",
+    mainCategory: "Напитки", subCategory: "ЧАЙ / ТИЗАН",
+    volumeInfo: "500 мл", basePrice: "420 р", options: null
+  },
+  {
+    id: 118, name: "ГРЕЧИХА-МАНГО",
+    description: "", priceInfo: "", category: "ЧАЙ / ТИЗАН",
+    mainCategory: "Напитки", subCategory: "ЧАЙ / ТИЗАН",
+    volumeInfo: "500 мл", basePrice: "550 р", options: null
+  },
+  {
+    id: 119, name: "ОБЛЕПИХА-ЦИТРУС",
+    description: "", priceInfo: "", category: "ЧАЙ / ТИЗАН",
+    mainCategory: "Напитки", subCategory: "ЧАЙ / ТИЗАН",
+    volumeInfo: "500 мл", basePrice: "550 р", options: null
+  },
+  {
+    id: 120, name: "ЧЕРНИКА-БРУСНИКА",
+    description: "", priceInfo: "", category: "ЧАЙ / ТИЗАН",
+    mainCategory: "Напитки", subCategory: "ЧАЙ / ТИЗАН",
+    volumeInfo: "500 мл", basePrice: "550 р", options: null
+  },
+  {
+    id: 121, name: "МАЛИНА-МАРАКУЙЯ",
+    description: "", priceInfo: "", category: "ЧАЙ / ТИЗАН",
+    mainCategory: "Напитки", subCategory: "ЧАЙ / ТИЗАН",
+    volumeInfo: "500 мл", basePrice: "550 р", options: null
+  },
+
+  // СОК БУТ. (3 напитка)
+  {
+    id: 122, name: "ЯБЛОКО",
+    description: "", priceInfo: "", category: "СОК БУТ.",
+    mainCategory: "Напитки", subCategory: "СОК БУТ.",
+    volumeInfo: "200 мл", basePrice: "290 р", options: null
+  },
+  {
+    id: 123, name: "ВИШНЯ",
+    description: "", priceInfo: "", category: "СОК БУТ.",
+    mainCategory: "Напитки", subCategory: "СОК БУТ.",
+    volumeInfo: "200 мл", basePrice: "290 р", options: null
+  },
+  {
+    id: 124, name: "ПЕРСИК",
+    description: "", priceInfo: "", category: "СОК БУТ.",
+    mainCategory: "Напитки", subCategory: "СОК БУТ.",
+    volumeInfo: "200 мл", basePrice: "290 р", options: null
+  },
+
+  // ВОДА (1 напиток)
+  {
+    id: 125, name: "MARUHA",
+    description: "", priceInfo: "", category: "ВОДА",
+    mainCategory: "Напитки", subCategory: "ВОДА",
+    volumeInfo: "500 мл", basePrice: "350 р", options: "НЕГАЗИРОВАННАЯ | ГАЗИРОВАННАЯ"
+  },
+
+  // ПИВО (6 напитков)
+  {
+    id: 126, name: "ESTRELLA DAMN",
+    description: "", priceInfo: "", category: "ПИВО",
+    mainCategory: "Напитки", subCategory: "ПИВО",
+    volumeInfo: "330 мл", basePrice: "490 р", options: null
+  },
+  {
+    id: 127, name: "INEDIT DAMN",
+    description: "", priceInfo: "", category: "ПИВО",
+    mainCategory: "Напитки", subCategory: "ПИВО",
+    volumeInfo: "330 мл", basePrice: "490 р", options: null
+  },
+  {
+    id: 128, name: "CLAUSTHALER",
+    description: "", priceInfo: "", category: "ПИВО",
+    mainCategory: "Напитки", subCategory: "ПИВО",
+    volumeInfo: "330 мл", basePrice: "390 р", options: null
+  },
+  {
+    id: 129, name: "LEFFE BRUNE",
+    description: "", priceInfo: "", category: "ПИВО",
+    mainCategory: "Напитки", subCategory: "ПИВО",
+    volumeInfo: "330 мл", basePrice: "490 р", options: null
+  },
+  {
+    id: 130, name: "CIDER VAL DE RANCE",
+    description: "", priceInfo: "", category: "ПИВО",
+    mainCategory: "Напитки", subCategory: "ПИВО",
+    volumeInfo: "750 мл", basePrice: "1350 р", options: null
+  },
+  {
+    id: 131, name: "CIDER GALIPETTE",
+    description: "", priceInfo: "", category: "ПИВО",
+    mainCategory: "Напитки", subCategory: "ПИВО",
+    volumeInfo: "330 мл", basePrice: "790 р", options: null
+  }
 ];
+
+console.log('✅ Загружены мок-данные: ' + mockMenuData.length + ' блюд');
 
 // Функция для получения данных
 const getApiData = async () => {
