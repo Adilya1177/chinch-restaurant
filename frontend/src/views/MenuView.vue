@@ -111,7 +111,7 @@
 </template>
 
 <script>
-import axios from 'axios';
+import { menuService } from '@/services/api';
 
 export default {
   name: 'MenuView',
@@ -200,13 +200,16 @@ export default {
       try {
         this.loading = true;
         
-        // Загружаем основное меню
-        const menuResponse = await axios.get('http://localhost:5277/api/menu');
-        this.menuItems = menuResponse.data;
+        // Используем наш сервис вместо прямого вызова axios
+        this.menuItems = await menuService.getDishes();
+        
+        console.log('✅ Загружены блюда:', this.menuItems.length);
         
       } catch (err) {
-        console.error('Ошибка загрузки данных:', err);
+        console.error('❌ Ошибка загрузки данных:', err);
         this.error = 'Сервер временно недоступен';
+        // На GitHub Pages покажем мок-данные из catch
+        this.menuItems = [];
       } finally {
         this.loading = false;
       }
@@ -259,21 +262,20 @@ export default {
     },
     
     // Форматирование информации о ценах (несколько цен)
-    // Форматирование информации о ценах (несколько цен)
     formatPriceInfo(priceInfo, itemName) {
       if (!priceInfo) return '';
       
-    // Для БАМБЛ-КАРАМЕЛЬ: "420 450 850 р" → "420 / 450 / 850 р"
+      // Для БАМБЛ-КАРАМЕЛЬ: "420 450 850 р" → "420 / 450 / 850 р"
       if (itemName && itemName.includes('БАМБЛ-КАРАМЕЛЬ')) {
-      // Разбиваем по пробелам и собираем обратно с разделителями
-        const parts = priceInfo.match(/\\d+/g);
+        // Разбиваем по пробелам и собираем обратно с разделителями
+        const parts = priceInfo.match(/\d+/g);
         if (parts && parts.length === 3) {
           return `${parts[0]} / ${parts[1]} / ${parts[2]} р`;
         }
-        return priceInfo.replace(/\\s+/g, " / ");
+        return priceInfo.replace(/\s+/g, " / ");
       }
       
-    // Для других напитков с форматом "240 | 260 р" → "240 / 260 р"
+      // Для других напитков с форматом "240 | 260 р" → "240 / 260 р"
       if (priceInfo.includes('|')) {
         return priceInfo.split('|').map(p => p.trim()).join(' / ');
       }
