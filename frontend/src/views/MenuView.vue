@@ -68,7 +68,7 @@
               <div 
                 v-for="item in subCategory.items" 
                 :key="item.id" 
-                class="dish-card"
+                :class="['dish-card', { 'is-addon': item.isAddon }]"
               >
                 <div class="dish-card-inner">
                   <h3 class="dish-title">{{ item.name }}</h3>
@@ -586,6 +586,44 @@ export default {
   font-size: 0.95rem;
   opacity: 0.7;
   font-style: italic;
+}
+
+/* Стиль для дополнений к яйцам */
+.dish-card.is-addon .dish-card-inner {
+  background: rgba(248, 244, 234, 0.4);
+  border-color: rgba(139, 107, 77, 0.3);
+  margin-left: 1.5rem;
+  transform: scale(0.95);
+}
+
+.dish-card.is-addon .dish-title {
+  font-size: 1.1rem;
+  color: #8b6b4d;
+  opacity: 0.9;
+}
+
+.dish-card.is-addon .dish-card-inner:hover {
+  transform: translateY(-2px) scale(0.97);
+  box-shadow: 0 4px 12px rgba(139, 107, 77, 0.1);
+}
+
+.dish-card.is-addon .price-single,
+.dish-card.is-addon .price-multiple {
+  font-size: 1rem;
+  color: #8b6b4d;
+  opacity: 0.8;
+}
+
+/* Для мобильных устройств */
+@media (max-width: 768px) {
+  .dish-card.is-addon .dish-card-inner {
+    margin-left: 1rem;
+    transform: scale(0.92);
+  }
+  
+  .dish-card.is-addon .dish-title {
+    font-size: 1rem;
+  }
 }
 
 /* Состояния */

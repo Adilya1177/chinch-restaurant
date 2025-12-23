@@ -64,6 +64,10 @@
                   class="form-select"
                 >
                   <option value="" disabled selected>Выберите время</option>
+                  <option value="08:00">08:00</option>
+                  <option value="09:00">09:00</option>
+                  <option value="10:00">10:00</option>
+                  <option value="11:00">11:00</option>
                   <option value="12:00">12:00</option>
                   <option value="13:00">13:00</option>
                   <option value="14:00">14:00</option>
@@ -75,6 +79,7 @@
                   <option value="20:00">20:00</option>
                   <option value="21:00">21:00</option>
                   <option value="22:00">22:00</option>
+                  <option value="23:00">23:00</option>
                 </select>
               </div>
             </div>
@@ -161,7 +166,7 @@
                 <div class="info-icon">📍</div>
                 <div class="info-text">
                   <div class="info-label">АДРЕС</div>
-                  <div class="info-value">г. Москва, ул. Пречистенка, 15</div>
+                  <div class="info-value">ул. Берзарина, 28А, корп. 4, Москва</div>
                 </div>
               </div>
               
@@ -169,7 +174,7 @@
                 <div class="info-icon">📞</div>
                 <div class="info-text">
                   <div class="info-label">ТЕЛЕФОН</div>
-                  <div class="info-value">+7 (495) 123-45-67</div>
+                  <div class="info-value">+7 (915) 054-96-06</div>
                 </div>
               </div>
               
@@ -178,9 +183,7 @@
                 <div class="info-text">
                   <div class="info-label">ЧАСЫ РАБОТЫ</div>
                   <div class="info-value">
-                    <div>Пн-Чт: 12:00 - 23:00</div>
-                    <div>Пт-Сб: 12:00 - 00:00</div>
-                    <div>Вс: 12:00 - 22:00</div>
+                    <div>Пн-Вс: 08:00 - 23:00</div>
                   </div>
                 </div>
               </div>
