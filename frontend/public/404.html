@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="ru">
+  <head>
+    <meta charset="UTF-8">
+    <link rel="icon" href="/favicon.ico">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CHINCH - Ресторан изысканной кухни</title>
+    <!-- Шрифты -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;400;500;600;700&family=Playfair+Display:wght@400;500;600;700&family=EB+Garamond:wght@400;500;600&display=swap" rel="stylesheet">
+    <!-- Мета-теги -->
+    <meta name="description" content="Ресторан CHINCH - авторская кухня, изысканные блюда и коктейли в центре Москвы">
+    
+    <!-- СКРИПТ ДЛЯ РЕДИРЕКТА В SPA -->
+    <script>
+      // Решение для SPA на GitHub Pages
+      (function() {
+        // Сохраняем оригинальный путь
+        const originalPath = window.location.pathname;
+        
+        // Перенаправляем только если это не корневая страница
+        if (originalPath !== '/chinch-restaurant/' && 
+            originalPath !== '/chinch-restaurant/index.html') {
+          
+          // Сохраняем путь в sessionStorage для Vue Router
+          sessionStorage.setItem('redirectPath', originalPath);
+          
+          // Перенаправляем на главную
+          window.location.href = '/chinch-restaurant/';
+        }
+      })();
+    </script>
+    
+    <!-- СКРИПТ ДЛЯ VUE ROUTER -->
+    <script>
+      // Помощник для Vue Router
+      window.handleGitHubPagesRedirect = function(router) {
+        const redirectPath = sessionStorage.getItem('redirectPath');
+        if (redirectPath) {
+          sessionStorage.removeItem('redirectPath');
+          
+          // Убираем base path из URL
+          const cleanPath = redirectPath.replace('/chinch-restaurant', '') || '/';
+          
+          // Переходим на нужный маршрут
+          setTimeout(() => {
+            router.push(cleanPath);
+          }, 100);
+        }
+      };
+    </script>
+    
+  </head>
+  <body>
+    <div id="app"></div>
+    <script type="module" src="/src/main.js"></script>
+  </body>
+</html>

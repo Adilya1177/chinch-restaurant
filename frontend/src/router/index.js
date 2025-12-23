@@ -1,7 +1,7 @@
 import { createRouter, createWebHistory } from 'vue-router'
 
 const router = createRouter({
-  history: createWebHistory('/'),
+  history: createWebHistory('/chinch-restaurant/'), // ИЗМЕНИТЕ ЭТО!
   routes: [
     {
       path: '/',
@@ -22,8 +22,20 @@ const router = createRouter({
       path: '/about',
       name: 'about',
       component: () => import('../views/AboutView.vue')
+    },
+    // Добавьте catch-all route для 404
+    {
+      path: '/:pathMatch(.*)*',
+      redirect: '/'
     }
   ]
+})
+
+// Обработка редиректа с GitHub Pages
+router.afterEach(() => {
+  if (typeof window.handleGitHubPagesRedirect === 'function') {
+    window.handleGitHubPagesRedirect(router);
+  }
 })
 
 export default router
