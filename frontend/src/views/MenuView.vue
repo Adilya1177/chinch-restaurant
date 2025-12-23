@@ -111,7 +111,7 @@
 </template>
 
 <script>
-import { menuService } from '@/services/api';
+import { menuService } from '../services/api';
 
 export default {
   name: 'MenuView',
