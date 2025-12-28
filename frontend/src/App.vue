@@ -27,16 +27,7 @@
           <h3 class="footer-title">ЧАСЫ РАБОТЫ</h3>
           <p class="footer-info">Пн-Вс: 08:00 - 23:00</p>
         </div>
-        
-        <div class="footer-section">
-          <h3 class="footer-title">МЫ В СОЦСЕТЯХ</h3>
-          <div class="social-links">
-            <span class="social-icon">📱</span>
-            <span class="social-icon">📷</span>
-            <span class="social-icon">📘</span>
-          </div>
         </div>
-      </div>
       
       <div class="footer-bottom">
         <div class="footer-line"></div>
@@ -143,25 +134,6 @@ export default {
   font-size: 1rem;
   line-height: 1.6;
   margin: 0.3rem 0;
-}
-
-.social-links {
-  display: flex;
-  gap: 1rem;
-  margin-top: 0.5rem;
-}
-
-.social-icon {
-  font-size: 1.5rem;
-  color: #d4b483;
-  cursor: pointer;
-  transition: all 0.3s ease;
-  opacity: 0.8;
-}
-
-.social-icon:hover {
-  opacity: 1;
-  transform: translateY(-2px);
 }
 
 .footer-bottom {

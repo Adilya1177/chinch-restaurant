@@ -47,8 +47,7 @@ export default {
       navItems: [
         { path: '/', label: 'ГЛАВНАЯ', icon: '⌂' },
         { path: '/menu', label: 'МЕНЮ', icon: '☰' },
-        { path: '/reservation', label: 'БРОНИРОВАНИЕ', icon: '✎' },
-        { path: '/about', label: 'О НАС', icon: 'ⓘ' }
+        { path: '/reservation', label: 'БРОНИРОВАНИЕ', icon: '✎' }
       ]
     };
   }

@@ -73,24 +73,11 @@
                 <div class="dish-card-inner">
                   <h3 class="dish-title">{{ item.name }}</h3>
                   
-                  <!-- Блок с объемом и ценами -->
-                  <div class="price-volume-block" v-if="item.volumeInfo || item.basePrice || item.priceInfo">
-                    <!-- Объем -->
-                    <div v-if="item.volumeInfo" class="volume-info">
+                  <!-- Блок с объемом (без цен) -->
+                  <div class="price-volume-block" v-if="item.volumeInfo">
+                    <!-- Только объем -->
+                    <div class="volume-info">
                       <span class="volume-label">{{ formatVolume(item.volumeInfo) }}</span>
-                    </div>
-                    
-                    <!-- Цены -->
-                    <div class="prices-container">
-                      <!-- Базовая цена (для простых товаров) -->
-                      <div v-if="item.basePrice && !item.priceInfo" class="price-single">
-                        <span class="price-value">{{ formatPrice(item.basePrice) }}</span>
-                      </div>
-                      
-                      <!-- Множественные цены (для напитков с разными объемами) -->
-                      <div v-if="item.priceInfo" class="price-multiple">
-                        <span class="price-values">{{ formatPriceInfo(item.priceInfo, item.name) }}</span>
-                      </div>
                     </div>
                   </div>
                   
@@ -259,34 +246,6 @@ export default {
         return formatted.split('|').map(v => v.trim()).join(' / ');
       }
       return formatted;
-    },
-    
-    // Форматирование цены
-    formatPrice(price) {
-      if (!price) return '';
-      return price;
-    },
-    
-    // Форматирование информации о ценах (несколько цен)
-    formatPriceInfo(priceInfo, itemName) {
-      if (!priceInfo) return '';
-      
-      // Для БАМБЛ-КАРАМЕЛЬ: "420 450 850 р" → "420 / 450 / 850 р"
-      if (itemName && itemName.includes('БАМБЛ-КАРАМЕЛЬ')) {
-        // Разбиваем по пробелам и собираем обратно с разделителями
-        const parts = priceInfo.match(/\d+/g);
-        if (parts && parts.length === 3) {
-          return `${parts[0]} / ${parts[1]} / ${parts[2]} р`;
-        }
-        return priceInfo.replace(/\s+/g, " / ");
-      }
-      
-      // Для других напитков с форматом "240 | 260 р" → "240 / 260 р"
-      if (priceInfo.includes('|')) {
-        return priceInfo.split('|').map(p => p.trim()).join(' / ');
-      }
-      
-      return priceInfo;
     },
     
     // Форматирование опций
@@ -564,30 +523,6 @@ export default {
   font-weight: 500;
 }
 
-.prices-container {
-  display: flex;
-  align-items: center;
-  justify-content: center; /* Цены по центру */
-}
-
-.price-single {
-  font-family: 'EB Garamond', serif; /* Шрифт как у объема */
-  font-size: 0.95rem;
-  color: #8b6b4d;
-  font-weight: 500;
-}
-
-.price-multiple {
-  font-family: 'EB Garamond', serif; /* Шрифт как у объема */
-  font-size: 0.95rem;
-  color: #8b6b4d;
-  font-weight: 500;
-}
-
-.price-values {
-  font-weight: 500;
-}
-
 /* Опции */
 .dish-details {
   margin-top: 0.8rem;
@@ -627,11 +562,6 @@ export default {
   margin-bottom: 0.8rem;
 }
 
-.dish-card.is-egg-main .price-single {
-  color: #2a1e14;
-  font-size: 1.1rem;
-  font-weight: 600;
-}
 
 /* Добавки к яйцам - красивый грид */
 .dish-card.is-addon .dish-card-inner {
@@ -651,12 +581,6 @@ export default {
   color: #8b6b4d;
   font-weight: 500;
   margin-bottom: 0.5rem;
-}
-
-.dish-card.is-addon .price-single {
-  font-size: 0.95rem;
-  color: #8b6b4d;
-  opacity: 0.9;
 }
 
 .dish-card.is-addon .dish-card-inner:hover {
