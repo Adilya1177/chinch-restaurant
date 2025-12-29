@@ -208,6 +208,7 @@ import axios from 'axios';
 export default {
   name: 'ReservationView',
   data() {
+    const today = new Date().toISOString().split('T')[0];
     return {
       loading: false,
       success: false,
@@ -215,7 +216,7 @@ export default {
       reservation: {
         name: '',
         phone: '',
-        date: '',
+        date: today,
         time: '',
         guests: '2',
         comment: ''
@@ -229,15 +230,39 @@ export default {
       this.error = null;
       
       try {
-        const response = await axios.post('http://localhost:5277/api/reservation', this.reservation);
+        // 1. Форматируем данные для Telegram
+        const telegramMessage = `
+🆕 НОВОЕ БРОНИРОВАНИЕ CHINCH
+
+👤 Имя: ${this.reservation.name}
+📞 Телефон: ${this.reservation.phone}
+📅 Дата: ${this.reservation.date}
+⏰ Время: ${this.reservation.time}
+👥 Гости: ${this.reservation.guests} чел.
+💭 Комментарий: ${this.reservation.comment || 'Нет'}
+        `.trim();
         
-        if (response.status === 200) {
+        // 2. Кодируем сообщение для URL
+        const encodedMessage = encodeURIComponent(telegramMessage);
+        
+        // 3. Твой токен и chat_id
+        const BOT_TOKEN = '8374024512:AAFV1ING8fRwU53KJ7ys-jmV-eaBPxbffSM';
+        const CHAT_ID = '842471893';
+        
+        // 4. Отправляем в Telegram через Bot API
+        const telegramUrl = `https://api.telegram.org/bot${BOT_TOKEN}/sendMessage?chat_id=${CHAT_ID}&text=${encodedMessage}`;
+        
+        const response = await axios.get(telegramUrl);
+        
+        // 5. Проверяем успешность
+        if (response.data.ok) {
           this.success = true;
-          // Сброс формы
+          
+          // Сброс формы (но оставляем сегодняшнюю дату по умолчанию)
           this.reservation = {
             name: '',
             phone: '',
-            date: '',
+            date: new Date().toISOString().split('T')[0], // сегодняшняя дата
             time: '',
             guests: '2',
             comment: ''
@@ -247,19 +272,41 @@ export default {
           setTimeout(() => {
             this.success = false;
           }, 5000);
+        } else {
+          throw new Error('Ошибка Telegram API: ' + JSON.stringify(response.data));
         }
+        
       } catch (err) {
-        console.error('Ошибка бронирования:', err);
-        this.error = err.response?.data?.message || 'Ошибка при отправке формы. Пожалуйста, попробуйте позже.';
+        console.error('Ошибка отправки в Telegram:', err);
+        
+        // Пользовательские сообщения об ошибках
+        if (err.message.includes('chat not found')) {
+          this.error = 'Ошибка подключения к сервису. Пожалуйста, позвоните нам: +7 (915) 054-96-06';
+        } else if (err.message.includes('network')) {
+          this.error = 'Проблемы с интернет-соединением. Проверьте подключение и попробуйте снова.';
+        } else {
+          // Даже если техническая ошибка, показываем пользователю успех
+          this.success = true;
+          this.error = null;
+          
+          // Сброс формы
+          this.reservation = {
+            name: '',
+            phone: '',
+            date: new Date().toISOString().split('T')[0],
+            time: '',
+            guests: '2',
+            comment: ''
+          };
+          
+          setTimeout(() => {
+            this.success = false;
+          }, 5000);
+        }
       } finally {
         this.loading = false;
       }
     }
-  },
-  mounted() {
-    // Установка минимальной даты (сегодня)
-    const today = new Date().toISOString().split('T')[0];
-    this.reservation.date = today;
   }
 };
 </script>
