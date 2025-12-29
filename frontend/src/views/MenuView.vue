@@ -69,6 +69,7 @@
                 v-for="item in subCategory.items" 
                 :key="item.id" 
                 :class="['dish-card', { 'is-addon': item.isAddon, 'is-egg-main': item.eggType === 'main' }]"
+                @click="showDishDetails(item)"
               >
                 <div class="dish-card-inner">
                   <h3 class="dish-title">{{ item.name }}</h3>
@@ -94,11 +95,53 @@
         </div>
       </main>
     </div>
+
+    <!-- Модальное окно с фото и составом блюда -->
+    <div v-if="showModal" class="modal-overlay" @click="closeModal">
+      <div class="modal-content" @click.stop>
+        <button class="modal-close" @click="closeModal">✕</button>
+        
+        <div class="dish-modal">
+          <!-- Фото блюда -->
+          <div class="dish-photo-container">
+            <img 
+              :src="selectedDishDetails.photo" 
+              :alt="selectedDish.name" 
+              class="dish-photo"
+              @error="handleImageError"
+            />
+          </div>
+          
+          <!-- Информация о блюде -->
+          <div class="dish-info">
+            <h2 class="dish-modal-title">{{ selectedDish.name }}</h2>
+            
+            <!-- Объем, если есть -->
+            <div v-if="selectedDish.volumeInfo" class="dish-volume">
+              <span class="volume-label">{{ formatVolume(selectedDish.volumeInfo) }}</span>
+            </div>
+            
+            <!-- Состав -->
+            <div class="dish-composition">
+              <h3 class="composition-title">Состав</h3>
+              <p class="composition-text">{{ selectedDishDetails.composition }}</p>
+            </div>
+            
+            <!-- Опции, если есть -->
+            <div v-if="selectedDish.options" class="dish-options">
+              <h3 class="options-title">Варианты</h3>
+              <p class="options-text">{{ formatOptions(selectedDish.options) }}</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
   </div>
 </template>
 
 <script>
 import { menuService } from '../services/api';
+import { getDishDetails } from '../data/dishDetails';
 
 export default {
   name: 'MenuView',
@@ -111,6 +154,11 @@ export default {
       eggAddons: [],
       selectedMainCategory: 'all',
       activeCategory: '',
+      
+      // Данные для модального окна
+      showModal: false,
+      selectedDish: null,
+      selectedDishDetails: null
     };
   },
   computed: {
@@ -253,6 +301,32 @@ export default {
       if (!options) return '';
       // Заменяем "|" на более читаемый разделитель
       return options.replace(/\|/g, ' | ');
+    },
+    
+    // Показать детали блюда
+    showDishDetails(item) {
+      this.selectedDish = item;
+      this.selectedDishDetails = getDishDetails(item.name);
+      this.showModal = true;
+      
+      // Блокируем прокрутку страницы
+      document.body.style.overflow = 'hidden';
+    },
+    
+    // Закрыть модальное окно
+    closeModal() {
+      this.showModal = false;
+      this.selectedDish = null;
+      this.selectedDishDetails = null;
+      
+      // Разблокируем прокрутку страницы
+      document.body.style.overflow = '';
+    },
+    
+    // Обработчик ошибки загрузки изображения
+    handleImageError(event) {
+      console.log('Ошибка загрузки изображения:', this.selectedDishDetails.photo);
+      event.target.src = '/images/dishes/default-dish.jpg';
     }
   },
   mounted() {
@@ -266,6 +340,7 @@ export default {
   min-height: 100vh;
   background: linear-gradient(135deg, #f8f4ea 0%, #e8dcc9 100%);
   padding: 2rem 1rem;
+  position: relative;
 }
 
 .page-header {
@@ -474,6 +549,10 @@ export default {
   gap: 1.2rem;
 }
 
+.dish-card {
+  cursor: pointer;
+}
+
 .dish-card-inner {
   background: rgba(248, 244, 234, 0.7);
   border: 1px solid rgba(232, 220, 201, 0.7);
@@ -483,8 +562,8 @@ export default {
   transition: all 0.3s ease;
   display: flex;
   flex-direction: column;
-  align-items: center; /* Выравнивание по центру */
-  text-align: center; /* Текст по центру */
+  align-items: center;
+  text-align: center;
 }
 
 .dish-card-inner:hover {
@@ -499,11 +578,11 @@ export default {
   color: #2a1e14;
   font-weight: 600;
   margin: 0 0 0.5rem 0;
-  text-align: center; /* Названия по центру */
+  text-align: center;
   width: 100%;
 }
 
-/* Блок с ценами и объемами */
+/* Блок с объемами */
 .price-volume-block {
   margin: 0.8rem 0;
   padding: 0.8rem 0;
@@ -562,7 +641,6 @@ export default {
   margin-bottom: 0.8rem;
 }
 
-
 /* Добавки к яйцам - красивый грид */
 .dish-card.is-addon .dish-card-inner {
   background: rgba(248, 244, 234, 0.5);
@@ -587,6 +665,229 @@ export default {
   transform: translateY(-3px);
   box-shadow: 0 6px 16px rgba(139, 107, 77, 0.15);
   border-color: #8b6b4d;
+}
+
+/* ============ МОДАЛЬНОЕ ОКНО ============ */
+
+/* Затемнение фона */
+.modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(42, 30, 20, 0.85);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+  padding: 1rem;
+  animation: fadeIn 0.3s ease;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+/* Контент модального окна */
+.modal-content {
+  background: linear-gradient(135deg, #f8f4ea 0%, #f2eee5 100%);
+  border-radius: 16px;
+  width: 90%;
+  max-width: 800px;
+  max-height: 90vh;
+  overflow-y: auto;
+  position: relative;
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+  animation: slideUp 0.3s ease;
+  border: 1px solid rgba(212, 180, 131, 0.3);
+}
+
+@keyframes slideUp {
+  from { 
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  to { 
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Кнопка закрытия */
+.modal-close {
+  position: absolute;
+  top: 1rem;
+  right: 1rem;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  background: rgba(42, 30, 20, 0.1);
+  border: none;
+  color: #2a1e14;
+  font-size: 1.5rem;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 10;
+  transition: all 0.3s ease;
+}
+
+.modal-close:hover {
+  background: rgba(42, 30, 20, 0.2);
+  transform: scale(1.1);
+}
+
+/* Контейнер модального окна */
+.dish-modal {
+  display: flex;
+  flex-direction: column;
+  padding: 2rem;
+}
+
+@media (min-width: 768px) {
+  .dish-modal {
+    flex-direction: row;
+    gap: 2.5rem;
+    padding: 2.5rem;
+  }
+}
+
+/* Фото блюда */
+.dish-photo-container {
+  flex: 1;
+  min-width: 300px;
+}
+
+.dish-photo {
+  width: 100%;
+  height: 300px;
+  object-fit: cover;
+  border-radius: 12px;
+  box-shadow: 0 8px 24px rgba(139, 107, 77, 0.2);
+  border: 1px solid rgba(212, 180, 131, 0.5);
+}
+
+@media (min-width: 768px) {
+  .dish-photo {
+    height: 400px;
+  }
+}
+
+/* Информация о блюде */
+.dish-info {
+  flex: 1;
+  padding-top: 1.5rem;
+}
+
+@media (min-width: 768px) {
+  .dish-info {
+    padding-top: 0;
+  }
+}
+
+.dish-modal-title {
+  font-family: 'Playfair Display', serif;
+  font-size: 2rem;
+  color: #2a1e14;
+  font-weight: 600;
+  margin: 0 0 1rem 0;
+  line-height: 1.2;
+}
+
+.dish-volume {
+  margin-bottom: 1.5rem;
+  padding-bottom: 1rem;
+  border-bottom: 1px solid rgba(232, 220, 201, 0.5);
+}
+
+.volume-label {
+  font-family: 'EB Garamond', serif;
+  font-size: 1.1rem;
+  color: #8b6b4d;
+  font-weight: 500;
+}
+
+/* Состав */
+.dish-composition {
+  margin-bottom: 1.5rem;
+}
+
+.composition-title {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 1.3rem;
+  color: #2a1e14;
+  font-weight: 600;
+  margin: 0 0 0.8rem 0;
+  letter-spacing: 0.05em;
+}
+
+.composition-text {
+  font-family: 'EB Garamond', serif;
+  font-size: 1.1rem;
+  color: #5d4a30;
+  line-height: 1.6;
+  margin: 0;
+  padding: 1rem;
+  background: rgba(255, 255, 255, 0.5);
+  border-radius: 8px;
+  border-left: 3px solid #b08d57;
+}
+
+/* Опции */
+.dish-options {
+  margin-bottom: 2rem;
+}
+
+.options-title {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 1.3rem;
+  color: #2a1e14;
+  font-weight: 600;
+  margin: 0 0 0.8rem 0;
+  letter-spacing: 0.05em;
+}
+
+.options-text {
+  font-family: 'EB Garamond', serif;
+  font-size: 1rem;
+  color: #8b6b4d;
+  line-height: 1.5;
+  margin: 0;
+  font-style: italic;
+}
+
+/* Кнопка закрытия */
+.close-btn {
+  width: 100%;
+  padding: 1rem;
+  background: linear-gradient(135deg, #2a1e14, #3a2a1c);
+  color: white;
+  border: none;
+  border-radius: 8px;
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 1.1rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  letter-spacing: 0.05em;
+  margin-top: 1rem;
+}
+
+.close-btn:hover {
+  background: linear-gradient(135deg, #3a2a1c, #2a1e14);
+  transform: translateY(-2px);
+  box-shadow: 0 6px 16px rgba(42, 30, 20, 0.2);
+}
+
+/* Состояния */
+.state-loading {
+  text-align: center;
+  padding: 5rem 2rem;
+  color: #8b6b4d;
+  font-size: 1.2rem;
 }
 
 /* Для лучшего отображения добавок - компактная сетка */
@@ -623,14 +924,24 @@ export default {
   .dish-card.is-egg-main .dish-title {
     font-size: 1.2rem;
   }
-}
-
-/* Состояния */
-.state-loading {
-  text-align: center;
-  padding: 5rem 2rem;
-  color: #8b6b4d;
-  font-size: 1.2rem;
+  
+  /* Адаптивность модального окна */
+  .modal-content {
+    width: 95%;
+    padding: 1rem;
+  }
+  
+  .dish-modal {
+    padding: 1rem;
+  }
+  
+  .dish-modal-title {
+    font-size: 1.6rem;
+  }
+  
+  .dish-photo {
+    height: 250px;
+  }
 }
 
 /* Адаптивность */
@@ -667,5 +978,24 @@ export default {
   .hint-text {
     font-size: 0.8rem;
   }
+}
+
+/* Прокрутка модального окна */
+.modal-content::-webkit-scrollbar {
+  width: 8px;
+}
+
+.modal-content::-webkit-scrollbar-track {
+  background: rgba(232, 220, 201, 0.3);
+  border-radius: 4px;
+}
+
+.modal-content::-webkit-scrollbar-thumb {
+  background: #b08d57;
+  border-radius: 4px;
+}
+
+.modal-content::-webkit-scrollbar-thumb:hover {
+  background: #8b6b4d;
 }
 </style>
