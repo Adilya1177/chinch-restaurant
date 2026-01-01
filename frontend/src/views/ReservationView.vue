@@ -56,33 +56,51 @@
               </div>
               
               <div class="form-group">
-                <label for="time" class="form-label">Время *</label>
-                <select 
-                  id="time" 
-                  v-model="reservation.time"
-                  required
-                  class="form-select"
-                >
-                  <option value="" disabled selected>Выберите время</option>
-                  <option value="08:00">08:00</option>
-                  <option value="09:00">09:00</option>
-                  <option value="10:00">10:00</option>
-                  <option value="11:00">11:00</option>
-                  <option value="12:00">12:00</option>
-                  <option value="13:00">13:00</option>
-                  <option value="14:00">14:00</option>
-                  <option value="15:00">15:00</option>
-                  <option value="16:00">16:00</option>
-                  <option value="17:00">17:00</option>
-                  <option value="18:00">18:00</option>
-                  <option value="19:00">19:00</option>
-                  <option value="20:00">20:00</option>
-                  <option value="21:00">21:00</option>
-                  <option value="22:00">22:00</option>
-                  <option value="23:00">23:00</option>
-                </select>
+                <label class="form-label">Время *</label>
+                <div class="time-selectors">
+                  <select 
+                    v-model="reservation.hour"
+                    required
+                    class="time-select hour-select"
+                  >
+                    <option value="08">08</option>
+                    <option value="09">09</option>
+                    <option value="10">10</option>
+                    <option value="11">11</option>
+                    <option value="12">12</option>
+                    <option value="13">13</option>
+                    <option value="14">14</option>
+                    <option value="15">15</option>
+                    <option value="16">16</option>
+                    <option value="17">17</option>
+                    <option value="18">18</option>
+                    <option value="19">19</option>
+                    <option value="20">20</option>
+                    <option value="21">21</option>
+                    <option value="22">22</option>
+                  </select>
+                  <span class="time-separator">:</span>
+                  <select 
+                    v-model="reservation.minute"
+                    required
+                    class="time-select minute-select"
+                  >
+                    <option value="00">00</option>
+                    <option value="05">05</option>
+                    <option value="10">10</option>
+                    <option value="15">15</option>
+                    <option value="20">20</option>
+                    <option value="25">25</option>
+                    <option value="30">30</option>
+                    <option value="35">35</option>
+                    <option value="40">40</option>
+                    <option value="45">45</option>
+                    <option value="50">50</option>
+                    <option value="55">55</option>
+                  </select>
+                </div>
               </div>
-            </div>
+            </div> <!-- ЭТОТ </div> БЫЛ ПРОПУЩЕН! -->
             
             <div class="form-row">
               <div class="form-group">
@@ -217,7 +235,8 @@ export default {
         name: '',
         phone: '',
         date: today,
-        time: '',
+        hour: '20',     // НОВОЕ: часы по умолчанию 20
+        minute: '00',   // НОВОЕ: минуты по умолчанию 00
         guests: '2',
         comment: ''
       }
@@ -237,7 +256,7 @@ export default {
 👤 Имя: ${this.reservation.name}
 📞 Телефон: ${this.reservation.phone}
 📅 Дата: ${this.reservation.date}
-⏰ Время: ${this.reservation.time}
+⏰ Время: ${this.reservation.hour}:${this.reservation.minute}
 👥 Гости: ${this.reservation.guests} чел.
 💭 Комментарий: ${this.reservation.comment || 'Нет'}
         `.trim();
@@ -263,7 +282,8 @@ export default {
             name: '',
             phone: '',
             date: new Date().toISOString().split('T')[0], // сегодняшняя дата
-            time: '',
+            hour: '20',    // сбрасываем к дефолтному значению
+            minute: '00',  // сбрасываем к дефолтному значению
             guests: '2',
             comment: ''
           };
@@ -294,7 +314,8 @@ export default {
             name: '',
             phone: '',
             date: new Date().toISOString().split('T')[0],
-            time: '',
+            hour: '20',
+            minute: '00',
             guests: '2',
             comment: ''
           };
@@ -475,6 +496,66 @@ export default {
 .form-textarea {
   resize: vertical;
   min-height: 100px;
+}
+
+/* Стили для выбора времени */
+.time-selectors {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.time-select {
+  flex: 1;
+  padding: 0.9rem 0.8rem;
+  border: 1px solid #e8dcc9;
+  border-radius: 8px;
+  background: white;
+  color: #2a1e14;
+  font-family: 'EB Garamond', serif;
+  font-size: 1.1rem;
+  text-align: center;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  appearance: none;
+  background-image: url("data:image/svg+xml;charset=UTF-8,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%238b6b4d' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3e%3cpolyline points='6 9 12 15 18 9'%3e%3c/polyline%3e%3c/svg%3e");
+  background-repeat: no-repeat;
+  background-position: right 0.8rem center;
+  background-size: 1rem;
+  padding-right: 2rem;
+}
+
+.time-select:focus {
+  outline: none;
+  border-color: #b08d57;
+  box-shadow: 0 0 0 2px rgba(176, 141, 87, 0.1);
+}
+
+.hour-select {
+  max-width: 100px;
+}
+
+.minute-select {
+  max-width: 100px;
+}
+
+.time-separator {
+  font-family: 'EB Garamond', serif;
+  font-size: 1.2rem;
+  color: #8b6b4d;
+  font-weight: 500;
+}
+
+@media (max-width: 768px) {
+  .time-selectors {
+    gap: 0.3rem;
+  }
+  
+  .hour-select,
+  .minute-select {
+    max-width: 80px;
+    padding: 0.8rem 0.6rem;
+  }
 }
 
 /* Кнопка отправки */
