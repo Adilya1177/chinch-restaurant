@@ -119,9 +119,8 @@ const mockMenuData = [
     volumeInfo: null, basePrice: "790 р", options: null, isAddon: false
   },
   {
-    id: 18, name: "ОЛИВЬЕ КРАБ | БРИСКЕТ",
-    description: "ПЮРЕ ИЗ ЗЕЛЕНОГО ГОРОШКА, КРАСНАЯ ИКРА",
-    priceInfo: "", category: "NEW YEAR SPECIAL",
+    id: 18, name: "ОЛИВЬЕ КРАБ | БРИСКЕТ, ПЮРЕ ИЗ ЗЕЛЕНОГО ГОРОШКА, КРАСНАЯ ИКРА",
+    description: "", priceInfo: "", category: "NEW YEAR SPECIAL",
     mainCategory: "Еда", subCategory: "NEW YEAR SPECIAL",
     volumeInfo: null, basePrice: "990 р", options: null, isAddon: false
   },
@@ -138,9 +137,8 @@ const mockMenuData = [
     volumeInfo: null, basePrice: "810 р", options: null, isAddon: false
   },
   {
-    id: 21, name: "КРУАССАН | БЛИНЫ",
-    description: "КРАСНАЯ ИКРА, МАСЛО С ТРАВАМИ",
-    priceInfo: "", category: "NEW YEAR SPECIAL",
+    id: 21, name: "КРУАССАН | БЛИНЫ, КРАСНАЯ ИКРА, МАСЛО С ТРАВАМИ",
+    description: "", priceInfo: "", category: "NEW YEAR SPECIAL",
     mainCategory: "Еда", subCategory: "NEW YEAR SPECIAL",
     volumeInfo: null, basePrice: "890 р", options: null, isAddon: false
   },
@@ -347,7 +345,7 @@ const mockMenuData = [
     volumeInfo: null, basePrice: "870 р", options: null, isAddon: false
   },
   {
-    id: 54, name: "БУРГЕР. ГОВЯДИНА, РУККОЛА, ГОРГОНЗОЛА",
+    id: 54, name: "БУРГЕР ГОВЯДИНА, РУККОЛА, ГОРГОНЗОЛА",
     description: "", priceInfo: "", category: "НА ГОРЯЧЕЕ",
     mainCategory: "Еда", subCategory: "НА ГОРЯЧЕЕ",
     volumeInfo: null, basePrice: "790 р", options: null, isAddon: false
@@ -627,7 +625,7 @@ const mockMenuData = [
     volumeInfo: "350 мл", basePrice: "490 р", options: null, isAddon: false
   },
   {
-    id: 97, name: "АЛТАЙСКИЙ ЧАЙ. КЛЮКВА, МОЖЖЕВЕЛЬНИК",
+    id: 97, name: "АЛТАЙСКИЙ ЧАЙ, КЛЮКВА, МОЖЖЕВЕЛЬНИК",
     description: "", priceInfo: "", category: "SPECIAL",
     mainCategory: "Напитки", subCategory: "SPECIAL",
     volumeInfo: "500 мл", basePrice: "550 р", options: null, isAddon: false
