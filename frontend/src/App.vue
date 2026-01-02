@@ -27,11 +27,6 @@
           <h3 class="footer-title">ЧАСЫ РАБОТЫ</h3>
           <p class="footer-info">Пн-Вс: 08:00 - 23:00</p>
         </div>
-        </div>
-      
-      <div class="footer-bottom">
-        <div class="footer-line"></div>
-        <p class="copyright">© 2024 CHINCH Restaurant. Все права защищены.</p>
       </div>
     </footer>
   </div>
