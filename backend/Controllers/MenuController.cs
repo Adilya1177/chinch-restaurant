@@ -133,11 +133,31 @@ namespace backend.Controllers
     
             return Ok($"Обновлено: {dish.Name} -> {dish.PriceInfo}");
         }
+
+        [HttpPost("update-dish/{id}")]
+        public async Task<IActionResult> UpdateDish(int id, [FromBody] string newName)
+        {
+            try
+            {
+                var dish = await _context.Dishes.FindAsync(id);
+                if (dish == null)
+                    return NotFound($"Блюдо с ID {id} не найдено");
+
+                dish.Name = newName;
+                await _context.SaveChangesAsync();
+
+                return Ok($"Блюдо ID {id} обновлено: {newName}");
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(500, $"Ошибка: {ex.Message}");
+            }
+        }
     }
 
     public class UpdateOptionsRequest
     {
         public int Id { get; set; }
-        public string NewOptions { get; set; }
+        public required string NewOptions { get; set; }
     }
 }
