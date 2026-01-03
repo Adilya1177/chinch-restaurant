@@ -170,51 +170,6 @@
             </div>
           </form>
         </div>
-        
-        <!-- Информация о ресторане -->
-        <div class="restaurant-info">
-          <div class="info-card">
-            <div class="info-header">
-              <h3 class="info-title">ИНФОРМАЦИЯ О РЕСТОРАНЕ</h3>
-              <div class="info-divider"></div>
-            </div>
-            
-            <div class="info-content">
-              <div class="info-item">
-                <div class="info-icon">📍</div>
-                <div class="info-text">
-                  <div class="info-label">АДРЕС</div>
-                  <div class="info-value">ул. Берзарина, 28А, корп. 4, Москва</div>
-                </div>
-              </div>
-              
-              <div class="info-item">
-                <div class="info-icon">📞</div>
-                <div class="info-text">
-                  <div class="info-label">ТЕЛЕФОН</div>
-                  <div class="info-value">+7 (915) 054-96-06</div>
-                </div>
-              </div>
-              
-              <div class="info-item">
-                <div class="info-icon">🕒</div>
-                <div class="info-text">
-                  <div class="info-label">ЧАСЫ РАБОТЫ</div>
-                  <div class="info-value">
-                    <div>Пн-Вс: 08:00 - 23:00</div>
-                  </div>
-                </div>
-              </div>
-              
-              <div class="info-note">
-                <div class="note-icon">💡</div>
-                <div class="note-text">
-                  Для групп от 8 человек рекомендуем бронировать столик за 48 часов
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
       </div>
     </div>
   </div>
@@ -379,17 +334,9 @@ export default {
 
 /* Основной контейнер формы */
 .reservation-form-wrapper {
-  display: grid;
-  grid-template-columns: 2fr 1fr;
-  gap: 3rem;
-  margin-bottom: 4rem;
-}
-
-@media (max-width: 992px) {
-  .reservation-form-wrapper {
-    grid-template-columns: 1fr;
-    gap: 2rem;
-  }
+  display: block;
+  max-width: 800px;
+  margin: 0 auto 4rem auto;
 }
 
 /* Форма */
@@ -684,106 +631,6 @@ export default {
   color: #c62828;
 }
 
-/* Информация о ресторане */
-.restaurant-info {
-  display: flex;
-  flex-direction: column;
-  gap: 2rem;
-}
-
-.info-card {
-  background: linear-gradient(135deg, #fffbf0 0%, #f8f0e0 100%);
-  border-radius: 16px;
-  padding: 2rem;
-  border: 1px solid #e8d4b0;
-  box-shadow: 0 4px 20px rgba(232, 212, 176, 0.2);
-}
-
-.info-header {
-  margin-bottom: 2rem;
-  padding-bottom: 1rem;
-  border-bottom: 1px solid #e8d4b0;
-}
-
-.info-title {
-  font-family: 'Cormorant Garamond', serif;
-  font-size: 1.6rem;
-  color: #2a1e14;
-  font-weight: 600;
-  letter-spacing: 0.05em;
-  margin: 0 0 0.5rem 0;
-}
-
-.info-divider {
-  width: 60px;
-  height: 2px;
-  background: linear-gradient(90deg, #b08d57, transparent);
-}
-
-.info-content {
-  display: flex;
-  flex-direction: column;
-  gap: 1.5rem;
-}
-
-.info-item {
-  display: flex;
-  align-items: flex-start;
-  gap: 1rem;
-}
-
-.info-icon {
-  font-size: 1.5rem;
-  color: #b08d57;
-  flex-shrink: 0;
-  margin-top: 0.2rem;
-}
-
-.info-text {
-  flex: 1;
-}
-
-.info-label {
-  font-family: 'Cormorant Garamond', serif;
-  font-size: 0.9rem;
-  color: #8b6b4d;
-  font-weight: 600;
-  letter-spacing: 0.05em;
-  text-transform: uppercase;
-  margin-bottom: 0.3rem;
-}
-
-.info-value {
-  font-family: 'EB Garamond', serif;
-  font-size: 1.1rem;
-  color: #2a1e14;
-  line-height: 1.5;
-}
-
-.info-note {
-  display: flex;
-  align-items: flex-start;
-  gap: 1rem;
-  padding: 1rem;
-  background: rgba(176, 141, 87, 0.1);
-  border-radius: 8px;
-  margin-top: 1rem;
-}
-
-.note-icon {
-  font-size: 1.2rem;
-  color: #8b6b4d;
-  flex-shrink: 0;
-}
-
-.note-text {
-  font-family: 'EB Garamond', serif;
-  font-size: 0.95rem;
-  color: #5d4a30;
-  line-height: 1.5;
-  font-style: italic;
-}
-
 /* Анимации */
 @keyframes rotate {
   to { transform: rotate(360deg); }
@@ -798,8 +645,7 @@ export default {
     font-size: 2.2rem;
   }
   
-  .form-container,
-  .info-card {
+  .form-container {
     padding: 1.5rem;
   }
 }
