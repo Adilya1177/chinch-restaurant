@@ -6,7 +6,7 @@ const dishDetails = {
     composition: "Состав будет добавлен позже"
   },
   "БАТАТ ФРИ, ТРЮФЕЛЬНЫЙ МУСС": {
-    photo: "/chinch-restaurant/images/dishes/БАТАТ-ФРИ-ТРЮФЕЛЬНЫЙ-МУСС.jpeg",
+    photo: "/chinch-restaurant/images/dishes/BATAT-FRI-TRYUFELNYJ-MUSS.jpeg",
     composition: "Состав будет добавлен позже"
   },
   "БАТАТ, ДЗАДЗИКИ, ЛИМОН": {
@@ -14,23 +14,23 @@ const dishDetails = {
     composition: "Состав будет добавлен позже"
   },
   "БИФШТЕКС, ТОЛЧЕНЫЙ КАРТОФЕЛЬ, ЛИМОННАЯ СМЕТАНА": {
-    photo: "/chinch-restaurant/images/dishes/БИФШТЕКС-ТОЛЧЕНЫЙ-КАРТОФЕЛЬ-ЛИМОННАЯ-СМЕТАНА.jpeg",
+    photo: "/chinch-restaurant/images/dishes/BIFSTEKS-TOLCHENYJ-KARTOFEL-LIMONNAYA-SMETANA.jpeg",
     composition: "Состав будет добавлен позже"
   },
   "БРИОШЬ, РОСТБИФ, ЯЙЦО": {
-    photo: "/chinch-restaurant/images/dishes/БРИОШЬ-РОСТБИФ-ЯЙЦО.jpeg",
+    photo: "/chinch-restaurant/images/dishes/BRIOSH-ROSTBIF-JAJCO.jpeg",
     composition: "Состав будет добавлен позже"
   },
   "БРИСКЕТ, ЙОГУРТ, КАРТОФЕЛЬ": {
-    photo: "/chinch-restaurant/images/dishes/БРИСКЕТ-ЙОГУРТ-КАРТОФЕЛЬ.jpeg",
+    photo: "/chinch-restaurant/images/dishes/BRISKET-JOGURT-KARTOFEL.jpeg",
     composition: "Состав будет добавлен позже"
   },
-  "БУРГЕР. ГОВЯДИНА, РУККОЛА, ГОРГОНЗОЛА": {
-    photo: "/chinch-restaurant/images/dishes/БУРГЕР-ГОВЯДИНА-РУККОЛА-ГОРГОНЗОЛА.jpeg",
+  "БУРГЕР ГОВЯДИНА, РУККОЛА, ГОРГОНЗОЛА": {
+    photo: "/chinch-restaurant/images/dishes/BURGER-GOVYADINA-RUKKOLA-GORGONZOLA.jpeg",
     composition: "Состав будет добавлен позже"
   },
   "ГРЕЧЕСКИЙ САЛАТ": {
-    photo: "/chinch-restaurant/images/dishes/ГРЕЧЕСКИЙ-САЛАТ.jpeg",
+    photo: "/chinch-restaurant/images/dishes/GRECHESKIJ-SALAT.jpeg",
     composition: "Состав будет добавлен позже"
   },
   "ЗАПЕЧЕННЫЕ ПЕРЦЫ, СОУС ТОННАТО": {
@@ -38,18 +38,18 @@ const dishDetails = {
     composition: "Состав будет добавлен позже"
   },
   "ЗЕЛЕНЫЙ САЛАТ, ЛОСОСЬ, ПАРМЕЗАН": {
-    photo: "/chinch-restaurant/images/dishes/ЗЕЛЕНЫЙ-САЛАТ-ЛОСОСЬ-ПАРМЕЗАН.jpeg",
+    photo: "/chinch-restaurant/images/dishes/ZELENYJ-SALAT-LOSOS-PARMEZAN.jpeg",
     composition: "Состав будет добавлен позже"
   },
   "ЗЕЛЕНЫЙ САЛАТ, ТУНЕЦ, ЯЙЦО": {
-    photo: "/chinch-restaurant/images/dishes/ЗЕЛЕНЫЙ-САЛАТ-ТУНЕЦ-ЯЙЦО.jpeg",
+    photo: "/chinch-restaurant/images/dishes/ZELENYJ-SALAT-TUNEC-JAJCO.jpeg",
     composition: "Состав будет добавлен позже"
   },
   "ЙОГУРТ, ЯГОДЫ, МИНДАЛЬ": {
-    photo: "/chinch-restaurant/images/dishes/ЙОГУРТ-ЯГОДЫ-МИНДАЛЬ.jpeg",
+    photo: "/chinch-restaurant/images/dishes/JOGURT-JAGODY-MINDAL.jpeg",
     composition: "Состав будет добавлен позже"
   },
-  "КРАБ, СТРАЧАТТЕЛА, ТОМАТ": {
+  "КРАБ, СТРАЧАТЕЛЛА, ТОМАТ": {
     photo: "/chinch-restaurant/images/dishes/КРАБ-СТРАЧАТТЕЛА-ТОМАТ.jpeg",
     composition: "Состав будет добавлен позже"
   },
@@ -82,11 +82,11 @@ const dishDetails = {
     composition: "Состав будет добавлен позже"
   },
   "ЛОСОСЬ НА ГРИЛЕ, ПЮРЕ ИЗ ЦВЕТНОЙ КАПУСТЫ": {
-    photo: "/chinch-restaurant/images/dishes/ЛОСОСЬ-НА-ГРИЛЕ-ПЮРЕ-ИЗ-ЦВЕТНОЙ-КАПУСТЫ.jpeg",
+    photo: "/chinch-restaurant/images/dishes/LOSOS-NA-GRILE-PURE-IZ-CVETNOJ-KAPUSTY.jpeg",
     composition: "Состав будет добавлен позже"
   },
   "ЛОСОСЬ ПОД ШУБОЙ": {
-    photo: "/chinch-restaurant/images/dishes/ЛОСОСЬ-ПОД-ШУБОЙ.jpeg",
+    photo: "/chinch-restaurant/images/dishes/LOSOS-POD-SHUBOJ.jpeg",
     composition: "Состав будет добавлен позже"
   },
   "ЛОСОСЬ, КРАСНАЯ ИКРА, ПАРМЕЗАН": {
@@ -110,7 +110,7 @@ const dishDetails = {
     composition: "Состав будет добавлен позже"
   },
   "ОПАЛЕННЫЙ ТУНЕЦ, ГУАКАМОЛЕ, ТОМАТ": {
-    photo: "/chinch-restaurant/images/dishes/ОПАЛЕННЫЙ-ТУНЕЦ-ГУАКАМОЛЕ-ТОМАТ.jpeg",
+    photo: "/chinch-restaurant/images/dishes/OPALENNYJ-TUNEC-GUAKAMOLE-TOMAT.jpeg",
     composition: "Состав будет добавлен позже"
   },
   "ОРЗО, КРЕВЕТКИ, ТРЮФЕЛЬ": {
@@ -122,7 +122,7 @@ const dishDetails = {
     composition: "Состав будет добавлен позже"
   },
   "ПАСТА ТОРТИЛЬОНИ, ГОВЯЖЬИ ЩЕЧКИ, УСТРИЧНЫЙ СОУС": {
-    photo: "/chinch-restaurant/images/dishes/ПАСТА-ТОРТИЛЬОНИ-ГОВЯЖЬИ-ЩЕЧКИ-УСТРИЧНЫЙ-СОУС.jpeg",
+    photo: "/chinch-restaurant/images/dishes/PASTA-TORTILONI-GOVYAJI-SHECHKI-USTRICHNYJ-SAUS.jpeg",
     composition: "Состав будет добавлен позже"
   },
   "ПАСТРАМИ, ХАШБРАУН, ШПИНАТ": {
@@ -142,11 +142,11 @@ const dishDetails = {
     composition: "Состав будет добавлен позже"
   },
   "САЛАТ РОСТБИФ, КАРТОФЕЛЬ, ПЕЧЕННЫЙ БАКЛАЖАН": {
-    photo: "/chinch-restaurant/images/dishes/САЛАТ-РОСТБИФ-КАРТОФЕЛЬ-ПЕЧЕННЫЙ-БАКЛАЖАН.jpeg",
+    photo: "/chinch-restaurant/images/dishes/SALAT-ROSTBIF-KARTOFEL-PECHENNYJ-BAKLAZHAN.jpeg",
     composition: "Состав будет добавлен позже"
   },
-  "САЛАТ С УТИНОЙ ГРУДКОЙ, ПЕРИК": {
-    photo: "/chinch-restaurant/images/dishes/САЛАТ-С-УТИНОЙ-ГРУДКОЙ-ПЕРИК.jpeg",
+  "САЛАТ С УТИНОЙ ГРУДКОЙ, ПЕРСИК": {
+    photo: "/chinch-restaurant/images/dishes/SALAT-S-UTINOJ-GRUDKOJ-PERSIK.jpeg",
     composition: "Состав будет добавлен позже"
   },
   "СВЕКЛА, ТРЮФЕЛЬ, ФИСТАШКА": {
@@ -162,19 +162,19 @@ const dishDetails = {
     composition: "Состав будет добавлен позже"
   },
   "СЫРНЫЙ КРЕМ-СУП, ИНДЕЙКА": {
-    photo: "/chinch-restaurant/images/dishes/СЫРНЫЙ-КРЕМ-СУП-ИНДЕЙКА.jpeg",
+    photo: "/chinch-restaurant/images/dishes/SYRNYJ-KREM-SUP-INDEJKA.jpeg",
     composition: "Состав будет добавлен позже"
   },
   "ТАРТАР ТУНЕЦ, КЛУБНИКА, ГРАНАТ": {
-    photo: "/chinch-restaurant/images/dishes/ТАРТАР-ТУНЕЦ-КЛУБНИКА-ГРАНАТ.jpeg",
+    photo: "/chinch-restaurant/images/dishes/TARTAR-TUNEC-KLUBНИKA-GRANAT.jpeg",
     composition: "Состав будет добавлен позже"
   },
   "ТЫКВЕННЫЙ КРЕМ-СУП, ЛОСОСЬ": {
-    photo: "/chinch-restaurant/images/dishes/ТЫКВЕННЫЙ-КРЕМ-СУП-ЛОСОСЬ.jpeg",
+    photo: "/chinch-restaurant/images/dishes/TYKVENNYJ-KREM-SUP-LOSOS.jpeg",
     composition: "Состав будет добавлен позже"
   },
   "УТИНАЯ ГРУДКА, РАТАТУЙ, МЕД": {
-    photo: "/chinch-restaurant/images/dishes/УТИНАЯ-ГРУДКА-РАТАТУЙ-МЕД.jpeg",
+    photo: "/chinch-restaurant/images/dishes/UTINAYA-GRUDKA-RATATUJ-MED.jpeg",
     composition: "Состав будет добавлен позже"
   },
   "ФРИ, ПАРМЕЗАН, ТРЮФЕЛЬ": {
@@ -200,10 +200,44 @@ const dishDetails = {
   "ШАКШУКА, КОЛБАСКИ, ФЕТА, ШПИНАТ": {
     photo: "/chinch-restaurant/images/dishes/ШАКШУКА-КОЛБАСКИ-ФЕТА-ШПИНАТ.jpeg",
     composition: "Состав будет добавлен позже"
-  }
+  },
+  "ОЛИВЬЕ КРАБ / БРИСКЕТ, ПЮРЕ ИЗ ЗЕЛЕНОГО ГОРОШКА, КРАСНАЯ ИКРА": {
+    photo: "/chinch-restaurant/images/dishes/ОЛИВЬЕ-КРАБ-БРИСКЕТ-ПЮРЕ-ИЗ-ЗЕЛЕНОГО-ГОРОШКА-КРАСНАЯ-ИКРА.jpeg",
+    composition: "Состав будет добавлен позже"
+  },
+  "ГЛАЗУНЬЯ": {
+    photo: "/chinch-restaurant/images/dishes/ГЛАЗУНЬЯ.png",
+    composition: "Состав будет добавлен позже"
+  },
+  "СКРЭМБЛ": {
+    photo: "/chinch-restaurant/images/dishes/СКРЭМБЛ.png",
+    composition: "Состав будет добавлен позже"
+  },
+  "ОМЛЕТ": {
+    photo: "/chinch-restaurant/images/dishes/ОМЛЕТ.png",
+    composition: "Состав будет добавлен позже"
+  },
+  "КУРИНЫЙ БУЛЬОН, ОРЗО": {
+    photo: "/chinch-restaurant/images/dishes/КУРИНЫЙ-БУЛЬОН-ОРЗО.jpg",
+    composition: "Состав будет добавлен позже"
+  },
+  "ГОВЯЖЬИ ЩЕКИ, ОРЗО, ШПИНАТ": {
+    photo: "/chinch-restaurant/images/dishes/ГОВЯЖЬИ-ЩЕКИ-ОРЗО-ШПИНАТ.jpg",
+    composition: "Состав будет добавлен позже"
+  },
+  "КРУАССАН / БЛИНЫ, КРАСНАЯ ИКРА, МАСЛО С ТРАВАМИ": {
+    photos: [
+      "/chinch-restaurant/images/dishes/KRUSSAN-KRASNAYA-IKRA-MASLO-S-TRAVAMI.jpg",
+      "/chinch-restaurant/images/dishes/BLINY-KRASNAYA-IKRA-MASLO-S-TRAVAMI.jpg"
+    ],
+    composition: "Состав будет добавлен позже"
+  },
+    "ФРАНЦУЗСКИЙ ОМЛЕТ, ИНДЕЙКА": {
+    photo: "/chinch-restaurant/images/dishes/FRANTSUZSKIJ-OMLET-INDEJKA.jpg",
+    composition: "Состав будет добавлен позже"
+  },
 };
 
-// Функция для получения данных по названию блюда
 export function getDishDetails(dishName) {
   if (!dishName) {
     return getDefaultDetails();
@@ -211,44 +245,24 @@ export function getDishDetails(dishName) {
   
   const upperDishName = dishName.toUpperCase().trim();
   
-  // 1. Пробуем точное совпадение
+  // Точное совпадение
   if (dishDetails[upperDishName]) {
-    return dishDetails[upperDishName];
-  }
-  
-  // 2. Ищем частичное совпадение (без учета запятых и точек)
-  const normalizedSearch = upperDishName
-    .replace(/[.,]/g, ' ')
-    .replace(/\s+/g, ' ')
-    .trim();
-  
-  for (const key in dishDetails) {
-    const normalizedKey = key
-      .replace(/[.,]/g, ' ')
-      .replace(/\s+/g, ' ')
-      .trim();
+    const details = dishDetails[upperDishName];
     
-    if (normalizedSearch === normalizedKey || 
-        normalizedSearch.includes(normalizedKey) || 
-        normalizedKey.includes(normalizedSearch)) {
-      return dishDetails[key];
+    // Если есть массив photos, преобразуем в совместимую структуру
+    if (details.photos && Array.isArray(details.photos)) {
+      return {
+        photo: details.photos[0], // первое фото для совместимости
+        photos: details.photos,   // полный массив для нового компонента
+        composition: details.composition
+      };
     }
-  }
-  
-  // 3. Ищем по первым словам
-  const firstWords = normalizedSearch.split(' ').slice(0, 3).join(' ');
-  for (const key in dishDetails) {
-    const normalizedKey = key
-      .replace(/[.,]/g, ' ')
-      .replace(/\s+/g, ' ')
-      .trim();
     
-    if (normalizedKey.startsWith(firstWords) || firstWords.startsWith(normalizedKey.split(' ')[0])) {
-      return dishDetails[key];
-    }
+    // Если есть одиночное photo, оставляем как есть
+    return details;
   }
   
-  // 4. Если ничего не нашли - возвращаем дефолтную SVG
+  // Если не нашли, возвращаем заглушку
   return getDefaultDetails(dishName);
 }
 

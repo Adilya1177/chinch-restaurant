@@ -149,12 +149,44 @@
         <div class="dish-modal">
           <!-- Фото блюда -->
           <div class="dish-photo-container">
-            <img 
-              :src="selectedDishDetails.photo" 
-              :alt="selectedDish.name" 
-              class="dish-photo"
-              @error="handleImageError"
-            />
+            <!-- Если есть несколько фото -->
+            <div v-if="selectedDishDetails.photos && selectedDishDetails.photos.length > 1" class="multiple-photos-container">
+              <!-- Навигация по фото -->
+              <div class="photos-navigation">
+                <button 
+                  v-for="(photoUrl, index) in selectedDishDetails.photos" 
+                  :key="index"
+                  @click="currentPhotoIndex = index"
+                  :class="['photo-nav-btn', { active: currentPhotoIndex === index }]"
+                >
+                  {{ index + 1 }}
+                </button>
+              </div>
+              
+              <!-- Текущее фото -->
+              <img 
+                :src="selectedDishDetails.photos[currentPhotoIndex]" 
+                :alt="selectedDish.name + ' вариант ' + (currentPhotoIndex + 1)" 
+                class="dish-photo"
+                @error="handleImageError"
+              />
+              
+              <!-- Стрелки навигации -->
+              <div class="photo-arrows">
+                <button @click="prevPhoto" class="arrow-btn left-arrow">←</button>
+                <button @click="nextPhoto" class="arrow-btn right-arrow">→</button>
+              </div>
+            </div>
+            
+            <!-- Если одно фото -->
+            <div v-else>
+              <img 
+                :src="selectedDishDetails.photo" 
+                :alt="selectedDish.name" 
+                class="dish-photo"
+                @error="handleImageError"
+              />
+            </div>
           </div>
           
           <!-- Информация о блюде -->
@@ -201,7 +233,8 @@ export default {
       // Данные для модального окна
       showModal: false,
       selectedDish: null,
-      selectedDishDetails: null
+      selectedDishDetails: null,
+      currentPhotoIndex: 0
     };
   },
   computed: {
@@ -348,8 +381,12 @@ export default {
     
     // Показать детали блюда
     showDishDetails(item) {
+      console.log('🟣 КЛИК! showDishDetails вызван для:', item.name);
+      console.log('🟣 item:', item);
+
       this.selectedDish = item;
       this.selectedDishDetails = getDishDetails(item.name);
+      this.currentPhotoIndex = 0; // Сброс индекса фото
       this.showModal = true;
       
       // Блокируем прокрутку страницы
@@ -361,16 +398,39 @@ export default {
       this.showModal = false;
       this.selectedDish = null;
       this.selectedDishDetails = null;
+      this.currentPhotoIndex = 0;
       
       // Разблокируем прокрутку страницы
       document.body.style.overflow = '';
     },
     
+    // Навигация по фото
+    prevPhoto() {
+      if (this.selectedDishDetails.photos && this.selectedDishDetails.photos.length > 1) {
+        this.currentPhotoIndex = (this.currentPhotoIndex - 1 + this.selectedDishDetails.photos.length) % this.selectedDishDetails.photos.length;
+      }
+    },
+    
+    nextPhoto() {
+      if (this.selectedDishDetails.photos && this.selectedDishDetails.photos.length > 1) {
+        this.currentPhotoIndex = (this.currentPhotoIndex + 1) % this.selectedDishDetails.photos.length;
+      }
+    },
+    
     // Обработчик ошибки загрузки изображения
     handleImageError(event) {
-      console.log('Ошибка загрузки изображения:', this.selectedDishDetails.photo);
-      event.target.src = '/images/dishes/default-dish.jpg';
-    },
+      console.log('Ошибка загрузки изображения:', event.target.src);
+      // Используем SVG заглушку
+      event.target.src = `data:image/svg+xml;charset=UTF-8,${encodeURIComponent(`
+        <svg width="400" height="300" xmlns="http://www.w3.org/2000/svg">
+          <rect width="400" height="300" fill="#f8f4ea"/>
+          <rect x="20" y="20" width="360" height="260" rx="12" fill="#e8dcc9" stroke="#b08d57" stroke-width="2"/>
+          <text x="200" y="140" text-anchor="middle" font-family="Arial" font-size="18" fill="#8b6b4d">
+        Фото скоро будет
+          </text>
+        </svg>
+      `)}`;
+      },
     
     // Получить основные яичные блюда (первые 3)
     getEggMainDishes(items) {
@@ -597,7 +657,7 @@ export default {
   position: relative;
   width: 90%;
   max-width: 500px;
-  border-bottom: none !important; /* Убедиться, что нет других border */
+  border-bottom: none !important;
 }
 
 .menu-category .category-title-section .category-name::after {
@@ -871,12 +931,98 @@ export default {
   }
 }
 
-/* Фото блюда */
+/* Контейнер для фото */
 .dish-photo-container {
   flex: 1;
   min-width: 300px;
+  position: relative;
 }
 
+/* Контейнер для нескольких фото */
+.multiple-photos-container {
+  position: relative;
+}
+
+/* Навигация по фото */
+.photos-navigation {
+  display: flex;
+  justify-content: center;
+  gap: 0.5rem;
+  margin-bottom: 1rem;
+  flex-wrap: wrap;
+}
+
+.photo-nav-btn {
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  background: rgba(42, 30, 20, 0.1);
+  border: 1px solid rgba(212, 180, 131, 0.3);
+  color: #2a1e14;
+  font-family: 'EB Garamond', serif;
+  font-weight: 500;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.3s ease;
+}
+
+.photo-nav-btn:hover {
+  background: rgba(212, 180, 131, 0.3);
+  transform: scale(1.1);
+}
+
+.photo-nav-btn.active {
+  background: #8b6b4d;
+  border-color: #8b6b4d;
+  color: #f8f4ea;
+  transform: scale(1.1);
+}
+
+/* Стрелки навигации */
+.photo-arrows {
+  position: absolute;
+  top: 50%;
+  left: 0;
+  right: 0;
+  transform: translateY(-50%);
+  display: flex;
+  justify-content: space-between;
+  pointer-events: none;
+  padding: 0 1rem;
+}
+
+.arrow-btn {
+  pointer-events: auto;
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  background: rgba(42, 30, 20, 0.7);
+  border: none;
+  color: white;
+  font-size: 1.5rem;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.3s ease;
+}
+
+.arrow-btn:hover {
+  background: rgba(42, 30, 20, 0.9);
+  transform: scale(1.1);
+}
+
+.left-arrow {
+  margin-right: auto;
+}
+
+.right-arrow {
+  margin-left: auto;
+}
+
+/* Фото блюда */
 .dish-photo {
   width: 100%;
   height: 300px;
@@ -1078,6 +1224,18 @@ export default {
   
   .dish-photo {
     height: 250px;
+  }
+  
+  .arrow-btn {
+    width: 36px;
+    height: 36px;
+    font-size: 1.2rem;
+  }
+  
+  .photo-nav-btn {
+    width: 32px;
+    height: 32px;
+    font-size: 0.9rem;
   }
   
   /* Уменьшаем высоту карточек на мобильных */
