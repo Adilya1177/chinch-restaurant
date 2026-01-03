@@ -65,31 +65,76 @@
 
             <!-- Элементы категории -->
             <div class="items-container">
-              <div 
-                v-for="item in subCategory.items" 
-                :key="item.id" 
-                :class="['dish-card', { 'is-addon': item.isAddon, 'is-egg-main': item.eggType === 'main' }]"
-                @click="showDishDetails(item)"
-              >
-                <div class="dish-card-inner">
-                  <h3 class="dish-title">{{ item.name }}</h3>
-                  
-                  <!-- Блок с объемом (без цен) -->
-                  <div class="price-volume-block" v-if="item.volumeInfo">
-                    <!-- Только объем -->
-                    <div class="volume-info">
-                      <span class="volume-label">{{ formatVolume(item.volumeInfo) }}</span>
+              <!-- Для всех категорий кроме яичных - обычное отображение -->
+              <template v-if="subCategory.name !== 'БЛЮДА ИЗ ЯИЦ'">
+                <div 
+                  v-for="item in subCategory.items" 
+                  :key="item.id" 
+                  class="dish-card"
+                  @click="showDishDetails(item)"
+                >
+                  <div class="dish-card-inner">
+                    <h3 class="dish-title">{{ item.name }}</h3>
+                    
+                    <!-- Блок с объемом (без цен) -->
+                    <div class="price-volume-block" v-if="item.volumeInfo">
+                      <div class="volume-info">
+                        <span class="volume-label">{{ formatVolume(item.volumeInfo) }}</span>
+                      </div>
                     </div>
-                  </div>
-                  
-                  <!-- Опции (дополнительные варианты) -->
-                  <div v-if="item.options" class="dish-details">
-                    <div class="detail-item options-info">
-                      <span class="options-text">{{ formatOptions(item.options) }}</span>
+                    
+                    <!-- Опции (дополнительные варианты) -->
+                    <div v-if="item.options" class="dish-details">
+                      <div class="detail-item options-info">
+                        <span class="options-text">{{ formatOptions(item.options) }}</span>
+                      </div>
                     </div>
                   </div>
                 </div>
-              </div>
+              </template>
+
+              <!-- Для яичных блюд - специальная структура -->
+              <template v-else>
+                <!-- Основные блюда (первые 3: ГЛАЗУНЬЯ, СКРЭМБЛ, ОМЛЕТ) -->
+                <div 
+                  v-for="item in getEggMainDishes(subCategory.items)" 
+                  :key="item.id" 
+                  class="dish-card"
+                  @click="showDishDetails(item)"
+                >
+                  <div class="dish-card-inner">
+                    <h3 class="dish-title">{{ item.name }}</h3>
+                    
+                    <!-- Блок с объемом (без цен) -->
+                    <div class="price-volume-block" v-if="item.volumeInfo">
+                      <div class="volume-info">
+                        <span class="volume-label">{{ formatVolume(item.volumeInfo) }}</span>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                
+                <!-- Блок добавок (один большой) -->
+                <div 
+                  v-if="getEggAddons(subCategory.items).length > 0" 
+                  class="addons-container"
+                >
+                  <div class="addons-card">
+                    <h3 class="addons-title">Добавки к яичным блюдам</h3>
+                    <div class="addons-grid">
+                      <div 
+                        v-for="addon in getEggAddons(subCategory.items)" 
+                        :key="addon.id" 
+                        class="addon-item"
+                        @click="showDishDetails(addon)"
+                      >
+                        <span class="addon-name">{{ addon.name }}</span>
+                        <span v-if="addon.volumeInfo" class="addon-volume">{{ formatVolume(addon.volumeInfo) }}</span>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </template>
             </div>
           </div>
         </div>
@@ -150,8 +195,6 @@ export default {
       loading: true,
       error: null,
       menuItems: [],
-      eggDishes: [],
-      eggAddons: [],
       selectedMainCategory: 'all',
       activeCategory: '',
       
@@ -327,6 +370,16 @@ export default {
     handleImageError(event) {
       console.log('Ошибка загрузки изображения:', this.selectedDishDetails.photo);
       event.target.src = '/images/dishes/default-dish.jpg';
+    },
+    
+    // Получить основные яичные блюда (первые 3)
+    getEggMainDishes(items) {
+      return items.filter(item => !item.isAddon);
+    },
+    
+    // Получить добавки к яичным блюдам
+    getEggAddons(items) {
+      return items.filter(item => item.isAddon);
     }
   },
   mounted() {
@@ -565,7 +618,7 @@ export default {
 /* Карточки блюд */
 .items-container {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
   gap: 1.2rem;
 }
 
@@ -577,13 +630,16 @@ export default {
   background: rgba(248, 244, 234, 0.7);
   border: 1px solid rgba(232, 220, 201, 0.7);
   border-radius: 12px;
-  padding: 1.5rem;
+  padding: 1.2rem;
   backdrop-filter: blur(8px);
   transition: all 0.3s ease;
   display: flex;
   flex-direction: column;
   align-items: center;
   text-align: center;
+  height: 140px;
+  overflow: hidden;
+  position: relative;
 }
 
 .dish-card-inner:hover {
@@ -594,30 +650,36 @@ export default {
 
 .dish-title {
   font-family: 'Cormorant Garamond', serif;
-  font-size: 1.3rem;
+  font-size: 1.2rem;
   color: #2a1e14;
   font-weight: 600;
-  margin: 0 0 0.5rem 0;
+  margin: 0 0 0.3rem 0;
   text-align: center;
   width: 100%;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
 }
 
 /* Блок с объемами */
 .price-volume-block {
-  margin: 0.8rem 0;
-  padding: 0.8rem 0;
+  margin: 0.5rem 0;
+  padding: 0.5rem 0;
   border-top: 1px solid rgba(232, 220, 201, 0.5);
   border-bottom: 1px solid rgba(232, 220, 201, 0.5);
   width: 100%;
+  margin-top: auto;
 }
 
 .volume-info {
-  margin-bottom: 0.5rem;
+  margin-bottom: 0.3rem;
 }
 
 .volume-label {
   font-family: 'EB Garamond', serif;
-  font-size: 0.95rem;
+  font-size: 0.9rem;
   color: #8b6b4d;
   font-weight: 500;
 }
@@ -632,59 +694,93 @@ export default {
 .options-info .options-text {
   color: #8b6b4d;
   font-family: 'EB Garamond', serif;
-  font-size: 0.95rem;
+  font-size: 0.9rem;
   opacity: 0.7;
   font-style: italic;
 }
 
 /* ============ ОСОБЫЕ СТИЛИ ДЛЯ ЯИЧНЫХ БЛЮД ============ */
 
-/* Категория яичных блюд */
+/* Для яичных блюд - 3 колонки для основных блюд */
 .menu-category.egg-category .items-container {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
-  gap: 1.5rem;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1.2rem;
 }
 
-/* Основные яичные блюда (ГЛАЗУНЬЯ, СКРЭМБЛ, ОМЛЕТ) */
-.dish-card.is-egg-main .dish-card-inner {
-  background: rgba(139, 107, 77, 0.08);
-  border: 2px solid #8b6b4d;
-  padding: 1.8rem 1.5rem;
-  box-shadow: 0 4px 12px rgba(139, 107, 77, 0.1);
+/* Контейнер для всех добавок */
+.addons-container {
+  grid-column: 1 / -1;
+  margin-top: 2rem;
 }
 
-.dish-card.is-egg-main .dish-title {
+/* Карточка с добавками */
+.addons-card {
+  background: rgba(248, 244, 234, 0.9);
+  border: 2px solid rgba(139, 107, 77, 0.2);
+  border-radius: 12px;
+  padding: 1.5rem;
+  transition: all 0.3s ease;
+  cursor: pointer;
+}
+
+.addons-card:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 8px 24px rgba(139, 107, 77, 0.15);
+  border-color: #8b6b4d;
+}
+
+/* Заголовок добавок */
+.addons-title {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 1.3rem;
   color: #2a1e14;
-  font-size: 1.4rem;
-  font-weight: 700;
-  margin-bottom: 0.8rem;
+  font-weight: 600;
+  text-align: center;
+  margin: 0 0 1.2rem 0;
+  padding-bottom: 0.8rem;
+  border-bottom: 1px solid rgba(139, 107, 77, 0.2);
 }
 
-/* Добавки к яйцам - красивый грид */
-.dish-card.is-addon .dish-card-inner {
-  background: rgba(248, 244, 234, 0.5);
-  border: 1px solid rgba(139, 107, 77, 0.3);
-  padding: 1.2rem;
-  border-radius: 10px;
-  min-height: 100px;
+/* Сетка добавок */
+.addons-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 0.8rem;
+  width: 100%;
+}
+
+/* Отдельная добавка */
+.addon-item {
+  background: white;
+  border: 1px solid rgba(232, 220, 201, 0.7);
+  border-radius: 8px;
+  padding: 0.8rem 1rem;
   display: flex;
-  flex-direction: column;
-  justify-content: center;
+  justify-content: space-between;
   align-items: center;
+  cursor: pointer;
+  transition: all 0.2s ease;
 }
 
-.dish-card.is-addon .dish-title {
-  font-size: 1.05rem;
+.addon-item:hover {
+  background: rgba(248, 244, 234, 0.7);
+  border-color: #b08d57;
+  transform: translateY(-2px);
+}
+
+.addon-name {
+  font-family: 'EB Garamond', serif;
+  font-size: 1rem;
+  color: #2a1e14;
+  font-weight: 500;
+}
+
+.addon-volume {
+  font-family: 'EB Garamond', serif;
+  font-size: 0.9rem;
   color: #8b6b4d;
   font-weight: 500;
-  margin-bottom: 0.5rem;
-}
-
-.dish-card.is-addon .dish-card-inner:hover {
-  transform: translateY(-3px);
-  box-shadow: 0 6px 16px rgba(139, 107, 77, 0.15);
-  border-color: #8b6b4d;
 }
 
 /* ============ МОДАЛЬНОЕ ОКНО ============ */
@@ -910,61 +1006,7 @@ export default {
   font-size: 1.2rem;
 }
 
-/* Для лучшего отображения добавок - компактная сетка */
-@media (min-width: 768px) {
-  .menu-category.egg-category .items-container {
-    grid-template-columns: repeat(3, 1fr); /* Три колонки для основных */
-  }
-  
-  /* Добавки занимают 4 колонки */
-  .menu-category.egg-category .dish-card.is-addon:nth-child(n+4) {
-    grid-column: span 1;
-  }
-}
-
-/* Для мобильных устройств - вертикальное расположение */
-@media (max-width: 767px) {
-  .menu-category.egg-category .items-container {
-    grid-template-columns: 1fr;
-  }
-  
-  .dish-card.is-addon .dish-card-inner {
-    padding: 1rem;
-    min-height: 80px;
-  }
-  
-  .dish-card.is-addon .dish-title {
-    font-size: 1rem;
-  }
-  
-  .dish-card.is-egg-main .dish-card-inner {
-    padding: 1.5rem 1rem;
-  }
-  
-  .dish-card.is-egg-main .dish-title {
-    font-size: 1.2rem;
-  }
-  
-  /* Адаптивность модального окна */
-  .modal-content {
-    width: 95%;
-    padding: 1rem;
-  }
-  
-  .dish-modal {
-    padding: 1rem;
-  }
-  
-  .dish-modal-title {
-    font-size: 1.6rem;
-  }
-  
-  .dish-photo {
-    height: 250px;
-  }
-}
-
-/* Адаптивность */
+/* Адаптивность для мобильных */
 @media (max-width: 768px) {
   .restaurant-logo {
     font-size: 3rem;
@@ -985,6 +1027,27 @@ export default {
     grid-template-columns: 1fr;
   }
   
+  .menu-category.egg-category .items-container {
+    grid-template-columns: 1fr;
+  }
+  
+  .addons-container {
+    margin-top: 1.5rem;
+  }
+  
+  .addons-grid {
+    grid-template-columns: 1fr;
+  }
+  
+  .addons-card {
+    padding: 1rem;
+  }
+  
+  .addons-title {
+    font-size: 1.1rem;
+    margin-bottom: 1rem;
+  }
+  
   .nav-scroll-container {
     max-width: 100%;
     padding: 0.8rem 1rem;
@@ -997,6 +1060,34 @@ export default {
   
   .hint-text {
     font-size: 0.8rem;
+  }
+  
+  /* Адаптивность модального окна */
+  .modal-content {
+    width: 95%;
+    padding: 1rem;
+  }
+  
+  .dish-modal {
+    padding: 1rem;
+  }
+  
+  .dish-modal-title {
+    font-size: 1.6rem;
+  }
+  
+  .dish-photo {
+    height: 250px;
+  }
+  
+  /* Уменьшаем высоту карточек на мобильных */
+  .dish-card-inner {
+    height: 120px;
+    padding: 1rem;
+  }
+  
+  .dish-title {
+    font-size: 1.1rem;
   }
 }
 

@@ -206,14 +206,14 @@ export default {
       try {
         // 1. Форматируем данные для Telegram
         const telegramMessage = `
-🆕 НОВОЕ БРОНИРОВАНИЕ CHINCH
+НОВОЕ БРОНИРОВАНИЕ CHINCH
 
-👤 Имя: ${this.reservation.name}
-📞 Телефон: ${this.reservation.phone}
-📅 Дата: ${this.reservation.date}
-⏰ Время: ${this.reservation.hour}:${this.reservation.minute}
-👥 Гости: ${this.reservation.guests} чел.
-💭 Комментарий: ${this.reservation.comment || 'Нет'}
+Имя: ${this.reservation.name}
+Телефон: ${this.reservation.phone}
+Дата: ${this.reservation.date}
+Время: ${this.reservation.hour}:${this.reservation.minute}
+Гости: ${this.reservation.guests} чел.
+Комментарий: ${this.reservation.comment || 'Нет'}
         `.trim();
         
         // 2. Кодируем сообщение для URL
