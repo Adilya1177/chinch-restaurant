@@ -220,8 +220,8 @@ export default {
         const encodedMessage = encodeURIComponent(telegramMessage);
         
         // 3. Твой токен и chat_id
-        const BOT_TOKEN = '8374024512:AAFV1ING8fRwU53KJ7ys-jmV-eaBPxbffSM';
-        const CHAT_ID = '842471893';
+        const BOT_TOKEN = '8363432042:AAGAzA5qeRUNrCa9Biy_QmQRFWJl-ewhRUg';
+        const CHAT_ID = '6601991433';
         
         // 4. Отправляем в Telegram через Bot API
         const telegramUrl = `https://api.telegram.org/bot${BOT_TOKEN}/sendMessage?chat_id=${CHAT_ID}&text=${encodedMessage}`;
