@@ -31,24 +31,18 @@
     <div class="features-section">
       <div class="features-container">
         <div class="feature-card">
-          <div class="feature-icon">✦</div>
-          <h3 class="feature-title">ПРЕМИАЛЬНЫЕ ИНГРЕДИЕНТЫ</h3>
           <p class="feature-description">
             Отборные продукты от проверенных поставщиков со всего мира
           </p>
         </div>
         
         <div class="feature-card">
-          <div class="feature-icon">⌛</div>
-          <h3 class="feature-title">АВТОРСКИЕ РЕЦЕПТЫ</h3>
           <p class="feature-description">
             Уникальные блюда, созданные нашим шеф-поваром с любовью к деталям
           </p>
         </div>
         
-        <div class="feature-card">
-          <div class="feature-icon">🎩</div>
-          <h3 class="feature-title">ЭЛЕГАНТНАЯ АТМОСФЕРА</h3>
+        <div class="feature-card feature-card-photo">
           <p class="feature-description">
             Утонченный интерьер и безупречный сервис для особых моментов
           </p>
@@ -79,7 +73,7 @@ export default {
   justify-content: center;
   align-items: center;
   padding: 4rem 2rem;
-    background: linear-gradient(135deg, rgba(139, 107, 77, 0.9) 0%, rgba(176, 141, 87, 0.9) 100%);
+  background: url('/images/home-bg.jpg') center/cover no-repeat;
   background-size: cover;
   background-position: center;
 }
@@ -90,7 +84,7 @@ export default {
   left: 0;
   right: 0;
   bottom: 0;
-  background: rgba(255, 255, 255, 0.05);
+  background: rgba(255, 255, 255, 0.1); /* Почти прозрачный белый */
   pointer-events: none;
 }
 
@@ -122,20 +116,22 @@ export default {
 .hero-subtitle {
   font-family: 'Cormorant Garamond', serif;
   font-size: 1.6rem;
-  color: #8b6b4d;
+  color: #8b6b4d; 
   letter-spacing: 0.15em;
   margin: 0.5rem 0 1rem;
   font-weight: 500;
+  text-shadow: none;
 }
 
 .hero-description {
   font-family: 'EB Garamond', serif;
   font-size: 1.3rem;
-  color: #5d4a30;
+  color: #5d4a30; 
   line-height: 1.8;
   margin: 2rem 0;
   font-weight: 300;
   letter-spacing: 0.03em;
+  text-shadow: none;
 }
 
 /* Призыв к действию */
@@ -202,14 +198,14 @@ export default {
   max-width: 1200px;
   margin: 0 auto;
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-  gap: 2.5rem;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 3rem;
 }
 
 .feature-card {
   background: white;
   border-radius: 12px;
-  padding: 2.5rem 2rem;
+  padding: 3.5rem 3rem;
   text-align: center;
   box-shadow: 0 8px 32px rgba(139, 107, 77, 0.1);
   transition: all 0.4s ease;
@@ -240,8 +236,8 @@ export default {
 .feature-description {
   font-family: 'EB Garamond', serif;
   color: #5d4a30;
-  line-height: 1.6;
-  font-size: 1.1rem;
+  line-height: 1.7;
+  font-size: 1.25rem;
 }
 
 /* Отзывы */
@@ -395,4 +391,16 @@ export default {
     padding: 3rem 1rem;
   }
 }
+
+.feature-card-photo {
+  background: url('/images/atmosphere-bg.jpg') center/cover no-repeat;
+}
+
+
+.feature-card-photo .feature-icon,
+.feature-card-photo .feature-title,
+.feature-card-photo .feature-description {
+  color: #2a1e14; /* Темный цвет для читаемости на фото */
+}
+
 </style>

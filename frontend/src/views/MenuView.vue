@@ -525,7 +525,7 @@ export default {
 }
 
 .menu-category {
-  margin-bottom: 3rem;
+  position: 3rem;
 }
 
 .category-title-section {
@@ -533,13 +533,33 @@ export default {
   margin-bottom: 2rem;
 }
 
-.category-name {
+.menu-category .category-title-section .category-name {
   font-family: 'Playfair Display', serif;
   font-size: 1.8rem;
   color: #2a1e14;
   font-weight: 600;
   letter-spacing: 0.15em;
-  margin: 0;
+  margin: 0 auto 1.5rem auto;
+  padding-bottom: 0.8rem;
+  position: relative;
+  width: 90%;
+  max-width: 500px;
+  border-bottom: none !important; /* Убедиться, что нет других border */
+}
+
+.menu-category .category-title-section .category-name::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 100%;
+  height: 1px;
+  background: linear-gradient(90deg, 
+    transparent, 
+    rgba(176, 141, 87, 0.9), 
+    transparent
+  );
 }
 
 /* Карточки блюд */
