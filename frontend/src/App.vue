@@ -13,7 +13,7 @@
       <div class="footer-container">
         <div class="footer-section">
           <div class="footer-logo">CHINCH</div>
-          <p class="footer-tagline">Изысканная кухня с 2023 года</p>
+          <p class="footer-tagline">Изысканная кухня с 2024 года</p>
         </div>
         
         <div class="footer-section">
