@@ -10,6 +10,8 @@ namespace backend.Models
         public string? Options { get; set; }                     // Дополнительные опции (например: "ВАНИЛЬ|ЦИТРУС")
         public string? PriceInfo { get; set; }                   // Информация о цене: "240 | 260 р", "420 450 850 р"
         public string? BasePrice { get; set; }                   // Базовая цена для еды: "750 р"
-        public string? Composition { get; set; }                 // Состав блюда, может быть NULL
+        public string? Composition { get; set; } 
+        public string? EggType { get; set; }                // Состав блюда, может быть NULL
+        public bool? IsAddon { get; set; }
     }
 }
