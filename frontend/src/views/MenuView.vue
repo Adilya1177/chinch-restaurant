@@ -862,7 +862,7 @@ export default {
 
 /* Опции */
 .dish-details {
-  margin-top: 0.8rem;
+  margin-top: 0.1rem;
   text-align: center;
   width: 100%;
 }
