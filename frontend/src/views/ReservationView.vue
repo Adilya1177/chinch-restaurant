@@ -35,10 +35,13 @@
                 <input 
                   type="tel" 
                   id="phone" 
-                  v-model="reservation.phone"
+                  ref="phoneInput"
+                  v-model="phoneDisplay"
+                  @input="handlePhoneInput"
+                  @keydown="handlePhoneKeydown"
                   required
                   class="form-input"
-                  placeholder="+7 (999) 123-45-67"
+                  placeholder="+7 (___) ___-__-__"
                 >
               </div>
             </div>
@@ -118,10 +121,10 @@
                   <option value="5">5 гостей</option>
                   <option value="6">6 гостей</option>
                   <option value="7">7 гостей</option>
-                  <option value="8">8 гостей</option>
-                  <option value="9">9 гостей</option>
-                  <option value="10">10 гостей</option>
-                  <option value="11">Более 10 гостей</option>
+                    <option value="8">8 гостей</option>
+                    <option value="9">9 гостей</option>
+                    <option value="10">10 гостей</option>
+                    <option value="11">Более 10 гостей</option>
                 </select>
               </div>
               
@@ -186,19 +189,143 @@ export default {
       loading: false,
       success: false,
       error: null,
+      phoneDisplay: '',
+      phoneDigits: '',
       reservation: {
         name: '',
         phone: '',
         date: today,
-        hour: '20',     // НОВОЕ: часы по умолчанию 20
-        minute: '00',   // НОВОЕ: минуты по умолчанию 00
+        hour: '20',
+        minute: '00',
         guests: '2',
         comment: ''
       }
     };
   },
+  watch: {
+    phoneDigits(newDigits) {
+      this.reservation.phone = '+7' + newDigits;
+      this.updatePhoneDisplay();
+    }
+  },
+  mounted() {
+    this.updatePhoneDisplay();
+  },
   methods: {
+    updatePhoneDisplay() {
+      const d = this.phoneDigits;
+      
+      // Форматируем: +7 (XXX) XXX-XX-XX
+      let formatted = '+7';
+      
+      if (d.length > 0) {
+        formatted += ' (' + d.substring(0, 3);
+      }
+      
+      if (d.length >= 3) {
+        formatted += ') ' + d.substring(3, 6);
+      } else if (d.length > 0) {
+        formatted += ') ';
+      }
+      
+      if (d.length >= 6) {
+        formatted += '-' + d.substring(6, 8);
+      } else if (d.length > 3) {
+        formatted += '-';
+      }
+      
+      if (d.length >= 8) {
+        formatted += '-' + d.substring(8, 10);
+      }
+      
+      this.phoneDisplay = formatted;
+    },
+    
+    handlePhoneKeydown(event) {
+      const input = event.target;
+      const cursorPos = input.selectionStart;
+      const key = event.key;
+      
+      // Блокируем нецифровые символы (кроме управляющих клавиш)
+      if (!/[0-9]|Backspace|Delete|Tab|ArrowLeft|ArrowRight|ArrowUp|ArrowDown|Home|End|Enter/.test(key)) {
+        event.preventDefault();
+        return;
+      }
+      
+      // Если курсор перед +7, перемещаем его
+      if (cursorPos < 4 && (key === 'Backspace' || key === 'ArrowLeft')) {
+        event.preventDefault();
+        input.setSelectionRange(4, 4);
+        return;
+      }
+      
+      // Если пытаемся удалить часть префикса
+      if (cursorPos <= 4 && (key === 'Backspace' || key === 'Delete')) {
+        event.preventDefault();
+        return;
+      }
+      
+      // Если нажата цифра и курсор на форматирующем символе, перемещаем его
+      if (/[0-9]/.test(key)) {
+        const positions = [4, 5, 6, 9, 10, 11, 13, 14, 16, 17]; // Позиции цифр
+        if (!positions.includes(cursorPos)) {
+          // Находим следующую позицию для цифры
+          let nextPos = positions.find(pos => pos >= cursorPos);
+          if (nextPos === undefined) nextPos = 4;
+          
+          event.preventDefault();
+          
+          // Добавляем цифру
+          const digitIndex = positions.indexOf(nextPos);
+          if (digitIndex >= this.phoneDigits.length) {
+            this.phoneDigits += key;
+          } else {
+            this.phoneDigits = this.phoneDigits.substring(0, digitIndex) + key + this.phoneDigits.substring(digitIndex);
+          }
+          
+          this.$nextTick(() => {
+            input.setSelectionRange(nextPos + 1, nextPos + 1);
+          });
+        }
+      }
+    },
+    
+    handlePhoneInput(event) {
+      const input = event.target;
+      const value = input.value;
+      
+      // Если пользователь пытается изменить префикс
+      if (!value.startsWith('+7')) {
+        this.updatePhoneDisplay();
+        return;
+      }
+      
+      // Извлекаем цифры после +7
+      const newDigits = value.substring(2).replace(/\D/g, '').substring(0, 10);
+      
+      // Обновляем цифры
+      if (newDigits !== this.phoneDigits) {
+        this.phoneDigits = newDigits;
+        
+        // Корректируем курсор после обновления
+        this.$nextTick(() => {
+          const digitPositions = [4, 5, 6, 9, 10, 11, 13, 14, 16, 17];
+          const newCursorPos = this.phoneDigits.length < digitPositions.length 
+            ? digitPositions[this.phoneDigits.length] 
+            : this.phoneDisplay.length;
+          
+          input.setSelectionRange(newCursorPos, newCursorPos);
+        });
+      }
+    },
+    
     async submitReservation() {
+      // Проверяем, что номер заполнен полностью
+      if (this.phoneDigits.length < 10) {
+        this.error = 'Пожалуйста, введите полный номер телефона (10 цифр)';
+        return;
+      }
+      
       this.loading = true;
       this.success = false;
       this.error = null;
@@ -232,16 +359,18 @@ export default {
         if (response.data.ok) {
           this.success = true;
           
-          // Сброс формы (но оставляем сегодняшнюю дату по умолчанию)
+          // Сброс формы
           this.reservation = {
             name: '',
             phone: '',
-            date: new Date().toISOString().split('T')[0], // сегодняшняя дата
-            hour: '20',    // сбрасываем к дефолтному значению
-            minute: '00',  // сбрасываем к дефолтному значению
+            date: new Date().toISOString().split('T')[0],
+            hour: '20',
+            minute: '00',
             guests: '2',
             comment: ''
           };
+          this.phoneDigits = '';
+          this.phoneDisplay = '';
           
           // Автоматическое скрытие сообщения об успехе через 5 секунд
           setTimeout(() => {
@@ -274,6 +403,8 @@ export default {
             guests: '2',
             comment: ''
           };
+          this.phoneDigits = '';
+          this.phoneDisplay = '';
           
           setTimeout(() => {
             this.success = false;
@@ -288,6 +419,7 @@ export default {
 </script>
 
 <style scoped>
+/* Все стили без изменений - копируй из предыдущей версии */
 .reservation-view {
   min-height: calc(100vh - 400px);
   padding: 2rem 1rem;
@@ -299,7 +431,6 @@ export default {
   margin: 0 auto;
 }
 
-/* Заголовок */
 .page-header {
   text-align: center;
   margin-bottom: 3rem;
@@ -332,14 +463,12 @@ export default {
   margin: 0 auto;
 }
 
-/* Основной контейнер формы */
 .reservation-form-wrapper {
   display: block;
   max-width: 800px;
   margin: 0 auto 4rem auto;
 }
 
-/* Форма */
 .form-container {
   background: white;
   border-radius: 16px;
@@ -371,7 +500,6 @@ export default {
   margin: 0;
 }
 
-/* Стили формы */
 .reservation-form {
   display: flex;
   flex-direction: column;
@@ -405,7 +533,6 @@ export default {
   opacity: 0.8;
 }
 
-/* Специальные стили для date input на мобильных */
 .date-input {
   font-family: 'EB Garamond', serif;
   font-size: 1.1rem;
@@ -428,7 +555,6 @@ export default {
   box-shadow: 0 0 0 2px rgba(176, 141, 87, 0.1);
 }
 
-/* Для WebKit браузеров (Safari, Chrome) */
 .date-input::-webkit-inner-spin-button,
 .date-input::-webkit-calendar-picker-indicator {
   opacity: 0.6;
@@ -436,7 +562,6 @@ export default {
   padding: 0.2rem;
 }
 
-/* Для Firefox */
 @supports (-moz-appearance: none) {
   .date-input {
     min-height: 48px;
@@ -477,7 +602,6 @@ export default {
   min-height: 100px;
 }
 
-/* Стили для выбора времени */
 .time-selectors {
   display: flex;
   align-items: center;
@@ -525,7 +649,6 @@ export default {
   font-weight: 500;
 }
 
-/* Кнопка отправки */
 .form-actions {
   margin-top: 1rem;
 }
@@ -571,7 +694,6 @@ export default {
   animation: rotate 1s linear infinite;
 }
 
-/* Сообщения */
 .success-message,
 .error-message {
   display: flex;
@@ -651,12 +773,10 @@ export default {
   color: #c62828;
 }
 
-/* Анимации */
 @keyframes rotate {
   to { transform: rotate(360deg); }
 }
 
-/* МЕДИА-ЗАПРОСЫ ДЛЯ МОБИЛЬНЫХ */
 @media (max-width: 768px) {
   .reservation-view {
     padding: 1rem;
@@ -674,14 +794,12 @@ export default {
     grid-template-columns: 1fr;
   }
   
-  /* ФИКС ДЛЯ DATE INPUT НА МОБИЛЬНЫХ */
   .date-input {
     font-size: 1rem;
     padding: 0.8rem 1rem;
     min-height: 44px;
   }
   
-  /* Уменьшаем отступы в выборе времени */
   .time-selectors {
     gap: 0.3rem;
   }
@@ -693,25 +811,23 @@ export default {
     font-size: 1rem;
   }
   
-  /* Специальные исправления для iOS */
   @supports (-webkit-touch-callout: none) {
     .date-input {
-      font-size: 16px; /* Предотвращает масштабирование в iOS */
+      font-size: 16px;
       line-height: 1.4;
     }
   }
 }
 
-/* Дополнительные исправления для очень маленьких экранов */
 @media (max-width: 480px) {
   .date-input {
-    font-size: 16px; /* Фиксированный размер для лучшей читаемости */
+    font-size: 16px;
   }
   
   .form-input,
   .form-select,
   .form-textarea {
-    font-size: 16px; /* Предотвращает масштабирование в мобильных браузерах */
+    font-size: 16px;
   }
   
   .time-select {
