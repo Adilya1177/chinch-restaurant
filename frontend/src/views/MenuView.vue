@@ -199,9 +199,13 @@
             </div>
             
             <!-- Состав -->
-            <div class="dish-composition">
+            <div v-if="selectedDish.composition" class="dish-composition">
               <h3 class="composition-title">Состав</h3>
-              <p class="composition-text">{{ selectedDishDetails.composition }}</p>
+              <p class="composition-text">{{ selectedDish.composition }}</p>
+            </div>
+            <div v-else class="dish-composition">
+              <h3 class="composition-title">Состав</h3>
+              <p class="composition-text">Состав будет добавлен позже</p>
             </div>
             
             <!-- Опции, если есть -->
