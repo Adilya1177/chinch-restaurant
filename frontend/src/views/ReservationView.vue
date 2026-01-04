@@ -51,7 +51,7 @@
                   id="date" 
                   v-model="reservation.date"
                   required
-                  class="form-input"
+                  class="form-input date-input"
                 >
               </div>
               
@@ -100,7 +100,7 @@
                   </select>
                 </div>
               </div>
-            </div> <!-- ЭТОТ </div> БЫЛ ПРОПУЩЕН! -->
+            </div>
             
             <div class="form-row">
               <div class="form-group">
@@ -384,12 +384,6 @@ export default {
   gap: 1.5rem;
 }
 
-@media (max-width: 768px) {
-  .form-row {
-    grid-template-columns: 1fr;
-  }
-}
-
 .form-group {
   display: flex;
   flex-direction: column;
@@ -409,6 +403,44 @@ export default {
   color: #d9534f;
   margin-left: 0.2rem;
   opacity: 0.8;
+}
+
+/* Специальные стили для date input на мобильных */
+.date-input {
+  font-family: 'EB Garamond', serif;
+  font-size: 1.1rem;
+  padding: 0.9rem 1.2rem;
+  border: 1px solid #e8dcc9;
+  border-radius: 8px;
+  background: white;
+  color: #2a1e14;
+  transition: all 0.3s ease;
+  width: 100%;
+  box-sizing: border-box;
+  appearance: none;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+}
+
+.date-input:focus {
+  outline: none;
+  border-color: #b08d57;
+  box-shadow: 0 0 0 2px rgba(176, 141, 87, 0.1);
+}
+
+/* Для WebKit браузеров (Safari, Chrome) */
+.date-input::-webkit-inner-spin-button,
+.date-input::-webkit-calendar-picker-indicator {
+  opacity: 0.6;
+  cursor: pointer;
+  padding: 0.2rem;
+}
+
+/* Для Firefox */
+@supports (-moz-appearance: none) {
+  .date-input {
+    min-height: 48px;
+  }
 }
 
 .form-input,
@@ -491,18 +523,6 @@ export default {
   font-size: 1.2rem;
   color: #8b6b4d;
   font-weight: 500;
-}
-
-@media (max-width: 768px) {
-  .time-selectors {
-    gap: 0.3rem;
-  }
-  
-  .hour-select,
-  .minute-select {
-    max-width: 80px;
-    padding: 0.8rem 0.6rem;
-  }
 }
 
 /* Кнопка отправки */
@@ -636,6 +656,7 @@ export default {
   to { transform: rotate(360deg); }
 }
 
+/* МЕДИА-ЗАПРОСЫ ДЛЯ МОБИЛЬНЫХ */
 @media (max-width: 768px) {
   .reservation-view {
     padding: 1rem;
@@ -647,6 +668,59 @@ export default {
   
   .form-container {
     padding: 1.5rem;
+  }
+  
+  .form-row {
+    grid-template-columns: 1fr;
+  }
+  
+  /* ФИКС ДЛЯ DATE INPUT НА МОБИЛЬНЫХ */
+  .date-input {
+    font-size: 1rem;
+    padding: 0.8rem 1rem;
+    min-height: 44px;
+  }
+  
+  /* Уменьшаем отступы в выборе времени */
+  .time-selectors {
+    gap: 0.3rem;
+  }
+  
+  .hour-select,
+  .minute-select {
+    max-width: 80px;
+    padding: 0.8rem 0.6rem;
+    font-size: 1rem;
+  }
+  
+  /* Специальные исправления для iOS */
+  @supports (-webkit-touch-callout: none) {
+    .date-input {
+      font-size: 16px; /* Предотвращает масштабирование в iOS */
+      line-height: 1.4;
+    }
+  }
+}
+
+/* Дополнительные исправления для очень маленьких экранов */
+@media (max-width: 480px) {
+  .date-input {
+    font-size: 16px; /* Фиксированный размер для лучшей читаемости */
+  }
+  
+  .form-input,
+  .form-select,
+  .form-textarea {
+    font-size: 16px; /* Предотвращает масштабирование в мобильных браузерах */
+  }
+  
+  .time-select {
+    font-size: 16px;
+  }
+  
+  .hour-select,
+  .minute-select {
+    max-width: 70px;
   }
 }
 </style>

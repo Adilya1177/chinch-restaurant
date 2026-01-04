@@ -30,19 +30,31 @@
     <!-- Особенности -->
     <div class="features-section">
       <div class="features-container">
-        <div class="feature-card">
+        <!-- Карточка 1 -->
+        <div class="feature-item">
+          <div class="feature-image-container">
+            <div class="feature-image-placeholder"></div>
+          </div>
           <p class="feature-description">
             Отборные продукты от проверенных поставщиков со всего мира
           </p>
         </div>
         
-        <div class="feature-card">
+        <!-- Карточка 2 -->
+        <div class="feature-item">
+          <div class="feature-image-container">
+            <div class="feature-image-photo-blyda"></div>
+          </div>
           <p class="feature-description">
             Уникальные блюда, созданные нашим шеф-поваром с любовью к деталям
           </p>
         </div>
         
-        <div class="feature-card feature-card-photo">
+        <!-- Карточка 3 (с фото) -->
+        <div class="feature-item">
+          <div class="feature-image-container">
+            <div class="feature-image-photo-atmosphere"></div>
+          </div>
           <p class="feature-description">
             Утонченный интерьер и безупречный сервис для особых моментов
           </p>
@@ -50,7 +62,7 @@
       </div>
     </div>
 
-    </div>
+  </div>
 </template>
 
 <script>
@@ -134,7 +146,7 @@ export default {
   text-shadow: none;
 }
 
-/* Призыв к действию */
+/* Призыв к действию - ОДИНАКОВЫЕ КНОПКИ */
 .cta-section {
   display: flex;
   gap: 2rem;
@@ -147,7 +159,7 @@ export default {
   display: flex;
   align-items: center;
   gap: 0.8rem;
-  padding: 1.2rem 2.5rem;
+  padding: 1.2rem 2.8rem; /* Увеличил горизонтальный padding для равных кнопок */
   border-radius: 40px;
   text-decoration: none;
   font-family: 'Cormorant Garamond', serif;
@@ -156,6 +168,10 @@ export default {
   letter-spacing: 0.08em;
   transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
   box-shadow: 0 4px 16px rgba(0, 0, 0, 0.15);
+  min-width: 260px; /* Одинаковая минимальная ширина */
+  justify-content: center;
+  text-align: center;
+  white-space: nowrap; /* Текст в одну строку */
 }
 
 .cta-button.primary {
@@ -186,9 +202,15 @@ export default {
 
 .cta-icon {
   font-size: 1.4rem;
+  flex-shrink: 0; /* Иконка не сжимается */
 }
 
-/* Особенности */
+.cta-text {
+  flex-shrink: 1;
+  text-align: center;
+}
+
+/* Особенности - НОВАЯ СТРУКТУРА */
 .features-section {
   padding: 5rem 2rem;
   background: linear-gradient(135deg, #fffbf0 0%, #f8f0e0 100%);
@@ -202,131 +224,96 @@ export default {
   gap: 3rem;
 }
 
-.feature-card {
-  background: white;
+.feature-item {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+  align-items: center;
+}
+
+/* УВЕЛИЧИВАЕМ ВЫСОТУ КАРТОЧЕК */
+.feature-image-container {
+  height: 300px; /* Было 200px, теперь 300px */
   border-radius: 12px;
-  padding: 3.5rem 3rem;
-  text-align: center;
-  box-shadow: 0 8px 32px rgba(139, 107, 77, 0.1);
-  transition: all 0.4s ease;
-  border: 1px solid #e8dcc9;
+  overflow: hidden;
+  box-shadow: 0 4px 20px rgba(139, 107, 77, 0.15);
+  transition: all 0.3s ease;
+  width: 100%;
 }
 
-.feature-card:hover {
-  transform: translateY(-8px);
-  box-shadow: 0 16px 40px rgba(139, 107, 77, 0.15);
-  border-color: #b08d57;
+.feature-image-container:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 8px 28px rgba(139, 107, 77, 0.2);
 }
 
-.feature-icon {
-  font-size: 2.5rem;
-  color: #b08d57;
-  margin-bottom: 1.5rem;
+.feature-image-placeholder {
+  height: 100%;
+  background: linear-gradient(135deg, #2a1e14, #3a2a1c);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
 }
 
-.feature-title {
-  font-family: 'Cormorant Garamond', serif;
-  font-size: 1.4rem;
-  color: #2a1e14;
-  margin-bottom: 1rem;
-  font-weight: 600;
-  letter-spacing: 0.05em;
+.feature-image-placeholder::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: linear-gradient(45deg, transparent 60%, rgba(176, 141, 87, 0.1) 100%);
 }
 
+/* Фото блюда */
+.feature-image-photo-blyda {
+  height: 100%;
+  background: url('/images/blyda.jpeg') center/cover no-repeat;
+  background-size: cover;
+  background-position: center;
+  position: relative;
+}
+
+.feature-image-photo-blyda::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: linear-gradient(45deg, rgba(42, 30, 20, 0.1), rgba(42, 30, 20, 0.05));
+}
+
+/* Фото атмосферы */
+.feature-image-photo-atmosphere {
+  height: 100%;
+  background: url('/images/atmosphere-bg.jpg') center/cover no-repeat;
+  background-size: cover;
+  background-position: center;
+  position: relative;
+}
+
+.feature-image-photo-atmosphere::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: linear-gradient(45deg, rgba(42, 30, 20, 0.1), rgba(42, 30, 20, 0.05));
+}
+
+/* Стили для текста */
 .feature-description {
   font-family: 'EB Garamond', serif;
   color: #5d4a30;
   line-height: 1.7;
   font-size: 1.25rem;
-}
-
-/* Отзывы */
-.testimonials-section {
-  padding: 5rem 2rem;
-  background: linear-gradient(135deg, #f8f4ea 0%, #f1e9d7 100%);
-}
-
-.section-header {
+  margin: 0;
   text-align: center;
-  margin-bottom: 4rem;
-}
-
-.section-title {
-  font-family: 'Playfair Display', serif;
-  font-size: 2.5rem;
-  color: #2a1e14;
-  font-weight: 600;
-  letter-spacing: 0.1em;
-  margin-bottom: 1rem;
-}
-
-.section-divider {
-  width: 100px;
-  height: 2px;
-  background: linear-gradient(90deg, #b08d57, #8b6b4d);
-  margin: 0 auto;
-}
-
-.testimonials-container {
-  max-width: 1200px;
-  margin: 0 auto;
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
-  gap: 2rem;
-}
-
-.testimonial-card {
-  background: white;
-  border-radius: 12px;
-  padding: 2.5rem;
-  position: relative;
-  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
-  border: 1px solid #e8dcc9;
-  transition: all 0.3s ease;
-}
-
-.testimonial-card:hover {
-  box-shadow: 0 8px 28px rgba(139, 107, 77, 0.15);
-}
-
-.testimonial-quote {
-  position: absolute;
-  top: 1.5rem;
-  left: 1.5rem;
-  font-family: 'Playfair Display', serif;
-  font-size: 4rem;
-  color: #e8dcc9;
-  line-height: 1;
-}
-
-.testimonial-text {
-  font-family: 'EB Garamond', serif;
-  font-size: 1.2rem;
-  color: #2a1e14;
-  line-height: 1.7;
-  margin: 1rem 0 2rem;
-  font-style: italic;
-  padding-top: 1rem;
-}
-
-.testimonial-author {
-  border-top: 1px solid #e8dcc9;
-  padding-top: 1.5rem;
-}
-
-.author-name {
-  font-family: 'Cormorant Garamond', serif;
-  font-size: 1.2rem;
-  color: #2a1e14;
-  font-weight: 600;
-  margin-bottom: 0.3rem;
-}
-
-.author-date {
-  font-family: 'EB Garamond', serif;
-  color: #8b6b4d;
-  font-size: 0.9rem;
-  letter-spacing: 0.05em;
+  font-weight: 400;
+  padding: 0 1rem;
+  max-width: 350px;
 }
 
 /* Адаптивность */
@@ -356,19 +343,24 @@ export default {
   .cta-section {
     flex-direction: column;
     align-items: center;
+    gap: 1rem; /* Уменьшаем отступ между кнопками */
   }
   
+  /* УМЕНЬШАЕМ КНОПКИ НА МОБИЛЬНЫХ - ОДИНАКОВО */
   .cta-button {
     width: 100%;
-    max-width: 280px;
+    max-width: 300px; /* Одинаковый максимум */
+    min-width: auto; /* На мобильных не фиксируем минимальную ширину */
     justify-content: center;
+    padding: 1rem 2rem; /* Одинаковый padding */
+    font-size: 1.1rem; /* Немного уменьшаем шрифт */
+  }
+  
+  .cta-icon {
+    font-size: 1.2rem; /* Уменьшаем иконку */
   }
   
   .features-container {
-    grid-template-columns: 1fr;
-  }
-  
-  .testimonials-container {
     grid-template-columns: 1fr;
   }
 }
@@ -382,25 +374,38 @@ export default {
     padding: 2rem 1rem;
   }
   
-  .section-title {
-    font-size: 2rem;
+  .hero-description {
+    font-size: 1rem;
+    line-height: 1.6;
+    margin: 1.5rem 0;
   }
   
-  .features-section,
-  .testimonials-section {
+  /* ЕЩЕ МЕНЬШЕ КНОПКИ НА ОЧЕНЬ МАЛЕНЬКИХ ЭКРАНАХ - ОДИНАКОВО */
+  .cta-button {
+    padding: 0.9rem 1.5rem;
+    font-size: 1rem;
+    max-width: 280px;
+  }
+  
+  .cta-icon {
+    font-size: 1.1rem;
+  }
+  
+  .cta-section {
+    gap: 0.8rem;
+    margin-top: 2rem;
+  }
+  
+  .features-section {
     padding: 3rem 1rem;
   }
+  
+  .feature-image-container {
+    height: 250px; /* Немного меньше на мобильных */
+  }
+  
+  .feature-description {
+    font-size: 1.1rem;
+  }
 }
-
-.feature-card-photo {
-  background: url('/images/atmosphere-bg.jpg') center/cover no-repeat;
-}
-
-
-.feature-card-photo .feature-icon,
-.feature-card-photo .feature-title,
-.feature-card-photo .feature-description {
-  color: #2a1e14; /* Темный цвет для читаемости на фото */
-}
-
 </style>
