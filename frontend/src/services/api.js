@@ -157,7 +157,7 @@ const mockMenuData = [
     composition: "Свекла, картофель, батат, лосось, лук-шалот, майонез, яйцо, лук сибулет"
   },
   {
-    id: 21, name: "КРУАССАН | БЛИНЫ, КРАСНАЯ ИКРА, МАСЛО С ТРАВАМИ",
+    id: 21, name: "КРУАССАН / БЛИНЫ, КРАСНАЯ ИКРА, МАСЛО С ТРАВАМИ",
     description: "", priceInfo: "", category: "NEW YEAR SPECIAL",
     mainCategory: "Еда", subCategory: "NEW YEAR SPECIAL",
     volumeInfo: null, basePrice: "890 р", options: null, isAddon: false,
