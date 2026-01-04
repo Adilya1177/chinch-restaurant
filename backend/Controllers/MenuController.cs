@@ -153,6 +153,29 @@ namespace backend.Controllers
                 return StatusCode(500, $"Ошибка: {ex.Message}");
             }
         }
+
+        // 👇 ДОБАВЛЯЕМ ЭТОТ НОВЫЙ МЕТОД ДЛЯ УДАЛЕНИЯ 👇
+        [HttpDelete("{id}")]
+        public async Task<IActionResult> DeleteDish(int id)
+        {
+            try
+            {
+                var dish = await _context.Dishes.FindAsync(id);
+                if (dish == null)
+                {
+                    return NotFound(new { message = $"Блюдо с ID {id} не найдено" });
+                }
+
+                _context.Dishes.Remove(dish);
+                await _context.SaveChangesAsync();
+
+                return NoContent();
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(500, new { error = $"Ошибка при удалении: {ex.Message}" });
+            }
+        }
     }
 
     public class UpdateOptionsRequest

@@ -71,11 +71,12 @@
                   v-for="item in subCategory.items" 
                   :key="item.id" 
                   class="dish-card"
-                  @click="showDishDetails(item)"
+                  :class="{ 'non-clickable': isNonClickableDish(item) }"
+                  @click="!isNonClickableDish(item) && showDishDetails(item)"
                 >
                   <div class="dish-card-inner">
                     <h3 class="dish-title">{{ item.name }}</h3>
-                    
+
                     <!-- Блок с объемом и ценой -->
                     <div class="price-volume-block">
                       <!-- Цена -->
@@ -137,8 +138,8 @@
                       <div 
                         v-for="addon in getEggAddons(subCategory.items)" 
                         :key="addon.id" 
-                        class="addon-item"
-                        @click="showDishDetails(addon)"
+                        class="addon-item non-clickable"
+                        @click="false"
                       >
                         <span class="addon-name">{{ addon.name }}</span>
                         <div class="addon-info">
@@ -340,6 +341,15 @@ export default {
         
         console.log('✅ Загружены блюда:', this.menuItems.length);
         
+        // 👇 ДОБАВЬ ЭТОТ КОД 👇
+        console.log('🔍 Проверяем воду:');
+        const waterItems = this.menuItems.filter(item => 
+          item.subCategory === 'ВОДА' || item.name.includes('ВОДА') || item.name.includes('MARUHA')
+        );
+        console.log('Найдено записей с водой:', waterItems.length);
+        waterItems.forEach(item => console.log('-', item.name, '| ID:', item.id));
+        // 👆 ДОБАВЬ ЭТОТ КОД 👆
+
       } catch (err) {
         console.error('❌ Ошибка загрузки данных:', err);
         this.error = 'Сервер временно недоступен';
@@ -435,8 +445,22 @@ export default {
       return options.replace(/\|/g, ' | ');
     },
     
+    // Проверка, является ли блюдо некликабельным (напитки или добавки)
+    isNonClickableDish(item) {
+      // Используем mainCategory: 'Напитки' или 'Еда'
+      return item.mainCategory === 'Напитки' || item.isAddon;
+    },
+    
     // Показать детали блюда
     showDishDetails(item) {
+      // Проверяем, можно ли открывать модальное окно для этого блюда
+      if (this.isNonClickableDish(item)) {
+        console.log('⚠️ Это блюдо не кликабельно:', item.name, 
+                   'mainCategory:', item.mainCategory, 
+                   'isAddon:', item.isAddon);
+        return;
+      }
+      
       console.log('🟣 КЛИК! showDishDetails вызван для:', item.name);
       console.log('🟣 item:', item);
 
@@ -742,6 +766,27 @@ export default {
   cursor: pointer;
 }
 
+/* Некликабельные карточки */
+.dish-card.non-clickable {
+  cursor: default !important;
+}
+
+.dish-card.non-clickable .dish-card-inner:hover {
+  transform: none !important;
+  box-shadow: none !important;
+  border-color: rgba(232, 220, 201, 0.7) !important;
+}
+
+.addon-item.non-clickable {
+  cursor: default !important;
+}
+
+.addon-item.non-clickable:hover {
+  background: white !important;
+  border-color: rgba(232, 220, 201, 0.7) !important;
+  transform: none !important;
+}
+
 .dish-card-inner {
   background: rgba(248, 244, 234, 0.7);
   border: 1px solid rgba(232, 220, 201, 0.7);
@@ -852,13 +897,7 @@ export default {
   border-radius: 12px;
   padding: 1.5rem;
   transition: all 0.3s ease;
-  cursor: pointer;
-}
-
-.addons-card:hover {
-  transform: translateY(-3px);
-  box-shadow: 0 8px 24px rgba(139, 107, 77, 0.15);
-  border-color: #8b6b4d;
+  cursor: default;
 }
 
 /* Заголовок добавок */

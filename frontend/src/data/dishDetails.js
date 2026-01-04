@@ -201,7 +201,7 @@ const dishDetails = {
     photo: "/chinch-restaurant/images/dishes/ШАКШУКА-КОЛБАСКИ-ФЕТА-ШПИНАТ.jpeg",
     composition: "Состав будет добавлен позже"
   },
-  "ОЛИВЬЕ КРАБ | БРИСКЕТ, ПЮРЕ ИЗ ЗЕЛЕНОГО ГОРОШКА, КРАСНАЯ ИКРА": {
+  "ОЛИВЬЕ КРАБ / БРИСКЕТ, ПЮРЕ ИЗ ЗЕЛЕНОГО ГОРОШКА, КРАСНАЯ ИКРА": {
     photo: "/chinch-restaurant/images/dishes/ОЛИВЬЕ-КРАБ-БРИСКЕТ-ПЮРЕ-ИЗ-ЗЕЛЕНОГО-ГОРОШКА-КРАСНАЯ-ИКРА.jpeg",
     composition: "Состав будет добавлен позже"
   },
@@ -225,7 +225,7 @@ const dishDetails = {
     photo: "/chinch-restaurant/images/dishes/ГОВЯЖЬИ-ЩЕКИ-ОРЗО-ШПИНАТ.jpg",
     composition: "Состав будет добавлен позже"
   },
-  "КРУАССАН | БЛИНЫ, КРАСНАЯ ИКРА, МАСЛО С ТРАВАМИ": {
+  "КРУАССАН / БЛИНЫ, КРАСНАЯ ИКРА, МАСЛО С ТРАВАМИ": {
     photos: [
       "/chinch-restaurant/images/dishes/KRUSSAN-KRASNAYA-IKRA-MASLO-S-TRAVAMI.jpg",
       "/chinch-restaurant/images/dishes/BLINY-KRASNAYA-IKRA-MASLO-S-TRAVAMI.jpg"
