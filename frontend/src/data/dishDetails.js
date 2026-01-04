@@ -202,7 +202,7 @@ const dishDetails = {
     composition: "Состав будет добавлен позже"
   },
   "ОЛИВЬЕ КРАБ / БРИСКЕТ, ПЮРЕ ИЗ ЗЕЛЕНОГО ГОРОШКА, КРАСНАЯ ИКРА": {
-    photo: "/chinch-restaurant/images/dishes/ОЛИВЬЕ-КРАБ-БРИСКЕТ-ПЮРЕ-ИЗ-ЗЕЛЕНОГО-ГОРОШКА-КРАСНАЯ-ИКРА.jpeg",
+    photo: "/chinch-restaurant/images/dishes/OLIVE-KRAB-BRISKET-PURE-IZ-ZELENOGO-GOROSHKA-KRASNAYA-IKRA.jpeg",
     composition: "Состав будет добавлен позже"
   },
   "ГЛАЗУНЬЯ": {
