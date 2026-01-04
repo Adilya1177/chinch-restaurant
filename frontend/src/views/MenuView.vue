@@ -76,9 +76,15 @@
                   <div class="dish-card-inner">
                     <h3 class="dish-title">{{ item.name }}</h3>
                     
-                    <!-- Блок с объемом (без цен) -->
-                    <div class="price-volume-block" v-if="item.volumeInfo">
-                      <div class="volume-info">
+                    <!-- Блок с объемом и ценой -->
+                    <div class="price-volume-block">
+                      <!-- Цена -->
+                      <div v-if="item.priceInfo || item.basePrice" class="price-info">
+                        <span class="price-value">{{ formatPrice(item) }}</span>
+                      </div>
+                      
+                      <!-- Объем -->
+                      <div v-if="item.volumeInfo" class="volume-info">
                         <span class="volume-label">{{ formatVolume(item.volumeInfo) }}</span>
                       </div>
                     </div>
@@ -105,9 +111,15 @@
                   <div class="dish-card-inner">
                     <h3 class="dish-title">{{ item.name }}</h3>
                     
-                    <!-- Блок с объемом (без цен) -->
-                    <div class="price-volume-block" v-if="item.volumeInfo">
-                      <div class="volume-info">
+                    <!-- Блок с объемом и ценой -->
+                    <div class="price-volume-block">
+                      <!-- Цена -->
+                      <div v-if="item.priceInfo || item.basePrice" class="price-info">
+                        <span class="price-value">{{ formatPrice(item) }}</span>
+                      </div>
+                      
+                      <!-- Объем -->
+                      <div v-if="item.volumeInfo" class="volume-info">
                         <span class="volume-label">{{ formatVolume(item.volumeInfo) }}</span>
                       </div>
                     </div>
@@ -129,7 +141,10 @@
                         @click="showDishDetails(addon)"
                       >
                         <span class="addon-name">{{ addon.name }}</span>
-                        <span v-if="addon.volumeInfo" class="addon-volume">{{ formatVolume(addon.volumeInfo) }}</span>
+                        <div class="addon-info">
+                          <span v-if="addon.price" class="addon-price">{{ addon.price }} р</span>
+                          <span v-if="addon.volumeInfo" class="addon-volume">{{ formatVolume(addon.volumeInfo) }}</span>
+                        </div>
                       </div>
                     </div>
                   </div>
@@ -192,6 +207,11 @@
           <!-- Информация о блюде -->
           <div class="dish-info">
             <h2 class="dish-modal-title">{{ selectedDish.name }}</h2>
+            
+            <!-- Цена -->
+            <div v-if="selectedDish.priceInfo || selectedDish.basePrice" class="dish-price">
+              <span class="price-label">{{ formatPrice(selectedDish) }}</span>
+            </div>
             
             <!-- Объем, если есть -->
             <div v-if="selectedDish.volumeInfo" class="dish-volume">
@@ -358,6 +378,38 @@ export default {
           });
         }
       }, 50);
+    },
+    
+    // Форматирование цены
+    formatPrice(item) {
+      if (!item) return '';
+      
+      // Сначала проверяем priceInfo (для напитков с двумя объемами)
+      if (item.priceInfo) {
+        return item.priceInfo;
+      }
+      
+      // Если есть basePrice
+      if (item.basePrice) {
+        // Если цена уже в формате "750 р", возвращаем как есть
+        if (typeof item.basePrice === 'string' && item.basePrice.includes('р')) {
+          return item.basePrice;
+        }
+        
+        // Если цена число, добавляем " р"
+        if (typeof item.basePrice === 'number') {
+          return `${item.basePrice} р`;
+        }
+        
+        // Для строки без "р" добавляем
+        if (typeof item.basePrice === 'string') {
+          return item.basePrice.includes('р') ? item.basePrice : `${item.basePrice} р`;
+        }
+        
+        return item.basePrice;
+      }
+      
+      return '';
     },
     
     // Форматирование объема с добавлением пробела перед "мл"
@@ -701,7 +753,7 @@ export default {
   flex-direction: column;
   align-items: center;
   text-align: center;
-  height: 140px;
+  height: 160px; /* Увеличили высоту для цены */
   overflow: hidden;
   position: relative;
 }
@@ -717,7 +769,7 @@ export default {
   font-size: 1.2rem;
   color: #2a1e14;
   font-weight: 600;
-  margin: 0 0 0.3rem 0;
+  margin: 0 0 0.5rem 0; /* Увеличили отступ */
   text-align: center;
   width: 100%;
   overflow: hidden;
@@ -725,9 +777,10 @@ export default {
   display: -webkit-box;
   -webkit-line-clamp: 2;
   -webkit-box-orient: vertical;
+  min-height: 2.8em; /* Фиксированная высота для двух строк */
 }
 
-/* Блок с объемами */
+/* Блок с ценой и объемом */
 .price-volume-block {
   margin: 0.5rem 0;
   padding: 0.5rem 0;
@@ -737,6 +790,20 @@ export default {
   margin-top: auto;
 }
 
+/* Стили для цены */
+.price-info {
+  margin-bottom: 0.5rem;
+}
+
+.price-value {
+  font-family: 'Playfair Display', serif;
+  font-size: 1.1rem;
+  color: #d4af37; /* золотой цвет */
+  font-weight: 600;
+  letter-spacing: 0.02em;
+}
+
+/* Стили для объема */
 .volume-info {
   margin-bottom: 0.3rem;
 }
@@ -840,9 +907,23 @@ export default {
   font-weight: 500;
 }
 
+.addon-info {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 0.2rem;
+}
+
+.addon-price {
+  font-family: 'Playfair Display', serif;
+  font-size: 0.9rem;
+  color: #d4af37; /* золотой цвет */
+  font-weight: 600;
+}
+
 .addon-volume {
   font-family: 'EB Garamond', serif;
-  font-size: 0.9rem;
+  font-size: 0.8rem;
   color: #8b6b4d;
   font-weight: 500;
 }
@@ -1063,6 +1144,19 @@ export default {
   line-height: 1.2;
 }
 
+/* Цена в модальном окне */
+.dish-price {
+  margin-bottom: 1rem;
+}
+
+.price-label {
+  font-family: 'Playfair Display', serif;
+  font-size: 1.5rem;
+  color: #d4af37; /* золотой цвет */
+  font-weight: 600;
+  letter-spacing: 0.02em;
+}
+
 .dish-volume {
   margin-bottom: 1.5rem;
   padding-bottom: 1rem;
@@ -1244,12 +1338,25 @@ export default {
   
   /* Уменьшаем высоту карточек на мобильных */
   .dish-card-inner {
-    height: 120px;
+    height: 140px; /* Сохраняем для цены */
     padding: 1rem;
   }
   
   .dish-title {
     font-size: 1.1rem;
+    min-height: 2.4em;
+  }
+  
+  .price-value {
+    font-size: 1rem;
+  }
+  
+  .addon-price {
+    font-size: 0.8rem;
+  }
+  
+  .addon-volume {
+    font-size: 0.7rem;
   }
 }
 
