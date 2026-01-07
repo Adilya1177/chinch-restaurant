@@ -88,9 +88,9 @@ export default {
   min-height: 70vh;
   display: flex;
   flex-direction: column;
-  justify-content: center; /* Центрируем по вертикали */
+  justify-content: center;  
   align-items: center;
-  padding: 4rem 2rem;
+  padding: 0 2rem 4rem 2rem;
   background: url('/images/home-bg.jpg') center/cover no-repeat;
   background-size: cover;
   background-position: center;
@@ -492,6 +492,56 @@ export default {
   
   .feature-description {
     font-size: 1.1rem;
+  }
+}
+
+/* =========================================================== */
+/* ДОБАВЛЕНО: Убираем отступ на мобильных устройствах         */
+/* =========================================================== */
+@media (max-width: 768px) {
+  .hero-section {
+    margin-top: -25px !important; /* Убираем отступ для планшетов */
+    min-height: 80vh; /* Немного уменьшаем высоту */
+    background-position: center 0%;
+  }
+}
+
+@media (max-width: 480px) {
+  .hero-section {
+    margin-top: -25px !important; /* Убираем отступ для мобильных */
+    min-height: 85vh; /* Еще уменьшаем высоту */
+    padding: 0 1rem 3rem 1rem; /* Уменьшаем нижний отступ */
+    background-position: center 0%; /* ДОБАВИЛ */
+  }
+  
+  .hero-content {
+    margin-bottom: 4rem; /* Уменьшаем отступ для кнопок */
+  }
+  
+  .main-logo {
+    height: 100px !important; /* УВЕЛИЧИВАЕМ логотип на мобильных */
+    max-width: 320px !important;
+  }
+}
+
+@media (max-width: 375px) {
+  .hero-section {
+    margin-top: -90px !important; /* Еще больше убираем отступ */
+    min-height: 50vh;
+    background-position: center 0%; /* ДОБАВИЛ */
+  }
+  
+  .main-logo {
+    height: 110px !important; /* ЕЩЕ БОЛЬШЕ увеличиваем логотип */
+    max-width: 340px !important;
+  }
+  
+  .cta-section {
+    gap: 1.5rem !important; /* ДОБАВЛЯЕМ расстояние между кнопками */
+  }
+  
+  .cta-button {
+    margin-bottom: 0.5rem; /* Отступ между кнопками */
   }
 }
 </style>

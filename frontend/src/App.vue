@@ -73,51 +73,8 @@ export default {
 .app-main {
   flex: 1;
   padding: 0;
-  padding-top: 220px; /* БОЛЬШОЙ отступ для десктопа */
+  padding-top: 160px; /* БОЛЬШОЙ отступ для десктопа */
   min-height: calc(100vh - 250px);
-}
-
-/* Адаптивные отступы - ОЧЕНЬ БОЛЬШИЕ для мобильных */
-@media (max-width: 1200px) {
-  .app-main {
-    padding-top: 200px;
-  }
-}
-
-@media (max-width: 992px) {
-  .app-main {
-    padding-top: 190px;
-  }
-}
-
-@media (max-width: 768px) {
-  .app-main {
-    padding-top: 200px; /* Большой отступ для планшетов */
-  }
-}
-
-@media (max-width: 576px) {
-  .app-main {
-    padding-top: 210px; /* Еще больше для мобильных */
-  }
-}
-
-@media (max-width: 480px) {
-  .app-main {
-    padding-top: 220px; /* Максимальный для мобильных */
-  }
-}
-
-@media (max-width: 375px) {
-  .app-main {
-    padding-top: 230px; /* Очень большой для iPhone SE */
-  }
-}
-
-@media (max-width: 320px) {
-  .app-main {
-    padding-top: 240px; /* Максимально возможный */
-  }
 }
 
 /* Футер */
