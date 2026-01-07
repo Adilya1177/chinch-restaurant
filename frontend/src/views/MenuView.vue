@@ -1249,7 +1249,7 @@ export default {
   align-items: center;
   justify-content: center;
   gap: 0.6rem;
-  width: 100%;
+  width: calc(100% - 2rem); /* ТА ЖЕ ШИРИНА ЧТО И У СОСТАВА */
   padding: 0.8rem;
   background: #8b6b4d;
   color: #fff;
@@ -1261,7 +1261,7 @@ export default {
   cursor: pointer;
   transition: all 0.3s ease;
   text-decoration: none;
-  margin-top: 1.5rem;
+  margin: 1.5rem auto 0; /* центрируем */
   box-shadow: 0 2px 8px rgba(139, 107, 77, 0.25);
   border: 1px solid rgba(139, 107, 77, 0.3);
 }
@@ -1424,6 +1424,7 @@ export default {
     font-size: 0.85rem;
     padding: 0.7rem;
     margin-top: 1.2rem;
+    width: calc(100% - 2rem); /* ТА ЖЕ ШИРИНА НА МОБИЛЬНЫХ */
   }
   
   .btn-icon {
