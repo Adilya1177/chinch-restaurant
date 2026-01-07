@@ -17,10 +17,7 @@
         
         <p class="hero-subtitle">ГАСТРОБИСТРО С АВТОРСКОЙ КУХНЕЙ</p>
         <div class="hero-decoration bottom"></div>
-        <p class="hero-description">
-          Изысканные блюда, тщательно отобранные ингредиенты<br>
-          и непревзойденная атмосфера в самом сердце Москвы
-        </p>
+        <!-- Текст описания УБРАН -->
       </div>
       
       <!-- Призыв к действию -->
@@ -91,7 +88,7 @@ export default {
   min-height: 70vh;
   display: flex;
   flex-direction: column;
-  justify-content: center;
+  justify-content: center; /* Центрируем по вертикали */
   align-items: center;
   padding: 4rem 2rem;
   background: url('/images/home-bg.jpg') center/cover no-repeat;
@@ -116,6 +113,7 @@ export default {
   z-index: 1; /* Контент поверх затемнения */
   text-align: center;
   max-width: 800px;
+  margin-bottom: 8rem; /* СИЛЬНО УВЕЛИЧИЛ отступ для кнопок (было 5rem) */
 }
 
 .hero-decoration {
@@ -168,33 +166,10 @@ export default {
     0 22px 44px rgba(0, 0, 0, 0.3);
 }
 
-.hero-description {
-  font-family: 'EB Garamond', serif;
-  font-size: 1.3rem;
-  color: #f2eee5;
-  line-height: 1.8;
-  margin: 2rem 0;
-  font-weight: 600;
-  letter-spacing: 0.03em;
-  text-shadow: 
-    0 1px 3px rgba(0, 0, 0, 0.7),
-    0 2px 6px rgba(0, 0, 0, 0.65),
-    0 4px 8px rgba(0, 0, 0, 0.6),
-    0 6px 12px rgba(0, 0, 0, 0.55),
-    0 8px 16px rgba(0, 0, 0, 0.5),
-    0 10px 20px rgba(0, 0, 0, 0.45),
-    0 12px 24px rgba(0, 0, 0, 0.4),
-    0 14px 28px rgba(0, 0, 0, 0.35),
-    0 16px 32px rgba(0, 0, 0, 0.3),
-    0 18px 36px rgba(0, 0, 0, 0.25),
-    0 20px 40px rgba(0, 0, 0, 0.2);
-}
-
 /* Призыв к действию */
 .cta-section {
   display: flex;
   gap: 2rem;
-  margin-top: 3rem;
   flex-wrap: wrap;
   justify-content: center;
   position: relative; /* Чтобы был поверх затемнения */
@@ -403,18 +378,8 @@ export default {
       0 14px 26px rgba(0, 0, 0, 0.45);
   }
   
-  .hero-description {
-    font-size: 1.1rem;
-    font-weight: 600;
-    color: #f2eee5;
-    text-shadow: 
-      0 1px 2px rgba(0, 0, 0, 0.65),
-      0 2px 4px rgba(0, 0, 0, 0.6),
-      0 4px 6px rgba(0, 0, 0, 0.55),
-      0 6px 10px rgba(0, 0, 0, 0.5),
-      0 8px 14px rgba(0, 0, 0, 0.45),
-      0 10px 18px rgba(0, 0, 0, 0.4),
-      0 12px 22px rgba(0, 0, 0, 0.35);
+  .hero-content {
+    margin-bottom: 6rem; /* Для планшетов тоже увеличил отступ */
   }
   
   .cta-section {
@@ -484,19 +449,8 @@ export default {
       0 10px 18px rgba(0, 0, 0, 0.4);
   }
   
-  .hero-description {
-    font-size: 1rem;
-    line-height: 1.6;
-    margin: 1.5rem 0;
-    font-weight: 600;
-    color: #f2eee5;
-    text-shadow: 
-      0 1px 2px rgba(0, 0, 0, 0.6),
-      0 2px 4px rgba(0, 0, 0, 0.55),
-      0 4px 6px rgba(0, 0, 0, 0.5),
-      0 6px 10px rgba(0, 0, 0, 0.45),
-      0 8px 14px rgba(0, 0, 0, 0.4),
-      0 10px 18px rgba(0, 0, 0, 0.35);
+  .hero-content {
+    margin-bottom: 5rem; /* Для мобильных тоже увеличил отступ */
   }
   
   .cta-button {
