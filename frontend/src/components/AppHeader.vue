@@ -129,7 +129,6 @@ export default {
   height: 1px;
   background: linear-gradient(90deg, transparent, #b08d57, transparent);
   margin-bottom: 1rem;
-  transition: margin-bottom 0.3s ease;
 }
 
 .header-container {
@@ -141,7 +140,7 @@ export default {
   padding: 1.5rem 0;
 }
 
-/* Логотип - ОЧЕНЬ большой (максимально для шапки) */
+/* Логотип */
 .logo-section {
   flex-shrink: 0;
 }
@@ -161,14 +160,14 @@ export default {
 .logo-container {
   display: flex;
   align-items: center;
-  height: 160px; /* Максимально большой контейнер для шапки */
+  height: 160px;
 }
 
 .header-logo {
-  height: 150px; /* Очень большой логотип */
+  height: 155px;
   width: auto;
   object-fit: contain;
-  max-width: 350px; /* Чтобы не растягивался слишком широко */
+  max-width: 370px;
 }
 
 /* Навигация */
@@ -269,8 +268,8 @@ export default {
   }
   
   .header-logo {
-    height: 130px;
-    max-width: 300px;
+    height: 135px;
+    max-width: 310px;
   }
   
   .logo-container {
@@ -280,28 +279,29 @@ export default {
 
 @media (max-width: 768px) {
   .app-header {
-    padding: 0 0.8rem; /* Уменьшен padding */
+    padding: 0 0.8rem;
     height: auto;
   }
   
   .header-container {
     flex-direction: column;
-    gap: 0.5rem; /* Уменьшен отступ между элементами */
-    padding: 0.6rem 0; /* Уменьшен padding */
+    gap: 0.5rem;
+    padding: 0.6rem 0;
   }
   
   .nav-items {
-    gap: 1rem;
+    gap: 1.2rem; /* УВЕЛИЧЕН отступ между кнопками */
     padding: 0;
   }
   
   .nav-label {
-    font-size: 0.75rem;
+    font-size: 0.85rem; /* УВЕЛИЧЕН текст (было 0.75rem) */
+    font-weight: 600; /* Добавлена жирность */
   }
   
   .nav-icon {
-    font-size: 1rem;
-    margin-bottom: 0.1rem;
+    font-size: 1.2rem; /* УВЕЛИЧЕНА иконка (было 1rem) */
+    margin-bottom: 0.15rem;
   }
   
   .header-ornament {
@@ -309,8 +309,8 @@ export default {
   }
   
   .header-logo {
-    height: 120px;
-    max-width: 250px;
+    height: 125px;
+    max-width: 260px;
   }
   
   .logo-container {
@@ -318,42 +318,43 @@ export default {
   }
   
   .header-bottom-shadow {
-    bottom: -3px; /* Уменьшена тень */
+    bottom: -3px;
     height: 3px;
   }
   
   .header-top-line {
-    margin-bottom: 0.3rem; /* Уменьшен отступ */
-    height: 0.5px; /* Уменьшена толщина линии */
+    margin-bottom: 0.3rem;
+    height: 0.5px;
   }
   
   .nav-item {
-    padding: 0.2rem 0; /* Уменьшен padding */
-    gap: 0.2rem;
+    padding: 0.3rem 0; /* УВЕЛИЧЕН padding (было 0.2rem) */
+    gap: 0.25rem; /* УВЕЛИЧЕН gap */
   }
 }
 
 @media (max-width: 480px) {
   .app-header {
-    padding: 0 0.5rem; /* Уменьшен padding */
+    padding: 0 0.5rem;
   }
   
   .nav-items {
-    gap: 0.8rem;
+    gap: 1rem; /* УВЕЛИЧЕН отступ (было 0.8rem) */
   }
   
   .nav-icon {
-    font-size: 0.9rem;
+    font-size: 1.1rem; /* УВЕЛИЧЕНА иконка (было 0.9rem) */
   }
   
   .nav-label {
-    font-size: 0.65rem;
+    font-size: 0.75rem; /* УВЕЛИЧЕН текст (было 0.65rem) */
     letter-spacing: 0.1em;
+    font-weight: 700; /* Увеличена жирность */
   }
   
   .header-logo {
-    height: 100px;
-    max-width: 220px;
+    height: 105px;
+    max-width: 230px;
   }
   
   .logo-container {
@@ -361,36 +362,36 @@ export default {
   }
   
   .header-bottom-shadow {
-    bottom: -2px; /* Еще уменьшена тень */
+    bottom: -2px;
     height: 2px;
   }
   
   .header-container {
-    padding: 0.5rem 0; /* Уменьшен padding */
+    padding: 0.5rem 0;
   }
   
   .nav-item {
-    padding: 0.15rem 0; /* Уменьшен padding */
+    padding: 0.25rem 0; /* УВЕЛИЧЕН padding (было 0.15rem) */
   }
   
   .header-top-line {
-    margin-bottom: 0.2rem; /* Уменьшен отступ */
+    margin-bottom: 0.2rem;
   }
 }
 
 /* Для самых маленьких экранов */
 @media (max-width: 360px) {
   .app-header {
-    padding: 0 0.3rem; /* Уменьшен padding */
+    padding: 0 0.3rem;
   }
   
   .nav-items {
-    gap: 0.5rem;
+    gap: 0.8rem; /* УВЕЛИЧЕН отступ (было 0.5rem) */
   }
   
   .header-logo {
-    height: 80px;
-    max-width: 180px;
+    height: 85px;
+    max-width: 190px;
   }
   
   .logo-container {
@@ -398,16 +399,21 @@ export default {
   }
   
   .nav-label {
-    font-size: 0.6rem;
+    font-size: 0.7rem; /* УВЕЛИЧЕН текст (было 0.6rem) */
+    font-weight: 700;
   }
   
   .header-container {
-    padding: 0.4rem 0; /* Уменьшен padding */
+    padding: 0.4rem 0;
   }
   
   .header-bottom-shadow {
-    bottom: -1px; /* Минимальная тень */
+    bottom: -1px;
     height: 1px;
+  }
+  
+  .nav-item {
+    padding: 0.2rem 0; /* УВЕЛИЧЕН padding */
   }
 }
 </style>
