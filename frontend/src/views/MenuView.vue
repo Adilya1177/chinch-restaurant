@@ -1,9 +1,19 @@
 <template>
   <div class="menu-view">
     <div class="menu-wrapper">
+      <!-- УВЕЛИЧЕННЫЙ ОТСТУП ПОД ШАПКОЙ -->
+      <div class="menu-top-padding"></div>
+      
       <!-- Заголовок -->
       <header class="page-header">
-        <h1 class="restaurant-logo">CHINCH</h1>
+        <div class="logo-container">
+          <img 
+            src="/images/logo/logo-chinch.png" 
+            alt="CHINCH Restaurant Logo" 
+            class="menu-logo"
+            style="filter: brightness(0.7) sepia(0.3) saturate(1.2); opacity: 0.95;"
+          >
+        </div>
         <p class="restaurant-description">Авторская кухня и коктейли</p>
       </header>
 
@@ -532,8 +542,18 @@ export default {
 .menu-view {
   min-height: 100vh;
   background: linear-gradient(135deg, #f8f4ea 0%, #e8dcc9 100%);
-  padding: 2rem 1rem;
+  padding: 0 1rem; /* Убрали верхний padding */
   position: relative;
+}
+
+/* УВЕЛИЧЕННЫЙ ОТСТУП ПОД ШАПКОЙ */
+.menu-top-padding {
+  height: 60px; /* УВЕЛИЧИЛ с 20px до 60px */
+  width: 100%;
+}
+
+.menu-wrapper {
+  padding-bottom: 3rem;
 }
 
 .page-header {
@@ -541,13 +561,20 @@ export default {
   margin-bottom: 3rem;
 }
 
-.restaurant-logo {
-  font-family: 'Playfair Display', serif;
-  font-size: 4rem;
-  color: #2a1e14;
-  font-weight: 700;
-  letter-spacing: 0.1em;
-  margin: 0 0 0.5rem 0;
+/* Контейнер для логотипа */
+.logo-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-bottom: 0.8rem;
+  height: 80px; /* Высота как у текстового логотипа */
+}
+
+.menu-logo {
+  height: 70px; /* Размер как у текста "CHINCH" (было 4rem = ~64px) */
+  width: auto;
+  object-fit: contain;
+  max-width: 300px;
 }
 
 .restaurant-description {
@@ -718,7 +745,7 @@ export default {
 }
 
 .menu-category {
-  position: 3rem;
+  position: relative;
 }
 
 .category-title-section {
@@ -1291,8 +1318,13 @@ export default {
 
 /* Адаптивность для мобильных */
 @media (max-width: 768px) {
-  .restaurant-logo {
-    font-size: 3rem;
+  .logo-container {
+    height: 70px;
+  }
+  
+  .menu-logo {
+    height: 60px;
+    max-width: 250px;
   }
   
   .nav-container {
@@ -1343,6 +1375,11 @@ export default {
   
   .hint-text {
     font-size: 0.8rem;
+  }
+  
+  /* УВЕЛИЧЕННЫЙ ОТСТУП НА МОБИЛЬНЫХ */
+  .menu-top-padding {
+    height: 40px; /* УВЕЛИЧИЛ для мобильных */
   }
   
   /* Адаптивность модального окна */

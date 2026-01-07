@@ -3,7 +3,7 @@
     <!-- Красивый заголовок -->
     <AppHeader />
     
-    <!-- Основной контент -->
+    <!-- Основной контент С БОЛЬШИМ ОТСТУПОМ -->
     <main class="app-main">
       <router-view/>
     </main>
@@ -12,7 +12,14 @@
     <footer class="app-footer">
       <div class="footer-container">
         <div class="footer-section">
-          <div class="footer-logo">CHINCH</div>
+          <div class="footer-logo-container">
+            <img 
+              src="/images/logo/logo-chinch.png" 
+              alt="CHINCH Restaurant Logo" 
+              class="footer-logo-img"
+              style="filter: brightness(0.9) sepia(0.2) saturate(1.1);"
+            >
+          </div>
           <p class="footer-tagline">Изысканная кухня с 2024 года</p>
         </div>
         
@@ -27,6 +34,11 @@
           <h3 class="footer-title">ЧАСЫ РАБОТЫ</h3>
           <p class="footer-info">Пн-Вс: 08:00 - 23:00</p>
         </div>
+      </div>
+      
+      <div class="footer-bottom">
+        <div class="footer-line"></div>
+        <!-- УБРАЛ КОПИРАЙТ -->
       </div>
     </footer>
   </div>
@@ -57,16 +69,62 @@ export default {
   background: linear-gradient(135deg, #f9f6f0 0%, #f2eee5 100%);
 }
 
+/* ОСНОВНОЙ КОНТЕНТ - БОЛЬШОЙ ОТСТУП ДЛЯ ФИКСИРОВАННОЙ ШАПКИ */
 .app-main {
   flex: 1;
-  padding: 2rem 0;
+  padding: 0;
+  padding-top: 220px; /* БОЛЬШОЙ отступ для десктопа */
+  min-height: calc(100vh - 250px);
+}
+
+/* Адаптивные отступы - ОЧЕНЬ БОЛЬШИЕ для мобильных */
+@media (max-width: 1200px) {
+  .app-main {
+    padding-top: 200px;
+  }
+}
+
+@media (max-width: 992px) {
+  .app-main {
+    padding-top: 190px;
+  }
+}
+
+@media (max-width: 768px) {
+  .app-main {
+    padding-top: 200px; /* Большой отступ для планшетов */
+  }
+}
+
+@media (max-width: 576px) {
+  .app-main {
+    padding-top: 210px; /* Еще больше для мобильных */
+  }
+}
+
+@media (max-width: 480px) {
+  .app-main {
+    padding-top: 220px; /* Максимальный для мобильных */
+  }
+}
+
+@media (max-width: 375px) {
+  .app-main {
+    padding-top: 230px; /* Очень большой для iPhone SE */
+  }
+}
+
+@media (max-width: 320px) {
+  .app-main {
+    padding-top: 240px; /* Максимально возможный */
+  }
 }
 
 /* Футер */
 .app-footer {
   background: linear-gradient(135deg, #2a1e14 0%, #3a2a1c 100%);
   color: #f2eee5;
-  padding: 3rem 0 1.5rem;
+  padding: 3rem 0 1rem; /* Уменьшил нижний padding без копирайта */
   margin-top: auto;
 }
 
@@ -77,7 +135,7 @@ export default {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
   gap: 2.5rem;
-  margin-bottom: 2rem;
+  margin-bottom: 1.5rem; /* Уменьшил без копирайта */
 }
 
 .footer-section {
@@ -86,13 +144,20 @@ export default {
   gap: 1rem;
 }
 
-.footer-logo {
-  font-family: 'Playfair Display', serif;
-  font-size: 2.2rem;
-  font-weight: 600;
-  letter-spacing: 0.15em;
-  color: #f2eee5;
+/* Контейнер для логотипа в футере */
+.footer-logo-container {
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
   margin-bottom: 0.5rem;
+  height: 60px;
+}
+
+.footer-logo-img {
+  height: 50px;
+  width: auto;
+  object-fit: contain;
+  max-width: 200px;
 }
 
 .footer-tagline {
@@ -140,21 +205,14 @@ export default {
 .footer-line {
   height: 1px;
   background: linear-gradient(90deg, transparent, rgba(212, 180, 131, 0.3), transparent);
-  margin: 2rem 0;
+  margin: 0.5rem 0 0 0; /* Минимальный отступ без копирайта */
 }
 
-.copyright {
-  text-align: center;
-  color: #8b6b4d;
-  font-size: 0.9rem;
-  letter-spacing: 0.05em;
-  padding: 1rem 0;
-}
-
-/* Адаптивность */
+/* Адаптивность футера */
 @media (max-width: 768px) {
   .app-main {
     padding: 1rem 0;
+    padding-top: 200px;
   }
   
   .footer-container {
@@ -167,27 +225,46 @@ export default {
     text-align: center;
   }
   
+  .footer-logo-container {
+    justify-content: center;
+  }
+  
   .footer-title::after {
     left: 50%;
     transform: translateX(-50%);
   }
   
-  .social-links {
-    justify-content: center;
+  .app-footer {
+    padding: 2rem 0 0.5rem;
   }
 }
 
 @media (max-width: 480px) {
-  .app-footer {
-    padding: 2rem 0 1rem;
+  .app-main {
+    padding-top: 220px;
   }
   
   .footer-container {
     padding: 0 1rem;
   }
   
-  .footer-logo {
-    font-size: 1.8rem;
+  .footer-logo-img {
+    height: 45px;
+    max-width: 180px;
+  }
+  
+  .footer-logo-container {
+    height: 55px;
+  }
+  
+  .app-footer {
+    padding: 1.5rem 0 0.5rem;
+  }
+}
+
+@media (max-width: 375px) {
+  .app-main {
+    padding-top: 230px;
   }
 }
 </style>

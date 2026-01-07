@@ -5,7 +5,17 @@
       <div class="hero-overlay"></div>
       <div class="hero-content">
         <div class="hero-decoration top"></div>
-        <h1 class="hero-title">CHINCH</h1>
+        
+        <!-- Логотип вместо текста -->
+        <div class="logo-title-container">
+          <img 
+            src="/images/logo/logo-chinch.png"
+            alt="CHINCH Restaurant Logo" 
+            class="main-logo"
+            style="filter: brightness(0.7) sepia(0.3) saturate(1.2); opacity: 0.95;"
+          >
+        </div>
+        
         <p class="hero-subtitle">РЕСТОРАН АВТОРСКОЙ КУХНИ</p>
         <div class="hero-decoration bottom"></div>
         <p class="hero-description">
@@ -114,15 +124,19 @@ export default {
   width: 300px;
 }
 
-.hero-title {
-  font-family: 'Playfair Display', serif;
-  font-size: 5.5rem;
-  font-weight: 600;
-  color: #2a1e14;
-  letter-spacing: 0.25em;
+/* Контейнер для логотипа */
+.logo-title-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
   margin: 1rem 0;
-  text-transform: uppercase;
-  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.main-logo {
+  height: 120px; /* Размер логотипа как был у текста CHINCH */
+  width: auto;
+  object-fit: contain;
+  max-width: 400px; /* Чтобы не растягивался слишком широко */
 }
 
 .hero-subtitle {
@@ -318,8 +332,9 @@ export default {
 
 /* Адаптивность */
 @media (max-width: 992px) {
-  .hero-title {
-    font-size: 4.5rem;
+  .main-logo {
+    height: 100px;
+    max-width: 350px;
   }
   
   .features-container {
@@ -328,8 +343,9 @@ export default {
 }
 
 @media (max-width: 768px) {
-  .hero-title {
-    font-size: 3.5rem;
+  .main-logo {
+    height: 90px;
+    max-width: 320px;
   }
   
   .hero-subtitle {
@@ -366,8 +382,9 @@ export default {
 }
 
 @media (max-width: 480px) {
-  .hero-title {
-    font-size: 2.8rem;
+  .main-logo {
+    height: 80px;
+    max-width: 280px;
   }
   
   .hero-section {

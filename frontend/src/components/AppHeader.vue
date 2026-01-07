@@ -1,5 +1,5 @@
 <template>
-  <header class="app-header">
+  <header class="app-header" :class="{ 'header-hidden': isHidden }">
     <!-- Декоративная верхняя линия -->
     <div class="header-top-line"></div>
     
@@ -7,8 +7,14 @@
       <!-- Логотип -->
       <div class="logo-section">
         <router-link to="/" class="logo-link">
-          <div class="logo-mark">✦</div>
-          <div class="logo-text">CHINCH</div>
+          <div class="logo-container">
+            <img 
+              src="/images/logo/Artboard 4 copy 6@3x.png" 
+              alt="CHINCH Restaurant Logo" 
+              class="header-logo"
+              style="filter: brightness(0.7) sepia(0.3) saturate(1.2); opacity: 0.95;"
+            >
+          </div>
         </router-link>
       </div>
 
@@ -36,6 +42,9 @@
         <div class="ornament-dot"></div>
       </div>
     </div>
+    
+    <!-- Темная тень внизу шапки -->
+    <div class="header-bottom-shadow"></div>
   </header>
 </template>
 
@@ -48,8 +57,30 @@ export default {
         { path: '/', label: 'ГЛАВНАЯ', icon: '⌂' },
         { path: '/menu', label: 'МЕНЮ', icon: '☰' },
         { path: '/reservation', label: 'БРОНИРОВАНИЕ', icon: '✎' }
-      ]
+      ],
+      isHidden: false,
+      lastScrollTop: 0
     };
+  },
+  mounted() {
+    window.addEventListener('scroll', this.handleScroll);
+  },
+  beforeUnmount() {
+    window.removeEventListener('scroll', this.handleScroll);
+  },
+  methods: {
+    handleScroll() {
+      const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
+      
+      // Простая логика: если скроллим вниз больше 50px - скрываем
+      if (scrollTop > this.lastScrollTop && scrollTop > 50) {
+        this.isHidden = true;
+      } else {
+        this.isHidden = false;
+      }
+      
+      this.lastScrollTop = scrollTop;
+    }
   }
 };
 </script>
@@ -59,16 +90,46 @@ export default {
   background: linear-gradient(135deg, #f9f6f0 0%, #f2eee5 100%);
   border-bottom: 1px solid rgba(212, 180, 131, 0.3);
   padding: 0 2rem;
-  position: sticky;
+  position: fixed; /* Закрепляем на месте */
   top: 0;
+  left: 0;
+  width: 100%;
   z-index: 1000;
-  box-shadow: 0 2px 20px rgba(0, 0, 0, 0.05);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.12); /* Темная тень */
+  transition: transform 0.4s ease-in-out;
+  transform: translateY(0);
+}
+
+/* Усиленная тень при скролле */
+.app-header:not(.header-hidden) {
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.15);
+}
+
+/* Скрытое состояние - плавно уезжает вверх */
+.app-header.header-hidden {
+  transform: translateY(-100%);
+}
+
+/* Дополнительная темная тень внизу */
+.header-bottom-shadow {
+  position: absolute;
+  bottom: -8px;
+  left: 0;
+  width: 100%;
+  height: 8px;
+  background: linear-gradient(to bottom, 
+    rgba(0, 0, 0, 0.1) 0%, 
+    rgba(0, 0, 0, 0.08) 30%, 
+    rgba(0, 0, 0, 0.04) 60%, 
+    transparent 100%);
+  pointer-events: none;
 }
 
 .header-top-line {
   height: 1px;
   background: linear-gradient(90deg, transparent, #b08d57, transparent);
   margin-bottom: 1rem;
+  transition: margin-bottom 0.3s ease;
 }
 
 .header-container {
@@ -77,10 +138,10 @@ export default {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding: 1rem 0;
+  padding: 1.5rem 0;
 }
 
-/* Логотип */
+/* Логотип - ОЧЕНЬ большой (максимально для шапки) */
 .logo-section {
   flex-shrink: 0;
 }
@@ -88,7 +149,6 @@ export default {
 .logo-link {
   display: flex;
   align-items: center;
-  gap: 0.8rem;
   text-decoration: none;
   color: inherit;
   transition: transform 0.3s ease;
@@ -98,24 +158,17 @@ export default {
   transform: scale(1.02);
 }
 
-.logo-mark {
-  font-size: 1.8rem;
-  color: #b08d57;
-  animation: pulse 4s ease-in-out infinite;
+.logo-container {
+  display: flex;
+  align-items: center;
+  height: 160px; /* Максимально большой контейнер для шапки */
 }
 
-@keyframes pulse {
-  0%, 100% { opacity: 0.7; }
-  50% { opacity: 1; }
-}
-
-.logo-text {
-  font-family: 'Playfair Display', serif;
-  font-size: 2rem;
-  font-weight: 600;
-  color: #2a1e14;
-  letter-spacing: 0.15em;
-  text-transform: uppercase;
+.header-logo {
+  height: 150px; /* Очень большой логотип */
+  width: auto;
+  object-fit: contain;
+  max-width: 350px; /* Чтобы не растягивался слишком широко */
 }
 
 /* Навигация */
@@ -198,7 +251,7 @@ export default {
 .ornament-dot {
   width: 4px;
   height: 4px;
-  background: #b08d57;
+  background: #8b6b4d;
   border-radius: 50%;
   opacity: 0.5;
 }
@@ -206,7 +259,7 @@ export default {
 .ornament-line {
   width: 40px;
   height: 1px;
-  background: linear-gradient(90deg, #b08d57, transparent);
+  background: linear-gradient(90deg, #8b6b4d, transparent);
 }
 
 /* Адаптивность */
@@ -215,8 +268,13 @@ export default {
     gap: 2rem;
   }
   
-  .logo-text {
-    font-size: 1.8rem;
+  .header-logo {
+    height: 130px;
+    max-width: 300px;
+  }
+  
+  .logo-container {
+    height: 140px;
   }
 }
 
@@ -227,8 +285,8 @@ export default {
   
   .header-container {
     flex-direction: column;
-    gap: 1rem;
-    padding: 1rem 0;
+    gap: 1.5rem;
+    padding: 1.5rem 0;
   }
   
   .nav-items {
@@ -242,6 +300,20 @@ export default {
   
   .header-ornament {
     display: none;
+  }
+  
+  .header-logo {
+    height: 120px;
+    max-width: 280px;
+  }
+  
+  .logo-container {
+    height: 130px;
+  }
+  
+  .header-bottom-shadow {
+    bottom: -6px;
+    height: 6px;
   }
 }
 
@@ -258,8 +330,18 @@ export default {
     font-size: 0.75rem;
   }
   
-  .logo-text {
-    font-size: 1.5rem;
+  .header-logo {
+    height: 110px;
+    max-width: 250px;
+  }
+  
+  .logo-container {
+    height: 120px;
+  }
+  
+  .header-bottom-shadow {
+    bottom: -4px;
+    height: 4px;
   }
 }
 </style>
