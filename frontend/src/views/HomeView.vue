@@ -2,7 +2,7 @@
   <div class="home-view">
     <!-- Герой-секция -->
     <div class="hero-section">
-      <div class="hero-overlay"></div>
+      <!-- Убрали .hero-overlay отсюда -->
       <div class="hero-content">
         <div class="hero-decoration top"></div>
         
@@ -12,7 +12,6 @@
             src="/images/logo/logo-chinch.png"
             alt="CHINCH Restaurant Logo" 
             class="main-logo"
-            style="filter: brightness(0.7) sepia(0.3) saturate(1.2); opacity: 0.95;"
           >
         </div>
         
@@ -100,19 +99,21 @@ export default {
   background-position: center;
 }
 
-.hero-overlay {
+/* Затемнение фона через псевдоэлемент */
+.hero-section::before {
+  content: '';
   position: absolute;
   top: 0;
   left: 0;
   right: 0;
   bottom: 0;
-  background: rgba(255, 255, 255, 0.1); /* Почти прозрачный белый */
-  pointer-events: none;
+  background: rgba(0, 0, 0, 0.4); /* Затемнение фона */
+  z-index: 0; /* Помещаем под контентом */
 }
 
 .hero-content {
   position: relative;
-  z-index: 1;
+  z-index: 1; /* Контент поверх затемнения */
   text-align: center;
   max-width: 800px;
 }
@@ -133,47 +134,78 @@ export default {
 }
 
 .main-logo {
-  height: 120px; /* Размер логотипа как был у текста CHINCH */
+  height: 120px;
   width: auto;
   object-fit: contain;
-  max-width: 400px; /* Чтобы не растягивался слишком широко */
+  max-width: 400px;
+  filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.8))
+          drop-shadow(0 4px 8px rgba(0, 0, 0, 0.7))
+          drop-shadow(0 6px 12px rgba(0, 0, 0, 0.6))
+          drop-shadow(0 8px 16px rgba(0, 0, 0, 0.5))
+          drop-shadow(0 10px 20px rgba(0, 0, 0, 0.4))
+          brightness(0.9) sepia(0.2) saturate(1.1);
+  opacity: 0.98;
 }
 
 .hero-subtitle {
   font-family: 'Cormorant Garamond', serif;
   font-size: 1.6rem;
-  color: #8b6b4d; 
+  color: #f8f4ea;
   letter-spacing: 0.15em;
   margin: 0.5rem 0 1rem;
-  font-weight: 500;
-  text-shadow: none;
+  font-weight: 700;
+  text-shadow: 
+    0 2px 4px rgba(0, 0, 0, 0.8),
+    0 4px 8px rgba(0, 0, 0, 0.75),
+    0 6px 12px rgba(0, 0, 0, 0.7),
+    0 8px 16px rgba(0, 0, 0, 0.65),
+    0 10px 20px rgba(0, 0, 0, 0.6),
+    0 12px 24px rgba(0, 0, 0, 0.55),
+    0 14px 28px rgba(0, 0, 0, 0.5),
+    0 16px 32px rgba(0, 0, 0, 0.45),
+    0 18px 36px rgba(0, 0, 0, 0.4),
+    0 20px 40px rgba(0, 0, 0, 0.35),
+    0 22px 44px rgba(0, 0, 0, 0.3);
 }
 
 .hero-description {
   font-family: 'EB Garamond', serif;
   font-size: 1.3rem;
-  color: #5d4a30; 
+  color: #f2eee5;
   line-height: 1.8;
   margin: 2rem 0;
-  font-weight: 300;
+  font-weight: 600;
   letter-spacing: 0.03em;
-  text-shadow: none;
+  text-shadow: 
+    0 1px 3px rgba(0, 0, 0, 0.7),
+    0 2px 6px rgba(0, 0, 0, 0.65),
+    0 4px 8px rgba(0, 0, 0, 0.6),
+    0 6px 12px rgba(0, 0, 0, 0.55),
+    0 8px 16px rgba(0, 0, 0, 0.5),
+    0 10px 20px rgba(0, 0, 0, 0.45),
+    0 12px 24px rgba(0, 0, 0, 0.4),
+    0 14px 28px rgba(0, 0, 0, 0.35),
+    0 16px 32px rgba(0, 0, 0, 0.3),
+    0 18px 36px rgba(0, 0, 0, 0.25),
+    0 20px 40px rgba(0, 0, 0, 0.2);
 }
 
-/* Призыв к действию - ОДИНАКОВЫЕ КНОПКИ */
+/* Призыв к действию */
 .cta-section {
   display: flex;
   gap: 2rem;
   margin-top: 3rem;
   flex-wrap: wrap;
   justify-content: center;
+  position: relative; /* Чтобы был поверх затемнения */
+  z-index: 1;
 }
 
 .cta-button {
   display: flex;
   align-items: center;
   gap: 0.8rem;
-  padding: 1.2rem 2.8rem; /* Увеличил горизонтальный padding для равных кнопок */
+  padding: 1.2rem 2.8rem;
   border-radius: 40px;
   text-decoration: none;
   font-family: 'Cormorant Garamond', serif;
@@ -182,22 +214,26 @@ export default {
   letter-spacing: 0.08em;
   transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
   box-shadow: 0 4px 16px rgba(0, 0, 0, 0.15);
-  min-width: 260px; /* Одинаковая минимальная ширина */
+  min-width: 260px;
   justify-content: center;
   text-align: center;
-  white-space: nowrap; /* Текст в одну строку */
+  white-space: nowrap;
 }
 
 .cta-button.primary {
   background: linear-gradient(135deg, #2a1e14, #3a2a1c);
   color: #f8f4ea;
   border: 2px solid #2a1e14;
+  box-shadow: 
+    0 4px 16px rgba(0, 0, 0, 0.15),
+    0 0 0 2px rgba(255, 255, 255, 0.15),
+    0 0 80px 30px rgba(255, 255, 255, 0.25);
 }
 
 .cta-button.secondary {
-  background: linear-gradient(135deg, #f8f4ea, #f2eee5);
-  color: #2a1e14;
-  border: 2px solid #b08d57;
+  background: linear-gradient(135deg, #fffdf9, #faf6ef);
+  color: #5d4a30;
+  border: 2px solid #f3ebdc;
 }
 
 .cta-button:hover {
@@ -207,16 +243,20 @@ export default {
 
 .cta-button.primary:hover {
   background: linear-gradient(135deg, #3a2a1c, #2a1e14);
+  box-shadow: 
+    0 8px 24px rgba(0, 0, 0, 0.2),
+    0 0 0 2px rgba(255, 255, 255, 0.18),
+    0 0 100px 40px rgba(255, 255, 255, 0.3);
 }
 
 .cta-button.secondary:hover {
-  background: linear-gradient(135deg, #f2eee5, #f8f4ea);
-  border-color: #8b6b4d;
+  background: linear-gradient(135deg, #ffffff, #fcf9f3);
+  border-color: #f8f2e8;
 }
 
 .cta-icon {
   font-size: 1.4rem;
-  flex-shrink: 0; /* Иконка не сжимается */
+  flex-shrink: 0;
 }
 
 .cta-text {
@@ -224,7 +264,7 @@ export default {
   text-align: center;
 }
 
-/* Особенности - НОВАЯ СТРУКТУРА */
+/* Особенности */
 .features-section {
   padding: 5rem 2rem;
   background: linear-gradient(135deg, #fffbf0 0%, #f8f0e0 100%);
@@ -245,9 +285,8 @@ export default {
   align-items: center;
 }
 
-/* УВЕЛИЧИВАЕМ ВЫСОТУ КАРТОЧЕК */
 .feature-image-container {
-  height: 300px; /* Было 200px, теперь 300px */
+  height: 300px;
   border-radius: 12px;
   overflow: hidden;
   box-shadow: 0 4px 20px rgba(139, 107, 77, 0.15);
@@ -260,7 +299,6 @@ export default {
   box-shadow: 0 8px 28px rgba(139, 107, 77, 0.2);
 }
 
-/* ФОТО ДЕСЕРТА - НОВЫЙ СТИЛЬ */
 .feature-image-photo-desert {
   height: 100%;
   background: url('/images/desert.jpeg') center/cover no-repeat;
@@ -279,7 +317,6 @@ export default {
   background: linear-gradient(45deg, rgba(42, 30, 20, 0.1), rgba(42, 30, 20, 0.05));
 }
 
-/* Фото блюда */
 .feature-image-photo-blyda {
   height: 100%;
   background: url('/images/blyda.jpeg') center/cover no-repeat;
@@ -298,7 +335,6 @@ export default {
   background: linear-gradient(45deg, rgba(42, 30, 20, 0.1), rgba(42, 30, 20, 0.05));
 }
 
-/* Фото атмосферы */
 .feature-image-photo-atmosphere {
   height: 100%;
   background: url('/images/atmosphere-bg.jpg') center/cover no-repeat;
@@ -317,7 +353,6 @@ export default {
   background: linear-gradient(45deg, rgba(42, 30, 20, 0.1), rgba(42, 30, 20, 0.05));
 }
 
-/* Стили для текста */
 .feature-description {
   font-family: 'EB Garamond', serif;
   color: #5d4a30;
@@ -346,34 +381,73 @@ export default {
   .main-logo {
     height: 90px;
     max-width: 320px;
+    filter: drop-shadow(0 1px 2px rgba(0, 0, 0, 0.7))
+            drop-shadow(0 2px 4px rgba(0, 0, 0, 0.6))
+            drop-shadow(0 4px 6px rgba(0, 0, 0, 0.5))
+            drop-shadow(0 6px 10px rgba(0, 0, 0, 0.4))
+            drop-shadow(0 8px 14px rgba(0, 0, 0, 0.3))
+            brightness(0.9) sepia(0.2) saturate(1.1);
   }
   
   .hero-subtitle {
     font-size: 1.3rem;
+    font-weight: 700;
+    color: #f8f4ea;
+    text-shadow: 
+      0 2px 3px rgba(0, 0, 0, 0.75),
+      0 4px 6px rgba(0, 0, 0, 0.7),
+      0 6px 10px rgba(0, 0, 0, 0.65),
+      0 8px 14px rgba(0, 0, 0, 0.6),
+      0 10px 18px rgba(0, 0, 0, 0.55),
+      0 12px 22px rgba(0, 0, 0, 0.5),
+      0 14px 26px rgba(0, 0, 0, 0.45);
   }
   
   .hero-description {
     font-size: 1.1rem;
+    font-weight: 600;
+    color: #f2eee5;
+    text-shadow: 
+      0 1px 2px rgba(0, 0, 0, 0.65),
+      0 2px 4px rgba(0, 0, 0, 0.6),
+      0 4px 6px rgba(0, 0, 0, 0.55),
+      0 6px 10px rgba(0, 0, 0, 0.5),
+      0 8px 14px rgba(0, 0, 0, 0.45),
+      0 10px 18px rgba(0, 0, 0, 0.4),
+      0 12px 22px rgba(0, 0, 0, 0.35);
   }
   
   .cta-section {
     flex-direction: column;
     align-items: center;
-    gap: 1rem; /* Уменьшаем отступ между кнопками */
+    gap: 1rem;
   }
   
-  /* УМЕНЬШАЕМ КНОПКИ НА МОБИЛЬНЫХ - ОДИНАКОВО */
   .cta-button {
     width: 100%;
-    max-width: 300px; /* Одинаковый максимум */
-    min-width: auto; /* На мобильных не фиксируем минимальную ширину */
+    max-width: 300px;
+    min-width: auto;
     justify-content: center;
-    padding: 1rem 2rem; /* Одинаковый padding */
-    font-size: 1.1rem; /* Немного уменьшаем шрифт */
+    padding: 1rem 2rem;
+    font-size: 1.1rem;
+  }
+  
+  .cta-button.primary {
+    box-shadow: 
+      0 4px 12px rgba(0, 0, 0, 0.15),
+      0 0 0 1px rgba(255, 255, 255, 0.12),
+      0 0 50px 20px rgba(255, 255, 255, 0.22);
+  }
+  
+  .cta-button.primary:hover {
+    box-shadow: 
+      0 6px 18px rgba(0, 0, 0, 0.2),
+      0 0 0 1px rgba(255, 255, 255, 0.14),
+      0 0 60px 25px rgba(255, 255, 255, 0.26);
   }
   
   .cta-icon {
-    font-size: 1.2rem; /* Уменьшаем иконку */
+    font-size: 1.2rem;
   }
   
   .features-container {
@@ -385,23 +459,64 @@ export default {
   .main-logo {
     height: 80px;
     max-width: 280px;
+    filter: drop-shadow(0 1px 2px rgba(0, 0, 0, 0.7))
+            drop-shadow(0 2px 4px rgba(0, 0, 0, 0.6))
+            drop-shadow(0 4px 6px rgba(0, 0, 0, 0.5))
+            drop-shadow(0 6px 10px rgba(0, 0, 0, 0.4))
+            drop-shadow(0 8px 14px rgba(0, 0, 0, 0.3))
+            brightness(0.9) sepia(0.2) saturate(1.1);
   }
   
   .hero-section {
     padding: 2rem 1rem;
   }
   
+  .hero-subtitle {
+    font-size: 1.2rem;
+    font-weight: 700;
+    color: #f8f4ea;
+    text-shadow: 
+      0 1px 2px rgba(0, 0, 0, 0.65),
+      0 2px 4px rgba(0, 0, 0, 0.6),
+      0 4px 6px rgba(0, 0, 0, 0.55),
+      0 6px 10px rgba(0, 0, 0, 0.5),
+      0 8px 14px rgba(0, 0, 0, 0.45),
+      0 10px 18px rgba(0, 0, 0, 0.4);
+  }
+  
   .hero-description {
     font-size: 1rem;
     line-height: 1.6;
     margin: 1.5rem 0;
+    font-weight: 600;
+    color: #f2eee5;
+    text-shadow: 
+      0 1px 2px rgba(0, 0, 0, 0.6),
+      0 2px 4px rgba(0, 0, 0, 0.55),
+      0 4px 6px rgba(0, 0, 0, 0.5),
+      0 6px 10px rgba(0, 0, 0, 0.45),
+      0 8px 14px rgba(0, 0, 0, 0.4),
+      0 10px 18px rgba(0, 0, 0, 0.35);
   }
   
-  /* ЕЩЕ МЕНЬШЕ КНОПКИ НА ОЧЕНЬ МАЛЕНЬКИХ ЭКРАНАХ - ОДИНАКОВО */
   .cta-button {
     padding: 0.9rem 1.5rem;
     font-size: 1rem;
     max-width: 280px;
+  }
+  
+  .cta-button.primary {
+    box-shadow: 
+      0 3px 10px rgba(0, 0, 0, 0.15),
+      0 0 0 1px rgba(255, 255, 255, 0.1),
+      0 0 35px 15px rgba(255, 255, 255, 0.22);
+  }
+  
+  .cta-button.primary:hover {
+    box-shadow: 
+      0 5px 14px rgba(0, 0, 0, 0.2),
+      0 0 0 1px rgba(255, 255, 255, 0.12),
+      0 0 45px 20px rgba(255, 255, 255, 0.26);
   }
   
   .cta-icon {
@@ -418,7 +533,7 @@ export default {
   }
   
   .feature-image-container {
-    height: 250px; /* Немного меньше на мобильных */
+    height: 250px;
   }
   
   .feature-description {
