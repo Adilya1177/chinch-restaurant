@@ -14,7 +14,7 @@
             style="filter: brightness(0.7) sepia(0.3) saturate(1.2); opacity: 0.95;"
           >
         </div>
-        <p class="restaurant-description">Авторская кухня и коктейли</p>
+        <p class="restaurant-description">Вкус, который запомнится</p>
       </header>
 
       <!-- Основная навигация -->
@@ -84,6 +84,19 @@
                   :class="{ 'non-clickable': isNonClickableDish(item) }"
                   @click="!isNonClickableDish(item) && showDishDetails(item)"
                 >
+                  <!-- ИКОНКА ЗАКАЗАТЬ -->
+                  <a 
+                    v-if="!isNonClickableDish(item)"
+                    href="https://eda.yandex.ru/restaurant/chinch" 
+                    target="_blank" 
+                    rel="noopener noreferrer"
+                    class="order-icon"
+                    title="Заказать на Яндекс Еде"
+                    @click.stop
+                  >
+                    🛒
+                  </a>
+                  
                   <div class="dish-card-inner">
                     <h3 class="dish-title">{{ item.name }}</h3>
 
@@ -119,6 +132,18 @@
                   class="dish-card"
                   @click="showDishDetails(item)"
                 >
+                  <!-- ИКОНКА ЗАКАЗАТЬ -->
+                  <a 
+                    href="https://eda.yandex.ru/restaurant/chinch" 
+                    target="_blank" 
+                    rel="noopener noreferrer"
+                    class="order-icon"
+                    title="Заказать на Яндекс Еде"
+                    @click.stop
+                  >
+                    🛒
+                  </a>
+                  
                   <div class="dish-card-inner">
                     <h3 class="dish-title">{{ item.name }}</h3>
                     
@@ -244,6 +269,20 @@
               <h3 class="options-title">Варианты</h3>
               <p class="options-text">{{ formatOptions(selectedDish.options) }}</p>
             </div>
+            
+            <!-- КНОПКА ЗАКАЗАТЬ В ЯНДЕКС ЕДЕ -->
+            <a 
+              href="https://eda.yandex.ru/restaurant/chinch" 
+              target="_blank" 
+              rel="noopener noreferrer"
+              class="yandex-order-btn"
+            >
+              <span class="btn-icon">🍴</span>
+              ЗАКАЗАТЬ НА ЯНДЕКС ЕДЕ
+            </a>
+            
+            <!-- Кнопка закрытия -->
+            <button class="close-btn" @click="closeModal">ЗАКРЫТЬ</button>
           </div>
         </div>
       </div>
@@ -613,11 +652,12 @@ export default {
   gap: 0.8rem;
   transition: all 0.3s ease;
   backdrop-filter: blur(10px);
+  box-shadow: 0 4px 12px rgba(42, 30, 20, 0.15); /* Темная тень */
 }
 
 .primary-nav-btn:hover {
   transform: translateY(-3px);
-  box-shadow: 0 6px 12px rgba(139, 107, 77, 0.2);
+  box-shadow: 0 6px 16px rgba(42, 30, 20, 0.25); /* Усиленная тень при наведении */
   background: white;
 }
 
@@ -626,7 +666,7 @@ export default {
   border-color: #8b6b4d;
   color: #f8f4ea;
   transform: translateY(-3px);
-  box-shadow: 0 6px 16px rgba(139, 107, 77, 0.3);
+  box-shadow: 0 6px 20px rgba(42, 30, 20, 0.35); /* Самая темная тень */
 }
 
 .btn-label {
@@ -702,6 +742,7 @@ export default {
   backdrop-filter: blur(10px);
   max-width: 90%;
   margin: 0 auto;
+  box-shadow: 0 4px 12px rgba(42, 30, 20, 0.1); /* Добавил тень */
 }
 
 .nav-scroll-container::-webkit-scrollbar {
@@ -721,11 +762,12 @@ export default {
   white-space: nowrap;
   flex-shrink: 0;
   transition: all 0.3s ease;
+  box-shadow: 0 4px 8px rgba(42, 30, 20, 0.08); /* Темная тень */
 }
 
 .secondary-nav-btn:hover {
   transform: translateY(-2px);
-  box-shadow: 0 4px 8px rgba(139, 107, 77, 0.15);
+  box-shadow: 0 6px 12px rgba(42, 30, 20, 0.15); /* Усиленная тень */
 }
 
 .secondary-nav-btn.active {
@@ -733,7 +775,7 @@ export default {
   border-color: #8b6b4d;
   color: white;
   transform: translateY(-2px);
-  box-shadow: 0 4px 12px rgba(139, 107, 77, 0.25);
+  box-shadow: 0 6px 16px rgba(42, 30, 20, 0.25); /* Самая темная тень */
 }
 
 /* Категории */
@@ -782,6 +824,33 @@ export default {
   );
 }
 
+/* ИКОНКА ЗАКАЗАТЬ В КАРТОЧКАХ */
+.order-icon {
+  position: absolute;
+  top: 12px;
+  right: 12px;
+  width: 36px;
+  height: 36px;
+  background: linear-gradient(135deg, #D4AF37 0%, #FFD700 100%);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 18px;
+  color: #000;
+  text-decoration: none;
+  z-index: 10;
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 12px rgba(212, 175, 55, 0.4);
+  border: 1px solid rgba(255, 215, 0, 0.3);
+}
+
+.order-icon:hover {
+  transform: scale(1.15) rotate(10deg);
+  box-shadow: 0 6px 20px rgba(212, 175, 55, 0.6);
+  background: linear-gradient(135deg, #FFD700 0%, #FFA500 100%);
+}
+
 /* Карточки блюд */
 .items-container {
   display: grid;
@@ -791,6 +860,7 @@ export default {
 
 .dish-card {
   cursor: pointer;
+  position: relative; /* Для иконки заказа */
 }
 
 /* Некликабельные карточки */
@@ -812,8 +882,10 @@ export default {
   background: white !important;
   border-color: rgba(232, 220, 201, 0.7) !important;
   transform: none !important;
+  box-shadow: none !important;
 }
 
+/* ОСНОВНОЕ ИЗМЕНЕНИЕ: ДОБАВЛЕНЫ ТЕМНЫЕ ТЕНИ ДЛЯ КАРТОЧЕК БЛЮД */
 .dish-card-inner {
   background: rgba(248, 244, 234, 0.7);
   border: 1px solid rgba(232, 220, 201, 0.7);
@@ -828,12 +900,15 @@ export default {
   height: 160px; /* Увеличили высоту для цены */
   overflow: hidden;
   position: relative;
+  /* ТЕМНАЯ ТЕНЬ - ОСНОВНОЕ ИЗМЕНЕНИЕ */
+  box-shadow: 0 6px 18px rgba(42, 30, 20, 0.25); /* Темная глубокая тень */
 }
 
+/* Еще более темная тень при наведении для кликабельных карточек */
 .dish-card-inner:hover {
-  transform: translateY(-4px);
-  box-shadow: 0 8px 24px rgba(139, 107, 77, 0.15);
-  border-color: #d4b483;
+  transform: translateY(-6px); /* Увеличен подъем */
+  box-shadow: 0 12px 28px rgba(42, 30, 20, 0.35); /* Очень темная тень при наведении */
+  border-color: #b08d57;
 }
 
 .dish-title {
@@ -925,6 +1000,8 @@ export default {
   padding: 1.5rem;
   transition: all 0.3s ease;
   cursor: default;
+  /* ТЕМНАЯ ТЕНЬ для блока добавок */
+  box-shadow: 0 8px 24px rgba(42, 30, 20, 0.2);
 }
 
 /* Заголовок добавок */
@@ -958,12 +1035,15 @@ export default {
   align-items: center;
   cursor: pointer;
   transition: all 0.2s ease;
+  /* ТЕМНАЯ ТЕНЬ для элементов добавок */
+  box-shadow: 0 4px 10px rgba(42, 30, 20, 0.15);
 }
 
 .addon-item:hover {
   background: rgba(248, 244, 234, 0.7);
   border-color: #b08d57;
   transform: translateY(-2px);
+  box-shadow: 0 6px 14px rgba(42, 30, 20, 0.2); /* Усиленная тень при наведении */
 }
 
 .addon-name {
@@ -1285,6 +1365,41 @@ export default {
   font-style: italic;
 }
 
+/* КНОПКА ЗАКАЗАТЬ В ЯНДЕКС ЕДЕ */
+.yandex-order-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.8rem;
+  width: 100%;
+  padding: 1rem;
+  background: linear-gradient(135deg, #FFCC00 0%, #FF9900 100%);
+  color: #000;
+  border: none;
+  border-radius: 8px;
+  font-family: 'EB Garamond', serif;
+  font-size: 1.1rem;
+  font-weight: 700;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  text-decoration: none;
+  margin-bottom: 1rem;
+  box-shadow: 0 4px 12px rgba(255, 153, 0, 0.3);
+  border: 2px solid rgba(255, 204, 0, 0.5);
+}
+
+.yandex-order-btn:hover {
+  background: linear-gradient(135deg, #FF9900 0%, #FF6600 100%);
+  transform: translateY(-3px);
+  box-shadow: 0 8px 20px rgba(255, 153, 0, 0.4);
+  color: #000;
+  text-decoration: none;
+}
+
+.btn-icon {
+  font-size: 1.3rem;
+}
+
 /* Кнопка закрытия */
 .close-btn {
   width: 100%;
@@ -1377,6 +1492,15 @@ export default {
     font-size: 0.8rem;
   }
   
+  /* Уменьшаем иконку заказа на мобильных */
+  .order-icon {
+    width: 32px;
+    height: 32px;
+    font-size: 16px;
+    top: 10px;
+    right: 10px;
+  }
+  
   /* УВЕЛИЧЕННЫЙ ОТСТУП НА МОБИЛЬНЫХ */
   .menu-top-padding {
     height: 40px; /* УВЕЛИЧИЛ для мобильных */
@@ -1416,6 +1540,13 @@ export default {
   .dish-card-inner {
     height: 140px; /* Сохраняем для цены */
     padding: 1rem;
+    /* Уменьшаем тени на мобильных для лучшей производительности */
+    box-shadow: 0 4px 12px rgba(42, 30, 20, 0.2);
+  }
+  
+  .dish-card-inner:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 8px 20px rgba(42, 30, 20, 0.3);
   }
   
   .dish-title {
@@ -1433,6 +1564,30 @@ export default {
   
   .addon-volume {
     font-size: 0.7rem;
+  }
+  
+  /* Уменьшаем тени для добавок на мобильных */
+  .addons-card {
+    box-shadow: 0 6px 16px rgba(42, 30, 20, 0.15);
+  }
+  
+  .addon-item {
+    box-shadow: 0 3px 8px rgba(42, 30, 20, 0.1);
+  }
+  
+  .addon-item:hover {
+    box-shadow: 0 5px 12px rgba(42, 30, 20, 0.15);
+  }
+  
+  /* Кнопка Яндекс Еды в модальном окне */
+  .yandex-order-btn {
+    font-size: 1rem;
+    padding: 0.9rem;
+    margin-bottom: 0.8rem;
+  }
+  
+  .btn-icon {
+    font-size: 1.1rem;
   }
 }
 

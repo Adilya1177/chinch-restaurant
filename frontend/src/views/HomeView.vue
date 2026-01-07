@@ -16,7 +16,7 @@
           >
         </div>
         
-        <p class="hero-subtitle">РЕСТОРАН АВТОРСКОЙ КУХНИ</p>
+        <p class="hero-subtitle">ГАСТРОБИСТРО С АВТОРСКОЙ КУХНЕЙ</p>
         <div class="hero-decoration bottom"></div>
         <p class="hero-description">
           Изысканные блюда, тщательно отобранные ингредиенты<br>

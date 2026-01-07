@@ -281,21 +281,27 @@ export default {
 @media (max-width: 768px) {
   .app-header {
     padding: 0 1rem;
+    height: auto; /* Автоматическая высота */
   }
   
   .header-container {
     flex-direction: column;
-    gap: 1.5rem;
-    padding: 1.5rem 0;
+    gap: 1rem; /* Уменьшен отступ между элементами */
+    padding: 1rem 0; /* Уменьшен padding */
   }
   
   .nav-items {
-    gap: 1.5rem;
+    gap: 1rem; /* Уменьшен отступ между элементами навигации */
     padding: 0;
   }
   
   .nav-label {
-    font-size: 0.8rem;
+    font-size: 0.75rem; /* Уменьшен текст */
+  }
+  
+  .nav-icon {
+    font-size: 1rem; /* Уменьшены иконки */
+    margin-bottom: 0.1rem;
   }
   
   .header-ornament {
@@ -303,45 +309,91 @@ export default {
   }
   
   .header-logo {
-    height: 120px;
-    max-width: 280px;
+    height: 80px; /* СУЩЕСТВЕННО уменьшен логотип */
+    max-width: 200px;
   }
   
   .logo-container {
-    height: 130px;
-  }
-  
-  .header-bottom-shadow {
-    bottom: -6px;
-    height: 6px;
-  }
-}
-
-@media (max-width: 480px) {
-  .nav-items {
-    gap: 1rem;
-  }
-  
-  .nav-icon {
-    font-size: 1rem;
-  }
-  
-  .nav-label {
-    font-size: 0.75rem;
-  }
-  
-  .header-logo {
-    height: 110px;
-    max-width: 250px;
-  }
-  
-  .logo-container {
-    height: 120px;
+    height: 90px; /* Уменьшен контейнер логотипа */
   }
   
   .header-bottom-shadow {
     bottom: -4px;
     height: 4px;
+  }
+  
+  .header-top-line {
+    margin-bottom: 0.5rem; /* Уменьшен отступ */
+  }
+  
+  .nav-item {
+    padding: 0.3rem 0; /* Уменьшен padding */
+    gap: 0.2rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .app-header {
+    padding: 0 0.8rem;
+  }
+  
+  .nav-items {
+    gap: 0.8rem;
+  }
+  
+  .nav-icon {
+    font-size: 0.9rem;
+  }
+  
+  .nav-label {
+    font-size: 0.65rem; /* Еще меньше текст */
+    letter-spacing: 0.1em;
+  }
+  
+  .header-logo {
+    height: 60px; /* Минимальная высота логотипа */
+    max-width: 180px;
+  }
+  
+  .logo-container {
+    height: 70px;
+  }
+  
+  .header-bottom-shadow {
+    bottom: -3px;
+    height: 3px;
+  }
+  
+  .header-container {
+    padding: 0.8rem 0;
+  }
+  
+  .nav-item {
+    padding: 0.2rem 0;
+  }
+}
+
+/* Для самых маленьких экранов */
+@media (max-width: 360px) {
+  .app-header {
+    padding: 0 0.5rem;
+  }
+  
+  .nav-items {
+    gap: 0.5rem;
+  }
+  
+  .header-logo {
+    height: 50px;
+    max-width: 150px;
+  }
+  
+  .logo-container {
+    height: 60px;
+  }
+  
+  .nav-label {
+    font-size: 0.6rem;
   }
 }
 </style>
