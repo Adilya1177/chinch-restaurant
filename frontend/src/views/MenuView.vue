@@ -30,14 +30,6 @@
             <span class="btn-counter">{{ category.count }}</span>
           </button>
         </div>
-        <div class="scroll-hint">
-          <span class="hint-text">← Прокрутите для выбора →</span>
-          <div class="hint-dots">
-            <span class="hint-dot active"></span>
-            <span class="hint-dot"></span>
-            <span class="hint-dot"></span>
-          </div>
-        </div>
       </nav>
 
       <!-- Навигация по подкатегориям -->
@@ -84,19 +76,6 @@
                   :class="{ 'non-clickable': isNonClickableDish(item) }"
                   @click="!isNonClickableDish(item) && showDishDetails(item)"
                 >
-                  <!-- ИКОНКА ЗАКАЗАТЬ -->
-                  <a 
-                    v-if="!isNonClickableDish(item)"
-                    href="https://eda.yandex.ru/restaurant/chinch" 
-                    target="_blank" 
-                    rel="noopener noreferrer"
-                    class="order-icon"
-                    title="Заказать на Яндекс Еде"
-                    @click.stop
-                  >
-                    🛒
-                  </a>
-                  
                   <div class="dish-card-inner">
                     <h3 class="dish-title">{{ item.name }}</h3>
 
@@ -112,13 +91,6 @@
                         <span class="volume-label">{{ formatVolume(item.volumeInfo) }}</span>
                       </div>
                     </div>
-                    
-                    <!-- Опции (дополнительные варианты) -->
-                    <div v-if="item.options" class="dish-details">
-                      <div class="detail-item options-info">
-                        <span class="options-text">{{ formatOptions(item.options) }}</span>
-                      </div>
-                    </div>
                   </div>
                 </div>
               </template>
@@ -132,18 +104,6 @@
                   class="dish-card"
                   @click="showDishDetails(item)"
                 >
-                  <!-- ИКОНКА ЗАКАЗАТЬ -->
-                  <a 
-                    href="https://eda.yandex.ru/restaurant/chinch" 
-                    target="_blank" 
-                    rel="noopener noreferrer"
-                    class="order-icon"
-                    title="Заказать на Яндекс Еде"
-                    @click.stop
-                  >
-                    🛒
-                  </a>
-                  
                   <div class="dish-card-inner">
                     <h3 class="dish-title">{{ item.name }}</h3>
                     
@@ -270,19 +230,16 @@
               <p class="options-text">{{ formatOptions(selectedDish.options) }}</p>
             </div>
             
-            <!-- КНОПКА ЗАКАЗАТЬ В ЯНДЕКС ЕДЕ -->
+            <!-- КНОПКА ЗАКАЗАТЬ В ЯНДЕКС ЕДЕ (коричневая) -->
             <a 
               href="https://eda.yandex.ru/restaurant/chinch" 
               target="_blank" 
               rel="noopener noreferrer"
               class="yandex-order-btn"
             >
-              <span class="btn-icon">🍴</span>
-              ЗАКАЗАТЬ НА ЯНДЕКС ЕДЕ
+              <span class="btn-icon">🍽️</span>
+              Заказать на Яндекс Еде
             </a>
-            
-            <!-- Кнопка закрытия -->
-            <button class="close-btn" @click="closeModal">ЗАКРЫТЬ</button>
           </div>
         </div>
       </div>
@@ -626,7 +583,7 @@ export default {
 
 /* Основная навигация */
 .primary-navigation {
-  margin-bottom: 2.5rem;
+  margin-bottom: 2rem;
 }
 
 .nav-container {
@@ -688,40 +645,6 @@ export default {
   color: #f8f4ea;
 }
 
-.scroll-hint {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 0.5rem;
-  margin-top: 0.5rem;
-}
-
-.hint-text {
-  font-family: 'Cormorant Garamond', serif;
-  font-size: 0.9rem;
-  color: #8b6b4d;
-  opacity: 0.8;
-  font-style: italic;
-}
-
-.hint-dots {
-  display: flex;
-  gap: 0.5rem;
-}
-
-.hint-dot {
-  width: 6px;
-  height: 6px;
-  border-radius: 50%;
-  background: rgba(139, 107, 77, 0.3);
-  transition: all 0.3s ease;
-}
-
-.hint-dot.active {
-  background: #8b6b4d;
-  transform: scale(1.2);
-}
-
 /* Вторичная навигация */
 .secondary-navigation {
   margin-bottom: 2rem;
@@ -742,7 +665,7 @@ export default {
   backdrop-filter: blur(10px);
   max-width: 90%;
   margin: 0 auto;
-  box-shadow: 0 4px 12px rgba(42, 30, 20, 0.1); /* Добавил тень */
+  box-shadow: 0 4px 12px rgba(42, 30, 20, 0.1);
 }
 
 .nav-scroll-container::-webkit-scrollbar {
@@ -762,12 +685,12 @@ export default {
   white-space: nowrap;
   flex-shrink: 0;
   transition: all 0.3s ease;
-  box-shadow: 0 4px 8px rgba(42, 30, 20, 0.08); /* Темная тень */
+  box-shadow: 0 4px 8px rgba(42, 30, 20, 0.08);
 }
 
 .secondary-nav-btn:hover {
   transform: translateY(-2px);
-  box-shadow: 0 6px 12px rgba(42, 30, 20, 0.15); /* Усиленная тень */
+  box-shadow: 0 6px 12px rgba(42, 30, 20, 0.15);
 }
 
 .secondary-nav-btn.active {
@@ -775,7 +698,7 @@ export default {
   border-color: #8b6b4d;
   color: white;
   transform: translateY(-2px);
-  box-shadow: 0 6px 16px rgba(42, 30, 20, 0.25); /* Самая темная тень */
+  box-shadow: 0 6px 16px rgba(42, 30, 20, 0.25);
 }
 
 /* Категории */
@@ -824,33 +747,6 @@ export default {
   );
 }
 
-/* ИКОНКА ЗАКАЗАТЬ В КАРТОЧКАХ */
-.order-icon {
-  position: absolute;
-  top: 12px;
-  right: 12px;
-  width: 36px;
-  height: 36px;
-  background: linear-gradient(135deg, #D4AF37 0%, #FFD700 100%);
-  border-radius: 50%;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-size: 18px;
-  color: #000;
-  text-decoration: none;
-  z-index: 10;
-  transition: all 0.3s ease;
-  box-shadow: 0 4px 12px rgba(212, 175, 55, 0.4);
-  border: 1px solid rgba(255, 215, 0, 0.3);
-}
-
-.order-icon:hover {
-  transform: scale(1.15) rotate(10deg);
-  box-shadow: 0 6px 20px rgba(212, 175, 55, 0.6);
-  background: linear-gradient(135deg, #FFD700 0%, #FFA500 100%);
-}
-
 /* Карточки блюд */
 .items-container {
   display: grid;
@@ -860,7 +756,6 @@ export default {
 
 .dish-card {
   cursor: pointer;
-  position: relative; /* Для иконки заказа */
 }
 
 /* Некликабельные карточки */
@@ -901,13 +796,13 @@ export default {
   overflow: hidden;
   position: relative;
   /* ТЕМНАЯ ТЕНЬ - ОСНОВНОЕ ИЗМЕНЕНИЕ */
-  box-shadow: 0 6px 18px rgba(42, 30, 20, 0.25); /* Темная глубокая тень */
+  box-shadow: 0 6px 18px rgba(42, 30, 20, 0.25);
 }
 
 /* Еще более темная тень при наведении для кликабельных карточек */
 .dish-card-inner:hover {
-  transform: translateY(-6px); /* Увеличен подъем */
-  box-shadow: 0 12px 28px rgba(42, 30, 20, 0.35); /* Очень темная тень при наведении */
+  transform: translateY(-6px);
+  box-shadow: 0 12px 28px rgba(42, 30, 20, 0.35);
   border-color: #b08d57;
 }
 
@@ -916,7 +811,7 @@ export default {
   font-size: 1.2rem;
   color: #2a1e14;
   font-weight: 600;
-  margin: 0 0 0.5rem 0; /* Увеличили отступ */
+  margin: 0 0 0.5rem 0;
   text-align: center;
   width: 100%;
   overflow: hidden;
@@ -924,7 +819,7 @@ export default {
   display: -webkit-box;
   -webkit-line-clamp: 2;
   -webkit-box-orient: vertical;
-  min-height: 2.8em; /* Фиксированная высота для двух строк */
+  min-height: 2.8em;
 }
 
 /* Блок с ценой и объемом */
@@ -945,7 +840,7 @@ export default {
 .price-value {
   font-family: 'Playfair Display', serif;
   font-size: 1.1rem;
-  color: #d4af37; /* золотой цвет */
+  color: #d4af37;
   font-weight: 600;
   letter-spacing: 0.02em;
 }
@@ -960,21 +855,6 @@ export default {
   font-size: 0.9rem;
   color: #8b6b4d;
   font-weight: 500;
-}
-
-/* Опции */
-.dish-details {
-  margin-top: 0.1rem;
-  text-align: center;
-  width: 100%;
-}
-
-.options-info .options-text {
-  color: #8b6b4d;
-  font-family: 'EB Garamond', serif;
-  font-size: 0.9rem;
-  opacity: 0.7;
-  font-style: italic;
 }
 
 /* ============ ОСОБЫЕ СТИЛИ ДЛЯ ЯИЧНЫХ БЛЮД ============ */
@@ -1000,7 +880,6 @@ export default {
   padding: 1.5rem;
   transition: all 0.3s ease;
   cursor: default;
-  /* ТЕМНАЯ ТЕНЬ для блока добавок */
   box-shadow: 0 8px 24px rgba(42, 30, 20, 0.2);
 }
 
@@ -1035,7 +914,6 @@ export default {
   align-items: center;
   cursor: pointer;
   transition: all 0.2s ease;
-  /* ТЕМНАЯ ТЕНЬ для элементов добавок */
   box-shadow: 0 4px 10px rgba(42, 30, 20, 0.15);
 }
 
@@ -1043,7 +921,7 @@ export default {
   background: rgba(248, 244, 234, 0.7);
   border-color: #b08d57;
   transform: translateY(-2px);
-  box-shadow: 0 6px 14px rgba(42, 30, 20, 0.2); /* Усиленная тень при наведении */
+  box-shadow: 0 6px 14px rgba(42, 30, 20, 0.2);
 }
 
 .addon-name {
@@ -1063,7 +941,7 @@ export default {
 .addon-price {
   font-family: 'Playfair Display', serif;
   font-size: 0.9rem;
-  color: #d4af37; /* золотой цвет */
+  color: #d4af37;
   font-weight: 600;
 }
 
@@ -1298,7 +1176,7 @@ export default {
 .price-label {
   font-family: 'Playfair Display', serif;
   font-size: 1.5rem;
-  color: #d4af37; /* золотой цвет */
+  color: #d4af37;
   font-weight: 600;
   letter-spacing: 0.02em;
 }
@@ -1344,7 +1222,7 @@ export default {
 
 /* Опции */
 .dish-options {
-  margin-bottom: 2rem;
+  margin-bottom: 1rem;
 }
 
 .options-title {
@@ -1365,62 +1243,39 @@ export default {
   font-style: italic;
 }
 
-/* КНОПКА ЗАКАЗАТЬ В ЯНДЕКС ЕДЕ */
+/* КНОПКА ЗАКАЗАТЬ В ЯНДЕКС ЕДЕ (КОРИЧНЕВАЯ) */
 .yandex-order-btn {
   display: flex;
   align-items: center;
   justify-content: center;
-  gap: 0.8rem;
+  gap: 0.6rem;
   width: 100%;
-  padding: 1rem;
-  background: linear-gradient(135deg, #FFCC00 0%, #FF9900 100%);
-  color: #000;
+  padding: 0.8rem;
+  background: #8b6b4d;
+  color: #fff;
   border: none;
-  border-radius: 8px;
+  border-radius: 6px;
   font-family: 'EB Garamond', serif;
-  font-size: 1.1rem;
-  font-weight: 700;
+  font-size: 0.9rem;
+  font-weight: 600;
   cursor: pointer;
   transition: all 0.3s ease;
   text-decoration: none;
-  margin-bottom: 1rem;
-  box-shadow: 0 4px 12px rgba(255, 153, 0, 0.3);
-  border: 2px solid rgba(255, 204, 0, 0.5);
+  margin-top: 1.5rem;
+  box-shadow: 0 2px 8px rgba(139, 107, 77, 0.25);
+  border: 1px solid rgba(139, 107, 77, 0.3);
 }
 
 .yandex-order-btn:hover {
-  background: linear-gradient(135deg, #FF9900 0%, #FF6600 100%);
-  transform: translateY(-3px);
-  box-shadow: 0 8px 20px rgba(255, 153, 0, 0.4);
-  color: #000;
+  background: #7a5d40;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(139, 107, 77, 0.35);
+  color: #fff;
   text-decoration: none;
 }
 
 .btn-icon {
-  font-size: 1.3rem;
-}
-
-/* Кнопка закрытия */
-.close-btn {
-  width: 100%;
-  padding: 1rem;
-  background: linear-gradient(135deg, #2a1e14, #3a2a1c);
-  color: white;
-  border: none;
-  border-radius: 8px;
-  font-family: 'Cormorant Garamond', serif;
-  font-size: 1.1rem;
-  font-weight: 600;
-  cursor: pointer;
-  transition: all 0.3s ease;
-  letter-spacing: 0.05em;
-  margin-top: 1rem;
-}
-
-.close-btn:hover {
-  background: linear-gradient(135deg, #3a2a1c, #2a1e14);
-  transform: translateY(-2px);
-  box-shadow: 0 6px 16px rgba(42, 30, 20, 0.2);
+  font-size: 1rem;
 }
 
 /* Состояния */
@@ -1488,22 +1343,9 @@ export default {
     font-size: 0.9rem;
   }
   
-  .hint-text {
-    font-size: 0.8rem;
-  }
-  
-  /* Уменьшаем иконку заказа на мобильных */
-  .order-icon {
-    width: 32px;
-    height: 32px;
-    font-size: 16px;
-    top: 10px;
-    right: 10px;
-  }
-  
   /* УВЕЛИЧЕННЫЙ ОТСТУП НА МОБИЛЬНЫХ */
   .menu-top-padding {
-    height: 40px; /* УВЕЛИЧИЛ для мобильных */
+    height: 40px;
   }
   
   /* Адаптивность модального окна */
@@ -1538,9 +1380,8 @@ export default {
   
   /* Уменьшаем высоту карточек на мобильных */
   .dish-card-inner {
-    height: 140px; /* Сохраняем для цены */
+    height: 140px;
     padding: 1rem;
-    /* Уменьшаем тени на мобильных для лучшей производительности */
     box-shadow: 0 4px 12px rgba(42, 30, 20, 0.2);
   }
   
@@ -1566,7 +1407,6 @@ export default {
     font-size: 0.7rem;
   }
   
-  /* Уменьшаем тени для добавок на мобильных */
   .addons-card {
     box-shadow: 0 6px 16px rgba(42, 30, 20, 0.15);
   }
@@ -1581,13 +1421,13 @@ export default {
   
   /* Кнопка Яндекс Еды в модальном окне */
   .yandex-order-btn {
-    font-size: 1rem;
-    padding: 0.9rem;
-    margin-bottom: 0.8rem;
+    font-size: 0.85rem;
+    padding: 0.7rem;
+    margin-top: 1.2rem;
   }
   
   .btn-icon {
-    font-size: 1.1rem;
+    font-size: 0.9rem;
   }
 }
 
