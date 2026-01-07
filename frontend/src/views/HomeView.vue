@@ -40,13 +40,13 @@
     <!-- Особенности -->
     <div class="features-section">
       <div class="features-container">
-        <!-- Карточка 1 -->
+        <!-- Карточка 1 - С ФОТО ДЕСЕРТА -->
         <div class="feature-item">
           <div class="feature-image-container">
-            <div class="feature-image-placeholder"></div>
+            <div class="feature-image-photo-desert"></div>
           </div>
           <p class="feature-description">
-            Отборные продукты от проверенных поставщиков со всего мира
+            Сладкие шедевры, дарящие настоящее гастрономическое удовольствие
           </p>
         </div>
         
@@ -260,23 +260,23 @@ export default {
   box-shadow: 0 8px 28px rgba(139, 107, 77, 0.2);
 }
 
-.feature-image-placeholder {
+/* ФОТО ДЕСЕРТА - НОВЫЙ СТИЛЬ */
+.feature-image-photo-desert {
   height: 100%;
-  background: linear-gradient(135deg, #2a1e14, #3a2a1c);
-  display: flex;
-  align-items: center;
-  justify-content: center;
+  background: url('/images/desert.jpeg') center/cover no-repeat;
+  background-size: cover;
+  background-position: center;
   position: relative;
 }
 
-.feature-image-placeholder::after {
+.feature-image-photo-desert::after {
   content: '';
   position: absolute;
   top: 0;
   left: 0;
   right: 0;
   bottom: 0;
-  background: linear-gradient(45deg, transparent 60%, rgba(176, 141, 87, 0.1) 100%);
+  background: linear-gradient(45deg, rgba(42, 30, 20, 0.1), rgba(42, 30, 20, 0.05));
 }
 
 /* Фото блюда */
