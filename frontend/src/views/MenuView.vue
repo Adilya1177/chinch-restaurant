@@ -27,7 +27,6 @@
             :class="['primary-nav-btn', { active: selectedMainCategory === category.value }]"
           >
             <span class="btn-label">{{ category.label }}</span>
-            <span class="btn-counter">{{ category.count }}</span>
           </button>
         </div>
       </nav>
@@ -281,9 +280,9 @@ export default {
   computed: {
     mainCategories() {
       return [
-        { value: 'all', label: 'ВСЁ МЕНЮ', count: this.menuItems.length },
-        { value: 'Еда', label: 'БЛЮДА', count: this.menuItems.filter(item => item.mainCategory === 'Еда').length },
-        { value: 'Напитки', label: 'НАПИТКИ', count: this.menuItems.filter(item => item.mainCategory === 'Напитки').length },
+        { value: 'all', label: 'МЕНЮ', count: this.menuItems.length },
+        // { value: 'Еда', label: 'БЛЮДА', count: this.menuItems.filter(item => item.mainCategory === 'Еда').length },
+        // { value: 'Напитки', label: 'НАПИТКИ', count: this.menuItems.filter(item => item.mainCategory === 'Напитки').length },
       ];
     },
     
@@ -616,7 +615,7 @@ export default {
   font-weight: 600;
   display: flex;
   align-items: center;
-  gap: 0.8rem;
+  justify-content: center; /* ДОБАВЛЯЕМ центрирование */
   transition: all 0.3s ease;
   backdrop-filter: blur(10px);
   box-shadow: 0 4px 12px rgba(42, 30, 20, 0.15); /* Темная тень */
@@ -639,20 +638,6 @@ export default {
 .btn-label {
   font-family: 'EB Garamond', serif;
   letter-spacing: 0.05em;
-}
-
-.btn-counter {
-  background: rgba(255, 255, 255, 0.9);
-  color: #8b6b4d;
-  border-radius: 999px;
-  padding: 0.2rem 0.6rem;
-  font-size: 0.85rem;
-  font-weight: 500;
-}
-
-.primary-nav-btn.active .btn-counter {
-  background: rgba(248, 244, 234, 0.2);
-  color: #f8f4ea;
 }
 
 /* Вторичная навигация */
