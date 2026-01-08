@@ -56,7 +56,13 @@
         <div class="feature-item">
           <div class="feature-image-container">
             <!-- Карусель с 4 фотографиями -->
-            <div class="carousel">
+            <div 
+              class="carousel"
+              @touchstart="handleTouchStart"
+              @touchmove="handleTouchMove"
+              @touchend="handleTouchEnd"
+              ref="carouselContainer"
+            >
               <div 
                 class="carousel-slides"
                 :style="{ transform: `translateX(-${currentSlide * 100}%)` }"
@@ -144,7 +150,10 @@ export default {
   data() {
     return {
       currentSlide: 0,
-      carouselInterval: null
+      carouselInterval: null,
+      touchStartX: 0,
+      touchEndX: 0,
+      isDragging: false
     }
   },
   
@@ -174,6 +183,48 @@ export default {
       this.stopCarousel();
       this.currentSlide = index;
       this.startCarousel();
+    },
+    
+    handleTouchStart(e) {
+      // Останавливаем автоматическую прокрутку при касании
+      this.stopCarousel();
+      this.touchStartX = e.touches[0].clientX;
+      this.isDragging = true;
+    },
+    
+    handleTouchMove(e) {
+      if (!this.isDragging) return;
+      e.preventDefault(); // Предотвращаем скролл страницы
+    },
+    
+    handleTouchEnd(e) {
+      if (!this.isDragging) return;
+      
+      this.touchEndX = e.changedTouches[0].clientX;
+      this.handleSwipe();
+      
+      // Перезапускаем автоматическую прокрутку
+      setTimeout(() => {
+        this.startCarousel();
+      }, 100);
+      
+      this.isDragging = false;
+    },
+    
+    handleSwipe() {
+      const swipeThreshold = 50; // Минимальная дистанция свайпа в пикселях
+      const diff = this.touchStartX - this.touchEndX;
+      
+      // Свайп влево (следующее фото)
+      if (Math.abs(diff) > swipeThreshold) {
+        if (diff > 0) {
+          // Свайп влево - следующее фото
+          this.currentSlide = (this.currentSlide + 1) % 4;
+        } else {
+          // Свайп вправо - предыдущее фото
+          this.currentSlide = (this.currentSlide - 1 + 4) % 4;
+        }
+      }
     }
   }
 }
@@ -410,6 +461,8 @@ export default {
   position: relative;
   overflow: hidden;
   border-radius: 12px;
+  /* Добавляем touch-action для предотвращения конфликтов со скроллом */
+  touch-action: pan-y pinch-zoom;
 }
 
 .carousel-slides {
@@ -431,6 +484,9 @@ export default {
   object-fit: cover; /* ТОЧНО ТАК ЖЕ КАК У feature-image */
   object-position: center; /* ТОЧНО ТАК ЖЕ КАК У feature-image */
   display: block;
+  /* Предотвращаем drag изображений */
+  user-select: none;
+  -webkit-user-drag: none;
 }
 
 /* Индикаторы (точки внизу) */
@@ -454,6 +510,7 @@ export default {
   cursor: pointer;
   padding: 0;
   transition: all 0.3s ease;
+  touch-action: manipulation; /* Улучшаем тач-взаимодействие */
 }
 
 .carousel-indicator:hover {
