@@ -17,6 +17,17 @@
         <p class="restaurant-description">Вкус, который запомнится</p>
       </header>
 
+      <!-- ОКНО-ПОДСКАЗКА (полупрозрачное) -->
+      <div v-if="showHelp" class="help-overlay" @click.self="closeHelp">
+        <div class="help-modal">
+          <div class="help-content">
+            <!-- УБРАЛИ ЗАГОЛОВОК "Как пользоваться меню" -->
+            <p class="help-text">Нажмите на любое блюдо, чтобы увидеть фото и подробный состав</p>
+            <button class="help-ok-btn" @click="closeHelp">Понятно</button>
+          </div>
+        </div>
+      </div>
+
       <!-- Основная навигация -->
       <nav class="primary-navigation">
         <div class="nav-container">
@@ -274,7 +285,10 @@ export default {
       showModal: false,
       selectedDish: null,
       selectedDishDetails: null,
-      currentPhotoIndex: 0
+      currentPhotoIndex: 0,
+      
+      // Флаг показа окна-подсказки (ВСЕГДА true при заходе)
+      showHelp: false
     };
   },
   computed: {
@@ -525,7 +539,7 @@ export default {
           </text>
         </svg>
       `)}`;
-      },
+    },
     
     // Получить основные яичные блюда (первые 3)
     getEggMainDishes(items) {
@@ -535,10 +549,24 @@ export default {
     // Получить добавки к яичным блюдам
     getEggAddons(items) {
       return items.filter(item => item.isAddon);
+    },
+    
+    // Закрыть окно-подсказку
+    closeHelp() {
+      this.showHelp = false;
+    },
+    
+    // Показать окно-подсказку (ВСЕГДА при заходе)
+    showHelpWindow() {
+      // Ждем немного, чтобы все загрузилось, показываем подсказку
+      setTimeout(() => {
+        this.showHelp = true;
+      }, 500);
     }
   },
   mounted() {
     this.fetchData();
+    this.showHelpWindow(); // ВСЕГДА показываем окно-подсказку
   }
 };
 </script>
@@ -588,6 +616,87 @@ export default {
   color: #8b6b4d;
   font-style: italic;
   margin: 0;
+}
+
+/* ОКНО-ПОДСКАЗКА (полупрозрачное) */
+.help-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(42, 30, 20, 0.75); /* Более прозрачный темный фон */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 2000;
+  animation: fadeInHelp 0.3s ease;
+  padding: 1rem;
+}
+
+@keyframes fadeInHelp {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+.help-modal {
+  background: rgba(248, 244, 234, 0.85); /* ПОЛУПРОЗРАЧНЫЙ бежевый фон */
+  backdrop-filter: blur(15px); /* Усиленный эффект матового стекла */
+  padding: 2.5rem; /* УВЕЛИЧИЛИ padding */
+  border-radius: 20px; /* Более круглые углы */
+  max-width: 500px; /* УВЕЛИЧИЛИ ширину */
+  width: 90%;
+  position: relative;
+  box-shadow: 0 25px 70px rgba(0, 0, 0, 0.4); /* Усиленная тень */
+  animation: slideUpHelp 0.4s ease;
+  border: 1px solid rgba(212, 180, 131, 0.5); /* Полупрозрачная золотая рамка */
+}
+
+@keyframes slideUpHelp {
+  from { 
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  to { 
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.help-content {
+  text-align: center;
+}
+
+.help-text {
+  color: #2a1e14;
+  margin-bottom: 2rem; /* УВЕЛИЧИЛИ отступ */
+  font-family: 'EB Garamond', serif;
+  font-size: 1.8rem; /* УВЕЛИЧИЛИ шрифт: было 1.1rem */
+  line-height: 1.5;
+  font-weight: 500;
+  letter-spacing: 0.02em;
+}
+
+.help-ok-btn {
+  display: inline-block;
+  padding: 1rem 3rem; /* УВЕЛИЧИЛИ padding */
+  background: #8b6b4d;
+  color: white;
+  border: none;
+  border-radius: 8px; /* Более круглые углы */
+  font-family: 'EB Garamond', serif;
+  font-size: 1.2rem; /* УВЕЛИЧИЛИ шрифт: было 1rem */
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  box-shadow: 0 6px 20px rgba(139, 107, 77, 0.3);
+  letter-spacing: 0.03em;
+}
+
+.help-ok-btn:hover {
+  background: #7a5d40;
+  transform: translateY(-3px); /* Усиленный эффект подъема */
+  box-shadow: 0 8px 25px rgba(139, 107, 77, 0.4);
 }
 
 /* Основная навигация */
@@ -1457,6 +1566,22 @@ export default {
   
   .btn-icon {
     font-size: 0.9rem;
+  }
+  
+  /* Окно-подсказка на мобильных */
+  .help-modal {
+    padding: 1.5rem;
+    background: rgba(248, 244, 234, 0.95); /* Немного менее прозрачный на мобильных */
+  }
+  
+  .help-text {
+    font-size: 1.4rem; /* Меньше на мобильных, но все еще большой */
+    margin-bottom: 1.5rem;
+  }
+  
+  .help-ok-btn {
+    padding: 0.8rem 2rem;
+    font-size: 1.1rem;
   }
 }
 
