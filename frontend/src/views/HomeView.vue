@@ -52,15 +52,65 @@
           </p>
         </div>
         
-        <!-- Карточка 2 -->
+        <!-- Карточка 2 - С КАРУСЕЛЬЮ -->
         <div class="feature-item">
           <div class="feature-image-container">
-            <img 
-              src="/images/blyda.jpeg" 
-              alt="Уникальные блюда"
-              class="feature-image"
-            >
-            <div class="feature-overlay"></div>
+            <!-- Карусель с 4 фотографиями -->
+            <div class="carousel">
+              <div 
+                class="carousel-slides"
+                :style="{ transform: `translateX(-${currentSlide * 100}%)` }"
+              >
+                <!-- Слайд 1 -->
+                <div class="carousel-slide">
+                  <img 
+                    src="/images/carousel-1.jpg" 
+                    alt="Блюдо от шеф-повара 1"
+                    class="carousel-image"
+                  >
+                  <div class="feature-overlay"></div>
+                </div>
+                <!-- Слайд 2 -->
+                <div class="carousel-slide">
+                  <img 
+                    src="/images/carousel-2.jpg" 
+                    alt="Блюдо от шеф-повара 2"
+                    class="carousel-image"
+                  >
+                  <div class="feature-overlay"></div>
+                </div>
+                <!-- Слайд 3 -->
+                <div class="carousel-slide">
+                  <img 
+                    src="/images/carousel-3.jpg" 
+                    alt="Блюдо от шеф-повара 3"
+                    class="carousel-image"
+                  >
+                  <div class="feature-overlay"></div>
+                </div>
+                <!-- Слайд 4 -->
+                <div class="carousel-slide">
+                  <img 
+                    src="/images/carousel-4.jpg" 
+                    alt="Блюдо от шеф-повара 4"
+                    class="carousel-image"
+                  >
+                  <div class="feature-overlay"></div>
+                </div>
+              </div>
+              
+              <!-- Индикаторы (точки) -->
+              <div class="carousel-indicators">
+                <button
+                  v-for="index in 4"
+                  :key="index"
+                  class="carousel-indicator"
+                  :class="{ active: currentSlide === (index - 1) }"
+                  @click="goToSlide(index - 1)"
+                  :aria-label="`Перейти к слайду ${index}`"
+                ></button>
+              </div>
+            </div>
           </div>
           <p class="feature-description">
             Уникальные блюда, созданные нашим шеф-поваром с любовью к деталям
@@ -89,7 +139,43 @@
 
 <script>
 export default {
-  name: 'HomeView'
+  name: 'HomeView',
+  
+  data() {
+    return {
+      currentSlide: 0,
+      carouselInterval: null
+    }
+  },
+  
+  mounted() {
+    this.startCarousel();
+  },
+  
+  beforeUnmount() {
+    this.stopCarousel();
+  },
+  
+  methods: {
+    startCarousel() {
+      this.carouselInterval = setInterval(() => {
+        this.currentSlide = (this.currentSlide + 1) % 4;
+      }, 3000);
+    },
+    
+    stopCarousel() {
+      if (this.carouselInterval) {
+        clearInterval(this.carouselInterval);
+        this.carouselInterval = null;
+      }
+    },
+    
+    goToSlide(index) {
+      this.stopCarousel();
+      this.currentSlide = index;
+      this.startCarousel();
+    }
+  }
 }
 </script>
 
@@ -147,22 +233,22 @@ export default {
   margin: 1rem 0;
 }
 
-/* УМЕНЬШАЕМ ТЕНЬ У ЛОГОТИПА */
+/* УВЕЛИЧИВАЕМ ТЕНЬ У ЛОГОТИПА */
 .main-logo {
   height: 120px;
   width: auto;
   object-fit: contain;
   max-width: 400px;
-  /* ЗНАЧИТЕЛЬНО УМЕНЬШАЕМ тень */
-  filter: drop-shadow(0 1px 2px rgba(0, 0, 0, 0.3))
-          drop-shadow(0 2px 4px rgba(0, 0, 0, 0.25))
-          drop-shadow(0 3px 6px rgba(0, 0, 0, 0.2))
-          drop-shadow(0 4px 8px rgba(0, 0, 0, 0.15))
+  /* ЗНАЧИТЕЛЬНО УВЕЛИЧИВАЕМ тень (вместо 0.3-0.15 делаем 0.4-0.25) */
+  filter: drop-shadow(0 3px 8px rgba(0, 0, 0, 0.4))
+          drop-shadow(0 6px 12px rgba(0, 0, 0, 0.35))
+          drop-shadow(0 8px 16px rgba(0, 0, 0, 0.3))
+          drop-shadow(0 10px 20px rgba(0, 0, 0, 0.25))
           brightness(0.95) sepia(0.1) saturate(1.05);
   opacity: 0.98;
 }
 
-/* УМЕНЬШАЕМ ТЕНЬ У ТЕКСТА */
+/* УВЕЛИЧИВАЕМ ТЕНЬ У ТЕКСТА */
 .hero-subtitle {
   font-family: 'Cormorant Garamond', serif;
   font-size: 1.6rem;
@@ -170,12 +256,12 @@ export default {
   letter-spacing: 0.15em;
   margin: 0.5rem 0 1rem;
   font-weight: 700;
-  /* ЗНАЧИТЕЛЬНО УМЕНЬШАЕМ тень */
+  /* ЗНАЧИТЕЛЬНО УВЕЛИЧИВАЕМ тень (вместо 0.4-0.25 делаем 0.5-0.35) */
   text-shadow: 
-    0 1px 2px rgba(0, 0, 0, 0.4),
-    0 2px 4px rgba(0, 0, 0, 0.35),
-    0 3px 6px rgba(0, 0, 0, 0.3),
-    0 4px 8px rgba(0, 0, 0, 0.25);
+    0 2px 6px rgba(0, 0, 0, 0.5),
+    0 4px 8px rgba(0, 0, 0, 0.45),
+    0 6px 12px rgba(0, 0, 0, 0.4),
+    0 8px 16px rgba(0, 0, 0, 0.35);
 }
 
 /* Призыв к действию */
@@ -273,7 +359,7 @@ export default {
 }
 
 /* =========================================================== */
-/* ИСПРАВЛЕНИЕ: Делаем контейнер квадратным на всех устройствах */
+/* ОБЩИЕ СТИЛИ ДЛЯ КОНТЕЙНЕРА С ИЗОБРАЖЕНИЯМИ                 */
 /* =========================================================== */
 .feature-image-container {
   width: 100%;
@@ -314,6 +400,72 @@ export default {
   pointer-events: none;
 }
 
+/* =========================================================== */
+/* СТИЛИ ДЛЯ КАРУСЕЛИ (только для второй карточки)           */
+/* ДЕЛАЕМ ТОЧНО ТАК ЖЕ КАК В ДРУГИХ КАРТОЧКАХ               */
+/* =========================================================== */
+.carousel {
+  width: 100%;
+  height: 100%;
+  position: relative;
+  overflow: hidden;
+  border-radius: 12px;
+}
+
+.carousel-slides {
+  display: flex;
+  height: 100%;
+  transition: transform 0.5s ease-in-out;
+  will-change: transform;
+}
+
+.carousel-slide {
+  flex: 0 0 100%;
+  position: relative;
+  height: 100%;
+}
+
+.carousel-image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover; /* ТОЧНО ТАК ЖЕ КАК У feature-image */
+  object-position: center; /* ТОЧНО ТАК ЖЕ КАК У feature-image */
+  display: block;
+}
+
+/* Индикаторы (точки внизу) */
+.carousel-indicators {
+  position: absolute;
+  bottom: 15px;
+  left: 0;
+  right: 0;
+  display: flex;
+  justify-content: center;
+  gap: 8px;
+  z-index: 10;
+}
+
+.carousel-indicator {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  border: none;
+  background-color: rgba(255, 255, 255, 0.5);
+  cursor: pointer;
+  padding: 0;
+  transition: all 0.3s ease;
+}
+
+.carousel-indicator:hover {
+  background-color: rgba(255, 255, 255, 0.7);
+  transform: scale(1.2);
+}
+
+.carousel-indicator.active {
+  background-color: #b08d57;
+  transform: scale(1.2);
+}
+
 .feature-description {
   font-family: 'EB Garamond', serif;
   color: #5d4a30;
@@ -339,26 +491,29 @@ export default {
 }
 
 @media (max-width: 768px) {
-  /* УМЕНЬШАЕМ ТЕНЬ НА МОБИЛЬНЫХ */
+  /* УВЕЛИЧИВАЕМ ТЕНЬ НА МОБИЛЬНЫХ */
   .main-logo {
     height: 90px;
     max-width: 320px;
-    filter: drop-shadow(0 1px 1px rgba(0, 0, 0, 0.2))
-            drop-shadow(0 2px 2px rgba(0, 0, 0, 0.18))
-            drop-shadow(0 3px 3px rgba(0, 0, 0, 0.16))
-            drop-shadow(0 4px 4px rgba(0, 0, 0, 0.14))
+    /* УВЕЛИЧИВАЕМ тень на мобильных (вместо 0.2-0.14 делаем 0.35-0.2) */
+    filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.35))
+            drop-shadow(0 4px 6px rgba(0, 0, 0, 0.3))
+            drop-shadow(0 6px 8px rgba(0, 0, 0, 0.25))
+            drop-shadow(0 8px 10px rgba(0, 0, 0, 0.2))
             brightness(0.95) sepia(0.1) saturate(1.05);
   }
   
-  /* УМЕНЬШАЕМ ТЕНЬ ТЕКСТА НА МОБИЛЬНЫХ */
+  /* УВЕЛИЧИВАЕМ ТЕНЬ ТЕКСТА НА МОБИЛЬНЫХ */
   .hero-subtitle {
     font-size: 1.3rem;
     font-weight: 700;
     color: #f8f4ea;
+    /* УВЕЛИЧИВАЕМ тень текста (вместо 0.3-0.2 делаем 0.45-0.3) */
     text-shadow: 
-      0 1px 1px rgba(0, 0, 0, 0.3),
-      0 2px 2px rgba(0, 0, 0, 0.25),
-      0 3px 3px rgba(0, 0, 0, 0.2);
+      0 1px 3px rgba(0, 0, 0, 0.45),
+      0 2px 4px rgba(0, 0, 0, 0.4),
+      0 3px 6px rgba(0, 0, 0, 0.35),
+      0 4px 8px rgba(0, 0, 0, 0.3);
   }
   
   .hero-content {
@@ -410,17 +565,29 @@ export default {
   .feature-image-container {
     aspect-ratio: 4 / 3; /* Такое же соотношение как на ПК */
   }
+  
+  /* Уменьшаем точки на мобильных */
+  .carousel-indicator {
+    width: 8px;
+    height: 8px;
+  }
+  
+  .carousel-indicators {
+    bottom: 10px;
+    gap: 6px;
+  }
 }
 
 @media (max-width: 480px) {
-  /* УМЕНЬШАЕМ ТЕНЬ НА МОБИЛЬНЫХ */
+  /* УВЕЛИЧИВАЕМ ТЕНЬ НА МОБИЛЬНЫХ */
   .main-logo {
     height: 80px;
     max-width: 280px;
-    filter: drop-shadow(0 1px 1px rgba(0, 0, 0, 0.15))
-            drop-shadow(0 1.5px 1.5px rgba(0, 0, 0, 0.13))
-            drop-shadow(0 2px 2px rgba(0, 0, 0, 0.11))
-            drop-shadow(0 2.5px 2.5px rgba(0, 0, 0, 0.09))
+    /* УВЕЛИЧИВАЕМ тень (вместо 0.15-0.09 делаем 0.3-0.15) */
+    filter: drop-shadow(0 1px 3px rgba(0, 0, 0, 0.3))
+            drop-shadow(0 2px 4px rgba(0, 0, 0, 0.25))
+            drop-shadow(0 3px 5px rgba(0, 0, 0, 0.2))
+            drop-shadow(0 4px 6px rgba(0, 0, 0, 0.15))
             brightness(0.95) sepia(0.1) saturate(1.05);
   }
   
@@ -428,15 +595,17 @@ export default {
     padding: 2rem 1rem;
   }
   
-  /* УМЕНЬШАЕМ ТЕНЬ ТЕКСТА НА МОБИЛЬНЫХ */
+  /* УВЕЛИЧИВАЕМ ТЕНЬ ТЕКСТА НА МОБИЛЬНЫХ */
   .hero-subtitle {
     font-size: 1.2rem;
     font-weight: 700;
     color: #f8f4ea;
+    /* УВЕЛИЧИВАЕМ тень текста (вместо 0.25-0.15 делаем 0.35-0.2) */
     text-shadow: 
-      0 0.5px 1px rgba(0, 0, 0, 0.25),
-      0 1px 1.5px rgba(0, 0, 0, 0.2),
-      0 1.5px 2px rgba(0, 0, 0, 0.15);
+      0 1px 2px rgba(0, 0, 0, 0.35),
+      0 2px 3px rgba(0, 0, 0, 0.3),
+      0 3px 4px rgba(0, 0, 0, 0.25),
+      0 4px 5px rgba(0, 0, 0, 0.2);
   }
   
   .hero-content {
@@ -478,6 +647,17 @@ export default {
   
   .feature-description {
     font-size: 1.1rem;
+  }
+  
+  /* Еще меньше точки на очень маленьких экранах */
+  .carousel-indicator {
+    width: 6px;
+    height: 6px;
+  }
+  
+  .carousel-indicators {
+    bottom: 8px;
+    gap: 5px;
   }
 }
 
