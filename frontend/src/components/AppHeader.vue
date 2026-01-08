@@ -56,7 +56,8 @@ export default {
       navItems: [
         { path: '/', label: 'ГЛАВНАЯ', icon: '⌂' },
         { path: '/menu', label: 'МЕНЮ', icon: '☰' },
-        { path: '/reservation', label: 'БРОНИРОВАНИЕ', icon: '✎' }
+        { path: '/reservation', label: 'БРОНИРОВАНИЕ', icon: '✎' },
+        { path: '/delivery', label: 'ДОСТАВКА', icon: '⏷' }
       ],
       isHidden: false,
       lastScrollTop: 0
@@ -90,12 +91,12 @@ export default {
   background: linear-gradient(135deg, #f9f6f0 0%, #f2eee5 100%);
   border-bottom: 1px solid rgba(212, 180, 131, 0.3);
   padding: 0 2rem;
-  position: fixed; /* Закрепляем на месте */
+  position: fixed;
   top: 0;
   left: 0;
   width: 100%;
   z-index: 1000;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.12); /* Темная тень */
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.12);
   transition: transform 0.4s ease-in-out;
   transform: translateY(0);
 }
@@ -128,7 +129,7 @@ export default {
 .header-top-line {
   height: 1px;
   background: linear-gradient(90deg, transparent, #b08d57, transparent);
-  margin-bottom: 0.6rem; /* Еще уменьшил отступ на 0.2rem */
+  margin-bottom: 0.6rem;
 }
 
 .header-container {
@@ -137,17 +138,17 @@ export default {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding: 1.1rem 0; /* Еще уменьшил шапку на 0.2rem (было 1.3rem) */
-  height: 120px; /* Еще уменьшил высоту шапки на 20px (было 140px) */
+  padding: 1.1rem 0;
+  height: 120px;
 }
 
-/* Логотип - ПОДНИМАЕМ ЕЩЕ ВЫШЕ */
+/* Логотип */
 .logo-section {
   flex-shrink: 0;
   height: 100%;
   display: flex;
   align-items: center;
-  margin-top: -15px; /* ПОДНИМАЕМ логотип ЕЩЕ ВЫШЕ на 5px (было -10px) */
+  margin-top: -15px;
 }
 
 .logo-link {
@@ -170,34 +171,36 @@ export default {
   height: 100%;
   padding: 0;
   margin: 0;
-  max-height: 130px; /* Еще уменьшил максимальную высоту */
+  max-height: 130px;
 }
 
 .header-logo {
-  height: 130px; /* Еще уменьшил логотип на 10px (было 140px) - поднимаем фото выше */
+  height: 130px;
   width: auto;
   object-fit: contain;
   max-width: 350px;
   min-height: 130px;
 }
 
-/* Навигация - ПОДНИМАЕМ кнопки ЕЩЕ ВЫШЕ */
+/* НАВИГАЦИЯ - ПК ВЕРСИЯ (не трогаем) */
 .main-navigation {
   flex: 1;
   display: flex;
   justify-content: center;
   align-items: center;
   height: 100%;
-  margin-top: -15px; /* ПОДНИМАЕМ кнопки ЕЩЕ ВЫШЕ на 5px (было -10px) */
+  margin-top: -15px;
 }
 
 .nav-items {
   display: flex;
-  gap: 3rem;
-  padding: 0 2rem;
-  width: 100%;
   justify-content: center;
   align-items: center;
+  width: 100%;
+  max-width: 600px;
+  margin: 0 auto;
+  padding: 0 1rem;
+  gap: 2.5rem; /* ПК расстояние - оставляем как есть */
 }
 
 .nav-item {
@@ -207,14 +210,16 @@ export default {
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 0.4rem;
-  padding: 0.5rem 0;
+  justify-content: center;
+  padding: 0.5rem 0.8rem;
   transition: all 0.3s ease;
   font-family: 'Cormorant Garamond', serif;
   font-weight: 500;
   letter-spacing: 0.1em;
   font-size: 1.1rem;
-  flex: 0 0 auto;
+  flex: 0 1 auto;
+  min-width: 0;
+  text-align: center;
 }
 
 .nav-item:hover {
@@ -234,6 +239,13 @@ export default {
   font-size: 1.2rem;
   opacity: 0.8;
   margin-bottom: 0.2rem;
+  color: #8b6b4d;
+  line-height: 1;
+  display: block;
+}
+
+.nav-item-active .nav-icon {
+  color: #2a1e14;
 }
 
 .nav-label {
@@ -241,13 +253,19 @@ export default {
   letter-spacing: 0.15em;
   text-align: center;
   white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  max-width: 100%;
+  line-height: 1.2;
+  display: block;
 }
 
 .nav-underline {
   position: absolute;
   bottom: -4px;
-  left: 0;
-  width: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 60%;
   height: 2px;
   background: linear-gradient(90deg, #b08d57, #8b6b4d);
   transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
@@ -255,11 +273,14 @@ export default {
 }
 
 .nav-item:hover .nav-underline {
-  width: 100%;
   opacity: 0.5;
 }
 
-/* Декоративный элемент - ПОДНИМАЕМ ЕЩЕ ВЫШЕ */
+.nav-item-active .nav-underline {
+  opacity: 1;
+}
+
+/* Декоративный элемент */
 .header-ornament {
   display: flex;
   align-items: center;
@@ -267,7 +288,7 @@ export default {
   flex-shrink: 0;
   height: 100%;
   align-items: center;
-  margin-top: -15px; /* ПОДНИМАЕМ декоративный элемент ЕЩЕ ВЫШЕ на 5px (было -10px) */
+  margin-top: -15px;
 }
 
 .ornament-dot {
@@ -284,12 +305,12 @@ export default {
   background: linear-gradient(90deg, #8b6b4d, transparent);
 }
 
-/* Адаптивность */
+/* ========================================= */
+/* ТОЛЬКО МОБИЛЬНАЯ ВЕРСИЯ - ДЕЛАЕМ БЛИЖЕ   */
+/* ========================================= */
+
+/* Планшет (992px и меньше) - НЕ МЕНЯЕМ */
 @media (max-width: 992px) {
-  .nav-items {
-    gap: 2rem;
-  }
-  
   .header-logo {
     height: 110px;
     max-width: 300px;
@@ -317,26 +338,36 @@ export default {
   }
 }
 
+/* Мобильные (768px и меньше) - ДЕЛАЕМ БЛИЖЕ */
 @media (max-width: 768px) {
   .app-header {
-    padding: 0 0.8rem;
+    padding: 0 0.5rem;
   }
   
   .header-container {
     flex-direction: column;
-    gap: 0 !important;
-    padding: 0.5rem 0 !important; /* ЕЩЕ УМЕНЬШИЛ (было 0.7rem) */
+    padding: 0.4rem 0 !important;
     height: auto;
-    min-height: 145px !important; /* ЕЩЕ УМЕНЬШИЛ (было 160px) */
+    min-height: 140px !important;
+    gap: 0.3rem !important;
   }
   
+  /* МЕНЯЕМ ТОЛЬКО ЭТО - ДЕЛАЕМ БЛИЖЕ */
   .nav-items {
-    gap: 1rem;
-    padding: 0;
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 0.2rem !important; /* БЫЛО: 0.5rem, СТАЛО: 0.2rem - НАМНОГО БЛИЖЕ! */
     width: 100%;
-    justify-content: space-around;
-    align-items: center;
-    margin-top: -5px;
+    max-width: 100%;
+    padding: 0;
+    margin: 0 auto;
+  }
+  
+  .nav-item {
+    padding: 0.25rem 0.05rem !important; /* Уменьшили padding для компактности */
+    width: 100%;
+    min-height: 45px;
+    margin: 0;
   }
   
   .header-ornament {
@@ -344,18 +375,19 @@ export default {
   }
   
   .header-logo {
-    height: 160px !important; /* ОГРОМНЫЙ ЛОГОТИП (не меняем) */
-    max-width: 350px !important;
-    min-height: 160px !important;
-    margin-top: -25px !important; /* ЧУТЬ ПОДНЯЛ ВЫШЕ */
-    margin-bottom: -15px !important; /* ЧУТЬ УВЕЛИЧИЛ ОТРИЦАТЕЛЬНЫЙ ОТСТУП */
+    height: 150px !important;
+    max-width: 320px !important;
+    min-height: 150px !important;
+    margin: -20px auto -10px auto !important;
   }
   
   .logo-container {
-    max-height: 165px;
+    max-height: 155px;
     height: auto;
     padding: 0;
-    margin: 0;
+    margin: 0 auto;
+    display: flex;
+    justify-content: center;
   }
   
   .header-bottom-shadow {
@@ -368,128 +400,52 @@ export default {
     height: 0.5px;
   }
   
-  .nav-item {
-    padding: 0.4rem 0 !important; /* ЧУТЬ УМЕНЬШИЛ */
-    gap: 0.1rem !important;
-    flex: 1;
-    max-width: 110px;
-    min-width: 85px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-  }
-  
   .logo-section,
   .logo-link {
     height: auto;
     margin-top: 0;
+    width: 100%;
+    justify-content: center;
   }
   
   .main-navigation {
     margin-top: 0 !important;
-  }
-  
-  .nav-icon {
-    font-size: 1.2rem !important;
-    margin-bottom: 0.1rem !important;
-  }
-  
-  .nav-label {
-    font-size: 0.85rem !important;
-  }
-
-  .nav-item:nth-child(2) {
-    margin-right: 5px; /* Отступ справа для МЕНЮ */
-  }
-  
-  .nav-item:nth-child(3) {
-    margin-left: 5px; /* Отступ слева для БРОНИРОВАНИЯ */
-  }
-}
-
-@media (max-width: 480px) {
-  .app-header {
-    padding: 0 0.5rem;
-  }
-  
-  .nav-items {
-    gap: 0.8rem;
-    justify-content: space-between;
-    margin-top: 0;
-  }
-  
-  .header-logo {
-    height: 150px !important; /* ОГРОМНЫЙ ЛОГОТИП (не меняем) */
-    max-width: 320px !important;
-    min-height: 150px !important;
-    margin-top: -20px !important; /* ЧУТЬ ПОДНЯЛ ВЫШЕ */
-    margin-bottom: -10px !important; /* ЧУТЬ УВЕЛИЧИЛ ОТРИЦАТЕЛЬНЫЙ ОТСТУП */
-  }
-  
-  .logo-container {
-    max-height: 155px;
-  }
-  
-  .header-bottom-shadow {
-    bottom: -2px;
-    height: 2px;
-  }
-  
-  .header-container {
-    padding: 0.4rem 0 !important; /* ЕЩЕ УМЕНЬШИЛ (было 0.6rem) */
-    min-height: 135px !important; /* ЕЩЕ УМЕНЬШИЛ (было 150px) */
-    gap: 0 !important;
-  }
-  
-  .nav-item {
-    padding: 0.3rem 0 !important; /* ЧУТЬ УМЕНЬШИЛ */
-    min-width: 75px;
-    flex: 1;
-  }
-  
-  .header-top-line {
-    margin-bottom: 0 !important;
-  }
-  
-  .main-navigation {
-    margin-top: 0 !important;
+    width: 100%;
   }
   
   .nav-icon {
     font-size: 1.1rem !important;
+    margin-bottom: 0.05rem !important; /* Уменьшили отступ под иконкой */
   }
   
   .nav-label {
-    font-size: 0.8rem !important;
-  }
-
-  .nav-item:nth-child(2) {
-    margin-right: 10px !important; /* УВЕЛИЧИЛ отступ */
+    font-size: 0.75rem !important;
+    white-space: normal;
+    line-height: 1.1;
+    padding: 0 0.1rem; /* Минимальный padding по бокам */
   }
   
-  .nav-item:nth-child(3) {
-    margin-left: 10px !important; /* УВЕЛИЧИЛ отступ */
+  .nav-underline {
+    width: 50%;
   }
-
 }
 
-@media (max-width: 360px) {
+/* Маленькие мобильные (480px и меньше) - ЕЩЕ БЛИЖЕ */
+@media (max-width: 480px) {
   .app-header {
     padding: 0 0.3rem;
   }
   
+  /* ЕЩЕ БЛИЖЕ */
   .nav-items {
-    gap: 0.5rem;
-    justify-content: space-between;
-    margin-top: 0;
+    gap: 0.15rem !important; /* БЫЛО: 0.3rem, СТАЛО: 0.15rem */
   }
   
   .header-logo {
-    height: 140px !important; /* ОГРОМНЫЙ ЛОГОТИП (не меняем) */
+    height: 140px !important;
     max-width: 290px !important;
     min-height: 140px !important;
-    margin-top: -15px !important; /* ЧУТЬ ПОДНЯЛ ВЫШЕ */
-    margin-bottom: -5px !important; /* ЧУТЬ УВЕЛИЧИЛ ОТРИЦАТЕЛЬНЫЙ ОТСТУП */
+    margin: -15px auto -5px auto !important;
   }
   
   .logo-container {
@@ -497,45 +453,73 @@ export default {
   }
   
   .header-container {
-    padding: 0.3rem 0 !important; /* ЕЩЕ УМЕНЬШИЛ (было 0.5rem) */
-    min-height: 125px !important; /* ЕЩЕ УМЕНЬШИЛ (было 140px) */
-    gap: 0 !important;
-  }
-  
-  .header-bottom-shadow {
-    bottom: -1px;
-    height: 1px;
+    padding: 0.3rem 0 !important;
+    min-height: 130px !important;
+    gap: 0.2rem !important;
   }
   
   .nav-item {
-    padding: 0.2rem 0 !important; /* ЧУТЬ УМЕНЬШИЛ */
-    flex: 1;
-    min-width: 65px;
-  }
-  
-  .header-top-line {
-    margin-bottom: 0 !important;
-  }
-  
-  .main-navigation {
-    margin-top: 0 !important;
+    padding: 0.2rem 0.03rem !important; /* Еще меньше padding */
+    min-height: 40px;
   }
   
   .nav-icon {
     font-size: 1rem !important;
+    margin-bottom: 0.03rem !important;
   }
   
   .nav-label {
-    font-size: 0.75rem !important;
+    font-size: 0.7rem !important;
+    padding: 0 0.05rem;
   }
+}
 
-  .nav-item:nth-child(2) {
-    margin-right: 15px !important; /* МАКСИМАЛЬНЫЙ отступ */
+/* Очень маленькие мобильные (360px и меньше) - СУПЕР КОМПАКТНО */
+@media (max-width: 360px) {
+  .app-header {
+    padding: 0 0.2rem;
   }
   
-  .nav-item:nth-child(3) {
-    margin-left: 15px !important; /* МАКСИМАЛЬНЫЙ отступ */
+  /* СУПЕР БЛИЗКО */
+  .nav-items {
+    gap: 0.1rem !important; /* БЫЛО: 0.2rem, СТАЛО: 0.1rem - МИНИМАЛЬНОЕ РАССТОЯНИЕ */
   }
+  
+  .header-logo {
+    height: 130px !important;
+    max-width: 270px !important;
+    min-height: 130px !important;
+    margin: -10px auto -5px auto !important;
+  }
+  
+  .logo-container {
+    max-height: 135px;
+  }
+  
+  .header-container {
+    padding: 0.2rem 0 !important;
+    min-height: 120px !important;
+  }
+  
+  .nav-item {
+    padding: 0.15rem 0.02rem !important; /* Минимальный padding */
+    min-height: 35px;
+  }
+  
+  .nav-icon {
+    font-size: 0.9rem !important;
+  }
+  
+  .nav-label {
+    font-size: 0.65rem !important;
+    letter-spacing: 0.1em; /* Немного уменьшили междубуквенный интервал */
+  }
+}
 
+/* Для очень широких экранов (больше 1200px) - ПК НЕ ТРОГАЕМ */
+@media (min-width: 1200px) {
+  .nav-items {
+    max-width: 700px;
+  }
 }
 </style>

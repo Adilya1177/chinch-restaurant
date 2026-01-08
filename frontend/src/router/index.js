@@ -18,6 +18,11 @@ const router = createRouter({
       name: 'reservation',
       component: () => import('../views/ReservationView.vue')
     },
+    {
+      path: '/delivery',
+      name: 'delivery',
+      component: () => import('../views/DeliveryView.vue')
+    },
     // Добавьте catch-all route для 404
     {
       path: '/:pathMatch(.*)*',
