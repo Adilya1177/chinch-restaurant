@@ -6,7 +6,7 @@
       <div class="hero-content">
         <div class="hero-decoration top"></div>
         
-        <!-- Логотип вместо текста -->
+        <!-- Логотип ВЕРХНЕМ положении -->
         <div class="logo-title-container">
           <img 
             src="/images/logo/logo-chinch.png"
@@ -15,6 +15,7 @@
           >
         </div>
         
+        <!-- Текст "ГАСТРОБИСТРО" ПОД логотипом -->
         <p class="hero-subtitle">ГАСТРОБИСТРО С АВТОРСКОЙ КУХНЕЙ</p>
         <div class="hero-decoration bottom"></div>
         <!-- Текст описания УБРАН -->
@@ -111,7 +112,7 @@ export default {
   background-position: center;
 }
 
-/* Затемнение фона через псевдоэлемент */
+/* УБИРАЕМ ЗАТЕМНЕНИЕ ФОНА */
 .hero-section::before {
   content: '';
   position: absolute;
@@ -119,7 +120,7 @@ export default {
   left: 0;
   right: 0;
   bottom: 0;
-  background: rgba(0, 0, 0, 0.4); /* Затемнение фона */
+  background: rgba(0, 0, 0, 0); /* ИЗМЕНЕНО: было 0.4, стало 0 (прозрачный) */
   z-index: 0; /* Помещаем под контентом */
 }
 
@@ -146,39 +147,35 @@ export default {
   margin: 1rem 0;
 }
 
+/* УМЕНЬШАЕМ ТЕНЬ У ЛОГОТИПА */
 .main-logo {
   height: 120px;
   width: auto;
   object-fit: contain;
   max-width: 400px;
-  filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.8))
-          drop-shadow(0 4px 8px rgba(0, 0, 0, 0.7))
-          drop-shadow(0 6px 12px rgba(0, 0, 0, 0.6))
-          drop-shadow(0 8px 16px rgba(0, 0, 0, 0.5))
-          drop-shadow(0 10px 20px rgba(0, 0, 0, 0.4))
-          brightness(0.9) sepia(0.2) saturate(1.1);
+  /* ЗНАЧИТЕЛЬНО УМЕНЬШАЕМ тень */
+  filter: drop-shadow(0 1px 2px rgba(0, 0, 0, 0.3))
+          drop-shadow(0 2px 4px rgba(0, 0, 0, 0.25))
+          drop-shadow(0 3px 6px rgba(0, 0, 0, 0.2))
+          drop-shadow(0 4px 8px rgba(0, 0, 0, 0.15))
+          brightness(0.95) sepia(0.1) saturate(1.05);
   opacity: 0.98;
 }
 
+/* УМЕНЬШАЕМ ТЕНЬ У ТЕКСТА */
 .hero-subtitle {
   font-family: 'Cormorant Garamond', serif;
   font-size: 1.6rem;
-  color: #f8f4ea;
+  color: #f8f4ea; /* Оставляем белый цвет */
   letter-spacing: 0.15em;
   margin: 0.5rem 0 1rem;
   font-weight: 700;
+  /* ЗНАЧИТЕЛЬНО УМЕНЬШАЕМ тень */
   text-shadow: 
-    0 2px 4px rgba(0, 0, 0, 0.8),
-    0 4px 8px rgba(0, 0, 0, 0.75),
-    0 6px 12px rgba(0, 0, 0, 0.7),
-    0 8px 16px rgba(0, 0, 0, 0.65),
-    0 10px 20px rgba(0, 0, 0, 0.6),
-    0 12px 24px rgba(0, 0, 0, 0.55),
-    0 14px 28px rgba(0, 0, 0, 0.5),
-    0 16px 32px rgba(0, 0, 0, 0.45),
-    0 18px 36px rgba(0, 0, 0, 0.4),
-    0 20px 40px rgba(0, 0, 0, 0.35),
-    0 22px 44px rgba(0, 0, 0, 0.3);
+    0 1px 2px rgba(0, 0, 0, 0.4),
+    0 2px 4px rgba(0, 0, 0, 0.35),
+    0 3px 6px rgba(0, 0, 0, 0.3),
+    0 4px 8px rgba(0, 0, 0, 0.25);
 }
 
 /* Призыв к действию */
@@ -342,29 +339,26 @@ export default {
 }
 
 @media (max-width: 768px) {
+  /* УМЕНЬШАЕМ ТЕНЬ НА МОБИЛЬНЫХ */
   .main-logo {
     height: 90px;
     max-width: 320px;
-    filter: drop-shadow(0 1px 2px rgba(0, 0, 0, 0.7))
-            drop-shadow(0 2px 4px rgba(0, 0, 0, 0.6))
-            drop-shadow(0 4px 6px rgba(0, 0, 0, 0.5))
-            drop-shadow(0 6px 10px rgba(0, 0, 0, 0.4))
-            drop-shadow(0 8px 14px rgba(0, 0, 0, 0.3))
-            brightness(0.9) sepia(0.2) saturate(1.1);
+    filter: drop-shadow(0 1px 1px rgba(0, 0, 0, 0.2))
+            drop-shadow(0 2px 2px rgba(0, 0, 0, 0.18))
+            drop-shadow(0 3px 3px rgba(0, 0, 0, 0.16))
+            drop-shadow(0 4px 4px rgba(0, 0, 0, 0.14))
+            brightness(0.95) sepia(0.1) saturate(1.05);
   }
   
+  /* УМЕНЬШАЕМ ТЕНЬ ТЕКСТА НА МОБИЛЬНЫХ */
   .hero-subtitle {
     font-size: 1.3rem;
     font-weight: 700;
     color: #f8f4ea;
     text-shadow: 
-      0 2px 3px rgba(0, 0, 0, 0.75),
-      0 4px 6px rgba(0, 0, 0, 0.7),
-      0 6px 10px rgba(0, 0, 0, 0.65),
-      0 8px 14px rgba(0, 0, 0, 0.6),
-      0 10px 18px rgba(0, 0, 0, 0.55),
-      0 12px 22px rgba(0, 0, 0, 0.5),
-      0 14px 26px rgba(0, 0, 0, 0.45);
+      0 1px 1px rgba(0, 0, 0, 0.3),
+      0 2px 2px rgba(0, 0, 0, 0.25),
+      0 3px 3px rgba(0, 0, 0, 0.2);
   }
   
   .hero-content {
@@ -419,32 +413,30 @@ export default {
 }
 
 @media (max-width: 480px) {
+  /* УМЕНЬШАЕМ ТЕНЬ НА МОБИЛЬНЫХ */
   .main-logo {
     height: 80px;
     max-width: 280px;
-    filter: drop-shadow(0 1px 2px rgba(0, 0, 0, 0.7))
-            drop-shadow(0 2px 4px rgba(0, 0, 0, 0.6))
-            drop-shadow(0 4px 6px rgba(0, 0, 0, 0.5))
-            drop-shadow(0 6px 10px rgba(0, 0, 0, 0.4))
-            drop-shadow(0 8px 14px rgba(0, 0, 0, 0.3))
-            brightness(0.9) sepia(0.2) saturate(1.1);
+    filter: drop-shadow(0 1px 1px rgba(0, 0, 0, 0.15))
+            drop-shadow(0 1.5px 1.5px rgba(0, 0, 0, 0.13))
+            drop-shadow(0 2px 2px rgba(0, 0, 0, 0.11))
+            drop-shadow(0 2.5px 2.5px rgba(0, 0, 0, 0.09))
+            brightness(0.95) sepia(0.1) saturate(1.05);
   }
   
   .hero-section {
     padding: 2rem 1rem;
   }
   
+  /* УМЕНЬШАЕМ ТЕНЬ ТЕКСТА НА МОБИЛЬНЫХ */
   .hero-subtitle {
     font-size: 1.2rem;
     font-weight: 700;
     color: #f8f4ea;
     text-shadow: 
-      0 1px 2px rgba(0, 0, 0, 0.65),
-      0 2px 4px rgba(0, 0, 0, 0.6),
-      0 4px 6px rgba(0, 0, 0, 0.55),
-      0 6px 10px rgba(0, 0, 0, 0.5),
-      0 8px 14px rgba(0, 0, 0, 0.45),
-      0 10px 18px rgba(0, 0, 0, 0.4);
+      0 0.5px 1px rgba(0, 0, 0, 0.25),
+      0 1px 1.5px rgba(0, 0, 0, 0.2),
+      0 1.5px 2px rgba(0, 0, 0, 0.15);
   }
   
   .hero-content {
