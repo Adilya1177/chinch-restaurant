@@ -746,7 +746,7 @@ export default {
 .items-container {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-  gap: 1.2rem;
+  gap: 0.8rem; /* УМЕНЬШИЛ с 1.2rem до 0.8rem */
 }
 
 .dish-card {
@@ -780,18 +780,21 @@ export default {
   background: rgba(248, 244, 234, 0.7);
   border: 1px solid rgba(232, 220, 201, 0.7);
   border-radius: 12px;
-  padding: 1.2rem;
+  padding: 0.8rem; /* УМЕНЬШИЛ с 1.2rem до 0.8rem */
   backdrop-filter: blur(8px);
   transition: all 0.3s ease;
   display: flex;
   flex-direction: column;
   align-items: center;
   text-align: center;
-  height: 180px; /* Увеличили высоту для опций */
+  height: 150px; /* УМЕНЬШИЛ с 180px до 150px */
   overflow: hidden;
   position: relative;
   /* ТЕМНАЯ ТЕНЬ - ОСНОВНОЕ ИЗМЕНЕНИЕ */
   box-shadow: 0 6px 18px rgba(42, 30, 20, 0.25);
+  
+  /* ИЗМЕНЕНИЕ: равномерное распределение элементов */
+  justify-content: space-between;
 }
 
 /* Еще более темная тень при наведении для кликабельных карточек */
@@ -803,10 +806,10 @@ export default {
 
 .dish-title {
   font-family: 'Cormorant Garamond', serif;
-  font-size: 1.2rem;
+  font-size: 1.1rem; /* УМЕНЬШИЛ с 1.2rem до 1.1rem */
   color: #2a1e14;
   font-weight: 600;
-  margin: 0 0 0.5rem 0;
+  margin: 0.3rem 0 0.3rem 0; /* ИЗМЕНИЛ: был margin: 0 0 0.3rem 0 */
   text-align: center;
   width: 100%;
   overflow: hidden;
@@ -814,17 +817,22 @@ export default {
   display: -webkit-box;
   -webkit-line-clamp: 2;
   -webkit-box-orient: vertical;
-  min-height: 2.8em;
+  min-height: 2.4em; /* УМЕНЬШИЛ с 2.8em */
+  
+  /* ИЗМЕНЕНИЕ: ОПУСКАЕМ НАЗВАНИЕ НИЖЕ */
+  flex-shrink: 0;
+  margin-top: auto; /* Автоматический отступ сверху */
 }
 
 /* Блок с ценой, объемом и опциями */
 .price-volume-block {
-  margin: 0.5rem 0;
-  padding: 0.5rem 0;
+  margin: 0.3rem 0; /* УМЕНЬШИЛ с 0.5rem 0 */
+  padding: 0.3rem 0; /* УМЕНЬШИЛ с 0.5rem 0 */
   border-top: 1px solid rgba(232, 220, 201, 0.5);
   border-bottom: 1px solid rgba(232, 220, 201, 0.5);
   width: 100%;
-  margin-top: auto;
+  margin-top: auto; /* ДОБАВИЛ: автоматический отступ сверху */
+  flex-shrink: 0; /* ДОБАВИЛ: предотвращаем сжатие */
 }
 
 /* Стили для цены */
@@ -834,7 +842,7 @@ export default {
 
 .price-value {
   font-family: 'Playfair Display', serif;
-  font-size: 1.1rem;
+  font-size: 1rem; /* УМЕНЬШИЛ с 1.1rem до 1rem */
   color: #d4af37;
   font-weight: 600;
   letter-spacing: 0.02em;
@@ -847,22 +855,22 @@ export default {
 
 .volume-label {
   font-family: 'EB Garamond', serif;
-  font-size: 0.9rem;
+  font-size: 0.85rem; /* УМЕНЬШИЛ с 0.9rem до 0.85rem */
   color: #8b6b4d;
   font-weight: 500;
 }
 
 /* Стили для опций */
 .options-info {
-  margin-top: 0.5rem;
-  padding-top: 0.5rem;
+  margin-top: 0.3rem; /* УМЕНЬШИЛ с 0.5rem */
+  padding-top: 0.3rem; /* УМЕНЬШИЛ с 0.5rem */
   border-top: 1px dashed rgba(139, 107, 77, 0.3);
   width: 100%;
 }
 
 .options-label {
   font-family: 'EB Garamond', serif;
-  font-size: 0.85rem;
+  font-size: 0.8rem; /* УМЕНЬШИЛ с 0.85rem до 0.8rem */
   color: #8b6b4d;
   font-weight: 500;
   font-style: italic;
@@ -1391,9 +1399,10 @@ export default {
   
   /* Уменьшаем высоту карточек на мобильных */
   .dish-card-inner {
-    height: 170px; /* Увеличили для опций */
-    padding: 1rem;
+    height: 140px; /* УМЕНЬШИЛ с 170px до 140px */
+    padding: 0.7rem; /* УМЕНЬШИЛ с 1rem до 0.7rem */
     box-shadow: 0 4px 12px rgba(42, 30, 20, 0.2);
+    justify-content: space-between; /* ДОБАВИЛ для мобильных */
   }
   
   .dish-card-inner:hover {
@@ -1402,22 +1411,25 @@ export default {
   }
   
   .dish-title {
-    font-size: 1.1rem;
-    min-height: 2.4em;
+    font-size: 1rem; /* УМЕНЬШИЛ с 1.1rem до 1rem */
+    min-height: 2.2em; /* УМЕНЬШИЛ с 2.4em */
+    margin: 0.3rem 0 0.3rem 0; /* ИЗМЕНИЛ для мобильных */
+    flex-shrink: 0;
+    margin-top: auto; /* ДОБАВИЛ для мобильных */
   }
   
   .price-value {
-    font-size: 1rem;
+    font-size: 0.95rem; /* УМЕНЬШИЛ с 1rem до 0.95rem */
   }
   
   /* Опции на мобильных */
   .options-info {
-    margin-top: 0.3rem;
-    padding-top: 0.3rem;
+    margin-top: 0.2rem; /* УМЕНЬШИЛ с 0.3rem */
+    padding-top: 0.2rem; /* УМЕНЬШИЛ с 0.3rem */
   }
   
   .options-label {
-    font-size: 0.8rem;
+    font-size: 0.75rem; /* УМЕНЬШИЛ с 0.8rem до 0.75rem */
   }
   
   .addon-price {
