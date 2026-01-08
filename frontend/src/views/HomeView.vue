@@ -39,7 +39,12 @@
         <!-- Карточка 1 - С ФОТО ДЕСЕРТА -->
         <div class="feature-item">
           <div class="feature-image-container">
-            <div class="feature-image-photo-desert"></div>
+            <img 
+              src="/images/desert.jpeg" 
+              alt="Десерты ручной работы"
+              class="feature-image"
+            >
+            <div class="feature-overlay"></div>
           </div>
           <p class="feature-description">
             Сладкие шедевры, дарящие настоящее гастрономическое удовольствие
@@ -49,7 +54,12 @@
         <!-- Карточка 2 -->
         <div class="feature-item">
           <div class="feature-image-container">
-            <div class="feature-image-photo-blyda"></div>
+            <img 
+              src="/images/blyda.jpeg" 
+              alt="Уникальные блюда"
+              class="feature-image"
+            >
+            <div class="feature-overlay"></div>
           </div>
           <p class="feature-description">
             Уникальные блюда, созданные нашим шеф-поваром с любовью к деталям
@@ -59,7 +69,12 @@
         <!-- Карточка 3 (с фото) -->
         <div class="feature-item">
           <div class="feature-image-container">
-            <div class="feature-image-photo-atmosphere"></div>
+            <img 
+              src="/images/atmosphere-bg.jpg" 
+              alt="Утонченный интерьер"
+              class="feature-image"
+            >
+            <div class="feature-overlay"></div>
           </div>
           <p class="feature-description">
             Утонченный интерьер и безупречный сервис для особых моментов
@@ -260,13 +275,18 @@ export default {
   align-items: center;
 }
 
+/* =========================================================== */
+/* ИСПРАВЛЕНИЕ: Делаем контейнер квадратным на всех устройствах */
+/* =========================================================== */
 .feature-image-container {
-  height: 300px;
+  width: 100%;
   border-radius: 12px;
   overflow: hidden;
   box-shadow: 0 4px 20px rgba(139, 107, 77, 0.15);
   transition: all 0.3s ease;
-  width: 100%;
+  position: relative;
+  /* Соотношение сторон 4:3 (как большинство фото) */
+  aspect-ratio: 4 / 3;
 }
 
 .feature-image-container:hover {
@@ -274,58 +294,27 @@ export default {
   box-shadow: 0 8px 28px rgba(139, 107, 77, 0.2);
 }
 
-.feature-image-photo-desert {
+.feature-image {
+  width: 100%;
   height: 100%;
-  background: url('/images/desert.jpeg') center/cover no-repeat;
-  background-size: cover;
-  background-position: center;
-  position: relative;
+  object-fit: cover;
+  object-position: center;
+  display: block;
+  transition: transform 0.3s ease;
 }
 
-.feature-image-photo-desert::after {
-  content: '';
+.feature-image-container:hover .feature-image {
+  transform: scale(1.05);
+}
+
+.feature-overlay {
   position: absolute;
   top: 0;
   left: 0;
   right: 0;
   bottom: 0;
   background: linear-gradient(45deg, rgba(42, 30, 20, 0.1), rgba(42, 30, 20, 0.05));
-}
-
-.feature-image-photo-blyda {
-  height: 100%;
-  background: url('/images/blyda.jpeg') center/cover no-repeat;
-  background-size: cover;
-  background-position: center;
-  position: relative;
-}
-
-.feature-image-photo-blyda::after {
-  content: '';
-  position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  background: linear-gradient(45deg, rgba(42, 30, 20, 0.1), rgba(42, 30, 20, 0.05));
-}
-
-.feature-image-photo-atmosphere {
-  height: 100%;
-  background: url('/images/atmosphere-bg.jpg') center/cover no-repeat;
-  background-size: cover;
-  background-position: center;
-  position: relative;
-}
-
-.feature-image-photo-atmosphere::after {
-  content: '';
-  position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  background: linear-gradient(45deg, rgba(42, 30, 20, 0.1), rgba(42, 30, 20, 0.05));
+  pointer-events: none;
 }
 
 .feature-description {
@@ -417,6 +406,15 @@ export default {
   
   .features-container {
     grid-template-columns: 1fr;
+    gap: 2rem;
+  }
+  
+  /* =========================================================== */
+  /* НА МОБИЛЬНЫХ: ТОЛЬКО меняем gap между карточками */
+  /* Контейнер остается с aspect-ratio 4:3, как на ПК */
+  /* =========================================================== */
+  .feature-image-container {
+    aspect-ratio: 4 / 3; /* Такое же соотношение как на ПК */
   }
 }
 
@@ -484,10 +482,6 @@ export default {
   
   .features-section {
     padding: 3rem 1rem;
-  }
-  
-  .feature-image-container {
-    height: 250px;
   }
   
   .feature-description {
