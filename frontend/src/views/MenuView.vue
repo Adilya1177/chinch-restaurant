@@ -79,7 +79,7 @@
                   <div class="dish-card-inner">
                     <h3 class="dish-title">{{ item.name }}</h3>
 
-                    <!-- Блок с объемом и ценой -->
+                    <!-- Блок с объемом, ценой и опциями -->
                     <div class="price-volume-block">
                       <!-- Цена -->
                       <div v-if="item.priceInfo || item.basePrice" class="price-info">
@@ -89,6 +89,11 @@
                       <!-- Объем -->
                       <div v-if="item.volumeInfo" class="volume-info">
                         <span class="volume-label">{{ formatVolume(item.volumeInfo) }}</span>
+                      </div>
+                      
+                      <!-- ОПЦИИ (если есть) -->
+                      <div v-if="item.options" class="options-info">
+                        <span class="options-label">{{ formatOptions(item.options) }}</span>
                       </div>
                     </div>
                   </div>
@@ -107,7 +112,7 @@
                   <div class="dish-card-inner">
                     <h3 class="dish-title">{{ item.name }}</h3>
                     
-                    <!-- Блок с объемом и ценой -->
+                    <!-- Блок с объемом, ценой и опциями -->
                     <div class="price-volume-block">
                       <!-- Цена -->
                       <div v-if="item.priceInfo || item.basePrice" class="price-info">
@@ -117,6 +122,11 @@
                       <!-- Объем -->
                       <div v-if="item.volumeInfo" class="volume-info">
                         <span class="volume-label">{{ formatVolume(item.volumeInfo) }}</span>
+                      </div>
+                      
+                      <!-- ОПЦИИ (если есть) -->
+                      <div v-if="item.options" class="options-info">
+                        <span class="options-label">{{ formatOptions(item.options) }}</span>
                       </div>
                     </div>
                   </div>
@@ -353,7 +363,7 @@ export default {
           item.subCategory === 'ВОДА' || item.name.includes('ВОДА') || item.name.includes('MARUHA')
         );
         console.log('Найдено записей с водой:', waterItems.length);
-        waterItems.forEach(item => console.log('-', item.name, '| ID:', item.id));
+        waterItems.forEach(item => console.log('-', item.name, '| ID:', item.id, '| Options:', item.options));
         // 👆 ДОБАВЬ ЭТОТ КОД 👆
 
       } catch (err) {
@@ -792,7 +802,7 @@ export default {
   flex-direction: column;
   align-items: center;
   text-align: center;
-  height: 160px; /* Увеличили высоту для цены */
+  height: 180px; /* Увеличили высоту для опций */
   overflow: hidden;
   position: relative;
   /* ТЕМНАЯ ТЕНЬ - ОСНОВНОЕ ИЗМЕНЕНИЕ */
@@ -822,7 +832,7 @@ export default {
   min-height: 2.8em;
 }
 
-/* Блок с ценой и объемом */
+/* Блок с ценой, объемом и опциями */
 .price-volume-block {
   margin: 0.5rem 0;
   padding: 0.5rem 0;
@@ -855,6 +865,22 @@ export default {
   font-size: 0.9rem;
   color: #8b6b4d;
   font-weight: 500;
+}
+
+/* Стили для опций */
+.options-info {
+  margin-top: 0.5rem;
+  padding-top: 0.5rem;
+  border-top: 1px dashed rgba(139, 107, 77, 0.3);
+  width: 100%;
+}
+
+.options-label {
+  font-family: 'EB Garamond', serif;
+  font-size: 0.85rem;
+  color: #8b6b4d;
+  font-weight: 500;
+  font-style: italic;
 }
 
 /* ============ ОСОБЫЕ СТИЛИ ДЛЯ ЯИЧНЫХ БЛЮД ============ */
@@ -1380,7 +1406,7 @@ export default {
   
   /* Уменьшаем высоту карточек на мобильных */
   .dish-card-inner {
-    height: 140px;
+    height: 170px; /* Увеличили для опций */
     padding: 1rem;
     box-shadow: 0 4px 12px rgba(42, 30, 20, 0.2);
   }
@@ -1397,6 +1423,16 @@ export default {
   
   .price-value {
     font-size: 1rem;
+  }
+  
+  /* Опции на мобильных */
+  .options-info {
+    margin-top: 0.3rem;
+    padding-top: 0.3rem;
+  }
+  
+  .options-label {
+    font-size: 0.8rem;
   }
   
   .addon-price {

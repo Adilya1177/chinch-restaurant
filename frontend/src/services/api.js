@@ -927,13 +927,13 @@ const mockMenuData = [
   },
 
   // ВОДА (1 напиток)
-  //{
-    //id: 125, name: "MARUHA",
-    //description: "", priceInfo: "", category: "ВОДА",
-    //mainCategory: "Напитки", subCategory: "ВОДА",
-    //volumeInfo: "500 мл", basePrice: "350 р", options: "НЕГАЗИРОВАННАЯ | ГАЗИРОВАННАЯ", isAddon: false,
-    //composition: null
-  //},
+  {
+    id: 125, name: "MARUHA",
+    description: "", priceInfo: "", category: "ВОДА",
+    mainCategory: "Напитки", subCategory: "ВОДА",
+    volumeInfo: "500 мл", basePrice: "350 р", options: "НЕГАЗИРОВАННАЯ | ГАЗИРОВАННАЯ", isAddon: false,
+    composition: null
+  },
 
   // ПИВО (6 напитков)
   {
