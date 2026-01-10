@@ -1,45 +1,25 @@
 <template>
   <div class="delivery-view">
-    <!-- Герой-секция -->
-    <div class="delivery-hero">
-      <div class="delivery-hero-content">
-        <h1 class="delivery-title">ДОСТАВКА</h1>
-        <p class="delivery-subtitle">Заказывайте нашу авторскую кухню с доставкой</p>
-      </div>
-    </div>
-
+    <!-- Заголовок как в Бронировании -->
     <div class="delivery-container">
+      <header class="page-header">
+        <h1 class="page-title">ДОСТАВКА</h1>
+        <p class="page-subtitle">Заказывайте нашу авторскую кухню с доставкой</p>
+        <div class="header-line"></div>
+      </header>
+
       <!-- Две карточки доставки -->
       <div class="delivery-options">
         <!-- Карточка 1: Октябрьское поле -->
         <div class="delivery-card">
           <div class="card-header">
-            <div class="card-icon">🏘️</div>
+            <img src="/images/jk.jpg" alt="ЖК Октябрьское поле" class="card-photo">
             <h2>По территории ЖК "Октябрьское поле"</h2>
           </div>
           
           <div class="card-content">
-            <div class="feature-list">
-              <div class="feature-item">
-                <span class="feature-icon">✓</span>
-                <span>Бесплатная доставка</span>
-              </div>
-              <div class="feature-item">
-                <span class="feature-icon">✓</span>
-                <span>Минимальный заказ от 800 ₽</span>
-              </div>
-              <div class="feature-item">
-                <span class="feature-icon">✓</span>
-                <span>Доставка в течение 30-45 минут</span>
-              </div>
-              <div class="feature-item">
-                <span class="feature-icon">✓</span>
-                <span>Оплата картой или наличными</span>
-              </div>
-            </div>
-            
             <div class="order-button-container">
-              <p class="order-instruction">Заказ через Telegram-бот:</p>
+              <p class="order-instruction">Заказ через Telegram:</p>
               <a 
                 href="https://t.me/chinch_coffee" 
                 target="_blank"
@@ -55,30 +35,11 @@
         <!-- Карточка 2: По Москве -->
         <div class="delivery-card">
           <div class="card-header">
-            <div class="card-icon">🏙️</div>
+            <img src="/images/moscow.jpg" alt="Москва" class="card-photo">
             <h2>По Москве</h2>
           </div>
           
           <div class="card-content">
-            <div class="feature-list">
-              <div class="feature-item">
-                <span class="feature-icon">✓</span>
-                <span>Доставка по всей Москве</span>
-              </div>
-              <div class="feature-item">
-                <span class="feature-icon">✓</span>
-                <span>Стоимость доставки: 199 ₽</span>
-              </div>
-              <div class="feature-item">
-                <span class="feature-icon">✓</span>
-                <span>Бесплатно при заказе от 1500 ₽</span>
-              </div>
-              <div class="feature-item">
-                <span class="feature-icon">✓</span>
-                <span>Доставка в течение 60 минут</span>
-              </div>
-            </div>
-            
             <div class="order-button-container">
               <p class="order-instruction">Заказ через Яндекс Еду:</p>
               <a 
@@ -91,20 +52,6 @@
               </a>
             </div>
           </div>
-        </div>
-      </div>
-      
-      <!-- Дополнительная информация -->
-      <div class="additional-info">
-        <div class="info-card">
-          <h3>🕒 Время работы доставки</h3>
-          <p>Понедельник - Воскресенье: 12:00 - 23:00</p>
-        </div>
-        
-        <div class="info-card">
-          <h3>📞 Контакты</h3>
-          <p>Телефон: <a href="tel:+79150549606">+7 (915) 054-96-06</a></p>
-          <p>Адрес: ул. Берзарина, 28А, корп. 4, Москва</p>
         </div>
       </div>
     </div>
@@ -120,60 +67,66 @@ export default {
 <style scoped>
 .delivery-view {
   min-height: calc(100vh - 400px);
+  padding: 2rem 1rem;
+  background: linear-gradient(135deg, #f8f4ea 0%, #f1e9d7 100%);
 }
 
-/* Герой-секция */
-.delivery-hero {
-  background: linear-gradient(rgba(42, 30, 20, 0.85), rgba(42, 30, 20, 0.9)), 
-              url('/images/home-bg.jpg') center/cover no-repeat;
-  padding: 6rem 2rem 4rem;
-  text-align: center;
-  margin-top: 145px; /* Учитываем высоту шапки */
-}
-
-.delivery-hero-content {
-  max-width: 800px;
-  margin: 0 auto;
-}
-
-.delivery-title {
-  font-family: 'Playfair Display', serif;
-  font-size: 3rem;
-  color: #f8f4ea;
-  margin-bottom: 1rem;
-  letter-spacing: 0.1em;
-  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
-}
-
-.delivery-subtitle {
-  font-family: 'Cormorant Garamond', serif;
-  font-size: 1.4rem;
-  color: #e6dfd1;
-  font-weight: 400;
-}
-
-/* Основной контейнер */
 .delivery-container {
   max-width: 1200px;
   margin: 0 auto;
-  padding: 4rem 2rem;
+}
+
+/* Заголовок как в Бронировании */
+.page-header {
+  text-align: center;
+  margin-bottom: 3rem;
+  padding-bottom: 2rem;
+  border-bottom: 1px solid rgba(212, 180, 131, 0.3);
+}
+
+.page-title {
+  font-family: 'Playfair Display', serif;
+  font-size: 2.8rem;
+  color: #2a1e14;
+  font-weight: 600;
+  letter-spacing: 0.1em;
+  margin-bottom: 0.5rem;
+}
+
+.page-subtitle {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 1.4rem;
+  color: #8b6b4d;
+  font-style: italic;
+  letter-spacing: 0.05em;
+  margin-bottom: 1rem;
+}
+
+.header-line {
+  width: 100px;
+  height: 2px;
+  background: linear-gradient(90deg, #b08d57, #8b6b4d);
+  margin: 0 auto;
 }
 
 /* Карточки доставки */
 .delivery-options {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
-  gap: 3rem;
-  margin-bottom: 4rem;
+  gap: 2rem;
+  margin-bottom: 3rem;
 }
 
 .delivery-card {
   background: white;
   border-radius: 16px;
   overflow: hidden;
-  box-shadow: 0 8px 30px rgba(139, 107, 77, 0.15);
+  box-shadow: 0 8px 32px rgba(139, 107, 77, 0.12);
   transition: transform 0.3s ease, box-shadow 0.3s ease;
-  border: 1px solid #f0e9dd;
+  border: 1px solid #e8dcc9;
+  display: flex;
+  flex-direction: column;
+  height: 500px;
 }
 
 .delivery-card:hover {
@@ -182,67 +135,54 @@ export default {
 }
 
 .card-header {
-  background: linear-gradient(135deg, #2a1e14, #3a2a1c);
-  padding: 2rem;
-  color: white;
-  text-align: center;
+  position: relative;
+  flex: 1.1;
+  overflow: hidden;
 }
 
-.card-icon {
-  font-size: 3rem;
-  margin-bottom: 1rem;
+.card-photo {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+  transform: scale(1.05);
+  transition: transform 0.5s ease;
+}
+
+.card-header:hover .card-photo {
+  transform: scale(1.08);
 }
 
 .card-header h2 {
-  font-family: 'Cormorant Garamond', serif;
-  font-size: 1.8rem;
-  font-weight: 600;
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background: linear-gradient(to top, rgba(42, 30, 20, 0.95), rgba(42, 30, 20, 0.7), transparent);
+  color: white;
+  padding: 1.5rem;
   margin: 0;
-  color: #f8f4ea;
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 1.6rem;
+  font-weight: 600;
+  text-align: center;
 }
 
 .card-content {
-  padding: 2.5rem;
-}
-
-.feature-list {
-  margin-bottom: 2.5rem;
-}
-
-.feature-item {
-  display: flex;
-  align-items: center;
-  gap: 1rem;
-  margin-bottom: 1rem;
-  font-size: 1.1rem;
-  color: #5d4a30;
-}
-
-.feature-icon {
-  color: #b08d57;
-  font-weight: bold;
-  font-size: 1.2rem;
-  background: #f8f4ea;
-  width: 24px;
-  height: 24px;
-  border-radius: 50%;
-  display: flex;
-  align-items: center;
-  justify-content: center;
+  padding: 1.5rem;
   flex-shrink: 0;
 }
 
 .order-button-container {
   text-align: center;
-  border-top: 1px solid #f0e9dd;
-  padding-top: 2rem;
+  padding-top: 0.5rem;
 }
 
 .order-instruction {
   font-family: 'Cormorant Garamond', serif;
-  font-size: 1.3rem;
+  font-size: 1.2rem;
   color: #2a1e14;
-  margin-bottom: 1.5rem;
+  margin-bottom: 1rem;
   font-weight: 600;
 }
 
@@ -252,16 +192,16 @@ export default {
   align-items: center;
   justify-content: center;
   gap: 0.8rem;
-  padding: 1rem 2.5rem;
-  border-radius: 12px;
+  padding: 0.9rem 2rem;
+  border-radius: 8px;
   text-decoration: none;
   font-family: 'Cormorant Garamond', serif;
-  font-size: 1.2rem;
+  font-size: 1.1rem;
   font-weight: 600;
   transition: all 0.3s ease;
   width: 100%;
-  max-width: 300px;
-  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+  max-width: 280px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
 }
 
 .telegram-button {
@@ -276,7 +216,7 @@ export default {
 
 .telegram-button:hover,
 .yandex-button:hover {
-  transform: translateY(-3px);
+  transform: translateY(-2px);
   box-shadow: 0 6px 20px rgba(0, 0, 0, 0.15);
 }
 
@@ -289,7 +229,7 @@ export default {
 }
 
 .button-icon {
-  font-size: 1.4rem;
+  font-size: 1.2rem;
   flex-shrink: 0;
 }
 
@@ -298,135 +238,96 @@ export default {
   text-align: center;
 }
 
-/* Дополнительная информация */
-.additional-info {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-  gap: 2rem;
-  margin-top: 3rem;
-}
-
-.info-card {
-  background: linear-gradient(135deg, #f9f5ec, #f1eadd);
-  border-radius: 12px;
-  padding: 2rem;
-  border: 1px solid #e6dfd1;
-}
-
-.info-card h3 {
-  font-family: 'Cormorant Garamond', serif;
-  font-size: 1.4rem;
-  color: #2a1e14;
-  margin-bottom: 1.5rem;
-  display: flex;
-  align-items: center;
-  gap: 0.5rem;
-}
-
-.info-card p {
-  color: #5d4a30;
-  line-height: 1.6;
-  margin-bottom: 0.8rem;
-  font-size: 1.1rem;
-}
-
-.info-card a {
-  color: #b08d57;
-  text-decoration: none;
-  font-weight: 500;
-  transition: color 0.3s ease;
-}
-
-.info-card a:hover {
-  color: #2a1e14;
-  text-decoration: underline;
-}
-
 /* Адаптивность */
 @media (max-width: 768px) {
-  .delivery-hero {
-    padding: 5rem 1.5rem 3rem;
-    margin-top: 140px;
+  .delivery-view {
+    padding: 1.5rem 1rem;
   }
   
-  .delivery-title {
+  .page-header {
+    margin-bottom: 2rem;
+    padding-bottom: 1.5rem;
+  }
+  
+  .page-title {
     font-size: 2.2rem;
   }
   
-  .delivery-subtitle {
+  .page-subtitle {
     font-size: 1.2rem;
-  }
-  
-  .delivery-container {
-    padding: 3rem 1.5rem;
   }
   
   .delivery-options {
     grid-template-columns: 1fr;
-    gap: 2rem;
-  }
-  
-  .card-content {
-    padding: 2rem;
-  }
-  
-  .telegram-button,
-  .yandex-button {
-    padding: 0.9rem 2rem;
-    font-size: 1.1rem;
-  }
-  
-  .additional-info {
-    grid-template-columns: 1fr;
-  }
-}
-
-@media (max-width: 480px) {
-  .delivery-hero {
-    padding: 4rem 1rem 2rem;
-    margin-top: 130px;
-  }
-  
-  .delivery-title {
-    font-size: 1.8rem;
-  }
-  
-  .delivery-subtitle {
-    font-size: 1.1rem;
-  }
-  
-  .delivery-container {
-    padding: 2rem 1rem;
+    gap: 1.5rem;
   }
   
   .delivery-card {
-    margin: 0 0.5rem;
-  }
-  
-  .card-header {
-    padding: 1.5rem;
+    height: 450px;
   }
   
   .card-header h2 {
-    font-size: 1.5rem;
+    font-size: 1.4rem;
+    padding: 1rem;
   }
   
   .card-content {
-    padding: 1.5rem;
-  }
-  
-  .feature-item {
-    font-size: 1rem;
+    padding: 1.2rem;
   }
   
   .order-instruction {
-    font-size: 1.2rem;
+    font-size: 1.1rem;
   }
   
   .telegram-button,
   .yandex-button {
     padding: 0.8rem 1.5rem;
     font-size: 1rem;
+    max-width: 250px;
+  }
+}
+
+@media (max-width: 480px) {
+  .delivery-view {
+    padding: 1rem 0.5rem;
+  }
+  
+  .page-header {
+    margin-bottom: 1.5rem;
+    padding-bottom: 1rem;
+  }
+  
+  .page-title {
+    font-size: 1.8rem;
+  }
+  
+  .page-subtitle {
+    font-size: 1rem;
+  }
+  
+  .delivery-card {
+    height: 400px;
+    margin: 0;
+  }
+  
+  .card-header h2 {
+    font-size: 1.2rem;
+    padding: 0.8rem;
+  }
+  
+  .card-content {
+    padding: 1rem;
+  }
+  
+  .order-instruction {
+    font-size: 1rem;
+  }
+  
+  .telegram-button,
+  .yandex-button {
+    padding: 0.7rem 1.2rem;
+    font-size: 0.95rem;
+    max-width: 220px;
   }
 }
 </style>
