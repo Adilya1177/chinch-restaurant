@@ -307,6 +307,9 @@ export default {
   letter-spacing: 0.15em;
   margin: 0.5rem 0 1rem;
   font-weight: 700;
+  /* РЕШЕНИЕ: ОПУСКАЕМ ТОЛЬКО ТЕКСТ */
+  position: relative;
+  top: 30px; /* Текст опускается на 30px */
   /* ЗНАЧИТЕЛЬНО УВЕЛИЧИВАЕМ тень (вместо 0.4-0.25 делаем 0.5-0.35) */
   text-shadow: 
     0 2px 6px rgba(0, 0, 0, 0.5),
@@ -565,6 +568,8 @@ export default {
     font-size: 1.3rem;
     font-weight: 700;
     color: #f8f4ea;
+    /* РЕШЕНИЕ: ОПУСКАЕМ ТОЛЬКО ТЕКСТ НА ПЛАНШЕТАХ */
+    top: 25px; /* Меньше на планшетах */
     /* УВЕЛИЧИВАЕМ тень текста (вместо 0.3-0.2 делаем 0.45-0.3) */
     text-shadow: 
       0 1px 3px rgba(0, 0, 0, 0.45),
@@ -657,6 +662,8 @@ export default {
     font-size: 1.2rem;
     font-weight: 700;
     color: #f8f4ea;
+    /* РЕШЕНИЕ: ОПУСКАЕМ ТОЛЬКО ТЕКСТ НА МОБИЛЬНЫХ */
+    top: 20px; /* Еще меньше на мобильных */
     /* УВЕЛИЧИВАЕМ тень текста (вместо 0.25-0.15 делаем 0.35-0.2) */
     text-shadow: 
       0 1px 2px rgba(0, 0, 0, 0.35),
@@ -757,6 +764,10 @@ export default {
   .main-logo {
     height: 110px !important; /* ЕЩЕ БОЛЬШЕ увеличиваем логотип */
     max-width: 340px !important;
+  }
+  
+  .hero-subtitle {
+    top: 15px; /* Самый маленький отступ на очень маленьких экранах */
   }
   
   .cta-section {
