@@ -3,17 +3,61 @@
   <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>CHINCH - Ресторан изысканной кухни</title>
-    <link rel="icon" href="data:,">
+    <title>CHINCH Restaurant - авторская кухня в Москве</title>
+    
+    <!-- Favicon для всех браузеров -->
+    <link rel="icon" href="/favicon-new.ico?v=103" type="image/x-icon">
+    <link rel="shortcut icon" href="/favicon-new.ico?v=103" type="image/x-icon">
+    
+    <!-- Дополнительные иконки для Apple/Safari -->
+    <link rel="apple-touch-icon" href="/favicon-new.ico?v=103">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <meta name="apple-mobile-web-app-title" content="CHINCH">
+    
+    <!-- Мета-теги -->
+    <meta name="description" content="Гастробистро CHINCH в Москве — авторская кухня, доставка, бронирование столиков. Меню с фото и ценами. Ресторан для ужинов и мероприятий.">
+    
+    <!-- Open Graph теги для соцсетей -->
+    <meta property="og:title" content="CHINCH Restaurant - авторская кухня">
+    <meta property="og:description" content="Гастробистро CHINCH в Москве — авторская кухня, доставка, бронирование">
+    <meta property="og:image" content="https://chinch.moscow/logo/logo-chinch.png">
+    <meta property="og:url" content="https://chinch.moscow">
+    <meta property="og:type" content="website">
+    
+    <!-- Яндекс.Метрика -->
+    <script type="text/javascript">
+      (function(m,e,t,r,i,k,a){
+          m[i]=m[i]||function(){(m[i].a=m[i].a||[]).push(arguments)};
+          m[i].l=1*new Date();
+          for (var j = 0; j < document.scripts.length; j++) {if (document.scripts[j].src === r) { return; }}
+          k=e.createElement(t),a=e.getElementsByTagName(t)[0],k.async=1,k.src=r,a.parentNode.insertBefore(k,a)
+      })(window, document,'script','https://mc.yandex.ru/metrika/tag.js?id=106210858', 'ym');
+
+      ym(106210858, 'init', {ssr:true, webvisor:true, clickmap:true, ecommerce:"dataLayer", accurateTrackBounce:true, trackLinks:true});
+    </script>
+    <noscript>
+      <div>
+        <img src="https://mc.yandex.ru/watch/106210858" style="position:absolute; left:-9999px;" alt="" />
+      </div>
+    </noscript>
+    <!-- /Яндекс.Метрика -->
+    
     <!-- Шрифты -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;400;500;600;700&family=Playfair+Display:wght@400;500;600;700&family=EB+Garamond:wght@400;500;600&display=swap" rel="stylesheet">
-    <!-- Мета-теги -->
-    <meta name="description" content="Ресторан CHINCH - авторская кухня, изысканные блюда и коктейли в центре Москвы">
   </head>
   <body>
     <div id="app"></div>
+    <script>
+      // Обработка редиректа с 404 страницы для GitHub Pages SPA
+      const urlParams = new URLSearchParams(window.location.search);
+      const redirectPath = urlParams.get('redirect');
+      if (redirectPath && redirectPath !== '/') {
+        window.history.replaceState(null, '', redirectPath);
+      }
+    </script>
     <script type="module" src="/src/main.js"></script>
   </body>
 </html>

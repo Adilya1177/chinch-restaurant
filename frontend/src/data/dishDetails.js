@@ -65,6 +65,10 @@ const dishDetails = {
     photo: "/images/dishes/КРОКЕТЫ-БАТАТ-ЛОСОСЬ-ТОМАТ.jpeg",
     composition: "Состав будет добавлен позже"
   },
+  "КРОКЕТЫ КРАБ, КЛУБНИКА, ТОМАТ": {
+    photo: "/images/dishes/КРОКЕТЫ-КРАБ-КЛУБНИКА-ТОМАТ.png",
+    composition: "Состав будет добавлен позже"
+  },
   "КРУАССАН, ИНДЕЙКА, СКРЭМБЛ": {
     photo: "/images/dishes/KRUASSAN-INDEIKA-SCREMBL.jpeg",
     composition: "Состав будет добавлен позже"
@@ -79,6 +83,10 @@ const dishDetails = {
   },
   "ЛОСОСЬ НА ГРИЛЕ, ПЮРЕ ИЗ ЦВЕТНОЙ КАПУСТЫ": {
     photo: "/images/dishes/LOSOS-NA-GRILE-PURE-IZ-CVETNOJ-KAPUSTY.jpeg",
+    composition: "Состав будет добавлен позже"
+  },
+  "ЛОСОСЬ ПОД ШУБОЙ": {
+    photo: "/images/dishes/LOSOS-POD-SHUBOJ.jpeg",
     composition: "Состав будет добавлен позже"
   },
   "ЛОСОСЬ, ПАРМЕЗАН, РУККОЛА": {
@@ -137,6 +145,10 @@ const dishDetails = {
     photo: "/images/dishes/SALAT-ROSTBIF-KARTOFEL-PECHENNYJ-BAKLAZHAN.jpeg",
     composition: "Состав будет добавлен позже"
   },
+  "САЛАТ С УТИНОЙ ГРУДКОЙ, ПЕРСИК": {
+    photo: "/images/dishes/SALAT-S-UTINOJ-GRUDKOJ-PERSIK.jpeg",
+    composition: "Состав будет добавлен позже"
+  },
   "СВЕКЛА, ТРЮФЕЛЬ, ФИСТАШКА": {
     photo: "/images/dishes/СВЕКЛА-ТРЮФЕЛЬ-ФИСТАШКА.jpeg",
     composition: "Состав будет добавлен позже"
@@ -159,6 +171,10 @@ const dishDetails = {
   },
   "ТЫКВЕННЫЙ КРЕМ-СУП, ЛОСОСЬ": {
     photo: "/images/dishes/TYKVENNYJ-KREM-SUP-LOSOS.jpeg",
+    composition: "Состав будет добавлен позже"
+  },
+  "УТИНАЯ ГРУДКА, РАТАТУЙ, МЕД": {
+    photo: "/images/dishes/UTINAYA-GRUDKA-RATATUJ-MED.jpeg",
     composition: "Состав будет добавлен позже"
   },
   "ФРИ, ПАРМЕЗАН, ТРЮФЕЛЬ": {
@@ -185,6 +201,10 @@ const dishDetails = {
     photo: "/images/dishes/ШАКШУКА-КОЛБАСКИ-ФЕТА-ШПИНАТ.jpeg",
     composition: "Состав будет добавлен позже"
   },
+  "ОЛИВЬЕ КРАБ / БРИСКЕТ, ПЮРЕ ИЗ ЗЕЛЕНОГО ГОРОШКА, КРАСНАЯ ИКРА": {
+    photo: "/images/dishes/OLIVE-KRAB-BRISKET-PURE-IZ-ZELENOGO-GOROSHKA-KRASNAYA-IKRA.jpeg",
+    composition: "Состав будет добавлен позже"
+  },
   "ГЛАЗУНЬЯ": {
     photo: "/images/dishes/ГЛАЗУНЬЯ.png",
     composition: "Состав будет добавлен позже"
@@ -203,6 +223,13 @@ const dishDetails = {
   },
   "ГОВЯЖЬИ ЩЕКИ, ОРЗО, ШПИНАТ": {
     photo: "/images/dishes/ГОВЯЖЬИ-ЩЕКИ-ОРЗО-ШПИНАТ.jpg",
+    composition: "Состав будет добавлен позже"
+  },
+  "КРУАССАН / БЛИНЫ, КРАСНАЯ ИКРА, МАСЛО С ТРАВАМИ": {
+    photos: [
+      "/images/dishes/KRUSSAN-KRASNAYA-IKRA-MASLO-S-TRAVAMI.jpg",
+      "/images/dishes/BLINY-KRASNAYA-IKRA-MASLO-S-TRAVAMI.jpg"
+    ],
     composition: "Состав будет добавлен позже"
   },
   "ФРАНЦУЗСКИЙ ОМЛЕТ, ИНДЕЙКА": {

@@ -27,7 +27,6 @@
           <h3 class="footer-title">КОНТАКТЫ</h3>
           <p class="footer-info">ул. Берзарина, 28А, корп. 4, Москва</p>
           <p class="footer-info">+7 (915) 054-96-06</p>
-          <p class="footer-info">info@chinch.ru</p>
         </div>
         
         <div class="footer-section">
