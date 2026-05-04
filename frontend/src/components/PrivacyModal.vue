@@ -94,14 +94,13 @@
           <ul>
             <li>Email: <a href="mailto:chinch.moscow@gmail.com">chinch.moscow@gmail.com</a></li>
             <li>Телефон: [Ваш номер телефона]</li>
-            <li>Адрес: [Юридический адрес]</li>
+            <li>Адрес: ул. Берзарина, 28А, корп. 4, Москва</li>
           </ul>
         </section>
 
         <section>
           <h3>11. Изменение Политики</h3>
           <p>Оператор имеет право вносить изменения в настоящую Политику. Новая версия Политики вступает в силу с момента ее размещения на сайте, если иное не предусмотрено новой версией Политики.</p>
-          <p>Актуальная версия всегда доступна по адресу: <a href="https://chinch.moscow/privacy-policy" target="_blank">https://chinch.moscow/privacy-policy</a>.</p>
         </section>
       </div>
       
