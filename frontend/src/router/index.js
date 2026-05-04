@@ -1,7 +1,7 @@
 import { createRouter, createWebHistory } from 'vue-router'
 
 const router = createRouter({
-  history: createWebHistory('/chinch-restaurant/'), // ИЗМЕНИТЕ ЭТО!
+  history: createWebHistory('/chinch-restaurant/'),
   routes: [
     {
       path: '/',

@@ -1,15 +1,4 @@
-// frontend/src/services/api.js
-import axios from 'axios';
-
-// Определяем, где мы находимся
-const isLocalhost = window.location.hostname === 'localhost' || 
-                    window.location.hostname === '127.0.0.1';
-const isGitHubPages = window.location.hostname.includes('github.io');
-
-console.log(`📍 Определено окружение: ${isLocalhost ? 'Локально' : 'Продакшен'}`);
-console.log(`🌐 Хост: ${window.location.hostname}`);
-
-// МОК-ДАННЫЕ для GitHub Pages (ПОЛНОЕ РЕАЛЬНОЕ МЕНЮ - 161 блюдо)
+// МОК-ДАННЫЕ (полное меню - 131 блюдо)
 const mockMenuData = [
   // ============ ЕДА ============
   
@@ -36,139 +25,139 @@ const mockMenuData = [
     composition: "Крокеты из батата, пармезан, моцарелла, фета, панировочные сухари, слабосоленый лосось, романо, редис, гуакамоле, салат из томатов с петрушкой"
   },
   {
-    id: 4, name: "КРОКЕТЫ КРАБ, КЛУБНИКА, ТОМАТ",
-    description: "", priceInfo: "", category: "ЗАВТРАКИ НА ВЕСЬ ДЕНЬ",
-    mainCategory: "Еда", subCategory: "ЗАВТРАКИ НА ВЕСЬ ДЕНЬ",
-    volumeInfo: null, basePrice: "1190 р", options: null, isAddon: false,
-    composition: "3 крокета краб-креветка, сливки 33%, пармезан, гранулированный чеснок, петрушка, льезон, сухари панко, шпинат свежий, руккола, клубника, фета, салат из томатов с петрушкой, яйцо, гуакамоле-киви"
-  },
-  {
-    id: 5, name: "ОЛАДЬИ ИЗ ЦУКИНИ, ЛОСОСЬ, СТРАЧАТЕЛЛА",
+    id: 4, name: "ОЛАДЬИ ИЗ ЦУКИНИ, ЛОСОСЬ, СТРАЧАТЕЛЛА",
     description: "", priceInfo: "", category: "ЗАВТРАКИ НА ВЕСЬ ДЕНЬ",
     mainCategory: "Еда", subCategory: "ЗАВТРАКИ НА ВЕСЬ ДЕНЬ",
     volumeInfo: null, basePrice: "790 р", options: null, isAddon: false,
     composition: "Цукини, мука, яйцо, соль, перец, лосось, страчателла, лук сибулет, петрушка, зеленое масло (растительное масло, шпинат, петрушка)"
   },
   {
-    id: 6, name: "ШАКШУКА, КОЛБАСКИ, ФЕТА, ШПИНАТ",
+    id: 5, name: "ШАКШУКА, КОЛБАСКИ, ФЕТА, ШПИНАТ",
     description: "", priceInfo: "", category: "ЗАВТРАКИ НА ВЕСЬ ДЕНЬ",
     mainCategory: "Еда", subCategory: "ЗАВТРАКИ НА ВЕСЬ ДЕНЬ",
     volumeInfo: null, basePrice: "770 р", options: null, isAddon: false,
     composition: "Томаты, красный лук ялтинский, колбаска говяжья, перец запеченный ромиро, яйца, томатный соус, фета, шпинат, лук маринованный, сливочное масло, чесночное масло, лук сибулет, петрушка, тартин"
   },
   {
-    id: 7, name: "ФРАНЦУЗСКИЙ ОМЛЕТ, ИНДЕЙКА",
+    id: 6, name: "ФРАНЦУЗСКИЙ ОМЛЕТ, ИНДЕЙКА",
     description: "", priceInfo: "", category: "ЗАВТРАКИ НА ВЕСЬ ДЕНЬ",
     mainCategory: "Еда", subCategory: "ЗАВТРАКИ НА ВЕСЬ ДЕНЬ",
     volumeInfo: null, basePrice: "690 р", options: null, isAddon: false,
     composition: "Яйца, соль, перец, пастрами индейка, гауда, романо, редис, томаты с петрушкой, греческая заправка"
   },
   {
-    id: 8, name: "ОВСЯНАЯ КАША, ГОЛУБИКА, БАНАН",
+    id: 7, name: "ОВСЯНАЯ КАША, ГОЛУБИКА, БАНАН",
     description: "", priceInfo: "", category: "ЗАВТРАКИ НА ВЕСЬ ДЕНЬ",
     mainCategory: "Еда", subCategory: "ЗАВТРАКИ НА ВЕСЬ ДЕНЬ",
     volumeInfo: null, basePrice: "450 р", options: null, isAddon: false,
     composition: "Овсяные хлопья, молоко, ванильный сахар, банан, голубика"
   },
   {
-    id: 9, name: "РИСОВАЯ КАША, КЛУБНИКА, ГРАНОЛА",
+    id: 8, name: "РИСОВАЯ КАША, КЛУБНИКА, ГРАНОЛА",
     description: "", priceInfo: "", category: "ЗАВТРАКИ НА ВЕСЬ ДЕНЬ",
     mainCategory: "Еда", subCategory: "ЗАВТРАКИ НА ВЕСЬ ДЕНЬ",
     volumeInfo: null, basePrice: "480 р", options: null, isAddon: false,
     composition: "Рис, молоко, ванильный сахар, гранола (изюм, фундук, миндаль, овсяные хлопья, мед), клубника"
   },
   {
-    id: 10, name: "ПАНИНИ, ПАСТРАМИ, ТОМАТ, ГАУДА",
+    id: 9, name: "ПАНИНИ, ПАСТРАМИ, ТОМАТ, ГАУДА",
     description: "", priceInfo: "", category: "ЗАВТРАКИ НА ВЕСЬ ДЕНЬ",
     mainCategory: "Еда", subCategory: "ЗАВТРАКИ НА ВЕСЬ ДЕНЬ",
     volumeInfo: null, basePrice: "590 р", options: null, isAddon: false,
     composition: "Панини, соус сэндвичный (горчица зернистая, майонез, кетчуп), гауда, пастрами говядина, томаты"
   },
   {
-    id: 11, name: "КРУАССАН, ЛОСОСЬ, КРЕМ-ЧИЗ, АВОКАДО",
+    id: 10, name: "КРУАССАН, ЛОСОСЬ, КРЕМ-ЧИЗ, АВОКАДО",
     description: "", priceInfo: "", category: "ЗАВТРАКИ НА ВЕСЬ ДЕНЬ",
     mainCategory: "Еда", subCategory: "ЗАВТРАКИ НА ВЕСЬ ДЕНЬ",
     volumeInfo: null, basePrice: "630 р", options: null, isAddon: false,
     composition: "Круассан, крем-чиз, гуакамоле, авокадо, масло чесночное, лимонный фреш, соль, перец, лосось с/с, руккола"
   },
   {
-    id: 12, name: "КРУАССАН, ИНДЕЙКА, СКРЭМБЛ",
+    id: 11, name: "КРУАССАН, ИНДЕЙКА, СКРЭМБЛ",
     description: "", priceInfo: "", category: "ЗАВТРАКИ НА ВЕСЬ ДЕНЬ",
     mainCategory: "Еда", subCategory: "ЗАВТРАКИ НА ВЕСЬ ДЕНЬ",
     volumeInfo: null, basePrice: "650 р", options: null, isAddon: false,
     composition: "Круассан, пастрами индейка, соус бургерный (майонез, соус кимчи), романо, запеченный перец рамиро, скрэмбл, сливочное масло, пармезан"
   },
   {
-    id: 13, name: "КРУАССАН, ТРЮФЕЛЬ, СТРАЧАТЕЛЛА, ТОМАТ",
+    id: 12, name: "КРУАССАН, ТРЮФЕЛЬ, СТРАЧАТЕЛЛА, ТОМАТ",
     description: "", priceInfo: "", category: "ЗАВТРАКИ НА ВЕСЬ ДЕНЬ",
     mainCategory: "Еда", subCategory: "ЗАВТРАКИ НА ВЕСЬ ДЕНЬ",
     volumeInfo: null, basePrice: "590 р", options: null, isAddon: false,
     composition: "Круассан, страчателла, томат, трюфельная паста"
   },
   {
-    id: 14, name: "СЫРНИКИ, КЛУБНИКА, ЛИМОННАЯ СМЕТАНА",
+    id: 13, name: "СЫРНИКИ, КЛУБНИКА, ЛИМОННАЯ СМЕТАНА",
     description: "", priceInfo: "", category: "ЗАВТРАКИ НА ВЕСЬ ДЕНЬ",
     mainCategory: "Еда", subCategory: "ЗАВТРАКИ НА ВЕСЬ ДЕНЬ",
     volumeInfo: null, basePrice: "610 р", options: null, isAddon: false,
     composition: "Сырники (творог, ванильный сахар, желток, мука), лепестки миндаля, клубника, лимонная сметана, малиновое варенье, сублимированная малина"
   },
   {
-    id: 15, name: "ЙОГУРТ, ЯГОДЫ, МИНДАЛЬ",
+    id: 14, name: "ЙОГУРТ, ЯГОДЫ, МИНДАЛЬ",
     description: "", priceInfo: "", category: "ЗАВТРАКИ НА ВЕСЬ ДЕНЬ",
     mainCategory: "Еда", subCategory: "ЗАВТРАКИ НА ВЕСЬ ДЕНЬ",
     volumeInfo: null, basePrice: "490 р", options: null, isAddon: false,
     composition: "Греческий йогурт, малиновое варенье, цедра лайма, голубика, миндаль"
   },
-
-  // NEW YEAR SPECIAL (7 блюд)
   {
-    id: 16, name: "БРИОШЬ, РОСТБИФ, ЯЙЦО",
-    description: "", priceInfo: "", category: "NEW YEAR SPECIAL",
-    mainCategory: "Еда", subCategory: "NEW YEAR SPECIAL",
+    id: 15, name: "СКРЭМБЛ, КРЕВЕТКИ, ЗАПЕЧЕННЫЙ ПЕРЕЦ, ОЛИВКИ",
+    description: "", priceInfo: "", category: "ЗАВТРАКИ НА ВЕСЬ ДЕНЬ",
+    mainCategory: "Еда", subCategory: "ЗАВТРАКИ НА ВЕСЬ ДЕНЬ",
+    volumeInfo: null, basePrice: "? р", options: null, isAddon: false,
+    composition: "Скрэмбл, креветки, перец рамиро, пармезан, оливки каламата, микс зелени"
+  },
+  {
+    id: 16, name: "СКРЭМБЛ, ТРЮФЕЛЬ, СТРАЧАТЕЛЛА",
+    description: "", priceInfo: "", category: "ЗАВТРАКИ НА ВЕСЬ ДЕНЬ",
+    mainCategory: "Еда", subCategory: "ЗАВТРАКИ НА ВЕСЬ ДЕНЬ",
+    volumeInfo: null, basePrice: "? р", options: null, isAddon: false,
+    composition: "Скрэмбл, трюфель, страчателла, трюфельное масло, зелень"
+  },
+
+  // СПЕШЛ (7 блюд)
+  {
+    id: 17, name: "БРИОШЬ, РОСТБИФ, ЯЙЦО",
+    description: "", priceInfo: "", category: "СПЕШЛ",
+    mainCategory: "Еда", subCategory: "СПЕШЛ",
     volumeInfo: null, basePrice: "990 р", options: null, isAddon: false,
     composition: "Бриошь, сливочное масло, бургерный соус (соус кимчи, майонез), руккола, томаты узбекские, ростбиф (вырезка, соль, чеснок, сливочное масло), яйцо, сибулет, черри маринованные (кимчи, соль, петрушка, вода), медово-горчичная заправка (мед, горчица зернистая, сок лайма, оливковое масло), чили масло (хлопья чили, масло растительное)"
   },
   {
-    id: 17, name: "САЛАТ РОСТБИФ, КАРТОФЕЛЬ, ПЕЧЕННЫЙ БАКЛАЖАН",
-    description: "", priceInfo: "", category: "NEW YEAR SPECIAL",
-    mainCategory: "Еда", subCategory: "NEW YEAR SPECIAL",
+    id: 18, name: "САЛАТ РОСТБИФ, КАРТОФЕЛЬ, ПЕЧЕННЫЙ БАКЛАЖАН",
+    description: "", priceInfo: "", category: "СПЕШЛ",
+    mainCategory: "Еда", subCategory: "СПЕШЛ",
     volumeInfo: null, basePrice: "790 р", options: null, isAddon: false,
     composition: "Картофель бейби, ростбиф из говядины (вырезка, соль, чеснок, сливочное масло), печеный баклажан, томаты узбекские, шпинат, романо, лук ялтинский маринованный, соус кимчи (оливковое масло, соус кимчи, зернистая горчицы, сок лайма)"
   },
   {
-    id: 18, name: "ОЛИВЬЕ КРАБ / БРИСКЕТ, ПЮРЕ ИЗ ЗЕЛЕНОГО ГОРОШКА, КРАСНАЯ ИКРА",
-    description: "", priceInfo: "", category: "NEW YEAR SPECIAL",
-    mainCategory: "Еда", subCategory: "NEW YEAR SPECIAL",
-    volumeInfo: null, basePrice: "990 р", options: null, isAddon: false,
-    composition: "Краб / брикет, картофель, морковь, пюре горошек (горошек свежемороженый, сливочное масло, соль), яйца перепелиные, малосольные огурцы (огурцы, чеснок, соль, петрушка, соевый соус, соус кимчи), японский майонез, икра красная, зеленое масло (петрушка, укроп, растительное масло)"
+    id: 19, name: "КАЦУ-СЭНДВИЧ, ЦЫПЛЕНОК, ТОМАТ",
+    description: "", priceInfo: "", category: "СПЕШЛ",
+    mainCategory: "Еда", subCategory: "СПЕШЛ",
+    volumeInfo: null, basePrice: "? р", options: null, isAddon: false,
+    composition: "Шницель, микс зелени, томат, сладкий чили, бриошь"
   },
   {
-    id: 19, name: "САЛАТ С УТИНОЙ ГРУДКОЙ, ПЕРСИК",
-    description: "", priceInfo: "", category: "NEW YEAR SPECIAL",
-    mainCategory: "Еда", subCategory: "NEW YEAR SPECIAL",
-    volumeInfo: null, basePrice: "750 р", options: null, isAddon: false,
-    composition: "Руккола, шпинат, романо, персик консервированный, медово-горчичная заправка (мед, горчица зернистая, сок лайма, оливковое масло), варенье вишня, дор блю, арахис дробленный, утиная грудка"
+    id: 20, name: "ЗЕЛЕНЫЙ САЛАТ, АВОКАДО, БОБЫ",
+    description: "", priceInfo: "", category: "СПЕШЛ",
+    mainCategory: "Еда", subCategory: "СПЕШЛ",
+    volumeInfo: null, basePrice: "? р", options: null, isAddon: false,
+    composition: "Романо, руккола, шпинат, бобы, авокадо, огурец, микс семечек, запеченный цукини, гуакамоле, зеленое масло"
   },
   {
-    id: 20, name: "ЛОСОСЬ ПОД ШУБОЙ",
-    description: "", priceInfo: "", category: "NEW YEAR SPECIAL",
-    mainCategory: "Еда", subCategory: "NEW YEAR SPECIAL",
-    volumeInfo: null, basePrice: "810 р", options: null, isAddon: false,
-    composition: "Свекла, картофель, батат, лосось, лук-шалот, майонез, яйцо, лук сибулет"
+    id: 21, name: "ШНИЦЕЛЬ, РОМАНО, ЦЕЗАРЬ, ПАРМЕЗАН",
+    description: "", priceInfo: "", category: "СПЕШЛ",
+    mainCategory: "Еда", subCategory: "СПЕШЛ",
+    volumeInfo: null, basePrice: "? р", options: null, isAddon: false,
+    composition: "Куриный шницель, романо, айсберг, пармезан, соус цезарь"
   },
   {
-    id: 21, name: "КРУАССАН / БЛИНЫ, КРАСНАЯ ИКРА, МАСЛО С ТРАВАМИ",
-    description: "", priceInfo: "", category: "NEW YEAR SPECIAL",
-    mainCategory: "Еда", subCategory: "NEW YEAR SPECIAL",
-    volumeInfo: null, basePrice: "890 р", options: null, isAddon: false,
-    composition: "Круассан / блины (молоко, мука, яйца, сахар, соль, растительное масло, сливочное масло), икра, сливочное масло, лук сибулет, зеленое масло, черный перец"
-  },
-  {
-    id: 22, name: "УТИНАЯ ГРУДКА, РАТАТУЙ, МЕД",
-    description: "", priceInfo: "", category: "NEW YEAR SPECIAL",
-    mainCategory: "Еда", subCategory: "NEW YEAR SPECIAL",
-    volumeInfo: null, basePrice: "950 р", options: null, isAddon: false,
-    composition: "Утиная грудка, рататуй овощной (томат, кабачок, баклажан, оливковое масло, соль, перец), томатный соус (томаты с/с, соль, перец, чеснок, лук, орегано), пармезан, соль, перец, оливковое масло, медово-горчичная заправка (мед, горчица зернистая, сок лайма, оливковое масло), масло зеленое (петрушка, укроп, растительное масло)"
+    id: 22, name: "ТОСТ, КРЕВЕТКИ, АВОКАДО, ЧЕРРИ",
+    description: "", priceInfo: "", category: "СПЕШЛ",
+    mainCategory: "Еда", subCategory: "СПЕШЛ",
+    volumeInfo: null, basePrice: "? р", options: null, isAddon: false,
+    composition: "Тартин луковый, креветки, сладкий чили, авокадо, зеленый лук"
   },
 
   // СУПЫ (3 блюда)
@@ -196,7 +185,7 @@ const mockMenuData = [
 
   // РИМСКАЯ ПИЦЦА (4 блюда)
   {
-    id: 26, name: "ЛОСОСЬ, КРАСНАЯ ИКРА, ПАРМЕЗАН",
+    id: 26, name: "ЛОСОСЬ, ПАРМЕЗАН, РУККОЛА",
     description: "", priceInfo: "", category: "РИМСКАЯ ПИЦЦА",
     mainCategory: "Еда", subCategory: "РИМСКАЯ ПИЦЦА",
     volumeInfo: null, basePrice: "1750 р", options: null, isAddon: false,
@@ -412,7 +401,7 @@ const mockMenuData = [
     composition: "Паста отварная, щеки, масло растительное, карамелезированный лук, шампиньоны, чеснок, сливки 33%, устричный соус, соль, перец, пармезан, гауда"
   },
 
-  // БЛЮДА ИЗ ЯИЦ (1 основное + 13 дополнений = 14 блюд)
+  // БЛЮДА ИЗ ЯИЦ (3 основных + 13 дополнений = 16 блюд)
   {
     id: 56, name: "ГЛАЗУНЬЯ",
     description: "Яичница глазунья", priceInfo: "", category: "БЛЮДА ИЗ ЯИЦ",
@@ -525,487 +514,14 @@ const mockMenuData = [
     volumeInfo: null, basePrice: "250 р", options: null, isAddon: true,
     composition: null
   },
-
-  // ============ НАПИТКИ ============
-  // Для напитков composition: null (или можно добавить общее описание)
-
-  // КОФЕ (19 напитков)
-  {
-    id: 70, name: "ЭСПРЕССО",
-    description: "", priceInfo: "", category: "КОФЕ",
-    mainCategory: "Напитки", subCategory: "КОФЕ",
-    volumeInfo: "35мл", basePrice: "230 р", options: null, isAddon: false,
-    composition: null
-  },
-  {
-    id: 71, name: "АМЕРИКАНО",
-    description: "", priceInfo: "", category: "КОФЕ",
-    mainCategory: "Напитки", subCategory: "КОФЕ",
-    volumeInfo: "250мл", basePrice: "250 р", options: null, isAddon: false,
-    composition: null
-  },
-  {
-    id: 72, name: "ФИЛЬТР-КОФЕ",
-    description: "", priceInfo: "240 | 260 р", category: "КОФЕ",
-    mainCategory: "Напитки", subCategory: "КОФЕ",
-    volumeInfo: "250 | 350 мл", basePrice: null, options: null, isAddon: false,
-    composition: null
-  },
-  {
-    id: 73, name: "КАПУЧИНО",
-    description: "", priceInfo: "280 | 330 р", category: "КОФЕ",
-    mainCategory: "Напитки", subCategory: "КОФЕ",
-    volumeInfo: "250 | 350 мл", basePrice: null, options: null, isAddon: false,
-    composition: null
-  },
-  {
-    id: 74, name: "ЛАТТЕ",
-    description: "", priceInfo: "310 | 350 р", category: "КОФЕ",
-    mainCategory: "Напитки", subCategory: "КОФЕ",
-    volumeInfo: "350 | 450 мл", basePrice: null, options: null, isAddon: false,
-    composition: null
-  },
-  {
-    id: 75, name: "ФЛЭТ УАЙТ",
-    description: "", priceInfo: "", category: "КОФЕ",
-    mainCategory: "Напитки", subCategory: "КОФЕ",
-    volumeInfo: "250мл", basePrice: "330 р", options: null, isAddon: false,
-    composition: null
-  },
-  {
-    id: 76, name: "РАФ",
-    description: "", priceInfo: "", category: "КОФЕ",
-    mainCategory: "Напитки", subCategory: "КОФЕ",
-    volumeInfo: "350мл", basePrice: "420 р", options: "ВАНИЛЬ | ЦИТРУС | ПРАГА | ХАЛВА", isAddon: false,
-    composition: null
-  },
-  {
-    id: 77, name: "PAФ CHINCH",
-    description: "", priceInfo: "", category: "КОФЕ",
-    mainCategory: "Напитки", subCategory: "КОФЕ",
-    volumeInfo: "350мл", basePrice: "450 р", options: null, isAddon: false,
-    composition: null
-  },
-  {
-    id: 78, name: "МАТЧА ЛАТТЕ",
-    description: "", priceInfo: "330 | 380 р", category: "КОФЕ",
-    mainCategory: "Напитки", subCategory: "КОФЕ",
-    volumeInfo: "250 | 350 мл", basePrice: null, options: null, isAddon: false,
-    composition: null
-  },
-  {
-    id: 79, name: "КАКАО-ШОКОЛАД",
-    description: "", priceInfo: "", category: "КОФЕ",
-    mainCategory: "Напитки", subCategory: "КОФЕ",
-    volumeInfo: "350 мл", basePrice: "370 р", options: null, isAddon: false,
-    composition: null
-  },
-  {
-    id: 80, name: "БЕЛЫЙ КАКАО, ФИСТАШКА, СОЛЬ",
-    description: "", priceInfo: "", category: "КОФЕ",
-    mainCategory: "Напитки", subCategory: "КОФЕ",
-    volumeInfo: "350 мл", basePrice: "420 р", options: null, isAddon: false,
-    composition: null
-  },
-  {
-    id: 81, name: "ЛАТТЕ СИНГАПУР",
-    description: "", priceInfo: "", category: "КОФЕ",
-    mainCategory: "Напитки", subCategory: "КОФЕ",
-    volumeInfo: "350 мл", basePrice: "450 р", options: null, isAddon: false,
-    composition: null
-  },
-  {
-    id: 82, name: "ЛАТТЕ, БЕЛЫЙ ШОКОЛАД, ФИСТАШКА",
-    description: "", priceInfo: "", category: "КОФЕ",
-    mainCategory: "Напитки", subCategory: "КОФЕ",
-    volumeInfo: "350 мл", basePrice: "420 р", options: null, isAddon: false,
-    composition: null
-  },
-  {
-    id: 83, name: "ЛАТТЕ ПТИЧЬЕ МОЛОКО",
-    description: "", priceInfo: "", category: "КОФЕ",
-    mainCategory: "Напитки", subCategory: "КОФЕ",
-    volumeInfo: "350 мл", basePrice: "420 р", options: null, isAddon: false,
-    composition: null
-  },
-  {
-    id: 84, name: "БАМБЛ-КАРАМЕЛЬ",
-    description: "Эспрессо, карамель, молоко", priceInfo: "420 / 450 / 850 р", 
-    category: "КОФЕ", mainCategory: "Напитки", subCategory: "КОФЕ",
-    volumeInfo: "250 мл", basePrice: null, options: "ГРЕЙПФРУТ | ГРАНАТ", isAddon: false,
-    composition: null
-  },
-  {
-    id: 85, name: "ЭСПРЕССО-ТОНИК",
-    description: "", priceInfo: "", category: "КОФЕ",
-    mainCategory: "Напитки", subCategory: "КОФЕ",
-    volumeInfo: "350 мл", basePrice: "390 р", options: null, isAddon: false,
-    composition: null
-  },
-  {
-    id: 86, name: "РАСТИТЕЛЬНОЕ МОЛОКО",
-    description: "", priceInfo: "", category: "КОФЕ",
-    mainCategory: "Напитки", subCategory: "КОФЕ",
-    volumeInfo: null, basePrice: "90 р", options: "КОКОСОВОЕ | МИНДАЛЬНОЕ | ФУНДУЧНОЕ | БАНАНОВОЕ | БЕЗЛАКТОЗНОЕ", isAddon: false,
-    composition: null
-  },
-
-  // ФРЕШ (4 напитка)
-  {
-    id: 87, name: "АПЕЛЬСИН",
-    description: "", priceInfo: "", category: "ФРЕШ",
-    mainCategory: "Напитки", subCategory: "ФРЕШ",
-    volumeInfo: "200 мл", basePrice: "370 р", options: null, isAddon: false,
-    composition: null
-  },
-  {
-    id: 88, name: "ГРЕЙПФРУТ",
-    description: "", priceInfo: "", category: "ФРЕШ",
-    mainCategory: "Напитки", subCategory: "ФРЕШ",
-    volumeInfo: "200 мл", basePrice: "370 р", options: null, isAddon: false,
-    composition: null
-  },
-  {
-    id: 89, name: "МАНДАРИН",
-    description: "", priceInfo: "", category: "ФРЕШ",
-    mainCategory: "Напитки", subCategory: "ФРЕШ",
-    volumeInfo: "200 мл", basePrice: "470 р", options: null, isAddon: false,
-    composition: null
-  },
-  {
-    id: 90, name: "ГРАНАТ",
-    description: "", priceInfo: "", category: "ФРЕШ",
-    mainCategory: "Напитки", subCategory: "ФРЕШ",
-    volumeInfo: "200 мл", basePrice: "790 р", options: null, isAddon: false,
-    composition: null
-  },
-
-  // SPECIAL (9 напитков)
-  {
-    id: 91, name: "СИБИРСКИЙ ЛАТТЕ",
-    description: "", priceInfo: "", category: "SPECIAL",
-    mainCategory: "Напитки", subCategory: "SPECIAL",
-    volumeInfo: "350 мл", basePrice: "450 р", options: null, isAddon: false,
-    composition: null
-  },
-  {
-    id: 92, name: "РАФ МАСАЛА",
-    description: "", priceInfo: "", category: "SPECIAL",
-    mainCategory: "Напитки", subCategory: "SPECIAL",
-    volumeInfo: "350 мл", basePrice: "450 р", options: null, isAddon: false,
-    composition: null
-  },
-  {
-    id: 93, name: "ЛАТТЕ АРАХИС",
-    description: "", priceInfo: "", category: "SPECIAL",
-    mainCategory: "Напитки", subCategory: "SPECIAL",
-    volumeInfo: "350 мл", basePrice: "420 р", options: null, isAddon: false,
-    composition: null
-  },
-  {
-    id: 94, name: "ЛАТТЕ ИМБИРНЫЙ ПРЯНИК",
-    description: "", priceInfo: "", category: "SPECIAL",
-    mainCategory: "Напитки", subCategory: "SPECIAL",
-    volumeInfo: "350 мл", basePrice: "420 р", options: null, isAddon: false,
-    composition: null
-  },
-  {
-    id: 95, name: "ГЛИНТВЕЙН Б/А, ВИШНЯ, БАРБАРИС",
-    description: "", priceInfo: "", category: "SPECIAL",
-    mainCategory: "Напитки", subCategory: "SPECIAL",
-    volumeInfo: "250 мл", basePrice: "490 р", options: null, isAddon: false,
-    composition: null
-  },
-  {
-    id: 96, name: "ЗИМНИЙ БАМБЛ, МАНДАРИН",
-    description: "", priceInfo: "", category: "SPECIAL",
-    mainCategory: "Напитки", subCategory: "SPECIAL",
-    volumeInfo: "350 мл", basePrice: "490 р", options: null, isAddon: false,
-    composition: null
-  },
-  {
-    id: 97, name: "АЛТАЙСКИЙ ЧАЙ, КЛЮКВА, МОЖЖЕВЕЛЬНИК",
-    description: "", priceInfo: "", category: "SPECIAL",
-    mainCategory: "Напитки", subCategory: "SPECIAL",
-    volumeInfo: "500 мл", basePrice: "550 р", options: null, isAddon: false,
-    composition: null
-  },
-  {
-    id: 98, name: "СМОРОДИНА, АПЕЛЬСИН, МАСАЛА",
-    description: "", priceInfo: "", category: "SPECIAL",
-    mainCategory: "Напитки", subCategory: "SPECIAL",
-    volumeInfo: "500 мл", basePrice: "550 р", options: null, isAddon: false,
-    composition: null
-  },
-  {
-    id: 99, name: "МОРОШКА, ПИХТА, МАЛИНА",
-    description: "", priceInfo: "", category: "SPECIAL",
-    mainCategory: "Напитки", subCategory: "SPECIAL",
-    volumeInfo: "500 мл", basePrice: "550 р", options: null, isAddon: false,
-    composition: null
-  },
-
-  // ХОЛОДНЫЕ НАПИТКИ (10 напитков)
-  {
-    id: 100, name: "АПЕРОЛЬ Б/А",
-    description: "", priceInfo: "", category: "ХОЛОДНЫЕ НАПИТКИ",
-    mainCategory: "Напитки", subCategory: "ХОЛОДНЫЕ НАПИТКИ",
-    volumeInfo: "250 мл", basePrice: "450 р", options: null, isAddon: false,
-    composition: null
-  },
-  {
-    id: 101, name: "ДЮШЕС",
-    description: "", priceInfo: "", category: "ХОЛОДНЫЕ НАПИТКИ",
-    mainCategory: "Напитки", subCategory: "ХОЛОДНЫЕ НАПИТКИ",
-    volumeInfo: "250 мл", basePrice: "410 р", options: null, isAddon: false,
-    composition: null
-  },
-  {
-    id: 102, name: "КЛУБНИКА-МЯТА",
-    description: "", priceInfo: "", category: "ХОЛОДНЫЕ НАПИТКИ",
-    mainCategory: "Напитки", subCategory: "ХОЛОДНЫЕ НАПИТКИ",
-    volumeInfo: "250 мл", basePrice: "410 р", options: null, isAddon: false,
-    composition: null
-  },
-  {
-    id: 103, name: "ГРЕЙПФРУТ, БУРБОНСКАЯ ВАНИЛЬ",
-    description: "", priceInfo: "", category: "ХОЛОДНЫЕ НАПИТКИ",
-    mainCategory: "Напитки", subCategory: "ХОЛОДНЫЕ НАПИТКИ",
-    volumeInfo: "250 мл", basePrice: "470 р", options: null, isAddon: false,
-    composition: null
-  },
-  {
-    id: 104, name: "МАНГО-МАРАКУЙЯ",
-    description: "", priceInfo: "", category: "ХОЛОДНЫЕ НАПИТКИ",
-    mainCategory: "Напитки", subCategory: "ХОЛОДНЫЕ НАПИТКИ",
-    volumeInfo: "250 мл", basePrice: "450 р", options: null, isAddon: false,
-    composition: null
-  },
-  {
-    id: 105, name: "МАНГО, МАТЧА, КОКОС",
-    description: "", priceInfo: "", category: "ХОЛОДНЫЕ НАПИТКИ",
-    mainCategory: "Напитки", subCategory: "ХОЛОДНЫЕ НАПИТКИ",
-    volumeInfo: "250 мл", basePrice: "470 р", options: null, isAddon: false,
-    composition: null
-  },
-  {
-    id: 106, name: "ГРЕЙПФРУТ-КЛУБНИКА",
-    description: "", priceInfo: "", category: "ХОЛОДНЫЕ НАПИТКИ",
-    mainCategory: "Напитки", subCategory: "ХОЛОДНЫЕ НАПИТКИ",
-    volumeInfo: "250 мл", basePrice: "450 р", options: null, isAddon: false,
-    composition: null
-  },
-  {
-    id: 107, name: "ЗЕЛЕНОЕ ЯБЛОКО, САГАН-ДАЙЛЯ",
-    description: "", priceInfo: "", category: "ХОЛОДНЫЕ НАПИТКИ",
-    mainCategory: "Напитки", subCategory: "ХОЛОДНЫЕ НАПИТКИ",
-    volumeInfo: "250 мл", basePrice: "420 р", options: null, isAddon: false,
-    composition: null
-  },
-  {
-    id: 108, name: "ПЕРСИК, ЛАЙМ, ЭСТРАГОН",
-    description: "", priceInfo: "", category: "ХОЛОДНЫЕ НАПИТКИ",
-    mainCategory: "Напитки", subCategory: "ХОЛОДНЫЕ НАПИТКИ",
-    volumeInfo: "250 мл", basePrice: "450 р", options: null, isAddon: false,
-    composition: null
-  },
-  {
-    id: 109, name: "СМУЗИ КЛУБНИКА-КОКОС",
-    description: "", priceInfo: "", category: "ХОЛОДНЫЕ НАПИТКИ",
-    mainCategory: "Напитки", subCategory: "ХОЛОДНЫЕ НАПИТКИ",
-    volumeInfo: "400 мл", basePrice: "450 р", options: null, isAddon: false,
-    composition: null
-  },
-  {
-    id: 110, name: "СМУЗИ АПЕЛЬСИН-ЧЕРНИКА",
-    description: "", priceInfo: "", category: "ХОЛОДНЫЕ НАПИТКИ",
-    mainCategory: "Напитки", subCategory: "ХОЛОДНЫЕ НАПИТКИ",
-    volumeInfo: "400 мл", basePrice: "450 р", options: null, isAddon: false,
-    composition: null
-  },
-
-  // ЧАЙ / ТИЗАН (11 напитков)
-  {
-    id: 111, name: "ДАРДЖИЛИНГ",
-    description: "", priceInfo: "", category: "ЧАЙ / ТИЗАН",
-    mainCategory: "Напитки", subCategory: "ЧАЙ / ТИЗАН",
-    volumeInfo: "500 мл", basePrice: "390 р", options: null, isAddon: false,
-    composition: null
-  },
-  {
-    id: 112, name: "ЭРЛ ГРЕЙ",
-    description: "", priceInfo: "", category: "ЧАЙ / ТИЗАН",
-    mainCategory: "Напитки", subCategory: "ЧАЙ / ТИЗАН",
-    volumeInfo: "500 мл", basePrice: "390 р", options: null, isAddon: false,
-    composition: null
-  },
-  {
-    id: 113, name: "СЕНЧА",
-    description: "", priceInfo: "", category: "ЧАЙ / ТИЗАН",
-    mainCategory: "Напитки", subCategory: "ЧАЙ / ТИЗАН",
-    volumeInfo: "500 мл", basePrice: "390 р", options: null, isAddon: false,
-    composition: null
-  },
-  {
-    id: 114, name: "ЖАСМИН",
-    description: "", priceInfo: "", category: "ЧАЙ / ТИЗАН",
-    mainCategory: "Напитки", subCategory: "ЧАЙ / ТИЗАН",
-    volumeInfo: "500 мл", basePrice: "390 р", options: null, isAddon: false,
-    composition: null
-  },
-  {
-    id: 115, name: "СБОР ТРАВ",
-    description: "", priceInfo: "", category: "ЧАЙ / ТИЗАН",
-    mainCategory: "Напитки", subCategory: "ЧАЙ / ТИЗАН",
-    volumeInfo: "500 мл", basePrice: "390 р", options: null, isAddon: false,
-    composition: null
-  },
-  {
-    id: 116, name: "ГРЕЧИШНЫЙ ЧАЙ",
-    description: "", priceInfo: "", category: "ЧАЙ / ТИЗАН",
-    mainCategory: "Напитки", subCategory: "ЧАЙ / ТИЗАН",
-    volumeInfo: "500 мл", basePrice: "390 р", options: null, isAddon: false,
-    composition: null
-  },
-  {
-    id: 117, name: "ШИПОВНИК-МАЛИНА",
-    description: "", priceInfo: "", category: "ЧАЙ / ТИЗАН",
-    mainCategory: "Напитки", subCategory: "ЧАЙ / ТИЗАН",
-    volumeInfo: "500 мл", basePrice: "420 р", options: null, isAddon: false,
-    composition: null
-  },
-  {
-    id: 118, name: "ГРЕЧИХА-МАНГО",
-    description: "", priceInfo: "", category: "ЧАЙ / ТИЗАН",
-    mainCategory: "Напитки", subCategory: "ЧАЙ / ТИЗАН",
-    volumeInfo: "500 мл", basePrice: "550 р", options: null, isAddon: false,
-    composition: null
-  },
-  {
-    id: 119, name: "ОБЛЕПИХА-ЦИТРУС",
-    description: "", priceInfo: "", category: "ЧАЙ / ТИЗАН",
-    mainCategory: "Напитки", subCategory: "ЧАЙ / ТИЗАН",
-    volumeInfo: "500 мл", basePrice: "550 р", options: null, isAddon: false,
-    composition: null
-  },
-  {
-    id: 120, name: "ЧЕРНИКА-БРУСНИКА",
-    description: "", priceInfo: "", category: "ЧАЙ / ТИЗАН",
-    mainCategory: "Напитки", subCategory: "ЧАЙ / ТИЗАН",
-    volumeInfo: "500 мл", basePrice: "550 р", options: null, isAddon: false,
-    composition: null
-  },
-  {
-    id: 121, name: "МАЛИНА-МАРАКУЙЯ",
-    description: "", priceInfo: "", category: "ЧАЙ / ТИЗАН",
-    mainCategory: "Напитки", subCategory: "ЧАЙ / ТИЗАН",
-    volumeInfo: "500 мл", basePrice: "550 р", options: null, isAddon: false,
-    composition: null
-  },
-
-  // СОК БУТ. (3 напитка)
-  {
-    id: 122, name: "ЯБЛОКО",
-    description: "", priceInfo: "", category: "СОК БУТ.",
-    mainCategory: "Напитки", subCategory: "СОК БУТ.",
-    volumeInfo: "200 мл", basePrice: "290 р", options: null, isAddon: false,
-    composition: null
-  },
-  {
-    id: 123, name: "ВИШНЯ",
-    description: "", priceInfo: "", category: "СОК БУТ.",
-    mainCategory: "Напитки", subCategory: "СОК БУТ.",
-    volumeInfo: "200 мл", basePrice: "290 р", options: null, isAddon: false,
-    composition: null
-  },
-  {
-    id: 124, name: "ПЕРСИК",
-    description: "", priceInfo: "", category: "СОК БУТ.",
-    mainCategory: "Напитки", subCategory: "СОК БУТ.",
-    volumeInfo: "200 мл", basePrice: "290 р", options: null, isAddon: false,
-    composition: null
-  },
-
-  // ВОДА (1 напиток)
-  {
-    id: 125, name: "MARUHA",
-    description: "", priceInfo: "", category: "ВОДА",
-    mainCategory: "Напитки", subCategory: "ВОДА",
-    volumeInfo: "500 мл", basePrice: "350 р", options: "НЕГАЗИРОВАННАЯ | ГАЗИРОВАННАЯ", isAddon: false,
-    composition: null
-  },
-
-  // ПИВО (6 напитков)
-  {
-    id: 126, name: "ESTRELLA DAMN",
-    description: "", priceInfo: "", category: "ПИВО",
-    mainCategory: "Напитки", subCategory: "ПИВО",
-    volumeInfo: "330 мл", basePrice: "490 р", options: null, isAddon: false,
-    composition: null
-  },
-  {
-    id: 127, name: "INEDIT DAMN",
-    description: "", priceInfo: "", category: "ПИВО",
-    mainCategory: "Напитки", subCategory: "ПИВО",
-    volumeInfo: "330 мл", basePrice: "490 р", options: null, isAddon: false,
-    composition: null
-  },
-  {
-    id: 128, name: "CLAUSTHALER",
-    description: "", priceInfo: "", category: "ПИВО",
-    mainCategory: "Напитки", subCategory: "ПИВО",
-    volumeInfo: "330 мл", basePrice: "390 р", options: null, isAddon: false,
-    composition: null
-  },
-  {
-    id: 129, name: "LEFFE BRUNE",
-    description: "", priceInfo: "", category: "ПИВО",
-    mainCategory: "Напитки", subCategory: "ПИВО",
-    volumeInfo: "330 мл", basePrice: "490 р", options: null, isAddon: false,
-    composition: null
-  },
-  {
-    id: 130, name: "CIDER VAL DE RANCE",
-    description: "", priceInfo: "", category: "ПИВО",
-    mainCategory: "Напитки", subCategory: "ПИВО",
-    volumeInfo: "750 мл", basePrice: "1350 р", options: null, isAddon: false,
-    composition: null
-  },
-  {
-    id: 131, name: "CIDER GALIPETTE",
-    description: "", priceInfo: "", category: "ПИВО",
-    mainCategory: "Напитки", subCategory: "ПИВО",
-    volumeInfo: "330 мл", basePrice: "790 р", options: null, isAddon: false,
-    composition: null
-  }
 ];
 
 console.log('✅ Загружены мок-данные: ' + mockMenuData.length + ' блюд');
 
-// Функция для получения данных
-const getApiData = async () => {
-  // Если локально - используем реальный API
-  if (isLocalhost) {
-    try {
-      console.log('🚀 Локальный режим: запрос к реальному API');
-      const response = await axios.get('http://localhost:5277/api/menu');
-      return response.data;
-    } catch (error) {
-      console.error('❌ Ошибка API:', error);
-      return mockMenuData; // fallback
-    }
-  }
-  
-  // Если GitHub Pages - используем мок-данные
-  console.log('🌐 Режим GitHub Pages: используем демо-данные');
-  console.log('💡 Чтобы показать реальное меню, нужно развернуть бэкенд в облаке');
-  return mockMenuData;
-};
-
 // СЕРВИС ДЛЯ РАБОТЫ С МЕНЮ
 export const menuService = {
   async getDishes() {
-    return await getApiData();
+    return mockMenuData;
   },
   
   async getAll() {
@@ -1026,48 +542,6 @@ export const menuService = {
   }
 };
 
-// СЕРВИС ДЛЯ БРОНИРОВАНИЙ
-export const reservationService = {
-  async getAll() {
-    if (isLocalhost) {
-      try {
-        const response = await axios.get('http://localhost:5277/api/reservation');
-        return response.data;
-      } catch (error) {
-        console.error('Ошибка получения бронирований:', error);
-        return [];
-      }
-    }
-    return [];
-  },
-  
-  async create(reservation) {
-    if (isLocalhost) {
-      try {
-        await axios.post('http://localhost:5277/api/reservation', reservation);
-        return { 
-          success: true, 
-          message: 'Бронирование успешно отправлено!' 
-        };
-      } catch (error) {
-        console.error('Ошибка бронирования:', error);
-        return { 
-          success: false, 
-          message: 'Ошибка при отправке' 
-        };
-      }
-    }
-    
-    // Для GitHub Pages - демо-режим
-    console.log('📅 Демо-бронирование:', reservation);
-    return { 
-      success: true, 
-      message: 'Демо-режим: бронирование имитировано (на GitHub Pages)' 
-    };
-  }
-};
-
 export default {
-  menuService,
-  reservationService
+  menuService
 };

@@ -143,6 +143,17 @@
               ></textarea>
             </div>
             
+            <!-- ЧЕКБОКС СОГЛАСИЯ -->
+            <div class="form-group checkbox-group">
+              <label class="checkbox-label">
+                <input type="checkbox" v-model="agreed" required>
+                <span class="checkbox-text">
+                  Я соглашаюсь на обработку персональных данных в соответствии с 
+                  <a href="#" @click.prevent="openPrivacyModal" class="privacy-link">Политикой конфиденциальности</a>
+                </span>
+              </label>
+            </div>
+            
             <div class="form-actions">
               <button 
                 type="submit" 
@@ -191,6 +202,7 @@ export default {
       error: null,
       phoneDisplay: '',
       phoneDigits: '',
+      agreed: false,
       reservation: {
         name: '',
         phone: '',
@@ -212,6 +224,10 @@ export default {
     this.updatePhoneDisplay();
   },
   methods: {
+    openPrivacyModal() {
+      this.$emit('open-privacy');
+    },
+    
     updatePhoneDisplay() {
       const d = this.phoneDigits;
       
@@ -320,6 +336,12 @@ export default {
     },
     
     async submitReservation() {
+      // Проверяем согласие
+      if (!this.agreed) {
+        this.error = 'Пожалуйста, подтвердите согласие на обработку персональных данных';
+        return;
+      }
+      
       // Проверяем, что номер заполнен полностью
       if (this.phoneDigits.length < 10) {
         this.error = 'Пожалуйста, введите полный номер телефона (10 цифр)';
@@ -371,6 +393,7 @@ export default {
           };
           this.phoneDigits = '';
           this.phoneDisplay = '';
+          this.agreed = false;
           
           // Автоматическое скрытие сообщения об успехе через 5 секунд
           setTimeout(() => {
@@ -405,6 +428,7 @@ export default {
           };
           this.phoneDigits = '';
           this.phoneDisplay = '';
+          this.agreed = false;
           
           setTimeout(() => {
             this.success = false;
@@ -771,6 +795,43 @@ export default {
 
 .error-text {
   color: #c62828;
+}
+
+/* Стили для чекбокса */
+.checkbox-group {
+  margin-bottom: 0.5rem;
+}
+
+.checkbox-label {
+  display: flex;
+  align-items: flex-start;
+  gap: 0.5rem;
+  cursor: pointer;
+  font-family: 'EB Garamond', serif;
+  font-size: 0.9rem;
+  color: #2a1e14;
+}
+
+.checkbox-label input[type="checkbox"] {
+  margin-top: 0.15rem;
+  width: 18px;
+  height: 18px;
+  cursor: pointer;
+  flex-shrink: 0;
+}
+
+.privacy-link {
+  color: #b08d57;
+  text-decoration: underline;
+  cursor: pointer;
+}
+
+.privacy-link:hover {
+  color: #8b6b4d;
+}
+
+.checkbox-text {
+  line-height: 1.4;
 }
 
 @keyframes rotate {

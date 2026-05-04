@@ -323,7 +323,7 @@ export default {
       // Порядок категорий
       const categoryOrder = [
         'ЗАВТРАКИ НА ВЕСЬ ДЕНЬ',
-        'NEW YEAR SPECIAL',
+        'СПЕШЛ',
         'СУПЫ',
         'РИМСКАЯ ПИЦЦА',
         'ЗАКУСКИ',
@@ -923,6 +923,7 @@ export default {
   display: -webkit-box;
   -webkit-line-clamp: 2;
   -webkit-box-orient: vertical;
+  line-clamp: 2;
   min-height: 2.2em; /* УМЕНЬШАЕМ ЕЩЕ: было 2.4em */
   flex-shrink: 0;
   margin-top: auto;
