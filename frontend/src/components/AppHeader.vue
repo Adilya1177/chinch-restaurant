@@ -378,7 +378,7 @@ export default {
     height: 50px !important;
     max-width: 150px !important;
     min-height: 50px !important;
-    margin: -20px auto -10px auto !important;
+    margin: 10px auto 0 auto !important;
   }
   
   .logo-container {
@@ -445,7 +445,7 @@ export default {
     height: 45px !important;
     max-width: 140px !important;
     min-height: 45px !important;
-    margin: -15px auto -5px auto !important;
+    margin: 15px auto 0 auto !important;
   }
   
   .logo-container {
@@ -489,7 +489,7 @@ export default {
     height: 40px !important;
     max-width: 130px !important;
     min-height: 40px !important;
-    margin: -10px auto -5px auto !important;
+    margin: 20px auto 0 auto !important;
   }
   
   .logo-container {
