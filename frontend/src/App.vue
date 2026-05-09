@@ -96,7 +96,7 @@ export default {
 .app-main {
   flex: 1;
   padding: 0;
-  padding-top: 160px; /* БОЛЬШОЙ отступ для десктопа */
+  padding-top: 120px; /* БОЛЬШОЙ отступ для десктопа */
   min-height: calc(100vh - 250px);
 }
 
@@ -219,7 +219,7 @@ export default {
 @media (max-width: 768px) {
   .app-main {
     padding: 1rem 0;
-    padding-top: 200px;
+    padding-top: 100px;
   }
   
   .footer-container {
@@ -256,7 +256,7 @@ export default {
 
 @media (max-width: 480px) {
   .app-main {
-    padding-top: 220px;
+    padding-top: 90px;
   }
   
   .footer-container {
@@ -279,7 +279,7 @@ export default {
 
 @media (max-width: 375px) {
   .app-main {
-    padding-top: 230px;
+    padding-top: 80px;
   }
 }
 </style>
