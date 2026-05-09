@@ -346,10 +346,10 @@ export default {
   
   .header-container {
     flex-direction: column;
-    padding: 0.4rem 0 !important;
+    padding: 0.2rem 0 !important;
     height: auto;
-    min-height: 140px !important;
-    gap: 0.3rem !important;
+    min-height: auto !important;
+    gap: 0rem !important;
   }
   
   /* МЕНЯЕМ ТОЛЬКО ЭТО - ДЕЛАЕМ БЛИЖЕ */
@@ -378,7 +378,7 @@ export default {
     height: 50px !important;
     max-width: 150px !important;
     min-height: 50px !important;
-    margin: 10px auto 0 auto !important;
+    margin: 0 auto !important;
   }
   
   .logo-container {
@@ -445,7 +445,7 @@ export default {
     height: 45px !important;
     max-width: 140px !important;
     min-height: 45px !important;
-    margin: 15px auto 0 auto !important;
+    margin: 0 auto !important;
   }
   
   .logo-container {
@@ -453,9 +453,9 @@ export default {
   }
   
   .header-container {
-    padding: 0.3rem 0 !important;
-    min-height: 130px !important;
-    gap: 0.2rem !important;
+    padding: 0.1rem 0 !important;
+    min-height: auto !important;
+    gap: 0rem !important;
   }
   
   .nav-item {
@@ -489,7 +489,7 @@ export default {
     height: 40px !important;
     max-width: 130px !important;
     min-height: 40px !important;
-    margin: 20px auto 0 auto !important;
+    margin: 0 auto !important;
   }
   
   .logo-container {
@@ -497,8 +497,8 @@ export default {
   }
   
   .header-container {
-    padding: 0.2rem 0 !important;
-    min-height: 120px !important;
+    padding: 0.1rem 0 !important;
+    min-height: auto !important;
   }
   
   .nav-item {
