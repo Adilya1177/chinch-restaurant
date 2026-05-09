@@ -375,10 +375,10 @@ export default {
   }
   
   .header-logo {
-    height: 50px !important;
-    max-width: 150px !important;
-    min-height: 50px !important;
-    margin: 10px auto 0 auto !important;
+    height: 40px !important;
+    max-width: 120px !important;
+    min-height: 40px !important;
+    margin: 8px auto 0 auto !important;
   }
   
   .logo-container {
@@ -442,10 +442,10 @@ export default {
   }
   
   .header-logo {
-    height: 45px !important;
-    max-width: 140px !important;
-    min-height: 45px !important;
-    margin: 15px auto 0 auto !important;
+    height: 35px !important;
+    max-width: 110px !important;
+    min-height: 35px !important;
+    margin: 12px auto 0 auto !important;
   }
   
   .logo-container {
@@ -486,12 +486,12 @@ export default {
   }
   
   .header-logo {
-    height: 40px !important;
-    max-width: 130px !important;
-    min-height: 40px !important;
-    margin: 20px auto 0 auto !important;
+    height: 30px !important;
+    max-width: 100px !important;
+    min-height: 30px !important;
+    margin: 15px auto 0 auto !important;
   }
-  
+
   .logo-container {
     max-height: 135px;
   }

@@ -92,11 +92,11 @@ export default {
   background: linear-gradient(135deg, #f9f6f0 0%, #f2eee5 100%);
 }
 
-/* ОСНОВНОЙ КОНТЕНТ - БОЛЬШОЙ ОТСТУП ДЛЯ ФИКСИРОВАННОЙ ШАПКИ */
+/* ОСНОВНОЙ КОНТЕНТ - ОТСТУП ДЛЯ ФИКСИРОВАННОЙ ШАПКИ */
 .app-main {
   flex: 1;
   padding: 0;
-  padding-top: 120px; /* БОЛЬШОЙ отступ для десктопа */
+  padding-top: 160px; 
   min-height: calc(100vh - 250px);
 }
 
