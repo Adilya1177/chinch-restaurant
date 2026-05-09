@@ -14,7 +14,7 @@
         <div class="footer-section">
           <div class="footer-logo-container">
             <img 
-              src="/images/logo/logo-chinch.png" 
+              src="/images/logo/logo-chinch.pdf" 
               alt="CHINCH Restaurant Logo" 
               class="footer-logo-img"
               style="filter: brightness(0.9) sepia(0.2) saturate(1.1);"
@@ -36,8 +36,8 @@
         
         <div class="footer-section">
           <h3 class="footer-title">РЕКВИЗИТЫ</h3>
-          <p class="footer-info-small">ИНН: 7718722140</p>
-          <p class="footer-info-small">ОГРН: 1237700012345</p>
+          <p class="footer-info-small">ИНН: 431203295030</p>
+          <p class="footer-info-small">ОГРНИП: 324430000003330</p>
         </div>
       </div>
       

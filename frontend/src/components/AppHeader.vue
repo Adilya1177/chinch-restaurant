@@ -9,7 +9,7 @@
         <router-link to="/" class="logo-link">
           <div class="logo-container">
             <img 
-              src="/images/logo/Artboard 4 copy 6@3x.png" 
+              src="/images/logo/Artboard 4 copy 6@3.png" 
               alt="CHINCH Restaurant Logo" 
               class="header-logo"
               style="filter: brightness(0.7) sepia(0.3) saturate(1.2); opacity: 0.95;"
@@ -175,11 +175,11 @@ export default {
 }
 
 .header-logo {
-  height: 130px;
+  height: 60px;
   width: auto;
   object-fit: contain;
-  max-width: 350px;
-  min-height: 130px;
+  max-width: 180px;
+  min-height: 60px;
 }
 
 /* НАВИГАЦИЯ - ПК ВЕРСИЯ (не трогаем) */
@@ -312,8 +312,8 @@ export default {
 /* Планшет (992px и меньше) - НЕ МЕНЯЕМ */
 @media (max-width: 992px) {
   .header-logo {
-    height: 110px;
-    max-width: 300px;
+    height: 55px;
+    max-width: 160px;
   }
   
   .logo-container {
@@ -375,9 +375,9 @@ export default {
   }
   
   .header-logo {
-    height: 150px !important;
-    max-width: 320px !important;
-    min-height: 150px !important;
+    height: 50px !important;
+    max-width: 150px !important;
+    min-height: 50px !important;
     margin: -20px auto -10px auto !important;
   }
   
@@ -442,9 +442,9 @@ export default {
   }
   
   .header-logo {
-    height: 140px !important;
-    max-width: 290px !important;
-    min-height: 140px !important;
+    height: 45px !important;
+    max-width: 140px !important;
+    min-height: 45px !important;
     margin: -15px auto -5px auto !important;
   }
   
@@ -486,9 +486,9 @@ export default {
   }
   
   .header-logo {
-    height: 130px !important;
-    max-width: 270px !important;
-    min-height: 130px !important;
+    height: 40px !important;
+    max-width: 130px !important;
+    min-height: 40px !important;
     margin: -10px auto -5px auto !important;
   }
   

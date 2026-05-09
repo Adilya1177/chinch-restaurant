@@ -48,7 +48,7 @@
                 class="yandex-button"
               >
                 <span class="button-icon">Я</span>
-                <span class="button-text">Яндекс Еда: CHINCH</span>
+                <span class="button-text">Яндекс Еда: ЧИНЧ</span>
               </a>
             </div>
           </div>

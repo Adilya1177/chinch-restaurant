@@ -105,14 +105,14 @@ const mockMenuData = [
     id: 15, name: "СКРЭМБЛ, КРЕВЕТКИ, ЗАПЕЧЕННЫЙ ПЕРЕЦ, ОЛИВКИ",
     description: "", priceInfo: "", category: "ЗАВТРАКИ НА ВЕСЬ ДЕНЬ",
     mainCategory: "Еда", subCategory: "ЗАВТРАКИ НА ВЕСЬ ДЕНЬ",
-    volumeInfo: null, basePrice: "? р", options: null, isAddon: false,
+    volumeInfo: null, basePrice: "790 р", options: null, isAddon: false,
     composition: "Скрэмбл, креветки, перец рамиро, пармезан, оливки каламата, микс зелени"
   },
   {
     id: 16, name: "СКРЭМБЛ, ТРЮФЕЛЬ, СТРАЧАТЕЛЛА",
     description: "", priceInfo: "", category: "ЗАВТРАКИ НА ВЕСЬ ДЕНЬ",
     mainCategory: "Еда", subCategory: "ЗАВТРАКИ НА ВЕСЬ ДЕНЬ",
-    volumeInfo: null, basePrice: "? р", options: null, isAddon: false,
+    volumeInfo: null, basePrice: "670 р", options: null, isAddon: false,
     composition: "Скрэмбл, трюфель, страчателла, трюфельное масло, зелень"
   },
 
@@ -135,28 +135,28 @@ const mockMenuData = [
     id: 19, name: "КАЦУ-СЭНДВИЧ, ЦЫПЛЕНОК, ТОМАТ",
     description: "", priceInfo: "", category: "СПЕШЛ",
     mainCategory: "Еда", subCategory: "СПЕШЛ",
-    volumeInfo: null, basePrice: "? р", options: null, isAddon: false,
+    volumeInfo: null, basePrice: "750 р", options: null, isAddon: false,
     composition: "Шницель, микс зелени, томат, сладкий чили, бриошь"
   },
   {
     id: 20, name: "ЗЕЛЕНЫЙ САЛАТ, АВОКАДО, БОБЫ",
     description: "", priceInfo: "", category: "СПЕШЛ",
     mainCategory: "Еда", subCategory: "СПЕШЛ",
-    volumeInfo: null, basePrice: "? р", options: null, isAddon: false,
+    volumeInfo: null, basePrice: "650 р", options: null, isAddon: false,
     composition: "Романо, руккола, шпинат, бобы, авокадо, огурец, микс семечек, запеченный цукини, гуакамоле, зеленое масло"
   },
   {
     id: 21, name: "ШНИЦЕЛЬ, РОМАНО, ЦЕЗАРЬ, ПАРМЕЗАН",
     description: "", priceInfo: "", category: "СПЕШЛ",
     mainCategory: "Еда", subCategory: "СПЕШЛ",
-    volumeInfo: null, basePrice: "? р", options: null, isAddon: false,
+    volumeInfo: null, basePrice: "790 р", options: null, isAddon: false,
     composition: "Куриный шницель, романо, айсберг, пармезан, соус цезарь"
   },
   {
     id: 22, name: "ТОСТ, КРЕВЕТКИ, АВОКАДО, ЧЕРРИ",
     description: "", priceInfo: "", category: "СПЕШЛ",
     mainCategory: "Еда", subCategory: "СПЕШЛ",
-    volumeInfo: null, basePrice: "? р", options: null, isAddon: false,
+    volumeInfo: null, basePrice: "690 р", options: null, isAddon: false,
     composition: "Тартин луковый, креветки, сладкий чили, авокадо, зеленый лук"
   },
 
@@ -188,7 +188,7 @@ const mockMenuData = [
     id: 26, name: "ЛОСОСЬ, ПАРМЕЗАН, РУККОЛА",
     description: "", priceInfo: "", category: "РИМСКАЯ ПИЦЦА",
     mainCategory: "Еда", subCategory: "РИМСКАЯ ПИЦЦА",
-    volumeInfo: null, basePrice: "1750 р", options: null, isAddon: false,
+    volumeInfo: null, basePrice: "1390 р", options: null, isAddon: false,
     composition: "Основа, красная икра, руккола, пармезан, лосось, сливки, моцарелла"
   },
   {

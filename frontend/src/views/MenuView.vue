@@ -8,7 +8,7 @@
       <header class="page-header">
         <div class="logo-container">
           <img 
-            src="/images/logo/logo-chinch.png" 
+            src="/images/logo/logo-chinch.pdf" 
             alt="CHINCH Restaurant Logo" 
             class="menu-logo"
             style="filter: brightness(0.7) sepia(0.3) saturate(1.2); opacity: 0.95;"

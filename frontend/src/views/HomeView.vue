@@ -9,7 +9,7 @@
         <!-- Логотип ВЕРХНЕМ положении -->
         <div class="logo-title-container">
           <img 
-            src="/images/logo/logo-chinch.png"
+            src="/images/logo/logo-chinch.pdf"
             alt="CHINCH Restaurant Logo" 
             class="main-logo"
           >
@@ -291,11 +291,11 @@ export default {
   object-fit: contain;
   max-width: 400px;
   /* ЗНАЧИТЕЛЬНО УВЕЛИЧИВАЕМ тень (вместо 0.3-0.15 делаем 0.4-0.25) */
-  filter: drop-shadow(0 3px 8px rgba(0, 0, 0, 0.4))
-          drop-shadow(0 6px 12px rgba(0, 0, 0, 0.35))
-          drop-shadow(0 8px 16px rgba(0, 0, 0, 0.3))
-          drop-shadow(0 10px 20px rgba(0, 0, 0, 0.25))
-          brightness(0.95) sepia(0.1) saturate(1.05);
+  filter: drop-shadow(0 3px 8px rgba(255, 255, 255, 0.3))
+          drop-shadow(0 6px 12px rgba(255, 255, 255, 0.25))
+          drop-shadow(0 8px 16px rgba(255, 255, 255, 0.2))
+          drop-shadow(0 10px 20px rgba(255, 255, 255, 0.15))
+          brightness(0.98) sepia(0.05) saturate(1.02);
   opacity: 0.98;
 }
 
@@ -556,11 +556,11 @@ export default {
     height: 90px;
     max-width: 320px;
     /* УВЕЛИЧИВАЕМ тень на мобильных (вместо 0.2-0.14 делаем 0.35-0.2) */
-    filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.35))
-            drop-shadow(0 4px 6px rgba(0, 0, 0, 0.3))
-            drop-shadow(0 6px 8px rgba(0, 0, 0, 0.25))
-            drop-shadow(0 8px 10px rgba(0, 0, 0, 0.2))
-            brightness(0.95) sepia(0.1) saturate(1.05);
+    filter: drop-shadow(0 2px 4px rgba(255, 255, 255, 0.25))
+        drop-shadow(0 4px 6px rgba(255, 255, 255, 0.2))
+        drop-shadow(0 6px 8px rgba(255, 255, 255, 0.15))
+        drop-shadow(0 8px 10px rgba(255, 255, 255, 0.1))
+        brightness(0.98) sepia(0.05) saturate(1.02);
   }
   
   /* УВЕЛИЧИВАЕМ ТЕНЬ ТЕКСТА НА МОБИЛЬНЫХ */
@@ -646,11 +646,11 @@ export default {
     height: 80px;
     max-width: 280px;
     /* УВЕЛИЧИВАЕМ тень (вместо 0.15-0.09 делаем 0.3-0.15) */
-    filter: drop-shadow(0 1px 3px rgba(0, 0, 0, 0.3))
-            drop-shadow(0 2px 4px rgba(0, 0, 0, 0.25))
-            drop-shadow(0 3px 5px rgba(0, 0, 0, 0.2))
-            drop-shadow(0 4px 6px rgba(0, 0, 0, 0.15))
-            brightness(0.95) sepia(0.1) saturate(1.05);
+    filter: drop-shadow(0 1px 3px rgba(255, 255, 255, 0.2))
+        drop-shadow(0 2px 4px rgba(255, 255, 255, 0.15))
+        drop-shadow(0 3px 5px rgba(255, 255, 255, 0.1))
+        drop-shadow(0 4px 6px rgba(255, 255, 255, 0.05))
+        brightness(0.98) sepia(0.05) saturate(1.02);
   }
   
   .hero-section {
