@@ -249,7 +249,6 @@ export default {
   background-position: center;
 }
 
-/* УБИРАЕМ ЗАТЕМНЕНИЕ ФОНА */
 .hero-section::before {
   content: '';
   position: absolute;
@@ -257,8 +256,14 @@ export default {
   left: 0;
   right: 0;
   bottom: 0;
-  background: rgba(0, 0, 0, 0); /* ИЗМЕНЕНО: было 0.4, стало 0 (прозрачный) */
-  z-index: 0; /* Помещаем под контентом */
+  background: linear-gradient(
+    to bottom,
+    rgba(0, 0, 0, 0.35) 0%,
+    rgba(0, 0, 0, 0.25) 20%,
+    rgba(0, 0, 0, 0.1) 40%,
+    rgba(0, 0, 0, 0) 70%
+  );
+  z-index: 0;
 }
 
 .hero-content {
@@ -291,10 +296,10 @@ export default {
   object-fit: contain;
   max-width: 400px;
   /* ЗНАЧИТЕЛЬНО УВЕЛИЧИВАЕМ тень (вместо 0.3-0.15 делаем 0.4-0.25) */
-  filter: drop-shadow(0 3px 8px rgba(255, 255, 255, 0.3))
-          drop-shadow(0 6px 12px rgba(255, 255, 255, 0.25))
-          drop-shadow(0 8px 16px rgba(255, 255, 255, 0.2))
-          drop-shadow(0 10px 20px rgba(255, 255, 255, 0.15))
+  filter: drop-shadow(0 8px 25px rgba(255, 255, 255, 0.4))
+          drop-shadow(0 15px 35px rgba(255, 255, 255, 0.35))
+          drop-shadow(0 25px 50px rgba(255, 255, 255, 0.3))
+          drop-shadow(0 35px 65px rgba(255, 255, 255, 0.25))
           brightness(0.98) sepia(0.05) saturate(1.02);
   opacity: 0.98;
 }
@@ -556,10 +561,10 @@ export default {
     height: 90px;
     max-width: 320px;
     /* УВЕЛИЧИВАЕМ тень на мобильных (вместо 0.2-0.14 делаем 0.35-0.2) */
-    filter: drop-shadow(0 2px 4px rgba(255, 255, 255, 0.25))
-        drop-shadow(0 4px 6px rgba(255, 255, 255, 0.2))
-        drop-shadow(0 6px 8px rgba(255, 255, 255, 0.15))
-        drop-shadow(0 8px 10px rgba(255, 255, 255, 0.1))
+    filter: drop-shadow(0 5px 15px rgba(255, 255, 255, 0.35))
+        drop-shadow(0 10px 25px rgba(255, 255, 255, 0.3))
+        drop-shadow(0 15px 35px rgba(255, 255, 255, 0.25))
+        drop-shadow(0 20px 45px rgba(255, 255, 255, 0.2))
         brightness(0.98) sepia(0.05) saturate(1.02);
   }
   
@@ -646,10 +651,10 @@ export default {
     height: 80px;
     max-width: 280px;
     /* УВЕЛИЧИВАЕМ тень (вместо 0.15-0.09 делаем 0.3-0.15) */
-    filter: drop-shadow(0 1px 3px rgba(255, 255, 255, 0.2))
-        drop-shadow(0 2px 4px rgba(255, 255, 255, 0.15))
-        drop-shadow(0 3px 5px rgba(255, 255, 255, 0.1))
-        drop-shadow(0 4px 6px rgba(255, 255, 255, 0.05))
+    filter: drop-shadow(0 5px 15px rgba(255, 255, 255, 0.35))
+        drop-shadow(0 10px 25px rgba(255, 255, 255, 0.3))
+        drop-shadow(0 15px 35px rgba(255, 255, 255, 0.25))
+        drop-shadow(0 20px 45px rgba(255, 255, 255, 0.2))
         brightness(0.98) sepia(0.05) saturate(1.02);
   }
   
