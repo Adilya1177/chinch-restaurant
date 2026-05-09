@@ -485,7 +485,7 @@ export default {
 .reservation-form-wrapper {
   display: block;
   max-width: 800px;
-  margin: 0 auto 4rem auto;
+  margin: 4rem auto 4rem auto;
 }
 
 .form-container {
