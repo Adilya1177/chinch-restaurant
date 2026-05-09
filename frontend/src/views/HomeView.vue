@@ -256,13 +256,7 @@ export default {
   left: 0;
   right: 0;
   bottom: 0;
-  background: linear-gradient(
-    to bottom,
-    rgba(0, 0, 0, 0.35) 0%,
-    rgba(0, 0, 0, 0.25) 20%,
-    rgba(0, 0, 0, 0.1) 40%,
-    rgba(0, 0, 0, 0) 70%
-  );
+  background: rgba(0, 0, 0, 0);
   z-index: 0;
 }
 
@@ -274,12 +268,7 @@ export default {
   margin-bottom: 8rem; /* СИЛЬНО УВЕЛИЧИЛ отступ для кнопок (было 5rem) */
 }
 
-.hero-decoration {
-  height: 1px;
-  background: linear-gradient(90deg, transparent, #b08d57, transparent);
-  margin: 0 auto;
-  width: 300px;
-}
+
 
 /* Контейнер для логотипа */
 .logo-title-container {
