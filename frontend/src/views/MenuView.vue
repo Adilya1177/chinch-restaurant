@@ -4,17 +4,9 @@
       <!-- УВЕЛИЧЕННЫЙ ОТСТУП ПОД ШАПКОЙ -->
       <div class="menu-top-padding"></div>
       
-      <!-- Заголовок -->
+      <!-- Заголовок (пустой) -->
       <header class="page-header">
-        <div class="logo-container">
-          <img 
-            src="/images/logo/logo-chinch.pdf" 
-            alt="CHINCH Restaurant Logo" 
-            class="menu-logo"
-            style="filter: brightness(0.7) sepia(0.3) saturate(1.2); opacity: 0.95;"
-          >
-        </div>
-        <p class="restaurant-description">Вкус, который запомнится</p>
+        <!-- Логотип и описание удалены -->
       </header>
 
       <!-- ОКНО-ПОДСКАЗКА (полупрозрачное) -->
@@ -28,33 +20,9 @@
         </div>
       </div>
 
-      <!-- Основная навигация -->
-      <nav class="primary-navigation">
-        <div class="nav-container">
-          <button 
-            v-for="category in mainCategories" 
-            :key="category.value"
-            @click="selectMainCategory(category.value)"
-            :class="['primary-nav-btn', { active: selectedMainCategory === category.value }]"
-          >
-            <span class="btn-label">{{ category.label }}</span>
-          </button>
-        </div>
-      </nav>
+      <!-- Основная навигация (удалена) -->
 
-      <!-- Навигация по подкатегориям -->
-      <div v-if="!loading && subCategories.length > 0" class="secondary-navigation">
-        <div class="nav-scroll-container">
-          <button 
-            v-for="subCat in subCategories" 
-            :key="subCat.name"
-            @click="scrollToCategory(subCat.name)"
-            :class="['secondary-nav-btn', { active: activeCategory === subCat.name }]"
-          >
-            {{ formatCategoryName(subCat.name) }}
-          </button>
-        </div>
-      </div>
+      <!-- Навигация по подкатегориям (удалена) -->
 
       <!-- Состояния -->
       <div v-if="loading" class="state-loading">
@@ -295,8 +263,6 @@ export default {
     mainCategories() {
       return [
         { value: 'all', label: 'МЕНЮ', count: this.menuItems.length },
-        // { value: 'Еда', label: 'БЛЮДА', count: this.menuItems.filter(item => item.mainCategory === 'Еда').length },
-        // { value: 'Напитки', label: 'НАПИТКИ', count: this.menuItems.filter(item => item.mainCategory === 'Напитки').length },
       ];
     },
     
@@ -591,32 +557,10 @@ export default {
 
 .page-header {
   text-align: center;
-  margin-bottom: 3rem;
+  margin-bottom: 0rem;
 }
 
-/* Контейнер для логотипа */
-.logo-container {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  margin-bottom: 0.8rem;
-  height: 80px; /* Высота как у текстового логотипа */
-}
-
-.menu-logo {
-  height: 70px; /* Размер как у текста "CHINCH" (было 4rem = ~64px) */
-  width: auto;
-  object-fit: contain;
-  max-width: 300px;
-}
-
-.restaurant-description {
-  font-family: 'Cormorant Garamond', serif;
-  font-size: 1.2rem;
-  color: #8b6b4d;
-  font-style: italic;
-  margin: 0;
-}
+/* Контейнер для логотипа удален */
 
 /* ОКНО-ПОДСКАЗКА (полупрозрачное) */
 .help-overlay {
@@ -699,111 +643,9 @@ export default {
   box-shadow: 0 8px 25px rgba(139, 107, 77, 0.4);
 }
 
-/* Основная навигация */
-.primary-navigation {
-  margin-bottom: 2rem;
-}
+/* Основная навигация (удалена) */
 
-.nav-container {
-  display: flex;
-  justify-content: center;
-  gap: 1rem;
-  margin-bottom: 1rem;
-  flex-wrap: wrap;
-}
-
-.primary-nav-btn {
-  background: rgba(255, 255, 255, 0.8);
-  border: 2px solid #d4b483;
-  color: #2a1e14;
-  padding: 1rem 2rem;
-  border-radius: 999px;
-  cursor: pointer;
-  font-family: 'EB Garamond', serif;
-  font-size: 1.1rem;
-  font-weight: 600;
-  display: flex;
-  align-items: center;
-  justify-content: center; /* ДОБАВЛЯЕМ центрирование */
-  transition: all 0.3s ease;
-  backdrop-filter: blur(10px);
-  box-shadow: 0 4px 12px rgba(42, 30, 20, 0.15); /* Темная тень */
-}
-
-.primary-nav-btn:hover {
-  transform: translateY(-3px);
-  box-shadow: 0 6px 16px rgba(42, 30, 20, 0.25); /* Усиленная тень при наведении */
-  background: white;
-}
-
-.primary-nav-btn.active {
-  background: #8b6b4d;
-  border-color: #8b6b4d;
-  color: #f8f4ea;
-  transform: translateY(-3px);
-  box-shadow: 0 6px 20px rgba(42, 30, 20, 0.35); /* Самая темная тень */
-}
-
-.btn-label {
-  font-family: 'EB Garamond', serif;
-  letter-spacing: 0.05em;
-}
-
-/* Вторичная навигация */
-.secondary-navigation {
-  margin-bottom: 2rem;
-  display: flex;
-  justify-content: center;
-  width: 100%;
-}
-
-.nav-scroll-container {
-  display: flex;
-  gap: 0.5rem;
-  padding: 1rem 1.5rem;
-  overflow-x: auto;
-  scrollbar-width: none;
-  background: rgba(255, 255, 255, 0.3);
-  border-radius: 999px;
-  border: 1px solid rgba(232, 220, 201, 0.5);
-  backdrop-filter: blur(10px);
-  max-width: 90%;
-  margin: 0 auto;
-  box-shadow: 0 4px 12px rgba(42, 30, 20, 0.1);
-}
-
-.nav-scroll-container::-webkit-scrollbar {
-  display: none;
-}
-
-.secondary-nav-btn {
-  background: rgba(255, 255, 255, 0.7);
-  border: 1px solid #e8dcc9;
-  color: #8b6b4d;
-  padding: 1rem 2.5rem;
-  border-radius: 999px;
-  cursor: pointer;
-  font-family: 'EB Garamond', serif;
-  font-size: 1rem;
-  font-weight: 500;
-  white-space: nowrap;
-  flex-shrink: 0;
-  transition: all 0.3s ease;
-  box-shadow: 0 4px 8px rgba(42, 30, 20, 0.08);
-}
-
-.secondary-nav-btn:hover {
-  transform: translateY(-2px);
-  box-shadow: 0 6px 12px rgba(42, 30, 20, 0.15);
-}
-
-.secondary-nav-btn.active {
-  background: #8b6b4d;
-  border-color: #8b6b4d;
-  color: white;
-  transform: translateY(-2px);
-  box-shadow: 0 6px 16px rgba(42, 30, 20, 0.25);
-}
+/* Вторичная навигация (удалена) */
 
 /* Категории */
 .categories-grid {
@@ -1412,59 +1254,8 @@ export default {
 
 /* Адаптивность для мобильных */
 @media (max-width: 768px) {
-  .logo-container {
-    height: 70px;
-  }
-  
-  .menu-logo {
-    height: 60px;
-    max-width: 250px;
-  }
-  
-  .nav-container {
-    flex-direction: column;
-    align-items: center;
-  }
-  
-  .primary-nav-btn {
-    width: 100%;
-    max-width: 280px;
-    justify-content: center;
-  }
-  
-  .items-container {
-    grid-template-columns: 1fr;
-  }
-  
-  .menu-category.egg-category .items-container {
-    grid-template-columns: 1fr;
-  }
-  
-  .addons-container {
-    margin-top: 1.5rem;
-  }
-  
-  .addons-grid {
-    grid-template-columns: 1fr;
-  }
-  
-  .addons-card {
-    padding: 1rem;
-  }
-  
-  .addons-title {
-    font-size: 1.1rem;
-    margin-bottom: 1rem;
-  }
-  
-  .nav-scroll-container {
-    max-width: 100%;
-    padding: 0.8rem 1rem;
-  }
-  
-  .secondary-nav-btn {
-    padding: 0.8rem 1.5rem;
-    font-size: 0.9rem;
+  .menu-top-padding {
+    height: 40px;
   }
   
   /* УВЕЛИЧЕННЫЙ ОТСТУП НА МОБИЛЬНЫХ */
@@ -1583,6 +1374,31 @@ export default {
   .help-ok-btn {
     padding: 0.8rem 2rem;
     font-size: 1.1rem;
+  }
+  
+  .items-container {
+    grid-template-columns: 1fr;
+  }
+  
+  .menu-category.egg-category .items-container {
+    grid-template-columns: 1fr;
+  }
+  
+  .addons-container {
+    margin-top: 1.5rem;
+  }
+  
+  .addons-grid {
+    grid-template-columns: 1fr;
+  }
+  
+  .addons-card {
+    padding: 1rem;
+  }
+  
+  .addons-title {
+    font-size: 1.1rem;
+    margin-bottom: 1rem;
   }
 }
 

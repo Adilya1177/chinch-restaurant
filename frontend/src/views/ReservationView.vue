@@ -1,12 +1,7 @@
 <template>
   <div class="reservation-view">
     <div class="reservation-container">
-      <!-- Заголовок -->
-      <header class="page-header">
-        <h1 class="page-title">БРОНИРОВАНИЕ СТОЛИКА</h1>
-        <p class="page-subtitle">Забронируйте столик в ЧИНЧ</p>
-        <div class="header-line"></div>
-      </header>
+
 
       <!-- Форма бронирования -->
       <div class="reservation-form-wrapper">

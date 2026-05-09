@@ -2,11 +2,6 @@
   <div class="delivery-view">
     <!-- Заголовок как в Бронировании -->
     <div class="delivery-container">
-      <header class="page-header">
-        <h1 class="page-title">ДОСТАВКА</h1>
-        <p class="page-subtitle">Заказывайте нашу авторскую кухню с доставкой</p>
-        <div class="header-line"></div>
-      </header>
 
       <!-- Две карточки доставки -->
       <div class="delivery-options">
