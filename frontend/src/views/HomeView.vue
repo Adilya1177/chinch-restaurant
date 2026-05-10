@@ -9,7 +9,7 @@
         <!-- Логотип ВЕРХНЕМ положении -->
         <div class="logo-title-container">
           <img 
-            src="/images/logo/logo-chinch.pdf"
+            src="/images/logo/logo-chinch.svg"
             alt="CHINCH Restaurant Logo" 
             class="main-logo"
           >
@@ -284,12 +284,6 @@ export default {
   width: auto;
   object-fit: contain;
   max-width: 400px;
-  /* ЗНАЧИТЕЛЬНО УВЕЛИЧИВАЕМ тень (вместо 0.3-0.15 делаем 0.4-0.25) */
-  filter: drop-shadow(0 8px 25px rgba(255, 255, 255, 0.4))
-          drop-shadow(0 15px 35px rgba(255, 255, 255, 0.35))
-          drop-shadow(0 25px 50px rgba(255, 255, 255, 0.3))
-          drop-shadow(0 35px 65px rgba(255, 255, 255, 0.25))
-          brightness(0.98) sepia(0.05) saturate(1.02);
   opacity: 0.98;
 }
 

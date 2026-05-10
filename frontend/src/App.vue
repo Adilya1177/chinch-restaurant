@@ -14,7 +14,7 @@
         <div class="footer-section">
           <div class="footer-logo-container">
             <img 
-              src="/images/logo/logo-chinch.pdf" 
+              src="/images/logo/logo-chinch.svg" 
               alt="CHINCH Restaurant Logo" 
               class="footer-logo-img"
               style="filter: brightness(0.9) sepia(0.2) saturate(1.1);"
