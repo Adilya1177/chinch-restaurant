@@ -284,6 +284,8 @@ export default {
   width: auto;
   object-fit: contain;
   max-width: 400px;
+  filter: drop-shadow(2px 4px 8px rgba(0, 0, 0, 0.3))
+          drop-shadow(4px 8px 16px rgba(0, 0, 0, 0.2));
   opacity: 0.98;
 }
 
