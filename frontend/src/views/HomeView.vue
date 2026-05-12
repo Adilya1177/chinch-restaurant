@@ -541,26 +541,19 @@ export default {
 }
 
 @media (max-width: 768px) {
-  /* УВЕЛИЧИВАЕМ ТЕНЬ НА МОБИЛЬНЫХ */
   .main-logo {
-    height: 90px;
-    max-width: 320px;
-    /* УВЕЛИЧИВАЕМ тень на мобильных (вместо 0.2-0.14 делаем 0.35-0.2) */
-    filter: drop-shadow(0 5px 15px rgba(255, 255, 255, 0.35))
-        drop-shadow(0 10px 25px rgba(255, 255, 255, 0.3))
-        drop-shadow(0 15px 35px rgba(255, 255, 255, 0.25))
-        drop-shadow(0 20px 45px rgba(255, 255, 255, 0.2))
-        brightness(0.98) sepia(0.05) saturate(1.02);
+  height: 90px;
+  max-width: 320px;
+  filter: drop-shadow(2px 4px 8px rgba(0, 0, 0, 0.3))
+          drop-shadow(4px 8px 16px rgba(0, 0, 0, 0.2));
+  opacity: 0.98;
   }
   
-  /* УВЕЛИЧИВАЕМ ТЕНЬ ТЕКСТА НА МОБИЛЬНЫХ */
   .hero-subtitle {
     font-size: 1.3rem;
     font-weight: 700;
     color: #f8f4ea;
-    /* РЕШЕНИЕ: ОПУСКАЕМ ТОЛЬКО ТЕКСТ НА ПЛАНШЕТАХ */
-    top: 25px; /* Меньше на планшетах */
-    /* УВЕЛИЧИВАЕМ тень текста (вместо 0.3-0.2 делаем 0.45-0.3) */
+    top: 25px; 
     text-shadow: 
       0 1px 3px rgba(0, 0, 0, 0.45),
       0 2px 4px rgba(0, 0, 0, 0.4),
@@ -569,7 +562,7 @@ export default {
   }
   
   .hero-content {
-    margin-bottom: 6rem; /* Для планшетов тоже увеличил отступ */
+    margin-bottom: 6rem; 
   }
   
   .cta-section {
@@ -610,15 +603,10 @@ export default {
     gap: 2rem;
   }
   
-  /* =========================================================== */
-  /* НА МОБИЛЬНЫХ: ТОЛЬКО меняем gap между карточками */
-  /* Контейнер остается с aspect-ratio 4:3, как на ПК */
-  /* =========================================================== */
   .feature-image-container {
     aspect-ratio: 4 / 3; /* Такое же соотношение как на ПК */
   }
   
-  /* Уменьшаем точки на мобильных */
   .carousel-indicator {
     width: 8px;
     height: 8px;
@@ -631,30 +619,23 @@ export default {
 }
 
 @media (max-width: 480px) {
-  /* УВЕЛИЧИВАЕМ ТЕНЬ НА МОБИЛЬНЫХ */
   .main-logo {
-    height: 80px;
-    max-width: 280px;
-    /* УВЕЛИЧИВАЕМ тень (вместо 0.15-0.09 делаем 0.3-0.15) */
-    filter: drop-shadow(0 5px 15px rgba(255, 255, 255, 0.35))
-        drop-shadow(0 10px 25px rgba(255, 255, 255, 0.3))
-        drop-shadow(0 15px 35px rgba(255, 255, 255, 0.25))
-        drop-shadow(0 20px 45px rgba(255, 255, 255, 0.2))
-        brightness(0.98) sepia(0.05) saturate(1.02);
+  height: 80px;
+  max-width: 280px;
+  filter: drop-shadow(2px 4px 8px rgba(0, 0, 0, 0.3))
+          drop-shadow(4px 8px 16px rgba(0, 0, 0, 0.2));
+  opacity: 0.98;
   }
   
   .hero-section {
     padding: 2rem 1rem;
   }
   
-  /* УВЕЛИЧИВАЕМ ТЕНЬ ТЕКСТА НА МОБИЛЬНЫХ */
   .hero-subtitle {
     font-size: 1.2rem;
     font-weight: 700;
     color: #f8f4ea;
-    /* РЕШЕНИЕ: ОПУСКАЕМ ТОЛЬКО ТЕКСТ НА МОБИЛЬНЫХ */
-    top: 20px; /* Еще меньше на мобильных */
-    /* УВЕЛИЧИВАЕМ тень текста (вместо 0.25-0.15 делаем 0.35-0.2) */
+    top: 20px; 
     text-shadow: 
       0 1px 2px rgba(0, 0, 0, 0.35),
       0 2px 3px rgba(0, 0, 0, 0.3),
@@ -663,7 +644,7 @@ export default {
   }
   
   .hero-content {
-    margin-bottom: 5rem; /* Для мобильных тоже увеличил отступ */
+    margin-bottom: 5rem; 
   }
   
   .cta-button {
@@ -703,7 +684,6 @@ export default {
     font-size: 1.1rem;
   }
   
-  /* Еще меньше точки на очень маленьких экранах */
   .carousel-indicator {
     width: 6px;
     height: 6px;
