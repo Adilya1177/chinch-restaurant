@@ -260,6 +260,34 @@ const dishDetails = {
     photo: "/images/dishes/TOST-KREVETKI.JPG",
     composition: "Состав будет добавлен позже"
   },
+  "ЛЕПЕШКА РОТИ, ЛОСОСЬ, ЛИМОН": {
+    photo: "/images/dishes/LEPESHKA-ROTI-LOCOC-LIMON.jpeg",
+    composition: "Состав будет добавлен позже"
+  },
+  "БУРРАТА, ЗАПЕЧЕННЫЙ ПЕРЕЦ, ТОМАТ": {
+    photo: "/images/dishes/BURRATA-ZAPECHENIY-PEREC-TOMAT.jpeg",
+    composition: "Состав будет добавлен позже"
+  },
+  "ЗАПЕЧЕННЫЙ РАМИРО, ЛИМОННЫЙ КРЕМ-ЧИЗ, СОУС ТОННАТО": {
+    photo: "/images/dishes/ZAPECHENIY-RAMIRO.jpeg",
+    composition: "Состав будет добавлен позже"
+  },
+  "АРБУЗ, ФЕТА, ТАРХУН": {
+    photo: "/images/dishes/ARBUZ-FETA.jpeg",
+    composition: "Состав будет добавлен позже"
+  },
+  "ОКРОШКА, РОСТБИФ, ЛИМОННАЯ СМЕТАНА": {
+    photo: "/images/dishes/OKROSHKA.jpeg",
+    composition: "Состав будет добавлен позже"
+  },
+  "ГАСПАЧО, РАКОВЫЕ ШЕЙКИ, БАЗИЛИК": {
+    photo: "/images/dishes/GASPACHO.jpeg",
+    composition: "Состав будет добавлен позже"
+  },
+  "КРОКЕТЫ КРАБ, КЛУБНИКА, ТОМАТ": {
+    photo: "/images/dishes/KROKETI-KRAB-KLUBNIKA-TOMAT.jpeg",
+    composition: "Состав будет добавлен позже"
+  },
 };
 
 export function getDishDetails(dishName) {
