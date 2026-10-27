@@ -288,6 +288,58 @@ const dishDetails = {
     photo: "/images/dishes/KROKETI-KRAB-KLUBNIKA-TOMAT.jpeg",
     composition: "Состав будет добавлен позже"
   },
+  "ЗЕЛЕНАЯ ГРЕЧА, СВЁКЛА, ТОМАТ, ЯЙЦО": {
+    photo: "/images/dishes/ZelenayaGrecha.jpeg",
+    composition: "Состав будет добавлен позже"
+  },
+  "ЗАПЕЧЕННЫЙ БАКЛАЖАН, КРЕМ ИЗ ПЕРЦА, ФЕТА": {
+    photo: "/images/dishes/ZapechennuiBaklazhan.jpeg",
+    composition: "Состав будет добавлен позже"
+  },
+  "ВИТЕЛЛО ТОННАТО": {
+    photo: "/images/dishes/VitelloTonnato.jpeg",
+    composition: "Состав будет добавлен позже"
+  },
+  "СМЭШ-КАРТОФЕЛЬ, КРАСНАЯ ИКРА": {
+    photo: "/images/dishes/SmeshKartofel.jpeg",
+    composition: "Состав будет добавлен позже"
+  },
+  "ЗЕЛЕНЫЙ САЛАТ, КРЕВЕТКИ, ГРЕЙПФРУТ": {
+    photo: "/images/dishes/ZelenuiSalatKrevetkiGreupfrut.jpeg",
+    composition: "Состав будет добавлен позже"
+  },
+  "ФИЛЕ СИБАСА, ЦУКИНИ, ЗАПЕЧЕННЫЙ ПЕРЕЦ": {
+    photo: "/images/dishes/FileSibasa.jpeg",
+    composition: "Состав будет добавлен позже"
+  },
+  "ТЁПЛЫЕ ОЛИВКИ, РОЗМАРИН, ЧЕСНОК": {
+    photo: "/images/dishes/TeplueOlivki.jpeg",
+    composition: "Состав будет добавлен позже"
+  },
+  "КОЛОТЫЙ ПАРМЕЗАН, ВАРЕНЬЕ ИЗ ИНЖИРА": {
+    photo: "/images/dishes/KolotyiParmezan.jpeg",
+    composition: "Состав будет добавлен позже"
+  },
+  "ТАРТИН, КРАСНАЯ ИКРА": {
+    photo: "/images/dishes/TartinKrasnayaIkra.jpeg",
+    composition: "Состав будет добавлен позже"
+  },
+  "БРИОШЬ, ПЕЧЕННЫЙ ПЕРЕЦ, АНЧОУС": {
+    photo: "/images/dishes/BriochPechenyiPerec.jpeg",
+    composition: "Состав будет добавлен позже"
+  },
+  "ХРУСТЯЩИЙ ТАРТИН, ПРОШУТТО": {
+    photo: "/images/dishes/TartinRukolaProchutto.jpeg",
+    composition: "Состав будет добавлен позже"
+  },
+  "БУРГУНДСКИЕ УЛИТКИ": {
+    photo: "/images/dishes/",
+    composition: "Состав будет добавлен позже"
+  },
+  "ТИГРОВЫЕ КРЕВЕТКИ, БЕЛОЕ ВИНО, ЧЕРРИ": {
+    photo: "/images/dishes/TigrivueKrevetki.jpeg",
+    composition: "Состав будет добавлен позже"
+  },
 };
 
 export function getDishDetails(dishName) {
