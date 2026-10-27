@@ -121,7 +121,7 @@ const dishDetails = {
     photo: "/images/dishes/ПАНИНИ-ПАСТРАМИ-ТОМАТ-ГАУДА.jpeg",
     composition: "Состав будет добавлен позже"
   },
-  "ПАСТА ТОРТИЛЬОНИ, ГОВЯЖЬИ ЩЕЧКИ, УСТРИЧНЫЙ СОУС": {
+  "ПАСТА ТОРТИЛЬОНИ, ГОВЯЖЬИ ЩЁЧКИ, УСТРИЧНЫЙ СОУС": {
     photo: "/images/dishes/PASTA-TORTILONI-GOVYAJI-SHECHKI-USTRICHNYJ-SAUS.jpeg",
     composition: "Состав будет добавлен позже"
   },

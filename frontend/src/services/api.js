@@ -410,7 +410,7 @@ const mockMenuData = [
     composition: "Креветки, чесночное масло, сливки 33%, пармезан, песто, бейби картофель, чеснок гранулированный, орегано, укроп, соль, перец"
   },
   {
-    id: 57, name: "ГОВЯЖЬИ ЩЕКИ, ОРЗО, ШПИНАТ",
+    id: 57, name: "ГОВЯЖЬИ ЩЁКИ, ОРЗО, ШПИНАТ",
     description: "", priceInfo: "", category: "НА ГОРЯЧЕЕ",
     mainCategory: "Еда", subCategory: "НА ГОРЯЧЕЕ",
     volumeInfo: null, basePrice: "890 р", options: null, isAddon: false,
