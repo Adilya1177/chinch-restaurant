@@ -98,28 +98,6 @@
                     </div>
                   </div>
                 </div>
-
-                <div
-                  v-if="getEggAddons(subCategory.items).length > 0"
-                  class="addons-container"
-                >
-                  <div class="addons-card">
-                    <h3 class="addons-title">Добавки к яичным блюдам</h3>
-                    <div class="addons-grid">
-                      <div
-                        v-for="addon in getEggAddons(subCategory.items)"
-                        :key="addon.id"
-                        class="addon-item non-clickable"
-                      >
-                        <span class="addon-name">{{ addon.name }}</span>
-                        <div class="addon-info">
-                          <span v-if="addon.price" class="addon-price">{{ addon.price }} р</span>
-                          <span v-if="addon.volumeInfo" class="addon-volume">{{ formatVolume(addon.volumeInfo) }}</span>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                </div>
               </template>
             </div>
           </div>
@@ -275,10 +253,6 @@ export default {
 
     getEggMainDishes(items) {
       return items.filter(item => !item.isAddon);
-    },
-
-    getEggAddons(items) {
-      return items.filter(item => item.isAddon);
     }
   },
   mounted() {
@@ -368,10 +342,9 @@ export default {
 
 /*
   Число карточек в ряд задаётся шириной контейнера:
-  5 в ряд → 5*240px + 4*1.2rem ≈ 1200px + 4.8rem
-  4 в ряд → 4*240px + 3*1.2rem ≈ 960px + 3.6rem
-  3 в ряд → 3*240px + 2*1.2rem ≈ 720px + 2.4rem
-  Добавим небольшой запас (0.1rem), чтобы карточки не переносились.
+  5 в ряд → 5*240px + 4*1.2rem
+  4 в ряд → 4*240px + 3*1.2rem
+  3 в ряд → 3*240px + 2*1.2rem
 */
 .menu-category.cols-5 .items-container {
   max-width: calc(5 * 240px + 4 * 1.2rem + 0.1rem);
@@ -503,79 +476,6 @@ export default {
   font-style: italic;
 }
 
-/* Блок добавок на всю ширину */
-.addons-container {
-  width: 100%;
-  margin-top: 2rem;
-}
-
-.addons-card {
-  background: rgba(248, 244, 234, 0.9);
-  border: 2px solid rgba(139, 107, 77, 0.2);
-  border-radius: 12px;
-  padding: 1.2rem;
-  cursor: default;
-  box-shadow: 0 8px 24px rgba(42, 30, 20, 0.2);
-}
-
-.addons-title {
-  font-family: 'Cormorant Garamond', serif;
-  font-size: 1.2rem;
-  color: #2a1e14;
-  font-weight: 600;
-  text-align: center;
-  margin: 0 0 1rem 0;
-  padding-bottom: 0.6rem;
-  border-bottom: 1px solid rgba(139, 107, 77, 0.2);
-}
-
-.addons-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-  gap: 0.6rem;
-  width: 100%;
-}
-
-.addon-item {
-  background: white;
-  border: 1px solid rgba(232, 220, 201, 0.7);
-  border-radius: 8px;
-  padding: 0.6rem 0.8rem;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  cursor: default;
-  box-shadow: 0 4px 10px rgba(42, 30, 20, 0.15);
-}
-
-.addon-name {
-  font-family: 'EB Garamond', serif;
-  font-size: 0.95rem;
-  color: #2a1e14;
-  font-weight: 500;
-}
-
-.addon-info {
-  display: flex;
-  flex-direction: column;
-  align-items: flex-end;
-  gap: 0.1rem;
-}
-
-.addon-price {
-  font-family: 'Playfair Display', serif;
-  font-size: 0.85rem;
-  color: #d4af37;
-  font-weight: 600;
-}
-
-.addon-volume {
-  font-family: 'EB Garamond', serif;
-  font-size: 0.75rem;
-  color: #8b6b4d;
-  font-weight: 500;
-}
-
 .state-loading {
   text-align: center;
   padding: 5rem 2rem;
@@ -599,23 +499,6 @@ export default {
     margin-bottom: 1.2rem;
   }
 
-  .addons-container {
-    margin-top: 1.5rem;
-  }
-
-  .addons-grid {
-    grid-template-columns: 1fr;
-  }
-
-  .addons-card {
-    padding: 1rem;
-  }
-
-  .addons-title {
-    font-size: 1.1rem;
-    margin-bottom: 1rem;
-  }
-
   .dish-title {
     font-size: 0.95rem;
     min-height: 2em;
@@ -636,22 +519,6 @@ export default {
 
   .options-label {
     font-size: 0.7rem;
-  }
-
-  .addon-price {
-    font-size: 0.8rem;
-  }
-
-  .addon-volume {
-    font-size: 0.7rem;
-  }
-
-  .addons-card {
-    box-shadow: 0 6px 16px rgba(42, 30, 20, 0.15);
-  }
-
-  .addon-item {
-    box-shadow: 0 3px 8px rgba(42, 30, 20, 0.1);
   }
 }
 </style>

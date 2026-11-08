@@ -206,15 +206,15 @@ const dishDetails = {
     composition: "Состав будет добавлен позже"
   },
   "ГЛАЗУНЬЯ": {
-    photo: "/images/dishes/ГЛАЗУНЬЯ.png",
+    photo: "/images/dishes/67.jpeg",
     composition: "Состав будет добавлен позже"
   },
   "СКРЭМБЛ": {
-    photo: "/images/dishes/СКРЭМБЛ.png",
+    photo: "/images/dishes/68.jpeg",
     composition: "Состав будет добавлен позже"
   },
   "ОМЛЕТ": {
-    photo: "/images/dishes/ОМЛЕТ.png",
+    photo: "/images/dishes/69.jpeg",
     composition: "Состав будет добавлен позже"
   },
   "КУРИНЫЙ БУЛЬОН, ОРЗО": {
