@@ -1,75 +1,62 @@
 <template>
   <div class="menu-view">
     <div class="menu-wrapper">
-      <!-- УВЕЛИЧЕННЫЙ ОТСТУП ПОД ШАПКОЙ -->
       <div class="menu-top-padding"></div>
-      
-      <!-- Заголовок (пустой) -->
-      <header class="page-header">
-        <!-- Логотип и описание удалены -->
-      </header>
 
-      <!-- ОКНО-ПОДСКАЗКА (полупрозрачное) -->
-      <div v-if="showHelp" class="help-overlay" @click.self="closeHelp">
-        <div class="help-modal">
-          <div class="help-content">
-            <!-- УБРАЛИ ЗАГОЛОВОК "Как пользоваться меню" -->
-            <p class="help-text">Нажмите на любое блюдо, чтобы увидеть фото и подробный состав</p>
-            <button class="help-ok-btn" @click="closeHelp">Понятно</button>
-          </div>
-        </div>
-      </div>
+      <header class="page-header"></header>
 
-      <!-- Основная навигация (удалена) -->
-
-      <!-- Навигация по подкатегориям (удалена) -->
-
-      <!-- Состояния -->
       <div v-if="loading" class="state-loading">
         <p>Загрузка меню...</p>
       </div>
 
-      <!-- Основное содержимое меню -->
       <main v-else class="menu-main">
         <div class="categories-grid">
-          <div 
-            v-for="subCategory in groupedMenu" 
-            :key="subCategory.name" 
+          <div
+            v-for="subCategory in groupedMenu"
+            :key="subCategory.name"
             :id="'category-' + subCategory.name"
-            :class="['menu-category', { 'egg-category': subCategory.name === 'БЛЮДА ИЗ ЯИЦ' }]"
+            :class="[
+              'menu-category',
+              { 'egg-category': subCategory.name === 'БЛЮДА ИЗ ЯИЦ' },
+              categoryColsClass(subCategory.name)
+            ]"
           >
-            <!-- Заголовок категории -->
             <div class="category-title-section">
               <h2 class="category-name">{{ subCategory.name.toUpperCase() }}</h2>
             </div>
 
-            <!-- Элементы категории -->
             <div class="items-container">
-              <!-- Для всех категорий кроме яичных - обычное отображение -->
               <template v-if="subCategory.name !== 'БЛЮДА ИЗ ЯИЦ'">
-                <div 
-                  v-for="item in subCategory.items" 
-                  :key="item.id" 
+                <div
+                  v-for="item in subCategory.items"
+                  :key="item.id"
                   class="dish-card"
                   :class="{ 'non-clickable': isNonClickableDish(item) }"
-                  @click="!isNonClickableDish(item) && showDishDetails(item)"
                 >
                   <div class="dish-card-inner">
+                    <div class="dish-photo-wrapper">
+                      <img
+                        :src="getDishPhoto(item)"
+                        :alt="item.name"
+                        class="dish-card-photo"
+                        loading="lazy"
+                        @error="handleImageError"
+                      >
+                    </div>
+
                     <h3 class="dish-title">{{ item.name }}</h3>
 
-                    <!-- Блок с объемом, ценой и опциями -->
+                    <p v-if="item.composition" class="dish-composition-text">
+                      {{ item.composition }}
+                    </p>
+
                     <div class="price-volume-block">
-                      <!-- Цена -->
                       <div v-if="item.priceInfo || item.basePrice" class="price-info">
                         <span class="price-value">{{ formatPrice(item) }}</span>
                       </div>
-                      
-                      <!-- Объем -->
                       <div v-if="item.volumeInfo" class="volume-info">
                         <span class="volume-label">{{ formatVolume(item.volumeInfo) }}</span>
                       </div>
-                      
-                      <!-- ОПЦИИ (если есть) -->
                       <div v-if="item.options" class="options-info">
                         <span class="options-label">{{ formatOptions(item.options) }}</span>
                       </div>
@@ -78,51 +65,51 @@
                 </div>
               </template>
 
-              <!-- Для яичных блюд - специальная структура -->
               <template v-else>
-                <!-- Основные блюда (первые 3: ГЛАЗУНЬЯ, СКРЭМБЛ, ОМЛЕТ) -->
-                <div 
-                  v-for="item in getEggMainDishes(subCategory.items)" 
-                  :key="item.id" 
+                <div
+                  v-for="item in getEggMainDishes(subCategory.items)"
+                  :key="item.id"
                   class="dish-card"
-                  @click="showDishDetails(item)"
                 >
                   <div class="dish-card-inner">
+                    <div class="dish-photo-wrapper">
+                      <img
+                        :src="getDishPhoto(item)"
+                        :alt="item.name"
+                        class="dish-card-photo"
+                        loading="lazy"
+                        @error="handleImageError"
+                      >
+                    </div>
                     <h3 class="dish-title">{{ item.name }}</h3>
-                    
-                    <!-- Блок с объемом, ценой и опциями -->
+                    <p v-if="item.composition" class="dish-composition-text">
+                      {{ item.composition }}
+                    </p>
                     <div class="price-volume-block">
-                      <!-- Цена -->
                       <div v-if="item.priceInfo || item.basePrice" class="price-info">
                         <span class="price-value">{{ formatPrice(item) }}</span>
                       </div>
-                      
-                      <!-- Объем -->
                       <div v-if="item.volumeInfo" class="volume-info">
                         <span class="volume-label">{{ formatVolume(item.volumeInfo) }}</span>
                       </div>
-                      
-                      <!-- ОПЦИИ (если есть) -->
                       <div v-if="item.options" class="options-info">
                         <span class="options-label">{{ formatOptions(item.options) }}</span>
                       </div>
                     </div>
                   </div>
                 </div>
-                
-                <!-- Блок добавок (один большой) -->
-                <div 
-                  v-if="getEggAddons(subCategory.items).length > 0" 
+
+                <div
+                  v-if="getEggAddons(subCategory.items).length > 0"
                   class="addons-container"
                 >
                   <div class="addons-card">
                     <h3 class="addons-title">Добавки к яичным блюдам</h3>
                     <div class="addons-grid">
-                      <div 
-                        v-for="addon in getEggAddons(subCategory.items)" 
-                        :key="addon.id" 
+                      <div
+                        v-for="addon in getEggAddons(subCategory.items)"
+                        :key="addon.id"
                         class="addon-item non-clickable"
-                        @click="false"
                       >
                         <span class="addon-name">{{ addon.name }}</span>
                         <div class="addon-info">
@@ -139,99 +126,6 @@
         </div>
       </main>
     </div>
-
-    <!-- Модальное окно с фото и составом блюда -->
-    <div v-if="showModal" class="modal-overlay" @click="closeModal">
-      <div class="modal-content" @click.stop>
-        <button class="modal-close" @click="closeModal">✕</button>
-        
-        <div class="dish-modal">
-          <!-- Фото блюда -->
-          <div class="dish-photo-container">
-            <!-- Если есть несколько фото -->
-            <div v-if="selectedDishDetails.photos && selectedDishDetails.photos.length > 1" class="multiple-photos-container">
-              <!-- Навигация по фото -->
-              <div class="photos-navigation">
-                <button 
-                  v-for="(photoUrl, index) in selectedDishDetails.photos" 
-                  :key="index"
-                  @click="currentPhotoIndex = index"
-                  :class="['photo-nav-btn', { active: currentPhotoIndex === index }]"
-                >
-                  {{ index + 1 }}
-                </button>
-              </div>
-              
-              <!-- Текущее фото -->
-              <img 
-                :src="selectedDishDetails.photos[currentPhotoIndex]" 
-                :alt="selectedDish.name + ' вариант ' + (currentPhotoIndex + 1)" 
-                class="dish-photo"
-                @error="handleImageError"
-              />
-              
-              <!-- Стрелки навигации -->
-              <div class="photo-arrows">
-                <button @click="prevPhoto" class="arrow-btn left-arrow">←</button>
-                <button @click="nextPhoto" class="arrow-btn right-arrow">→</button>
-              </div>
-            </div>
-            
-            <!-- Если одно фото -->
-            <div v-else>
-              <img 
-                :src="selectedDishDetails.photo" 
-                :alt="selectedDish.name" 
-                class="dish-photo"
-                @error="handleImageError"
-              />
-            </div>
-          </div>
-          
-          <!-- Информация о блюде -->
-          <div class="dish-info">
-            <h2 class="dish-modal-title">{{ selectedDish.name }}</h2>
-            
-            <!-- Цена -->
-            <div v-if="selectedDish.priceInfo || selectedDish.basePrice" class="dish-price">
-              <span class="price-label">{{ formatPrice(selectedDish) }}</span>
-            </div>
-            
-            <!-- Объем, если есть -->
-            <div v-if="selectedDish.volumeInfo" class="dish-volume">
-              <span class="volume-label">{{ formatVolume(selectedDish.volumeInfo) }}</span>
-            </div>
-            
-            <!-- Состав -->
-            <div v-if="selectedDish.composition" class="dish-composition">
-              <h3 class="composition-title">Состав</h3>
-              <p class="composition-text">{{ selectedDish.composition }}</p>
-            </div>
-            <div v-else class="dish-composition">
-              <h3 class="composition-title">Состав</h3>
-              <p class="composition-text">Состав будет добавлен позже</p>
-            </div>
-            
-            <!-- Опции, если есть -->
-            <div v-if="selectedDish.options" class="dish-options">
-              <h3 class="options-title">Варианты</h3>
-              <p class="options-text">{{ formatOptions(selectedDish.options) }}</p>
-            </div>
-            
-            <!-- КНОПКА ЗАКАЗАТЬ В ЯНДЕКС ЕДЕ (коричневая) -->
-            <a 
-              href="https://eda.yandex.ru/restaurant/chinch" 
-              target="_blank" 
-              rel="noopener noreferrer"
-              class="yandex-order-btn"
-            >
-              <span class="btn-icon">🍽️</span>
-              Заказать на Яндекс Еде
-            </a>
-          </div>
-        </div>
-      </div>
-    </div>
   </div>
 </template>
 
@@ -247,34 +141,19 @@ export default {
       error: null,
       menuItems: [],
       selectedMainCategory: 'all',
-      activeCategory: '',
-      
-      // Данные для модального окна
-      showModal: false,
-      selectedDish: null,
-      selectedDishDetails: null,
-      currentPhotoIndex: 0,
-      
-      // Флаг показа окна-подсказки (ВСЕГДА true при заходе)
-      showHelp: false
+      activeCategory: ''
     };
   },
   computed: {
-    mainCategories() {
-      return [
-        { value: 'all', label: 'МЕНЮ', count: this.menuItems.length },
-      ];
-    },
-    
     groupedMenu() {
       let filteredItems = this.menuItems;
-      
+
       if (this.selectedMainCategory !== 'all') {
-        filteredItems = filteredItems.filter(item => 
+        filteredItems = filteredItems.filter(item =>
           item.mainCategory === this.selectedMainCategory
         );
       }
-      
+
       const groups = {};
       filteredItems.forEach(item => {
         if (!groups[item.subCategory]) {
@@ -285,8 +164,7 @@ export default {
         }
         groups[item.subCategory].items.push(item);
       });
-      
-      // Порядок категорий
+
       const categoryOrder = [
         'ЗАВТРАКИ НА ВЕСЬ ДЕНЬ',
         'СПЕШЛ',
@@ -306,234 +184,105 @@ export default {
         'ВОДА',
         'ПИВО'
       ];
-      
+
       const sortedGroups = {};
       categoryOrder.forEach(category => {
         if (groups[category]) {
           sortedGroups[category] = groups[category];
         }
       });
-      
+
       Object.keys(groups).forEach(category => {
         if (!sortedGroups[category]) {
           sortedGroups[category] = groups[category];
         }
       });
-      
+
       return sortedGroups;
-    },
-    
-    subCategories() {
-      return Object.values(this.groupedMenu);
     }
   },
   methods: {
     async fetchData() {
       try {
         this.loading = true;
-        
-        // Используем наш сервис вместо прямого вызова axios
         this.menuItems = await menuService.getDishes();
-        
-        console.log('✅ Загружены блюда:', this.menuItems.length);
-        
-        // 👇 ДОБАВЬ ЭТОТ КОД 👇
-        console.log('🔍 Проверяем воду:');
-        const waterItems = this.menuItems.filter(item => 
-          item.subCategory === 'ВОДА' || item.name.includes('ВОДА') || item.name.includes('MARUHA')
-        );
-        console.log('Найдено записей с водой:', waterItems.length);
-        waterItems.forEach(item => console.log('-', item.name, '| ID:', item.id, '| Options:', item.options));
-        // 👆 ДОБАВЬ ЭТОТ КОД 👆
-
       } catch (err) {
         console.error('❌ Ошибка загрузки данных:', err);
         this.error = 'Сервер временно недоступен';
-        // На GitHub Pages покажем мок-данные из catch
         this.menuItems = [];
       } finally {
         this.loading = false;
       }
     },
-    
-    selectMainCategory(category) {
-      this.selectedMainCategory = category;
-      this.activeCategory = '';
-      window.scrollTo({ top: 0, behavior: 'smooth' });
+
+    categoryColsClass(name) {
+      const map = {
+        'ЗАВТРАКИ НА ВЕСЬ ДЕНЬ': 'cols-5',
+        'СПЕШЛ': 'cols-3',
+        'К ВИНУ': 'cols-3',
+        'СУПЫ': 'cols-3',
+        'РИМСКАЯ ПИЦЦА': 'cols-5',
+        'ЗАКУСКИ': 'cols-5',
+        'САЛАТЫ': 'cols-3',
+        'НА ГОРЯЧЕЕ': 'cols-5',
+        'БЛЮДА ИЗ ЯИЦ': 'cols-3'
+      };
+      return map[name] || 'cols-5';
     },
-    
-    formatCategoryName(name) {
-      if (name === 'ЗАВТРАКИ НА ВЕСЬ ДЕНЬ') return 'ЗАВТРАКИ';
-      if (name === 'ХОЛОДНЫЕ НАПИТКИ') return 'ХОЛОДНЫЕ';
-      return name;
+
+    getDishPhoto(item) {
+      const details = getDishDetails(item.name);
+      if (details.photos && details.photos.length > 0) {
+        return details.photos[0];
+      }
+      return details.photo;
     },
-    
-    scrollToCategory(categoryName) {
-      this.activeCategory = categoryName;
-      
-      setTimeout(() => {
-        const element = document.getElementById(`category-${categoryName}`);
-        if (element) {
-          const offset = 150;
-          const elementTop = element.getBoundingClientRect().top + window.pageYOffset;
-          const offsetPosition = elementTop - offset;
-          
-          window.scrollTo({
-            top: offsetPosition,
-            behavior: 'smooth'
-          });
-        }
-      }, 50);
-    },
-    
-    // Форматирование цены
+
     formatPrice(item) {
       if (!item) return '';
-      
-      // Сначала проверяем priceInfo (для напитков с двумя объемами)
-      if (item.priceInfo) {
-        return item.priceInfo;
-      }
-      
-      // Если есть basePrice
+      if (item.priceInfo) return item.priceInfo;
       if (item.basePrice) {
-        // Если цена уже в формате "750 р", возвращаем как есть
-        if (typeof item.basePrice === 'string' && item.basePrice.includes('р')) {
-          return item.basePrice;
-        }
-        
-        // Если цена число, добавляем " р"
-        if (typeof item.basePrice === 'number') {
-          return `${item.basePrice} р`;
-        }
-        
-        // Для строки без "р" добавляем
-        if (typeof item.basePrice === 'string') {
-          return item.basePrice.includes('р') ? item.basePrice : `${item.basePrice} р`;
-        }
-        
+        if (typeof item.basePrice === 'string' && item.basePrice.includes('р')) return item.basePrice;
+        if (typeof item.basePrice === 'number') return `${item.basePrice} р`;
+        if (typeof item.basePrice === 'string') return item.basePrice.includes('р') ? item.basePrice : `${item.basePrice} р`;
         return item.basePrice;
       }
-      
       return '';
     },
-    
-    // Форматирование объема с добавлением пробела перед "мл"
+
     formatVolume(volumeInfo) {
       if (!volumeInfo) return '';
-      
-      // Добавляем пробел перед "мл", если его нет
       let formatted = volumeInfo;
       formatted = formatted.replace(/(\d+)(мл)/g, '$1 $2');
-      formatted = formatted.replace(/(\d+)(мл)/g, '$1 $2');
-      
-      // Если есть символ "|", разбиваем на строки
       if (formatted.includes('|')) {
         return formatted.split('|').map(v => v.trim()).join(' / ');
       }
       return formatted;
     },
-    
-    // Форматирование опций
+
     formatOptions(options) {
       if (!options) return '';
-      // Заменяем "|" на более читаемый разделитель
       return options.replace(/\|/g, ' | ');
     },
-    
-    // Проверка, является ли блюдо некликабельным (напитки или добавки)
+
     isNonClickableDish(item) {
-      // Используем mainCategory: 'Напитки' или 'Еда'
       return item.mainCategory === 'Напитки' || item.isAddon;
     },
-    
-    // Показать детали блюда
-    showDishDetails(item) {
-      // Проверяем, можно ли открывать модальное окно для этого блюда
-      if (this.isNonClickableDish(item)) {
-        console.log('⚠️ Это блюдо не кликабельно:', item.name, 
-                   'mainCategory:', item.mainCategory, 
-                   'isAddon:', item.isAddon);
-        return;
-      }
-      
-      console.log('🟣 КЛИК! showDishDetails вызван для:', item.name);
-      console.log('🟣 item:', item);
 
-      this.selectedDish = item;
-      this.selectedDishDetails = getDishDetails(item.name);
-      this.currentPhotoIndex = 0; // Сброс индекса фото
-      this.showModal = true;
-      
-      // Блокируем прокрутку страницы
-      document.body.style.overflow = 'hidden';
-    },
-    
-    // Закрыть модальное окно
-    closeModal() {
-      this.showModal = false;
-      this.selectedDish = null;
-      this.selectedDishDetails = null;
-      this.currentPhotoIndex = 0;
-      
-      // Разблокируем прокрутку страницы
-      document.body.style.overflow = '';
-    },
-    
-    // Навигация по фото
-    prevPhoto() {
-      if (this.selectedDishDetails.photos && this.selectedDishDetails.photos.length > 1) {
-        this.currentPhotoIndex = (this.currentPhotoIndex - 1 + this.selectedDishDetails.photos.length) % this.selectedDishDetails.photos.length;
-      }
-    },
-    
-    nextPhoto() {
-      if (this.selectedDishDetails.photos && this.selectedDishDetails.photos.length > 1) {
-        this.currentPhotoIndex = (this.currentPhotoIndex + 1) % this.selectedDishDetails.photos.length;
-      }
-    },
-    
-    // Обработчик ошибки загрузки изображения
     handleImageError(event) {
-      console.log('Ошибка загрузки изображения:', event.target.src);
-      // Используем SVG заглушку
-      event.target.src = `data:image/svg+xml;charset=UTF-8,${encodeURIComponent(`
-        <svg width="400" height="300" xmlns="http://www.w3.org/2000/svg">
-          <rect width="400" height="300" fill="#f8f4ea"/>
-          <rect x="20" y="20" width="360" height="260" rx="12" fill="#e8dcc9" stroke="#b08d57" stroke-width="2"/>
-          <text x="200" y="140" text-anchor="middle" font-family="Arial" font-size="18" fill="#8b6b4d">
-        Фото скоро будет
-          </text>
-        </svg>
-      `)}`;
+      event.target.style.display = 'none';
     },
-    
-    // Получить основные яичные блюда (первые 3)
+
     getEggMainDishes(items) {
       return items.filter(item => !item.isAddon);
     },
-    
-    // Получить добавки к яичным блюдам
+
     getEggAddons(items) {
       return items.filter(item => item.isAddon);
-    },
-    
-    // Закрыть окно-подсказку
-    closeHelp() {
-      this.showHelp = false;
-    },
-    
-    // Показать окно-подсказку (ВСЕГДА при заходе)
-    showHelpWindow() {
-      // Ждем немного, чтобы все загрузилось, показываем подсказку
-      setTimeout(() => {
-        this.showHelp = true;
-      }, 500);
     }
   },
   mounted() {
     this.fetchData();
-    this.showHelpWindow(); // ВСЕГДА показываем окно-подсказку
   }
 };
 </script>
@@ -542,13 +291,12 @@ export default {
 .menu-view {
   min-height: 100vh;
   background: linear-gradient(135deg, #f8f4ea 0%, #e8dcc9 100%);
-  padding: 0 1rem; /* Убрали верхний padding */
+  padding: 0 1rem;
   position: relative;
 }
 
-/* УВЕЛИЧЕННЫЙ ОТСТУП ПОД ШАПКОЙ */
 .menu-top-padding {
-  height: 60px; /* УВЕЛИЧИЛ с 20px до 60px */
+  height: 60px;
   width: 100%;
 }
 
@@ -558,97 +306,9 @@ export default {
 
 .page-header {
   text-align: center;
-  margin-bottom: 0rem;
+  margin-bottom: 0;
 }
 
-/* Контейнер для логотипа удален */
-
-/* ОКНО-ПОДСКАЗКА (полупрозрачное) */
-.help-overlay {
-  position: fixed;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  background-color: rgba(42, 30, 20, 0.75); /* Более прозрачный темный фон */
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  z-index: 2000;
-  animation: fadeInHelp 0.3s ease;
-  padding: 1rem;
-}
-
-@keyframes fadeInHelp {
-  from { opacity: 0; }
-  to { opacity: 1; }
-}
-
-.help-modal {
-  background: rgba(248, 244, 234, 0.85); /* ПОЛУПРОЗРАЧНЫЙ бежевый фон */
-  backdrop-filter: blur(15px); /* Усиленный эффект матового стекла */
-  padding: 2.5rem; /* УВЕЛИЧИЛИ padding */
-  border-radius: 20px; /* Более круглые углы */
-  max-width: 500px; /* УВЕЛИЧИЛИ ширину */
-  width: 90%;
-  position: relative;
-  box-shadow: 0 25px 70px rgba(0, 0, 0, 0.4); /* Усиленная тень */
-  animation: slideUpHelp 0.4s ease;
-  border: 1px solid rgba(212, 180, 131, 0.5); /* Полупрозрачная золотая рамка */
-}
-
-@keyframes slideUpHelp {
-  from { 
-    opacity: 0;
-    transform: translateY(30px);
-  }
-  to { 
-    opacity: 1;
-    transform: translateY(0);
-  }
-}
-
-.help-content {
-  text-align: center;
-}
-
-.help-text {
-  color: #2a1e14;
-  margin-bottom: 2rem; /* УВЕЛИЧИЛИ отступ */
-  font-family: 'EB Garamond', serif;
-  font-size: 1.8rem; /* УВЕЛИЧИЛИ шрифт: было 1.1rem */
-  line-height: 1.5;
-  font-weight: 500;
-  letter-spacing: 0.02em;
-}
-
-.help-ok-btn {
-  display: inline-block;
-  padding: 1rem 3rem; /* УВЕЛИЧИЛИ padding */
-  background: #8b6b4d;
-  color: white;
-  border: none;
-  border-radius: 8px; /* Более круглые углы */
-  font-family: 'EB Garamond', serif;
-  font-size: 1.2rem; /* УВЕЛИЧИЛИ шрифт: было 1rem */
-  font-weight: 600;
-  cursor: pointer;
-  transition: all 0.3s ease;
-  box-shadow: 0 6px 20px rgba(139, 107, 77, 0.3);
-  letter-spacing: 0.03em;
-}
-
-.help-ok-btn:hover {
-  background: #7a5d40;
-  transform: translateY(-3px); /* Усиленный эффект подъема */
-  box-shadow: 0 8px 25px rgba(139, 107, 77, 0.4);
-}
-
-/* Основная навигация (удалена) */
-
-/* Вторичная навигация (удалена) */
-
-/* Категории */
 .categories-grid {
   display: flex;
   flex-direction: column;
@@ -676,7 +336,6 @@ export default {
   position: relative;
   width: 90%;
   max-width: 500px;
-  border-bottom: none !important;
 }
 
 .menu-category .category-title-section .category-name::after {
@@ -687,213 +346,211 @@ export default {
   transform: translateX(-50%);
   width: 100%;
   height: 1px;
-  background: linear-gradient(90deg, 
-    transparent, 
-    rgba(176, 141, 87, 0.9), 
-    transparent
-  );
+  background: linear-gradient(90deg, transparent, rgba(176, 141, 87, 0.9), transparent);
 }
 
-/* Карточки блюд */
+/* Контейнер карточек: flex + gap (отступы со всех сторон) */
 .items-container {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-  gap: 0.6rem; /* УМЕНЬШАЕМ ЕЩЕ: было 0.8rem */
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 1.2rem;
+  padding-bottom: 1.2rem;
+  margin: 0 auto;
 }
 
+/* Все карточки — одинаковая фиксированная ширина */
 .dish-card {
-  cursor: pointer;
+  width: 240px;
+  margin-bottom: 1.2rem;
+  flex-shrink: 0;
 }
 
-/* Некликабельные карточки */
-.dish-card.non-clickable {
-  cursor: default !important;
+/*
+  Число карточек в ряд задаётся шириной контейнера:
+  5 в ряд → 5*240px + 4*1.2rem ≈ 1200px + 4.8rem
+  4 в ряд → 4*240px + 3*1.2rem ≈ 960px + 3.6rem
+  3 в ряд → 3*240px + 2*1.2rem ≈ 720px + 2.4rem
+  Добавим небольшой запас (0.1rem), чтобы карточки не переносились.
+*/
+.menu-category.cols-5 .items-container {
+  max-width: calc(5 * 240px + 4 * 1.2rem + 0.1rem);
 }
 
-.dish-card.non-clickable .dish-card-inner:hover {
-  transform: none !important;
-  box-shadow: none !important;
-  border-color: rgba(232, 220, 201, 0.7) !important;
+.menu-category.cols-4 .items-container {
+  max-width: calc(4 * 240px + 3 * 1.2rem + 0.1rem);
 }
 
-.addon-item.non-clickable {
-  cursor: default !important;
+.menu-category.cols-3 .items-container {
+  max-width: calc(3 * 240px + 2 * 1.2rem + 0.1rem);
 }
 
-.addon-item.non-clickable:hover {
-  background: white !important;
-  border-color: rgba(232, 220, 201, 0.7) !important;
-  transform: none !important;
-  box-shadow: none !important;
+.menu-category.egg-category .items-container {
+  max-width: calc(3 * 240px + 2 * 1.2rem + 0.1rem);
 }
 
-/* ОСНОВНОЕ ИЗМЕНЕНИЕ: ДОБАВЛЕНЫ ТЕМНЫЕ ТЕНИ ДЛЯ КАРТОЧЕК БЛЮД */
 .dish-card-inner {
   background: rgba(248, 244, 234, 0.7);
   border: 1px solid rgba(232, 220, 201, 0.7);
   border-radius: 12px;
-  padding: 0.6rem; /* УМЕНЬШАЕМ ЕЩЕ: было 0.8rem */
+  padding: 0.6rem;
   backdrop-filter: blur(8px);
-  transition: all 0.3s ease;
+  transition: box-shadow 0.3s ease;
   display: flex;
   flex-direction: column;
-  align-items: center;
-  text-align: center;
-  height: 135px; /* УМЕНЬШАЕМ ЕЩЕ: было 150px */
+  height: 100%;
   overflow: hidden;
   position: relative;
   box-shadow: 0 6px 18px rgba(42, 30, 20, 0.25);
-  justify-content: space-between;
 }
 
-/* Еще более темная тень при наведении для кликабельных карточек */
 .dish-card-inner:hover {
-  transform: translateY(-6px);
   box-shadow: 0 12px 28px rgba(42, 30, 20, 0.35);
   border-color: #b08d57;
 }
 
-.dish-title {
-  font-family: 'Cormorant Garamond', serif;
-  font-size: 1rem; /* УМЕНЬШАЕМ ЕЩЕ: было 1.1rem */
-  color: #2a1e14;
-  font-weight: 600;
-  margin: 0.2rem 0 0.2rem 0; /* УМЕНЬШАЕМ ЕЩЕ: было 0.3rem */
-  text-align: center;
+.dish-photo-wrapper {
   width: 100%;
+  aspect-ratio: 4 / 3;
+  border-radius: 8px;
   overflow: hidden;
-  text-overflow: ellipsis;
-  display: -webkit-box;
-  -webkit-line-clamp: 2;
-  -webkit-box-orient: vertical;
-  line-clamp: 2;
-  min-height: 2.2em; /* УМЕНЬШАЕМ ЕЩЕ: было 2.4em */
+  margin-bottom: 0.5rem;
+  background: #e8dcc9;
   flex-shrink: 0;
-  margin-top: auto;
+  position: relative;
+  line-height: 0;
+  font-size: 0;
 }
 
-/* Блок с ценой, объемом и опциями */
+.dish-card-photo {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
+  display: block;
+}
+
+.dish-title {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 1rem;
+  color: #2a1e14;
+  font-weight: 600;
+  margin: 0.2rem 0;
+  text-align: center;
+  width: 100%;
+  flex-shrink: 0;
+}
+
+.dish-composition-text {
+  font-family: 'EB Garamond', serif;
+  font-size: 0.85rem;
+  color: #8b6b4d;
+  font-style: italic;
+  line-height: 1.4;
+  margin: 0.2rem 0 0.4rem 0;
+  text-align: center;
+}
+
 .price-volume-block {
-  margin: 0.2rem 0; /* УМЕНЬШАЕМ ЕЩЕ: было 0.3rem 0 */
-  padding: 0.2rem 0; /* УМЕНЬШАЕМ ЕЩЕ: было 0.3rem 0 */
+  margin: 0.2rem 0;
+  padding: 0.2rem 0;
   border-top: 1px solid rgba(232, 220, 201, 0.5);
   border-bottom: 1px solid rgba(232, 220, 201, 0.5);
   width: 100%;
   margin-top: auto;
   flex-shrink: 0;
+  text-align: center;
 }
 
-/* Стили для цены */
 .price-info {
-  margin-bottom: 0.4rem; /* УМЕНЬШАЕМ ЕЩЕ: было 0.5rem */
+  margin-bottom: 0.2rem;
 }
 
 .price-value {
   font-family: 'Playfair Display', serif;
-  font-size: 0.95rem; /* УМЕНЬШАЕМ ЕЩЕ: было 1rem */
+  font-size: 0.95rem;
   color: #d4af37;
   font-weight: 600;
   letter-spacing: 0.02em;
 }
 
-/* Стили для объема */
 .volume-info {
-  margin-bottom: 0.2rem; /* УМЕНЬШАЕМ ЕЩЕ: было 0.3rem */
+  margin-bottom: 0.2rem;
 }
 
 .volume-label {
   font-family: 'EB Garamond', serif;
-  font-size: 0.8rem; /* УМЕНЬШАЕМ ЕЩЕ: было 0.85rem */
+  font-size: 0.8rem;
   color: #8b6b4d;
   font-weight: 500;
 }
 
-/* Стили для опций */
 .options-info {
-  margin-top: 0.2rem; /* УМЕНЬШАЕМ ЕЩЕ: было 0.3rem */
-  padding-top: 0.2rem; /* УМЕНЬШАЕМ ЕЩЕ: было 0.3rem */
+  margin-top: 0.2rem;
+  padding-top: 0.2rem;
   border-top: 1px dashed rgba(139, 107, 77, 0.3);
   width: 100%;
 }
 
 .options-label {
   font-family: 'EB Garamond', serif;
-  font-size: 0.75rem; /* УМЕНЬШАЕМ ЕЩЕ: было 0.8rem */
+  font-size: 0.75rem;
   color: #8b6b4d;
   font-weight: 500;
   font-style: italic;
 }
 
-/* ============ ОСОБЫЕ СТИЛИ ДЛЯ ЯИЧНЫХ БЛЮД ============ */
-
-/* Для яичных блюд - 3 колонки для основных блюд */
-.menu-category.egg-category .items-container {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 1rem; /* УМЕНЬШАЕМ: было 1.2rem */
-}
-
-/* Контейнер для всех добавок */
+/* Блок добавок на всю ширину */
 .addons-container {
-  grid-column: 1 / -1;
+  width: 100%;
   margin-top: 2rem;
 }
 
-/* Карточка с добавками */
 .addons-card {
   background: rgba(248, 244, 234, 0.9);
   border: 2px solid rgba(139, 107, 77, 0.2);
   border-radius: 12px;
-  padding: 1.2rem; /* УМЕНЬШАЕМ: было 1.5rem */
-  transition: all 0.3s ease;
+  padding: 1.2rem;
   cursor: default;
   box-shadow: 0 8px 24px rgba(42, 30, 20, 0.2);
 }
 
-/* Заголовок добавок */
 .addons-title {
   font-family: 'Cormorant Garamond', serif;
-  font-size: 1.2rem; /* УМЕНЬШАЕМ: было 1.3rem */
+  font-size: 1.2rem;
   color: #2a1e14;
   font-weight: 600;
   text-align: center;
-  margin: 0 0 1rem 0; /* УМЕНЬШАЕМ: было 1.2rem */
-  padding-bottom: 0.6rem; /* УМЕНЬШАЕМ: было 0.8rem */
+  margin: 0 0 1rem 0;
+  padding-bottom: 0.6rem;
   border-bottom: 1px solid rgba(139, 107, 77, 0.2);
 }
 
-/* Сетка добавок */
 .addons-grid {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-  gap: 0.6rem; /* УМЕНЬШАЕМ: было 0.8rem */
+  gap: 0.6rem;
   width: 100%;
 }
 
-/* Отдельная добавка */
 .addon-item {
   background: white;
   border: 1px solid rgba(232, 220, 201, 0.7);
   border-radius: 8px;
-  padding: 0.6rem 0.8rem; /* УМЕНЬШАЕМ: было 0.8rem 1rem */
+  padding: 0.6rem 0.8rem;
   display: flex;
   justify-content: space-between;
   align-items: center;
-  cursor: pointer;
-  transition: all 0.2s ease;
+  cursor: default;
   box-shadow: 0 4px 10px rgba(42, 30, 20, 0.15);
-}
-
-.addon-item:hover {
-  background: rgba(248, 244, 234, 0.7);
-  border-color: #b08d57;
-  transform: translateY(-2px);
-  box-shadow: 0 6px 14px rgba(42, 30, 20, 0.2);
 }
 
 .addon-name {
   font-family: 'EB Garamond', serif;
-  font-size: 0.95rem; /* УМЕНЬШАЕМ: было 1rem */
+  font-size: 0.95rem;
   color: #2a1e14;
   font-weight: 500;
 }
@@ -902,350 +559,23 @@ export default {
   display: flex;
   flex-direction: column;
   align-items: flex-end;
-  gap: 0.1rem; /* УМЕНЬШАЕМ: было 0.2rem */
+  gap: 0.1rem;
 }
 
 .addon-price {
   font-family: 'Playfair Display', serif;
-  font-size: 0.85rem; /* УМЕНЬШАЕМ: было 0.9rem */
+  font-size: 0.85rem;
   color: #d4af37;
   font-weight: 600;
 }
 
 .addon-volume {
   font-family: 'EB Garamond', serif;
-  font-size: 0.75rem; /* УМЕНЬШАЕМ: было 0.8rem */
+  font-size: 0.75rem;
   color: #8b6b4d;
   font-weight: 500;
 }
 
-/* ============ МОДАЛЬНОЕ ОКНО ============ */
-
-/* Затемнение фона */
-.modal-overlay {
-  position: fixed;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  background-color: rgba(42, 30, 20, 0.85);
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  z-index: 1000;
-  padding: 1rem;
-  animation: fadeIn 0.3s ease;
-}
-
-@keyframes fadeIn {
-  from { opacity: 0; }
-  to { opacity: 1; }
-}
-
-/* Контент модального окна */
-.modal-content {
-  background: linear-gradient(135deg, #f8f4ea 0%, #f2eee5 100%);
-  border-radius: 16px;
-  width: 90%;
-  max-width: 800px;
-  max-height: 90vh;
-  overflow-y: auto;
-  position: relative;
-  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
-  animation: slideUp 0.3s ease;
-  border: 1px solid rgba(212, 180, 131, 0.3);
-}
-
-@keyframes slideUp {
-  from { 
-    opacity: 0;
-    transform: translateY(30px);
-  }
-  to { 
-    opacity: 1;
-    transform: translateY(0);
-  }
-}
-
-/* Кнопка закрытия */
-.modal-close {
-  position: absolute;
-  top: 1rem;
-  right: 1rem;
-  width: 40px;
-  height: 40px;
-  border-radius: 50%;
-  background: rgba(42, 30, 20, 0.1);
-  border: none;
-  color: #2a1e14;
-  font-size: 1.5rem;
-  cursor: pointer;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  z-index: 10;
-  transition: all 0.3s ease;
-}
-
-.modal-close:hover {
-  background: rgba(42, 30, 20, 0.2);
-  transform: scale(1.1);
-}
-
-/* Контейнер модального окна */
-.dish-modal {
-  display: flex;
-  flex-direction: column;
-  padding: 2rem;
-}
-
-@media (min-width: 768px) {
-  .dish-modal {
-    flex-direction: row;
-    gap: 2.5rem;
-    padding: 2.5rem;
-  }
-}
-
-/* Контейнер для фото */
-.dish-photo-container {
-  flex: 1;
-  min-width: 300px;
-  position: relative;
-}
-
-/* Контейнер для нескольких фото */
-.multiple-photos-container {
-  position: relative;
-}
-
-/* Навигация по фото */
-.photos-navigation {
-  display: flex;
-  justify-content: center;
-  gap: 0.5rem;
-  margin-bottom: 1rem;
-  flex-wrap: wrap;
-}
-
-.photo-nav-btn {
-  width: 36px;
-  height: 36px;
-  border-radius: 50%;
-  background: rgba(42, 30, 20, 0.1);
-  border: 1px solid rgba(212, 180, 131, 0.3);
-  color: #2a1e14;
-  font-family: 'EB Garamond', serif;
-  font-weight: 500;
-  cursor: pointer;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  transition: all 0.3s ease;
-}
-
-.photo-nav-btn:hover {
-  background: rgba(212, 180, 131, 0.3);
-  transform: scale(1.1);
-}
-
-.photo-nav-btn.active {
-  background: #8b6b4d;
-  border-color: #8b6b4d;
-  color: #f8f4ea;
-  transform: scale(1.1);
-}
-
-/* Стрелки навигации */
-.photo-arrows {
-  position: absolute;
-  top: 50%;
-  left: 0;
-  right: 0;
-  transform: translateY(-50%);
-  display: flex;
-  justify-content: space-between;
-  pointer-events: none;
-  padding: 0 1rem;
-}
-
-.arrow-btn {
-  pointer-events: auto;
-  width: 44px;
-  height: 44px;
-  border-radius: 50%;
-  background: rgba(42, 30, 20, 0.7);
-  border: none;
-  color: white;
-  font-size: 1.5rem;
-  cursor: pointer;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  transition: all 0.3s ease;
-}
-
-.arrow-btn:hover {
-  background: rgba(42, 30, 20, 0.9);
-  transform: scale(1.1);
-}
-
-.left-arrow {
-  margin-right: auto;
-}
-
-.right-arrow {
-  margin-left: auto;
-}
-
-/* Фото блюда */
-.dish-photo {
-  width: 100%;
-  height: 300px;
-  object-fit: cover;
-  border-radius: 12px;
-  box-shadow: 0 8px 24px rgba(139, 107, 77, 0.2);
-  border: 1px solid rgba(212, 180, 131, 0.5);
-}
-
-@media (min-width: 768px) {
-  .dish-photo {
-    height: 400px;
-  }
-}
-
-/* Информация о блюде */
-.dish-info {
-  flex: 1;
-  padding-top: 1.5rem;
-}
-
-@media (min-width: 768px) {
-  .dish-info {
-    padding-top: 0;
-  }
-}
-
-.dish-modal-title {
-  font-family: 'Playfair Display', serif;
-  font-size: 2rem;
-  color: #2a1e14;
-  font-weight: 600;
-  margin: 0 0 1rem 0;
-  line-height: 1.2;
-}
-
-/* Цена в модальном окне */
-.dish-price {
-  margin-bottom: 1rem;
-}
-
-.price-label {
-  font-family: 'Playfair Display', serif;
-  font-size: 1.5rem;
-  color: #d4af37;
-  font-weight: 600;
-  letter-spacing: 0.02em;
-}
-
-.dish-volume {
-  margin-bottom: 1.5rem;
-  padding-bottom: 1rem;
-  border-bottom: 1px solid rgba(232, 220, 201, 0.5);
-}
-
-.volume-label {
-  font-family: 'EB Garamond', serif;
-  font-size: 1.1rem;
-  color: #8b6b4d;
-  font-weight: 500;
-}
-
-/* Состав */
-.dish-composition {
-  margin-bottom: 1.5rem;
-}
-
-.composition-title {
-  font-family: 'Cormorant Garamond', serif;
-  font-size: 1.3rem;
-  color: #2a1e14;
-  font-weight: 600;
-  margin: 0 0 0.8rem 0;
-  letter-spacing: 0.05em;
-}
-
-.composition-text {
-  font-family: 'EB Garamond', serif;
-  font-size: 1.1rem;
-  color: #5d4a30;
-  line-height: 1.6;
-  margin: 0;
-  padding: 1rem;
-  background: rgba(255, 255, 255, 0.5);
-  border-radius: 8px;
-  border-left: 3px solid #b08d57;
-}
-
-/* Опции */
-.dish-options {
-  margin-bottom: 1rem;
-}
-
-.options-title {
-  font-family: 'Cormorant Garamond', serif;
-  font-size: 1.3rem;
-  color: #2a1e14;
-  font-weight: 600;
-  margin: 0 0 0.8rem 0;
-  letter-spacing: 0.05em;
-}
-
-.options-text {
-  font-family: 'EB Garamond', serif;
-  font-size: 1rem;
-  color: #8b6b4d;
-  line-height: 1.5;
-  margin: 0;
-  font-style: italic;
-}
-
-/* КНОПКА ЗАКАЗАТЬ В ЯНДЕКС ЕДЕ (КОРИЧНЕВАЯ) */
-.yandex-order-btn {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 0.6rem;
-  width: calc(100% - 2rem); /* ТА ЖЕ ШИРИНА ЧТО И У СОСТАВА */
-  padding: 0.8rem;
-  background: #8b6b4d;
-  color: #fff;
-  border: none;
-  border-radius: 6px;
-  font-family: 'EB Garamond', serif;
-  font-size: 0.9rem;
-  font-weight: 600;
-  cursor: pointer;
-  transition: all 0.3s ease;
-  text-decoration: none;
-  margin: 1.5rem auto 0; /* центрируем */
-  box-shadow: 0 2px 8px rgba(139, 107, 77, 0.25);
-  border: 1px solid rgba(139, 107, 77, 0.3);
-}
-
-.yandex-order-btn:hover {
-  background: #7a5d40;
-  transform: translateY(-2px);
-  box-shadow: 0 4px 12px rgba(139, 107, 77, 0.35);
-  color: #fff;
-  text-decoration: none;
-}
-
-.btn-icon {
-  font-size: 1rem;
-}
-
-/* Состояния */
 .state-loading {
   text-align: center;
   padding: 5rem 2rem;
@@ -1253,172 +583,75 @@ export default {
   font-size: 1.2rem;
 }
 
-/* Адаптивность для мобильных */
 @media (max-width: 768px) {
   .menu-top-padding {
     height: 40px;
   }
-  
-  /* УВЕЛИЧЕННЫЙ ОТСТУП НА МОБИЛЬНЫХ */
-  .menu-top-padding {
-    height: 40px;
-  }
-  
-  /* Адаптивность модального окна */
-  .modal-content {
-    width: 95%;
-    padding: 1rem;
-  }
-  
-  .dish-modal {
-    padding: 1rem;
-  }
-  
-  .dish-modal-title {
-    font-size: 1.6rem;
-  }
-  
-  .dish-photo {
-    height: 250px;
-  }
-  
-  .arrow-btn {
-    width: 36px;
-    height: 36px;
-    font-size: 1.2rem;
-  }
-  
-  .photo-nav-btn {
-    width: 32px;
-    height: 32px;
-    font-size: 0.9rem;
-  }
-  
-  /* Уменьшаем высоту карточек на мобильных */
-  .dish-card-inner {
-    height: 125px; /* УМЕНЬШАЕМ ЕЩЕ: было 140px */
-    padding: 0.6rem; /* УМЕНЬШАЕМ ЕЩЕ: было 0.7rem */
-    box-shadow: 0 4px 12px rgba(42, 30, 20, 0.2);
-    justify-content: space-between;
-  }
-  
-  .dish-card-inner:hover {
-    transform: translateY(-4px);
-    box-shadow: 0 8px 20px rgba(42, 30, 20, 0.3);
-  }
-  
-  .dish-title {
-    font-size: 0.95rem; /* УМЕНЬШАЕМ ЕЩЕ: было 1rem */
-    min-height: 2em; /* УМЕНЬШАЕМ ЕЩЕ: было 2.2em */
-    margin: 0.2rem 0 0.2rem 0; /* УМЕНЬШАЕМ ЕЩЕ: было 0.3rem */
-    flex-shrink: 0;
-    margin-top: auto;
-  }
-  
-  .price-value {
-    font-size: 0.9rem; /* УМЕНЬШАЕМ ЕЩЕ: было 0.95rem */
-  }
-  
-  /* Опции на мобильных */
-  .options-info {
-    margin-top: 0.1rem; /* УМЕНЬШАЕМ ЕЩЕ: было 0.2rem */
-    padding-top: 0.1rem; /* УМЕНЬШАЕМ ЕЩЕ: было 0.2rem */
-  }
-  
-  .options-label {
-    font-size: 0.7rem; /* УМЕНЬШАЕМ ЕЩЕ: было 0.75rem */
-  }
-  
-  .addon-price {
-    font-size: 0.8rem;
-  }
-  
-  .addon-volume {
-    font-size: 0.7rem;
-  }
-  
-  .addons-card {
-    box-shadow: 0 6px 16px rgba(42, 30, 20, 0.15);
-  }
-  
-  .addon-item {
-    box-shadow: 0 3px 8px rgba(42, 30, 20, 0.1);
-  }
-  
-  .addon-item:hover {
-    box-shadow: 0 5px 12px rgba(42, 30, 20, 0.15);
-  }
-  
-  /* Кнопка Яндекс Еды в модальном окне */
-  .yandex-order-btn {
-    font-size: 0.85rem;
-    padding: 0.7rem;
-    margin-top: 1.2rem;
-    width: calc(100% - 2rem); /* ТА ЖЕ ШИРИНА НА МОБИЛЬНЫХ */
-  }
-  
-  .btn-icon {
-    font-size: 0.9rem;
-  }
-  
-  /* Окно-подсказка на мобильных */
-  .help-modal {
-    padding: 1.5rem;
-    background: rgba(248, 244, 234, 0.95); /* Немного менее прозрачный на мобильных */
-  }
-  
-  .help-text {
-    font-size: 1.4rem; /* Меньше на мобильных, но все еще большой */
-    margin-bottom: 1.5rem;
-  }
-  
-  .help-ok-btn {
-    padding: 0.8rem 2rem;
-    font-size: 1.1rem;
-  }
-  
+
   .items-container {
-    grid-template-columns: 1fr;
+    flex-direction: column;
+    align-items: center;
   }
-  
-  .menu-category.egg-category .items-container {
-    grid-template-columns: 1fr;
+
+  .dish-card {
+    width: 100%;
+    max-width: 400px;
+    margin-bottom: 1.2rem;
   }
-  
+
   .addons-container {
     margin-top: 1.5rem;
   }
-  
+
   .addons-grid {
     grid-template-columns: 1fr;
   }
-  
+
   .addons-card {
     padding: 1rem;
   }
-  
+
   .addons-title {
     font-size: 1.1rem;
     margin-bottom: 1rem;
   }
-}
 
-/* Прокрутка модального окна */
-.modal-content::-webkit-scrollbar {
-  width: 8px;
-}
+  .dish-title {
+    font-size: 0.95rem;
+    min-height: 2em;
+  }
 
-.modal-content::-webkit-scrollbar-track {
-  background: rgba(232, 220, 201, 0.3);
-  border-radius: 4px;
-}
+  .dish-composition-text {
+    font-size: 0.8rem;
+  }
 
-.modal-content::-webkit-scrollbar-thumb {
-  background: #b08d57;
-  border-radius: 4px;
-}
+  .price-value {
+    font-size: 0.9rem;
+  }
 
-.modal-content::-webkit-scrollbar-thumb:hover {
-  background: #8b6b4d;
+  .options-info {
+    margin-top: 0.1rem;
+    padding-top: 0.1rem;
+  }
+
+  .options-label {
+    font-size: 0.7rem;
+  }
+
+  .addon-price {
+    font-size: 0.8rem;
+  }
+
+  .addon-volume {
+    font-size: 0.7rem;
+  }
+
+  .addons-card {
+    box-shadow: 0 6px 16px rgba(42, 30, 20, 0.15);
+  }
+
+  .addon-item {
+    box-shadow: 0 3px 8px rgba(42, 30, 20, 0.1);
+  }
 }
 </style>

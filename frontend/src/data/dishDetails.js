@@ -2,67 +2,67 @@
 const dishDetails = {
   // Блюда с фото
   "АССОРТИ БРУСКЕТТ, КРУАССАН": {
-    photo: "/images/dishes/АССОРТИ-БРУСКЕТТ-КРУАССАН.jpeg",
+    photo: "/images/dishes/41.jpeg",
     composition: "Состав будет добавлен позже"
   },
   "БАТАТ ФРИ, ТРЮФЕЛЬНЫЙ МУСС": {
-    photo: "/images/dishes/BATAT-FRI-TRYUFELNYJ-MUSS.jpeg",
+    photo: "/images/dishes/43.jpeg",
     composition: "Состав будет добавлен позже"
   },
   "БАТАТ, ДЗАДЗИКИ, ЛИМОН": {
-    photo: "/images/dishes/БАТАТ-ДЗАДЗИКИ-ЛИМОН.jpeg",
+    photo: "/images/dishes/47.jpeg",
     composition: "Состав будет добавлен позже"
   },
   "БИФШТЕКС, ТОЛЧЁНЫЙ КАРТОФЕЛЬ, ЛИМОННАЯ СМЕТАНА": {
-    photo: "/images/dishes/BIFSTEKS-TOLCHENYJ-KARTOFEL-LIMONNAYA-SMETANA.jpeg",
+    photo: "/images/dishes/59.jpeg",
     composition: "Состав будет добавлен позже"
   },
   "БРИОШЬ, РОСТБИФ, ЯЙЦО": {
-    photo: "/images/dishes/BRIOSH-ROSTBIF-JAJCO.jpeg",
+    photo: "/images/dishes/13.jpeg",
     composition: "Состав будет добавлен позже"
   },
   "БРИСКЕТ, ЙОГУРТ, КАРТОФЕЛЬ": {
-    photo: "/images/dishes/BRISKET-JOGURT-KARTOFEL.jpeg",
+    photo: "/images/dishes/60.jpeg",
     composition: "Состав будет добавлен позже"
   },
   "БУРГЕР ГОВЯДИНА, РУККОЛА, ГОРГОНЗОЛА": {
-    photo: "/images/dishes/BURGER-GOVYADINA-RUKKOLA-GORGONZOLA.jpeg",
+    photo: "/images/dishes/64.jpeg",
     composition: "Состав будет добавлен позже"
   },
   "ГРЕЧЕСКИЙ САЛАТ": {
-    photo: "/images/dishes/GRECHESKIJ-SALAT.jpeg",
+    photo: "/images/dishes/51.jpeg",
     composition: "Состав будет добавлен позже"
   },
   "ЗАПЕЧЁННЫЕ ПЕРЦЫ, СОУС ТОННАТО": {
-    photo: "/images/dishes/ЗАПЕЧЕННЫЕ-ПЕРЦЫ-СОУС-ТОННАТО.jpeg",
+    photo: "/images/dishes/50.jpeg",
     composition: "Состав будет добавлен позже"
   },
   "ЗЕЛЁНЫЙ САЛАТ, ЛОСОСЬ, ПАРМЕЗАН": {
-    photo: "/images/dishes/ZELENYJ-SALAT-LOSOS-PARMEZAN.jpeg",
+    photo: "/images/dishes/52.jpeg",
     composition: "Состав будет добавлен позже"
   },
   "ЗЕЛЁНЫЙ САЛАТ, ТУНЕЦ, ЯЙЦО": {
-    photo: "/images/dishes/ZELENYJ-SALAT-TUNEC-JAJCO.jpeg",
+    photo: "/images/dishes/55.jpeg",
     composition: "Состав будет добавлен позже"
   },
   "ЙОГУРТ, ЯГОДЫ, МИНДАЛЬ": {
-    photo: "/images/dishes/JOGURT-JAGODY-MINDAL.jpeg",
+    photo: "/images/dishes/20.jpeg",
     composition: "Состав будет добавлен позже"
   },
   "КРАБ, СТРАЧАТЕЛЛА, ТОМАТ": {
-    photo: "/images/dishes/КРАБ-СТРАЧАТТЕЛА-ТОМАТ.jpeg",
+    photo: "/images/dishes/53.jpeg",
     composition: "Состав будет добавлен позже"
   },
   "КРЕВЕТКИ, КАРТОФЕЛЬ, ПЕСТО": {
-    photo: "/images/dishes/КРЕВЕТКИ-КАРТОФЕЛЬ-ПЕСТО.jpeg",
+    photo: "/images/dishes/57.jpeg",
     composition: "Состав будет добавлен позже"
   },
   "КРЕВЕТКИ, ШПИНАТ, АВОКАДО, ТОМАТ": {
-    photo: "/images/dishes/КРЕВЕТКИ-ШПИНАТ-АВОКАДО-ТОМАТ.jpeg",
+    photo: "/images/dishes/1.jpeg",
     composition: "Состав будет добавлен позже"
   },
   "КРОКЕТЫ БАТАТ, ЛОСОСЬ, ТОМАТ": {
-    photo: "/images/dishes/КРОКЕТЫ-БАТАТ-ЛОСОСЬ-ТОМАТ.jpeg",
+    photo: "/images/dishes/3.jpeg",
     composition: "Состав будет добавлен позже"
   },
   "КРОКЕТЫ КРАБ, КЛУБНИКА, ТОМАТ": {
@@ -70,19 +70,19 @@ const dishDetails = {
     composition: "Состав будет добавлен позже"
   },
   "КРУАССАН, ИНДЕЙКА, СКРЭМБЛ": {
-    photo: "/images/dishes/KRUASSAN-INDEIKA-SCREMBL.jpeg",
+    photo: "/images/dishes/17.jpeg",
     composition: "Состав будет добавлен позже"
   },
   "КРУАССАН, ЛОСОСЬ, КРЕМ-ЧИЗ, АВОКАДО": {
-    photo: "/images/dishes/КРУАССАН-ЛОСОСЬ-КРЕМ-ЧИЗ-АВОКАДО.jpeg",
+    photo: "/images/dishes/16.jpeg",
     composition: "Состав будет добавлен позже"
   },
   "КРУАССАН, ТРЮФЕЛЬ, СТРАЧАТЕЛЛА, ТОМАТ": {
-    photo: "/images/dishes/КРУАССАН-ТРЮФЕЛЬ-СТРАЧАТЕЛЛА-ТОМАТ.jpeg",
+    photo: "/images/dishes/18.jpeg",
     composition: "Состав будет добавлен позже"
   },
   "ЛОСОСЬ НА ГРИЛЕ, ПЮРЕ ИЗ ЦВЕТНОЙ КАПУСТЫ": {
-    photo: "/images/dishes/LOSOS-NA-GRILE-PURE-IZ-CVETNOJ-KAPUSTY.jpeg",
+    photo: "/images/dishes/62.jpeg",
     composition: "Состав будет добавлен позже"
   },
   "ЛОСОСЬ ПОД ШУБОЙ": {
@@ -90,7 +90,7 @@ const dishDetails = {
     composition: "Состав будет добавлен позже"
   },
   "ЛОСОСЬ, ПАРМЕЗАН, РУККОЛА": {
-    photo: "/images/dishes/ЛОСОСЬ-КРАСНАЯ-ИКРА-ПАРМЕЗАН.jpeg",
+    photo: "/images/dishes/37.jpeg",
     composition: "Состав будет добавлен позже"
   },
   "ЛЬНЯНОЙ ХЛЕБ, КРАБ, СТРАЧАТЕЛЛА": {
@@ -98,43 +98,43 @@ const dishDetails = {
     composition: "Состав будет добавлен позже"
   },
   "МОЦАРЕЛЛА, МЁД, ТРЮФЕЛЬНОЕ МАСЛО": {
-    photo: "/images/dishes/МОЦАРЕЛЛА-МЕД-ТРЮФЕЛЬНОЕ-МАСЛО.jpeg",
+    photo: "/images/dishes/44.jpeg",
     composition: "Состав будет добавлен позже"
   },
   "ОВСЯНАЯ КАША, ГОЛУБИКА, БАНАН": {
-    photo: "/images/dishes/ОВСЯНАЯ-КАША-ГОЛУБИКА-БАНАН.jpeg",
+    photo: "/images/dishes/11.jpeg",
     composition: "Состав будет добавлен позже"
   },
   "ОЛАДЬИ ИЗ ЦУКИНИ, ЛОСОСЬ, СТРАЧАТЕЛЛА": {
-    photo: "/images/dishes/ОЛАДЬИ-ИЗ-ЦУКИНИ-ЛОСОСЬ-СТРАЧАТЕЛЛА.jpeg",
+    photo: "/images/dishes/6.jpeg",
     composition: "Состав будет добавлен позже"
   },
   "ОПАЛЁННЫЙ ТУНЕЦ, ГУАКАМОЛЕ, ТОМАТ": {
-    photo: "/images/dishes/OPALENNYJ-TUNEC-GUAKAMOLE-TOMAT.jpeg",
+    photo: "/images/dishes/48.jpeg",
     composition: "Состав будет добавлен позже"
   },
   "ОРЗО, КРЕВЕТКИ, ТРЮФЕЛЬ": {
-    photo: "/images/dishes/ОРЗО-КРЕВЕТКИ-ТРЮФЕЛЬ.jpeg",
+    photo: "/images/dishes/61.jpeg",
     composition: "Состав будет добавлен позже"
   },
   "ПАНИНИ, ПАСТРАМИ, ТОМАТ, ГАУДА": {
-    photo: "/images/dishes/ПАНИНИ-ПАСТРАМИ-ТОМАТ-ГАУДА.jpeg",
+    photo: "/images/dishes/15.jpeg",
     composition: "Состав будет добавлен позже"
   },
   "ПАСТА ТОРТИЛЬОНИ, ГОВЯЖЬИ ЩЁЧКИ, УСТРИЧНЫЙ СОУС": {
-    photo: "/images/dishes/PASTA-TORTILONI-GOVYAJI-SHECHKI-USTRICHNYJ-SAUS.jpeg",
+    photo: "/images/dishes/66.jpeg",
     composition: "Состав будет добавлен позже"
   },
   "ПАСТРАМИ, ХАШБРАУН, ШПИНАТ": {
-    photo: "/images/dishes/ПАСТРАМИ-ХАШБРАУН-ШПИНАТ.jpeg",
+    photo: "/images/dishes/2.jpeg",
     composition: "Состав будет добавлен позже"
   },
   "ПЕППЕРОНИ": {
-    photo: "/images/dishes/ПЕППЕРОНИ.jpeg",
+    photo: "/images/dishes/39.jpeg",
     composition: "Состав будет добавлен позже"
   },
   "РИСОВАЯ КАША, КЛУБНИКА, ГРАНОЛА": {
-    photo: "/images/dishes/РИСОВАЯ-КАША-КЛУБНИКА-ГРАНОЛА.jpeg",
+    photo: "/images/dishes/12.jpeg",
     composition: "Состав будет добавлен позже"
   },
   "РОСТБИФ, СОУС ТОННАТО": {
@@ -142,7 +142,7 @@ const dishDetails = {
     composition: "Состав будет добавлен позже"
   },
   "САЛАТ РОСТБИФ, КАРТОФЕЛЬ, ПЕЧЁНЫЙ БАКЛАЖАН": {
-    photo: "/images/dishes/SALAT-ROSTBIF-KARTOFEL-PECHENNYJ-BAKLAZHAN.jpeg",
+    photo: "/images/dishes/56.jpeg",
     composition: "Состав будет добавлен позже"
   },
   "САЛАТ С УТИНОЙ ГРУДКОЙ, ПЕРСИК": {
@@ -150,27 +150,27 @@ const dishDetails = {
     composition: "Состав будет добавлен позже"
   },
   "СВЁКЛА, ТРЮФЕЛЬ, ФИСТАШКА": {
-    photo: "/images/dishes/СВЕКЛА-ТРЮФЕЛЬ-ФИСТАШКА.jpeg",
+    photo: "/images/dishes/46.jpeg",
     composition: "Состав будет добавлен позже"
   },
   "СПАГЕТТИ ИЗ ЦУКИНИ, КРЕВЕТКИ, ТОМАТ": {
-    photo: "/images/dishes/СПАГЕТТИ-ИЗ-ЦУКИНИ-КРЕВЕТКИ-ТОМАТ.jpeg",
+    photo: "/images/dishes/63.jpeg",
     composition: "Состав будет добавлен позже"
   },
   "СЫРНИКИ, КЛУБНИКА, ЛИМОННАЯ СМЕТАНА": {
-    photo: "/images/dishes/СЫРНИКИ-КЛУБНИКА-ЛИМОННАЯ-СМЕТАНА.webp",
+    photo: "/images/dishes/19.jpeg",
     composition: "Состав будет добавлен позже"
   },
   "СЫРНЫЙ КРЕМ-СУП, ИНДЕЙКА": {
-    photo: "/images/dishes/SYRNYJ-KREM-SUP-INDEJKA.jpeg",
+    photo: "/images/dishes/35.jpeg",
     composition: "Состав будет добавлен позже"
   },
   "ТАРТАР ТУНЕЦ, КЛУБНИКА, ГРАНАТ": {
-    photo: "/images/dishes/TARTAR-TUNEC-KLUBНИKA-GRANAT.jpeg",
+    photo: "/images/dishes/45.jpeg",
     composition: "Состав будет добавлен позже"
   },
   "ТЫКВЕННЫЙ КРЕМ-СУП, ЛОСОСЬ": {
-    photo: "/images/dishes/TYKVENNYJ-KREM-SUP-LOSOS.jpeg",
+    photo: "/images/dishes/34.jpeg",
     composition: "Состав будет добавлен позже"
   },
   "УТИНАЯ ГРУДКА, РАТАТУЙ, МЁД": {
@@ -178,27 +178,27 @@ const dishDetails = {
     composition: "Состав будет добавлен позже"
   },
   "ФРИ, ПАРМЕЗАН, ТРЮФЕЛЬ": {
-    photo: "/images/dishes/ФРИ-ПАРМЕЗАН-ТРЮФЕЛЬ.jpeg",
+    photo: "/images/dishes/42.jpeg",
     composition: "Состав будет добавлен позже"
   },
   "ЦУКИНИ, ТОМАТ, КРЕМ-ЧИЗ": {
-    photo: "/images/dishes/ЦУКИНИ-ТОМАТ-КРЕМ-ЧИЗ.jpeg",
+    photo: "/images/dishes/54.jpeg",
     composition: "Состав будет добавлен позже"
   },
   "ЦЫПЛЕНОК, ПЕСТО, ТОМАТ": {
-    photo: "/images/dishes/ЦЫПЛЕНОК-ПЕСТО-ТОМАТ.jpeg",
+    photo: "/images/dishes/38.jpeg",
     composition: "Состав будет добавлен позже"
   },
   "ЧЕСНОЧНЫЕ КРЕВЕТКИ, ГУАКАМОЛЕ": {
-    photo: "/images/dishes/ЧЕСНОЧНЫЕ-КРЕВЕТКИ-ГУАКАМОЛЕ.jpeg",
+    photo: "/images/dishes/49.jpeg",
     composition: "Состав будет добавлен позже"
   },
   "ЧЕТЫРЕ СЫРА": {
-    photo: "/images/dishes/ЧЕТЫРЕ-СЫРА.jpeg",
+    photo: "/images/dishes/40.jpeg",
     composition: "Состав будет добавлен позже"
   },
   "ШАКШУКА, КОЛБАСКИ, ФЕТА, ШПИНАТ": {
-    photo: "/images/dishes/ШАКШУКА-КОЛБАСКИ-ФЕТА-ШПИНАТ.jpeg",
+    photo: "/images/dishes/7.jpeg",
     composition: "Состав будет добавлен позже"
   },
   "ОЛИВЬЕ КРАБ / БРИСКЕТ, ПЮРЕ ИЗ ЗЕЛЕНОГО ГОРОШКА, КРАСНАЯ ИКРА": {
@@ -218,11 +218,11 @@ const dishDetails = {
     composition: "Состав будет добавлен позже"
   },
   "КУРИНЫЙ БУЛЬОН, ОРЗО": {
-    photo: "/images/dishes/KURINIY-BULION-ORZO.jpg",
+    photo: "/images/dishes/33.jpeg",
     composition: "Состав будет добавлен позже"
   },
   "ГОВЯЖЬИ ЩЁКИ, ОРЗО, ШПИНАТ": {
-    photo: "/images/dishes/ГОВЯЖЬИ-ЩЕКИ-ОРЗО-ШПИНАТ.jpg",
+    photo: "/images/dishes/58.jpeg",
     composition: "Состав будет добавлен позже"
   },
   "КРУАССАН / БЛИНЫ, КРАСНАЯ ИКРА, МАСЛО С ТРАВАМИ": {
@@ -233,19 +233,19 @@ const dishDetails = {
     composition: "Состав будет добавлен позже"
   },
   "ФРАНЦУЗСКИЙ ОМЛЕТ, ИНДЕЙКА": {
-    photo: "/images/dishes/FRANTSUZSKIJ-OMLET-INDEJKA.jpg",
+    photo: "/images/dishes/10.jpeg",
     composition: "Состав будет добавлен позже"
   },
   "СКРЭМБЛ, КРЕВЕТКИ, ЗАПЕЧЁННЫЙ ПЕРЕЦ, ОЛИВКИ": {
-    photo: "/images/dishes/SCREMBL-KREVETKI-OLIVKI.JPG",
+    photo: "/images/dishes/8.jpeg",
     composition: "Состав будет добавлен позже"
   },
   "СКРЭМБЛ, ТРЮФЕЛЬ, СТРАЧАТЕЛЛА": {
-    photo: "/images/dishes/SCREMBL-TRUFEL-STRACHATELLA.JPG",
+    photo: "/images/dishes/9.jpeg",
     composition: "Состав будет добавлен позже"
   },
   "КАЦУ-СЭНДВИЧ, ЦЫПЛЁНОК, ТОМАТ": {
-    photo: "/images/dishes/KACU-SENDVICH.JPG",
+    photo: "/images/dishes/14.jpeg",
     composition: "Состав будет добавлен позже"
   },
   "ЗЕЛЁНЫЙ САЛАТ, АВОКАДО, БОБЫ": {
@@ -253,7 +253,7 @@ const dishDetails = {
     composition: "Состав будет добавлен позже"
   },
   "ШНИЦЕЛЬ, РОМАНО, ЦЕЗАРЬ, ПАРМЕЗАН": {
-    photo: "/images/dishes/SCHNICEL-ROMANO.JPG",
+    photo: "/images/dishes/65.jpeg",
     composition: "Состав будет добавлен позже"
   },
   "ТОСТ, КРЕВЕТКИ, АВОКАДО, ЧЕРРИ": {
@@ -261,7 +261,7 @@ const dishDetails = {
     composition: "Состав будет добавлен позже"
   },
   "ЛЕПЁШКА РОТИ, ЛОСОСЬ, ЛИМОН": {
-    photo: "/images/dishes/LEPESHKA-ROTI-LOCOC-LIMON.jpeg",
+    photo: "/images/dishes/5.jpeg",
     composition: "Состав будет добавлен позже"
   },
   "БУРРАТА, ЗАПЕЧЁННЫЙ ПЕРЕЦ, ТОМАТ": {
@@ -289,55 +289,59 @@ const dishDetails = {
     composition: "Состав будет добавлен позже"
   },
   "ЗЕЛЁНАЯ ГРЕЧА, СВЁКЛА, ТОМАТ, ЯЙЦО": {
-    photo: "/images/dishes/ZelenayaGrecha.jpeg",
+    photo: "/images/dishes/4.jpeg",
     composition: "Состав будет добавлен позже"
   },
   "ЗАПЕЧЁННЫЙ БАКЛАЖАН, КРЕМ ИЗ ПЕРЦА, ФЕТА": {
-    photo: "/images/dishes/ZapechennuiBaklazhan.jpeg",
+    photo: "/images/dishes/21.jpeg",
     composition: "Состав будет добавлен позже"
   },
   "ВИТЕЛЛО ТОННАТО": {
-    photo: "/images/dishes/VitelloTonnato.jpeg",
+    photo: "/images/dishes/22.jpeg",
     composition: "Состав будет добавлен позже"
   },
   "СМЭШ-КАРТОФЕЛЬ, КРАСНАЯ ИКРА": {
-    photo: "/images/dishes/SmeshKartofel.jpeg",
+    photo: "/images/dishes/23.jpeg",
     composition: "Состав будет добавлен позже"
   },
   "ЗЕЛЁНЫЙ САЛАТ, КРЕВЕТКИ, ГРЕЙПФРУТ": {
-    photo: "/images/dishes/ZelenuiSalatKrevetkiGreupfrut.jpeg",
+    photo: "/images/dishes/24.jpeg",
     composition: "Состав будет добавлен позже"
   },
   "ФИЛЕ СИБАСА, ЦУКИНИ, ЗАПЕЧЁННЫЙ ПЕРЕЦ": {
-    photo: "/images/dishes/FileSibasa.jpeg",
+    photo: "/images/dishes/26.jpeg",
     composition: "Состав будет добавлен позже"
   },
   "ТЁПЛЫЕ ОЛИВКИ, РОЗМАРИН, ЧЕСНОК": {
-    photo: "/images/dishes/TeplueOlivki.jpeg",
+    photo: "/images/dishes/27.jpeg",
     composition: "Состав будет добавлен позже"
   },
   "КОЛОТЫЙ ПАРМЕЗАН, ВАРЕНЬЕ ИЗ ИНЖИРА": {
-    photo: "/images/dishes/KolotyiParmezan.jpeg",
+    photo: "/images/dishes/28.jpeg",
     composition: "Состав будет добавлен позже"
   },
   "ТАРТИН, КРАСНАЯ ИКРА": {
-    photo: "/images/dishes/TartinKrasnayaIkra.jpeg",
+    photo: "/images/dishes/29.jpeg",
     composition: "Состав будет добавлен позже"
   },
   "БРИОШЬ, ПЕЧЁНЫЙ ПЕРЕЦ, АНЧОУС": {
-    photo: "/images/dishes/BriochPechenyiPerec.jpeg",
+    photo: "/images/dishes/30.jpeg",
     composition: "Состав будет добавлен позже"
   },
   "ХРУСТЯЩИЙ ТАРТИН, ПРОШУТТО": {
-    photo: "/images/dishes/TartinRukolaProchutto.jpeg",
+    photo: "/images/dishes/31.jpeg",
     composition: "Состав будет добавлен позже"
   },
   "БУРГУНДСКИЕ УЛИТКИ": {
-    photo: "/images/dishes/",
+    photo: "/images/dishes/32.jpeg",
     composition: "Состав будет добавлен позже"
   },
   "ТИГРОВЫЕ КРЕВЕТКИ, БЕЛОЕ ВИНО, ЧЕРРИ": {
-    photo: "/images/dishes/TigrivueKrevetki.jpeg",
+    photo: "/images/dishes/25.jpeg",
+    composition: "Состав будет добавлен позже"
+  },
+  "ЧЁРНЫЙ ТРЮФЕЛЬ, ПАРМЕЗАН": {
+    photo: "/images/dishes/36.jpeg",
     composition: "Состав будет добавлен позже"
   },
 };
