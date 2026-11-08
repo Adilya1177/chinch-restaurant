@@ -2,26 +2,21 @@
   <div class="home-view">
     <!-- Герой-секция -->
     <div class="hero-section">
-      <!-- Убрали .hero-overlay отсюда -->
       <div class="hero-content">
         <div class="hero-decoration top"></div>
-        
-        <!-- Логотип ВЕРХНЕМ положении -->
+
         <div class="logo-title-container">
-          <img 
+          <img
             src="/images/logo/logo-chinch.svg"
-            alt="CHINCH Restaurant Logo" 
+            alt="CHINCH Restaurant Logo"
             class="main-logo"
           >
         </div>
-        
-        <!-- Текст "ГАСТРОБИСТРО" ПОД логотипом -->
+
         <p class="hero-subtitle">ГАСТРОБИСТРО С АВТОРСКОЙ КУХНЕЙ</p>
         <div class="hero-decoration bottom"></div>
-        <!-- Текст описания УБРАН -->
       </div>
-      
-      <!-- Призыв к действию -->
+
       <div class="cta-section">
         <router-link to="/menu" class="cta-button primary">
           <span class="cta-icon">☰</span>
@@ -37,75 +32,41 @@
     <!-- Особенности -->
     <div class="features-section">
       <div class="features-container">
-        <!-- Карточка 1 - С ФОТО ДЕСЕРТА -->
+        <!-- ============================================== -->
+        <!-- ЗАКОММЕНТИРОВАННАЯ КАРТОЧКА С КАРУСЕЛЬЮ          -->
+        <!-- ============================================== -->
+        <!--
         <div class="feature-item">
           <div class="feature-image-container">
-            <img 
-              src="/images/desert.jpeg" 
-              alt="Десерты ручной работы"
-              class="feature-image"
-            >
-            <div class="feature-overlay"></div>
-          </div>
-          <p class="feature-description">
-            Сладкие шедевры, дарящие настоящее гастрономическое удовольствие
-          </p>
-        </div>
-        
-        <!-- Карточка 2 - С КАРУСЕЛЬЮ -->
-        <div class="feature-item">
-          <div class="feature-image-container">
-            <!-- Карусель с 4 фотографиями -->
-            <div 
+            <div
               class="carousel"
               @touchstart="handleTouchStart"
               @touchmove="handleTouchMove"
               @touchend="handleTouchEnd"
               ref="carouselContainer"
             >
-              <div 
+              <div
                 class="carousel-slides"
                 :style="{ transform: `translateX(-${currentSlide * 100}%)` }"
               >
-                <!-- Слайд 1 -->
                 <div class="carousel-slide">
-                  <img 
-                    src="/images/carousel-1.jpg" 
-                    alt="Блюдо от шеф-повара 1"
-                    class="carousel-image"
-                  >
+                  <img src="/images/carousel-1.jpg" alt="Блюдо от шеф-повара 1" class="carousel-image">
                   <div class="feature-overlay"></div>
                 </div>
-                <!-- Слайд 2 -->
                 <div class="carousel-slide">
-                  <img 
-                    src="/images/carousel-2.jpg" 
-                    alt="Блюдо от шеф-повара 2"
-                    class="carousel-image"
-                  >
+                  <img src="/images/carousel-2.jpg" alt="Блюдо от шеф-повара 2" class="carousel-image">
                   <div class="feature-overlay"></div>
                 </div>
-                <!-- Слайд 3 -->
                 <div class="carousel-slide">
-                  <img 
-                    src="/images/carousel-3.jpg" 
-                    alt="Блюдо от шеф-повара 3"
-                    class="carousel-image"
-                  >
+                  <img src="/images/carousel-3.jpg" alt="Блюдо от шеф-повара 3" class="carousel-image">
                   <div class="feature-overlay"></div>
                 </div>
-                <!-- Слайд 4 -->
                 <div class="carousel-slide">
-                  <img 
-                    src="/images/carousel-4.jpg" 
-                    alt="Блюдо от шеф-повара 4"
-                    class="carousel-image"
-                  >
+                  <img src="/images/carousel-4.jpg" alt="Блюдо от шеф-повара 4" class="carousel-image">
                   <div class="feature-overlay"></div>
                 </div>
               </div>
-              
-              <!-- Индикаторы (точки) -->
+
               <div class="carousel-indicators">
                 <button
                   v-for="index in 4"
@@ -122,20 +83,23 @@
             Уникальные блюда, созданные нашим шеф-поваром с любовью к деталям
           </p>
         </div>
-        
-        <!-- Карточка 3 (с фото) -->
+        -->
+
+        <!-- ============================================== -->
+        <!-- НОВАЯ КАРТОЧКА С ВИДЕО                          -->
+        <!-- ============================================== -->
         <div class="feature-item">
-          <div class="feature-image-container">
-            <img 
-              src="/images/atmosphere-bg.jpg" 
-              alt="Утонченный интерьер"
-              class="feature-image"
-            >
-            <div class="feature-overlay"></div>
+          <div class="feature-video-container">
+            <video
+              class="feature-video"
+              src="/IMG_6849.mp4"
+              autoplay
+              muted
+              loop
+              playsinline
+              preload="auto"
+            ></video>
           </div>
-          <p class="feature-description">
-            Утонченный интерьер и безупречный сервис для особых моментов
-          </p>
         </div>
       </div>
     </div>
@@ -146,7 +110,7 @@
 <script>
 export default {
   name: 'HomeView',
-  
+
   data() {
     return {
       currentSlide: 0,
@@ -156,72 +120,69 @@ export default {
       isDragging: false
     }
   },
-  
+
   mounted() {
-    this.startCarousel();
+    // Карусель закомментирована — автозапуск не нужен.
+    // Код методов оставлен, чтобы легко вернуть карточку с каруселью при необходимости.
+    // this.startCarousel();
   },
-  
+
   beforeUnmount() {
     this.stopCarousel();
   },
-  
+
   methods: {
     startCarousel() {
       this.carouselInterval = setInterval(() => {
         this.currentSlide = (this.currentSlide + 1) % 4;
       }, 3000);
     },
-    
+
     stopCarousel() {
       if (this.carouselInterval) {
         clearInterval(this.carouselInterval);
         this.carouselInterval = null;
       }
     },
-    
+
     goToSlide(index) {
       this.stopCarousel();
       this.currentSlide = index;
       this.startCarousel();
     },
-    
+
     handleTouchStart(e) {
-      // Останавливаем автоматическую прокрутку при касании
       this.stopCarousel();
       this.touchStartX = e.touches[0].clientX;
       this.isDragging = true;
     },
-    
+
     handleTouchMove(e) {
       if (!this.isDragging) return;
-      e.preventDefault(); // Предотвращаем скролл страницы
+      e.preventDefault();
     },
-    
+
     handleTouchEnd(e) {
       if (!this.isDragging) return;
-      
+
       this.touchEndX = e.changedTouches[0].clientX;
       this.handleSwipe();
-      
-      // Перезапускаем автоматическую прокрутку
+
       setTimeout(() => {
         this.startCarousel();
       }, 100);
-      
+
       this.isDragging = false;
     },
-    
+
     handleSwipe() {
-      const swipeThreshold = 50; // Минимальная дистанция свайпа в пикселях
+      const swipeThreshold = 50;
       const diff = this.touchStartX - this.touchEndX;
-      
-      // Свайп влево (следующее фото)
+
       if (Math.abs(diff) > swipeThreshold) {
         if (diff > 0) {
-          // Свайп влево - следующее фото
           this.currentSlide = (this.currentSlide + 1) % 4;
         } else {
-          // Свайп вправо - предыдущее фото
           this.currentSlide = (this.currentSlide - 1 + 4) % 4;
         }
       }
@@ -241,7 +202,7 @@ export default {
   min-height: 70vh;
   display: flex;
   flex-direction: column;
-  justify-content: center;  
+  justify-content: center;
   align-items: center;
   padding: 0 2rem 4rem 2rem;
   background: url('/images/home-bg.jpg') center/cover no-repeat;
@@ -262,15 +223,12 @@ export default {
 
 .hero-content {
   position: relative;
-  z-index: 1; /* Контент поверх затемнения */
+  z-index: 1;
   text-align: center;
   max-width: 800px;
-  margin-bottom: 8rem; /* СИЛЬНО УВЕЛИЧИЛ отступ для кнопок (было 5rem) */
+  margin-bottom: 8rem;
 }
 
-
-
-/* Контейнер для логотипа */
 .logo-title-container {
   display: flex;
   justify-content: center;
@@ -278,7 +236,6 @@ export default {
   margin: 1rem 0;
 }
 
-/* УВЕЛИЧИВАЕМ ТЕНЬ У ЛОГОТИПА */
 .main-logo {
   height: 120px;
   width: auto;
@@ -289,32 +246,28 @@ export default {
   opacity: 0.98;
 }
 
-/* УВЕЛИЧИВАЕМ ТЕНЬ У ТЕКСТА */
 .hero-subtitle {
   font-family: 'Cormorant Garamond', serif;
   font-size: 1.6rem;
-  color: #f8f4ea; /* Оставляем белый цвет */
+  color: #f8f4ea;
   letter-spacing: 0.15em;
   margin: 0.5rem 0 1rem;
   font-weight: 700;
-  /* РЕШЕНИЕ: ОПУСКАЕМ ТОЛЬКО ТЕКСТ */
   position: relative;
-  top: 30px; /* Текст опускается на 30px */
-  /* ЗНАЧИТЕЛЬНО УВЕЛИЧИВАЕМ тень (вместо 0.4-0.25 делаем 0.5-0.35) */
-  text-shadow: 
+  top: 30px;
+  text-shadow:
     0 2px 6px rgba(0, 0, 0, 0.5),
     0 4px 8px rgba(0, 0, 0, 0.45),
     0 6px 12px rgba(0, 0, 0, 0.4),
     0 8px 16px rgba(0, 0, 0, 0.35);
 }
 
-/* Призыв к действию */
 .cta-section {
   display: flex;
   gap: 2rem;
   flex-wrap: wrap;
   justify-content: center;
-  position: relative; /* Чтобы был поверх затемнения */
+  position: relative;
   z-index: 1;
 }
 
@@ -341,7 +294,7 @@ export default {
   background: linear-gradient(135deg, #2a1e14, #3a2a1c);
   color: #f8f4ea;
   border: 2px solid #2a1e14;
-  box-shadow: 
+  box-shadow:
     0 4px 16px rgba(0, 0, 0, 0.15),
     0 0 0 2px rgba(255, 255, 255, 0.15),
     0 0 80px 30px rgba(255, 255, 255, 0.25);
@@ -360,7 +313,7 @@ export default {
 
 .cta-button.primary:hover {
   background: linear-gradient(135deg, #3a2a1c, #2a1e14);
-  box-shadow: 
+  box-shadow:
     0 8px 24px rgba(0, 0, 0, 0.2),
     0 0 0 2px rgba(255, 255, 255, 0.18),
     0 0 100px 40px rgba(255, 255, 255, 0.3);
@@ -387,11 +340,12 @@ export default {
   background: linear-gradient(135deg, #fffbf0 0%, #f8f0e0 100%);
 }
 
+/* Центрирование одной карточки и ограничение её ширины */
 .features-container {
   max-width: 1200px;
   margin: 0 auto;
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  display: flex;
+  justify-content: center;
   gap: 3rem;
 }
 
@@ -400,11 +354,39 @@ export default {
   flex-direction: column;
   gap: 1.5rem;
   align-items: center;
+  width: 100%;
+  max-width: 600px;
 }
 
-/* =========================================================== */
-/* ОБЩИЕ СТИЛИ ДЛЯ КОНТЕЙНЕРА С ИЗОБРАЖЕНИЯМИ                 */
-/* =========================================================== */
+/* ============================================== */
+/* Контейнер и стили для ВИДЕО                    */
+/* ============================================== */
+.feature-video-container {
+  width: 100%;
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: 0 4px 20px rgba(139, 107, 77, 0.15);
+  transition: all 0.3s ease;
+  position: relative;
+  background: #e8dcc9;
+  aspect-ratio: 4 / 3;
+}
+
+.feature-video-container:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 8px 28px rgba(139, 107, 77, 0.2);
+}
+
+.feature-video {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+/* ============================================== */
+/* Стили старых карточек (оставлены для карусели) */
+/* ============================================== */
 .feature-image-container {
   width: 100%;
   border-radius: 12px;
@@ -412,7 +394,6 @@ export default {
   box-shadow: 0 4px 20px rgba(139, 107, 77, 0.15);
   transition: all 0.3s ease;
   position: relative;
-  /* Соотношение сторон 4:3 (как большинство фото) */
   aspect-ratio: 4 / 3;
 }
 
@@ -444,17 +425,13 @@ export default {
   pointer-events: none;
 }
 
-/* =========================================================== */
-/* СТИЛИ ДЛЯ КАРУСЕЛИ (только для второй карточки)           */
-/* ДЕЛАЕМ ТОЧНО ТАК ЖЕ КАК В ДРУГИХ КАРТОЧКАХ               */
-/* =========================================================== */
+/* Карусель */
 .carousel {
   width: 100%;
   height: 100%;
   position: relative;
   overflow: hidden;
   border-radius: 12px;
-  /* Добавляем touch-action для предотвращения конфликтов со скроллом */
   touch-action: pan-y pinch-zoom;
 }
 
@@ -474,15 +451,13 @@ export default {
 .carousel-image {
   width: 100%;
   height: 100%;
-  object-fit: cover; /* ТОЧНО ТАК ЖЕ КАК У feature-image */
-  object-position: center; /* ТОЧНО ТАК ЖЕ КАК У feature-image */
+  object-fit: cover;
+  object-position: center;
   display: block;
-  /* Предотвращаем drag изображений */
   user-select: none;
   -webkit-user-drag: none;
 }
 
-/* Индикаторы (точки внизу) */
 .carousel-indicators {
   position: absolute;
   bottom: 15px;
@@ -503,7 +478,7 @@ export default {
   cursor: pointer;
   padding: 0;
   transition: all 0.3s ease;
-  touch-action: manipulation; /* Улучшаем тач-взаимодействие */
+  touch-action: manipulation;
 }
 
 .carousel-indicator:hover {
@@ -534,43 +509,39 @@ export default {
     height: 100px;
     max-width: 350px;
   }
-  
-  .features-container {
-    grid-template-columns: repeat(2, 1fr);
-  }
 }
 
 @media (max-width: 768px) {
   .main-logo {
-  height: 90px;
-  max-width: 320px;
-  filter: drop-shadow(2px 4px 8px rgba(0, 0, 0, 0.3))
-          drop-shadow(4px 8px 16px rgba(0, 0, 0, 0.2));
-  opacity: 0.98;
+    height: 90px;
+    max-width: 320px;
+    filter: drop-shadow(2px 4px 8px rgba(0, 0, 0, 0.3))
+            drop-shadow(4px 8px 16px rgba(0, 0, 0, 0.2));
+    opacity: 0.98;
   }
-  
+
   .hero-subtitle {
     font-size: 1.3rem;
     font-weight: 700;
     color: #f8f4ea;
-    top: 25px; 
-    text-shadow: 
+    top: 25px;
+    text-shadow:
       0 1px 3px rgba(0, 0, 0, 0.45),
       0 2px 4px rgba(0, 0, 0, 0.4),
       0 3px 6px rgba(0, 0, 0, 0.35),
       0 4px 8px rgba(0, 0, 0, 0.3);
   }
-  
+
   .hero-content {
-    margin-bottom: 6rem; 
+    margin-bottom: 6rem;
   }
-  
+
   .cta-section {
     flex-direction: column;
     align-items: center;
     gap: 1rem;
   }
-  
+
   .cta-button {
     width: 100%;
     max-width: 300px;
@@ -579,39 +550,43 @@ export default {
     padding: 1rem 2rem;
     font-size: 1.1rem;
   }
-  
+
   .cta-button.primary {
-    box-shadow: 
+    box-shadow:
       0 4px 12px rgba(0, 0, 0, 0.15),
       0 0 0 1px rgba(255, 255, 255, 0.12),
       0 0 50px 20px rgba(255, 255, 255, 0.22);
   }
-  
+
   .cta-button.primary:hover {
-    box-shadow: 
+    box-shadow:
       0 6px 18px rgba(0, 0, 0, 0.2),
       0 0 0 1px rgba(255, 255, 255, 0.14),
       0 0 60px 25px rgba(255, 255, 255, 0.26);
   }
-  
+
   .cta-icon {
     font-size: 1.2rem;
   }
-  
+
   .features-container {
-    grid-template-columns: 1fr;
     gap: 2rem;
   }
-  
-  .feature-image-container {
-    aspect-ratio: 4 / 3; /* Такое же соотношение как на ПК */
+
+  .feature-item {
+    max-width: 100%;
   }
-  
+
+  .feature-image-container,
+  .feature-video-container {
+    aspect-ratio: 4 / 3;
+  }
+
   .carousel-indicator {
     width: 8px;
     height: 8px;
   }
-  
+
   .carousel-indicators {
     bottom: 10px;
     gap: 6px;
@@ -620,132 +595,129 @@ export default {
 
 @media (max-width: 480px) {
   .main-logo {
-  height: 80px;
-  max-width: 280px;
-  filter: drop-shadow(2px 4px 8px rgba(0, 0, 0, 0.3))
-          drop-shadow(4px 8px 16px rgba(0, 0, 0, 0.2));
-  opacity: 0.98;
+    height: 80px;
+    max-width: 280px;
+    filter: drop-shadow(2px 4px 8px rgba(0, 0, 0, 0.3))
+            drop-shadow(4px 8px 16px rgba(0, 0, 0, 0.2));
+    opacity: 0.98;
   }
-  
+
   .hero-section {
     padding: 2rem 1rem;
   }
-  
+
   .hero-subtitle {
     font-size: 1.2rem;
     font-weight: 700;
     color: #f8f4ea;
-    top: 20px; 
-    text-shadow: 
+    top: 20px;
+    text-shadow:
       0 1px 2px rgba(0, 0, 0, 0.35),
       0 2px 3px rgba(0, 0, 0, 0.3),
       0 3px 4px rgba(0, 0, 0, 0.25),
       0 4px 5px rgba(0, 0, 0, 0.2);
   }
-  
+
   .hero-content {
-    margin-bottom: 5rem; 
+    margin-bottom: 5rem;
   }
-  
+
   .cta-button {
     padding: 0.9rem 1.5rem;
     font-size: 1rem;
     max-width: 280px;
   }
-  
+
   .cta-button.primary {
-    box-shadow: 
+    box-shadow:
       0 3px 10px rgba(0, 0, 0, 0.15),
       0 0 0 1px rgba(255, 255, 255, 0.1),
       0 0 35px 15px rgba(255, 255, 255, 0.22);
   }
-  
+
   .cta-button.primary:hover {
-    box-shadow: 
+    box-shadow:
       0 5px 14px rgba(0, 0, 0, 0.2),
       0 0 0 1px rgba(255, 255, 255, 0.12),
       0 0 45px 20px rgba(255, 255, 255, 0.26);
   }
-  
+
   .cta-icon {
     font-size: 1.1rem;
   }
-  
+
   .cta-section {
     gap: 0.8rem;
     margin-top: 2rem;
   }
-  
+
   .features-section {
     padding: 3rem 1rem;
   }
-  
+
   .feature-description {
     font-size: 1.1rem;
   }
-  
+
   .carousel-indicator {
     width: 6px;
     height: 6px;
   }
-  
+
   .carousel-indicators {
     bottom: 8px;
     gap: 5px;
   }
 }
 
-/* =========================================================== */
-/* ДОБАВЛЕНО: Убираем отступ на мобильных устройствах         */
-/* =========================================================== */
 @media (max-width: 768px) {
   .hero-section {
-    margin-top: -25px !important; /* Убираем отступ для планшетов */
-    min-height: 80vh; /* Немного уменьшаем высоту */
+    margin-top: -25px !important;
+    min-height: 80vh;
     background-position: center 0%;
   }
 }
 
 @media (max-width: 480px) {
   .hero-section {
-    margin-top: -25px !important; /* Убираем отступ для мобильных */
-    min-height: 85vh; /* Еще уменьшаем высоту */
-    padding: 0 1rem 3rem 1rem; /* Уменьшаем нижний отступ */
-    background-position: center 0%; /* ДОБАВИЛ */
+    margin-top: -25px !important;
+    min-height: 85vh;
+    padding: 0 1rem 3rem 1rem;
+    background-position: center 0%;
   }
-  
+
   .hero-content {
-    margin-bottom: 4rem; /* Уменьшаем отступ для кнопок */
+    margin-bottom: 4rem;
   }
-  
+
   .main-logo {
-    height: 100px !important; /* УВЕЛИЧИВАЕМ логотип на мобильных */
+    height: 100px !important;
     max-width: 320px !important;
   }
 }
 
 @media (max-width: 375px) {
   .hero-section {
-    margin-top: -90px !important; /* Еще больше убираем отступ */
+    margin-top: -90px !important;
     min-height: 50vh;
-    background-position: center 0%; /* ДОБАВИЛ */
+    background-position: center 0%;
   }
-  
+
   .main-logo {
-    height: 110px !important; /* ЕЩЕ БОЛЬШЕ увеличиваем логотип */
+    height: 110px !important;
     max-width: 340px !important;
   }
-  
+
   .hero-subtitle {
-    top: 15px; /* Самый маленький отступ на очень маленьких экранах */
+    top: 15px;
   }
-  
+
   .cta-section {
-    gap: 1.5rem !important; /* ДОБАВЛЯЕМ расстояние между кнопками */
+    gap: 1.5rem !important;
   }
-  
+
   .cta-button {
-    margin-bottom: 0.5rem; /* Отступ между кнопками */
+    margin-bottom: 0.5rem;
   }
 }
 </style>

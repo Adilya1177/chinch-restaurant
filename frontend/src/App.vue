@@ -20,7 +20,6 @@
               style="filter: brightness(0.9) sepia(0.2) saturate(1.1);"
             >
           </div>
-          <p class="footer-tagline">Изысканная кухня с 2024 года</p>
         </div>
         
         <div class="footer-section">
@@ -138,14 +137,6 @@ export default {
   width: auto;
   object-fit: contain;
   max-width: 200px;
-}
-
-.footer-tagline {
-  font-family: 'Cormorant Garamond', serif;
-  font-style: italic;
-  color: #d4b483;
-  font-size: 1.1rem;
-  letter-spacing: 0.05em;
 }
 
 .footer-title {
