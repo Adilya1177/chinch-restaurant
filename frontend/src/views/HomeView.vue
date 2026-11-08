@@ -363,13 +363,13 @@ export default {
 /* ============================================== */
 .feature-video-container {
   width: 100%;
+  max-width: 400px;
   border-radius: 12px;
   overflow: hidden;
   box-shadow: 0 4px 20px rgba(139, 107, 77, 0.15);
   transition: all 0.3s ease;
   position: relative;
   background: #e8dcc9;
-  aspect-ratio: 4 / 3;
 }
 
 .feature-video-container:hover {
@@ -379,8 +379,7 @@ export default {
 
 .feature-video {
   width: 100%;
-  height: 100%;
-  object-fit: cover;
+  height: auto;
   display: block;
 }
 
@@ -577,9 +576,12 @@ export default {
     max-width: 100%;
   }
 
-  .feature-image-container,
-  .feature-video-container {
+  .feature-image-container {
     aspect-ratio: 4 / 3;
+  }
+
+  .feature-video-container {
+    max-width: 100%;
   }
 
   .carousel-indicator {
