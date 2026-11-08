@@ -15,90 +15,49 @@
             v-for="subCategory in groupedMenu"
             :key="subCategory.name"
             :id="'category-' + subCategory.name"
-            :class="[
-              'menu-category',
-              { 'egg-category': subCategory.name === 'БЛЮДА ИЗ ЯИЦ' },
-              categoryColsClass(subCategory.name)
-            ]"
+            :class="['menu-category', categoryColsClass(subCategory.name)]"
           >
             <div class="category-title-section">
               <h2 class="category-name">{{ subCategory.name.toUpperCase() }}</h2>
             </div>
 
             <div class="items-container">
-              <template v-if="subCategory.name !== 'БЛЮДА ИЗ ЯИЦ'">
-                <div
-                  v-for="item in subCategory.items"
-                  :key="item.id"
-                  class="dish-card"
-                  :class="{ 'non-clickable': isNonClickableDish(item) }"
-                >
-                  <div class="dish-card-inner">
-                    <div class="dish-photo-wrapper">
-                      <img
-                        :src="getDishPhoto(item)"
-                        :alt="item.name"
-                        class="dish-card-photo"
-                        loading="lazy"
-                        @error="handleImageError"
-                      >
+              <div
+                v-for="item in subCategory.items"
+                :key="item.id"
+                class="dish-card"
+                :class="{ 'non-clickable': isNonClickableDish(item) }"
+              >
+                <div class="dish-card-inner">
+                  <div class="dish-photo-wrapper">
+                    <img
+                      :src="getDishPhoto(item)"
+                      :alt="item.name"
+                      class="dish-card-photo"
+                      loading="lazy"
+                      @error="handleImageError"
+                    >
+                  </div>
+
+                  <h3 class="dish-title">{{ item.name }}</h3>
+
+                  <p v-if="item.composition" class="dish-composition-text">
+                    {{ item.composition }}
+                  </p>
+
+                  <div class="price-volume-block">
+                    <div v-if="item.priceInfo || item.basePrice" class="price-info">
+                      <span class="price-value">{{ formatPrice(item) }}</span>
                     </div>
-
-                    <h3 class="dish-title">{{ item.name }}</h3>
-
-                    <p v-if="item.composition" class="dish-composition-text">
-                      {{ item.composition }}
-                    </p>
-
-                    <div class="price-volume-block">
-                      <div v-if="item.priceInfo || item.basePrice" class="price-info">
-                        <span class="price-value">{{ formatPrice(item) }}</span>
-                      </div>
-                      <div v-if="item.volumeInfo" class="volume-info">
-                        <span class="volume-label">{{ formatVolume(item.volumeInfo) }}</span>
-                      </div>
-                      <div v-if="item.options" class="options-info">
-                        <span class="options-label">{{ formatOptions(item.options) }}</span>
-                      </div>
+                    <div v-if="item.volumeInfo" class="volume-info">
+                      <span class="volume-label">{{ formatVolume(item.volumeInfo) }}</span>
+                    </div>
+                    <div v-if="item.options" class="options-info">
+                      <span class="options-label">{{ formatOptions(item.options) }}</span>
                     </div>
                   </div>
                 </div>
-              </template>
-
-              <template v-else>
-                <div
-                  v-for="item in getEggMainDishes(subCategory.items)"
-                  :key="item.id"
-                  class="dish-card"
-                >
-                  <div class="dish-card-inner">
-                    <div class="dish-photo-wrapper">
-                      <img
-                        :src="getDishPhoto(item)"
-                        :alt="item.name"
-                        class="dish-card-photo"
-                        loading="lazy"
-                        @error="handleImageError"
-                      >
-                    </div>
-                    <h3 class="dish-title">{{ item.name }}</h3>
-                    <p v-if="item.composition" class="dish-composition-text">
-                      {{ item.composition }}
-                    </p>
-                    <div class="price-volume-block">
-                      <div v-if="item.priceInfo || item.basePrice" class="price-info">
-                        <span class="price-value">{{ formatPrice(item) }}</span>
-                      </div>
-                      <div v-if="item.volumeInfo" class="volume-info">
-                        <span class="volume-label">{{ formatVolume(item.volumeInfo) }}</span>
-                      </div>
-                      <div v-if="item.options" class="options-info">
-                        <span class="options-label">{{ formatOptions(item.options) }}</span>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </template>
+              </div>
             </div>
           </div>
         </div>
@@ -152,7 +111,6 @@ export default {
         'ЗАКУСКИ',
         'САЛАТЫ',
         'НА ГОРЯЧЕЕ',
-        'БЛЮДА ИЗ ЯИЦ',
         'КОФЕ',
         'ФРЕШ',
         'SPECIAL',
@@ -202,8 +160,7 @@ export default {
         'РИМСКАЯ ПИЦЦА': 'cols-5',
         'ЗАКУСКИ': 'cols-5',
         'САЛАТЫ': 'cols-3',
-        'НА ГОРЯЧЕЕ': 'cols-5',
-        'БЛЮДА ИЗ ЯИЦ': 'cols-3'
+        'НА ГОРЯЧЕЕ': 'cols-5'
       };
       return map[name] || 'cols-5';
     },
@@ -249,10 +206,6 @@ export default {
 
     handleImageError(event) {
       event.target.style.display = 'none';
-    },
-
-    getEggMainDishes(items) {
-      return items.filter(item => !item.isAddon);
     }
   },
   mounted() {
@@ -323,7 +276,6 @@ export default {
   background: linear-gradient(90deg, transparent, rgba(176, 141, 87, 0.9), transparent);
 }
 
-/* Контейнер карточек: flex + gap (отступы со всех сторон) */
 .items-container {
   display: flex;
   flex-wrap: wrap;
@@ -333,19 +285,12 @@ export default {
   margin: 0 auto;
 }
 
-/* Все карточки — одинаковая фиксированная ширина */
 .dish-card {
   width: 240px;
   margin-bottom: 1.2rem;
   flex-shrink: 0;
 }
 
-/*
-  Число карточек в ряд задаётся шириной контейнера:
-  5 в ряд → 5*240px + 4*1.2rem
-  4 в ряд → 4*240px + 3*1.2rem
-  3 в ряд → 3*240px + 2*1.2rem
-*/
 .menu-category.cols-5 .items-container {
   max-width: calc(5 * 240px + 4 * 1.2rem + 0.1rem);
 }
@@ -355,10 +300,6 @@ export default {
 }
 
 .menu-category.cols-3 .items-container {
-  max-width: calc(3 * 240px + 2 * 1.2rem + 0.1rem);
-}
-
-.menu-category.egg-category .items-container {
   max-width: calc(3 * 240px + 2 * 1.2rem + 0.1rem);
 }
 
